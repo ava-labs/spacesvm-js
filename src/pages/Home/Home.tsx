@@ -34,6 +34,8 @@ export const Home = memo(() => {
 	const onFormSubmit = (e: any) => {
 		e.preventDefault()
 
+		console.info('CLAIMING DOMAIN...')
+
 		setShowWhileYouWait(true)
 	}
 

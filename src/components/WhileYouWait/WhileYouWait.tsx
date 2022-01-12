@@ -1,28 +1,32 @@
 import { memo, useEffect, useState } from 'react'
 import { IoAdd } from 'react-icons/io5'
-import { Button, Divider, Grid, Slide, TextField, Typography } from '@mui/material'
+import { Button, CircularProgress, Divider, Grid, Slide, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/system'
 
 const SetButton = styled(Button)(({ theme }) => ({
 	color: 'white',
 	backgroundColor: '#523df1',
-	padding: theme.spacing(1, 10),
+	padding: theme.spacing(1),
 	borderRadius: 9999,
 	height: 80,
 	fontWeight: 900,
+	minWidth: 240,
 	fontSize: 24,
 	boxShadow: '0 0 40px rgb(82 61 241 / 60%)',
 	'&:hover': {
 		backgroundColor: '#7a68ff',
 		boxShadow: '0 0 40px rgb(82 61 241 / 80%)',
 	},
+	'&.Mui-disabled': {
+		backgroundColor: 'hsla(0,0%,100%,.1)',
+	},
 }))
 
 export const WhileYouWait = memo(() => {
 	const [showAfterDelay, setShowAfterDelay] = useState<boolean>(false)
 	const [delay] = useState<number>(2500)
-	const [formValues, setFormValues] = useState<{ keyText?: string; valueText?: string }[]>([
-		{ keyText: '', valueText: '' },
+	const [formValues, setFormValues] = useState<{ keyText?: string; valueText?: string; loading?: boolean }[]>([
+		{ keyText: '', valueText: '', loading: false },
 	])
 
 	useEffect(() => {
@@ -39,7 +43,7 @@ export const WhileYouWait = memo(() => {
 	}
 
 	const addFormFields = () => {
-		setFormValues([...formValues, { keyText: '', valueText: '' }])
+		setFormValues([...formValues, { keyText: '', valueText: '', loading: false }])
 	}
 
 	const removeFormFields = (i) => {
@@ -61,7 +65,7 @@ export const WhileYouWait = memo(() => {
 				</Typography>
 
 				{formValues.map(
-					({ keyText, valueText }, i) =>
+					({ keyText, valueText, loading }, i) =>
 						i < 5 && (
 							<Grid
 								key={i}
@@ -74,6 +78,7 @@ export const WhileYouWait = memo(() => {
 							>
 								<Grid item xs={12} sm={4}>
 									<TextField
+										disabled={loading}
 										variant="filled"
 										value={keyText}
 										name="keyText"
@@ -87,6 +92,7 @@ export const WhileYouWait = memo(() => {
 								</Grid>
 								<Grid item xs={12} sm={4}>
 									<TextField
+										disabled={loading}
 										variant="filled"
 										value={valueText}
 										name="valueText"
@@ -101,11 +107,21 @@ export const WhileYouWait = memo(() => {
 								<Grid item xs={12} sm={2}>
 									<SetButton
 										fullWidth
-										disabled={keyText?.length === 0 || valueText?.length === 0}
+										onClick={() => {
+											handleChange(i, {
+												target: {
+													name: 'loading',
+													value: true,
+												},
+											})
+
+											console.info('SETTING KEY/VALUE PAIR...', formValues[i])
+										}}
+										disabled={loading || keyText?.length === 0 || valueText?.length === 0}
 										variant="contained"
 										size="large"
 									>
-										Set
+										{loading ? <CircularProgress /> : 'Set'}
 									</SetButton>
 								</Grid>
 							</Grid>
