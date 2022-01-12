@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider, setLogger } from 'react-query'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material'
 import { render } from '@testing-library/react'
-import { QueryParamProvider } from 'use-query-params'
 
 import { darkTheme } from '@/theming/theme'
 
@@ -27,9 +26,7 @@ setLogger({
 const AllTheProviders: FC = ({ children }) => (
 	<ThemeProvider theme={darkTheme}>
 		<QueryClientProvider client={queryClient}>
-			<BrowserRouter>
-				<QueryParamProvider>{children}</QueryParamProvider>
-			</BrowserRouter>
+			<BrowserRouter>{children}</BrowserRouter>
 		</QueryClientProvider>
 	</ThemeProvider>
 )

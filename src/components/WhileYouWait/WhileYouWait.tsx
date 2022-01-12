@@ -1,19 +1,14 @@
 import { memo, useState } from 'react'
-import { IoSearch } from 'react-icons/io5'
-import { Button, Grid, InputAdornment, TextField, Typography } from '@mui/material'
+import { IoAdd } from 'react-icons/io5'
+import { Button, Divider, Grid, Slide, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/system'
 
-import { Page } from '@/components/Page'
-import { PageSubtitle } from '@/components/PageSubtitle'
-import { PageTitle } from '@/components/PageTitle'
-
-const ClaimButton = styled(Button)(({ theme }) => ({
+const SetButton = styled(Button)(({ theme }) => ({
 	color: 'white',
 	backgroundColor: '#523df1',
 	padding: theme.spacing(1, 10),
 	borderRadius: 9999,
 	height: 80,
-	minWidth: 320,
 	fontWeight: 900,
 	fontSize: 24,
 	boxShadow: '0 0 40px rgb(82 61 241 / 60%)',
@@ -23,40 +18,74 @@ const ClaimButton = styled(Button)(({ theme }) => ({
 	},
 }))
 
-export const WhileYouWait = memo(() => {
-	const [domain, setDomain] = useState<string>('')
+type WhileYouWaitProps = {
+	show?: boolean
+}
+
+export const WhileYouWait = memo(({ show = false }: WhileYouWaitProps) => {
+	const [keyText, setKeyText] = useState<string>('')
+	const [propertyText, setPropertyText] = useState<string>('')
 
 	return (
-		<>
-			<Typography variant="h6">While you wait...</Typography>
-			<Typography color="textSecondary" variant="body2">
-				Might aswell fill these out
-			</Typography>
+		<Slide
+			direction="up"
+			in={show}
+			style={{
+				//@ts-ignore
+				transitionDelay: 1500,
+			}}
+		>
+			<div>
+				<Divider sx={{ my: 8 }} />
 
-			<Grid container spacing={6} flexDirection="column" alignItems="center">
-				<Grid item>
-					<TextField
-						value={domain}
-						onChange={(e) => setDomain(e.target.value)}
-						placeholder="Domain"
-						fullWidth
-						autoFocus
-						InputProps={{
-							sx: { fontSize: 80, fontWeight: 900 },
-							startAdornment: (
-								<InputAdornment sx={{ marginRight: 4 }} position="start">
-									<IoSearch color="grey" />
-								</InputAdornment>
-							),
-						}}
-					/>
+				<Typography gutterBottom align="center" variant="h6">
+					While you wait...
+				</Typography>
+				<Typography align="center" color="textSecondary" variant="body2">
+					Might aswell fill these out
+				</Typography>
+
+				<Grid sx={{ mt: 2 }} container spacing={5} flexDirection="row" alignItems="center">
+					<Grid item xs={12} sm={5}>
+						<TextField
+							variant="filled"
+							value={keyText}
+							onChange={(e) => setKeyText(e.target.value)}
+							placeholder="Key"
+							fullWidth
+							InputProps={{
+								sx: { fontSize: 32, fontWeight: 900 },
+							}}
+						/>
+					</Grid>
+					<Grid item xs={12} sm={5}>
+						<TextField
+							variant="filled"
+							value={propertyText}
+							onChange={(e) => setPropertyText(e.target.value)}
+							placeholder="Value"
+							fullWidth
+							InputProps={{
+								sx: { fontSize: 32, fontWeight: 900 },
+							}}
+						/>
+					</Grid>
+					<Grid item xs={12} sm={2}>
+						<SetButton
+							fullWidth
+							disabled={keyText.length === 0 || propertyText.length === 0}
+							variant="contained"
+							size="large"
+						>
+							Set
+						</SetButton>
+					</Grid>
 				</Grid>
-				<Grid item>
-					<ClaimButton disabled={domain.length === 0} variant="contained" size="large">
-						Claim
-					</ClaimButton>
-				</Grid>
-			</Grid>
-		</>
+
+				<Button startIcon={<IoAdd />} sx={{ mt: 4 }}>
+					Add more
+				</Button>
+			</div>
+		</Slide>
 	)
 })

@@ -2,7 +2,7 @@ import { memo, PropsWithChildren } from 'react'
 import { Box, Container, Fade } from '@mui/material'
 import { useDocumentTitle } from '@react-hookz/web'
 
-import { Footer } from '@/components/Footer'
+//import { Footer } from '@/components/Footer'
 import { APP_NAME } from '@/constants'
 
 type PageProps = {
@@ -32,7 +32,7 @@ export const Page = memo(({ title, children }: PropsWithChildren<PageProps>) => 
 				>
 					{children}
 				</Box>
-				<Footer />
+				{/*<Footer />*/}
 			</Container>
 		</Fade>
 	)

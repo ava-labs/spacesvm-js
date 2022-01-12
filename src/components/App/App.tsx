@@ -2,10 +2,8 @@ import { memo } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter } from 'react-router-dom'
 import { CssBaseline, ThemeProvider } from '@mui/material'
-import { QueryParamProvider } from 'use-query-params'
 
 import { Layout } from '@/components/Layout'
-import { RouteAdapter } from '@/components/RouteAdapter'
 import { useThemeLocalStorage } from '@/hooks/useThemeLocalStorage'
 import { Routes } from '@/pages/Routes'
 import { darkTheme, lightTheme } from '@/theming/theme'
@@ -30,11 +28,9 @@ export const App = memo(() => {
 				<CssBaseline />
 
 				<QueryClientProvider client={queryClient}>
-					<QueryParamProvider ReactRouterRoute={RouteAdapter}>
-						<Layout>
-							<Routes />
-						</Layout>
-					</QueryParamProvider>
+					<Layout>
+						<Routes />
+					</Layout>
 				</QueryClientProvider>
 			</ThemeProvider>
 		</BrowserRouter>
