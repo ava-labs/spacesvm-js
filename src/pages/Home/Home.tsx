@@ -39,8 +39,8 @@ export const Home = memo(() => {
 
 	return (
 		<Page>
-			<form onSubmit={onFormSubmit}>
-				<PageTitle align="center">Claim your domain</PageTitle>
+			<form onSubmit={onFormSubmit} autoComplete="new-password">
+				<PageTitle align="center">Claim your username</PageTitle>
 				<PageSubtitle align="center">Needs to be unique</PageSubtitle>
 
 				<Grid container spacing={4} flexDirection="column" alignItems="center">
@@ -49,7 +49,8 @@ export const Home = memo(() => {
 							disabled={showWhileYouWait}
 							value={domain}
 							onChange={(e) => setDomain(e.target.value)}
-							placeholder="Domain"
+							placeholder="Username"
+							name="something"
 							fullWidth
 							autoFocus
 							InputProps={{
@@ -59,6 +60,11 @@ export const Home = memo(() => {
 										<IoSearch color="grey" />
 									</InputAdornment>
 								),
+							}}
+							inputProps={{
+								autoComplete: 'new-password',
+								'data-lpignore': true,
+								'allow-1password': 'no',
 							}}
 						/>
 					</Grid>
