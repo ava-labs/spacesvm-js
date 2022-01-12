@@ -125,7 +125,15 @@ export const Home = memo(() => {
 						fullWidth
 						autoFocus
 						InputProps={{
-							sx: { fontSize: 80, fontWeight: 900, fontFamily: 'DM Serif Display' },
+							sx: {
+								fontSize: {
+									xs: 24,
+									sm: 42,
+									md: 80,
+								},
+								fontWeight: 900,
+								fontFamily: 'DM Serif Display',
+							},
 							startAdornment: (
 								<InputAdornment sx={{ marginRight: 4 }} position="start">
 									<IoSearch color="grey" />
@@ -194,7 +202,7 @@ export const Home = memo(() => {
 						gutterBottom
 						color="textSecondary"
 					>
-						This may take a little while.
+						This may take a little while...
 					</Typography>
 					<Typography
 						variant="body2"
