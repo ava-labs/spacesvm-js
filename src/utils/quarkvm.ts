@@ -19,15 +19,18 @@ const fetchQuark = async (method: string, params = {}) => {
 	return JSON.parse(new TextDecoder().decode(encodedData?.value))?.result
 }
 
-export const getQuarkValue = async (prefix: string, key: string) =>
-	await fetchQuark('resolve', { path: `${prefix}/${key}` })
+export const getQuarkValue = async (prefix: string, key: string) => {
+	const response = await fetchQuark('resolve', { path: `${prefix}/${key}` })
+	return atob(response?.value)
+}
 
 export const getLatestBlockID = async () => {
 	const blockData = await fetchQuark('lastAccepted')
 	return blockData?.blockId
 }
 
-// export const getPrefixInfo = async (prefix: string) => {
-// 	const prefixData = await fetchQuark('prefixInfo', { pfx: new TextEncoder().encode('connor') })
-// 	console.log(`prefixData`, prefixData)
-// }
+export const getPrefixInfo = async (prefix: string) => {
+	const prefixData = await fetchQuark('prefixInfo', { prefix: btoa(prefix) })
+	if (!prefixData.info) return
+	return prefixData
+}

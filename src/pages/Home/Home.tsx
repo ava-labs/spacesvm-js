@@ -7,7 +7,7 @@ import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { WhileYouWait } from '@/components/WhileYouWait'
-import { getQuarkValue } from '@/utils/quarkvm'
+import { getPrefixInfo, getQuarkValue } from '@/utils/quarkvm'
 
 const ClaimButton = styled(Button)(({ theme }) => ({
 	color: 'white',
@@ -36,7 +36,8 @@ export const Home = memo(() => {
 		e.preventDefault()
 		setShowWhileYouWait(true)
 
-		const data = await getQuarkValue('connor', 'potato')
+		const data = await getPrefixInfo('connor')
+		// const data = await getQuarkValue('connor', 'potato')
 		console.log(`data`, data)
 	}
 
@@ -74,7 +75,7 @@ export const Home = memo(() => {
 					<Grid item>
 						<ClaimButton
 							type="submit"
-							disabled={domain.length === 0 || showWhileYouWait}
+							// disabled={domain.length === 0 || showWhileYouWait}
 							variant="contained"
 							size="large"
 						>
