@@ -75,7 +75,7 @@ export const Home = memo(() => {
 					<Grid item>
 						<ClaimButton
 							type="submit"
-							// disabled={domain.length === 0 || showWhileYouWait}
+							disabled={domain.length === 0 || showWhileYouWait}
 							variant="contained"
 							size="large"
 						>
