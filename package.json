@@ -13,6 +13,7 @@
   "dependencies": {
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
+    "@faker-js/faker": "^5.5.3",
     "@mui/material": "5.2.8",
     "@mui/styles": "5.2.3",
     "@react-hookz/web": "12.1.1",

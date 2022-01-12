@@ -1,5 +1,7 @@
 import { memo, useState } from 'react'
 import { IoSearch } from 'react-icons/io5'
+// @ts-ignore
+import faker from '@faker-js/faker/locale/en'
 import { Button, CircularProgress, Grid, Grow, InputAdornment, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/system'
 // @ts-ignore
@@ -8,6 +10,7 @@ import FakeProgress from 'fake-progress'
 import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
+import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
 import { isAlreadyClaimed } from '@/utils/quarkvm'
 
@@ -67,6 +70,8 @@ const ClaimButton = styled(Button)(({ theme, progress }: any) => ({
 	},
 }))
 
+const USERNAMES = new Array(50).fill(null).map(() => faker.name.firstName())
+
 export const Home = memo(() => {
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [username, setUsername] = useState<string>('')
@@ -114,36 +119,40 @@ export const Home = memo(() => {
 
 			<Grid container spacing={4} flexDirection="column" alignItems="center">
 				<Grid item>
-					<TextField
-						disabled={showWhileYouWait || (available && verified)}
-						value={username}
-						onChange={(e) => {
-							setVerified(false)
-							setUsername(e.target.value)
-						}}
-						placeholder="Desired username"
-						fullWidth
-						autoFocus
-						InputProps={{
-							sx: {
-								fontSize: {
-									xs: 24,
-									sm: 42,
-									md: 80,
-								},
-								fontWeight: 900,
-								fontFamily: 'DM Serif Display',
-							},
-							startAdornment: (
-								<InputAdornment sx={{ marginRight: 4 }} position="start">
-									<IoSearch color="grey" />
-								</InputAdornment>
-							),
-						}}
-						inputProps={{
-							spellCheck: 'false',
-						}}
-					/>
+					<TypewrittingInput waitBeforeDeleteMs={2000} strings={USERNAMES}>
+						{({ currentText }) => (
+							<TextField
+								disabled={showWhileYouWait || (available && verified)}
+								value={username}
+								onChange={(e) => {
+									setVerified(false)
+									setUsername(e.target.value)
+								}}
+								placeholder={currentText}
+								fullWidth
+								autoFocus
+								InputProps={{
+									sx: {
+										fontSize: {
+											xs: 24,
+											sm: 42,
+											md: 80,
+										},
+										fontWeight: 900,
+										fontFamily: 'DM Serif Display',
+									},
+									startAdornment: (
+										<InputAdornment sx={{ marginRight: 4 }} position="start">
+											<IoSearch color="grey" />
+										</InputAdornment>
+									),
+								}}
+								inputProps={{
+									spellCheck: 'false',
+								}}
+							/>
+						)}
+					</TypewrittingInput>
 				</Grid>
 				<Grid item>
 					{verified && available ? (

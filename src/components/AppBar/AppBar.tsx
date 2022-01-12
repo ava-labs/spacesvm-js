@@ -8,7 +8,7 @@ import { APP_NAME } from '@/constants'
 export const AppBar = memo(() => (
 	<Box sx={{ flexGrow: 1 }}>
 		<MuiAppBar position="fixed" elevation={0} color="primary" sx={{ backdropFilter: 'blur(5px)' }}>
-			<Toolbar disableGutters>
+			<Toolbar>
 				<Container maxWidth="xl" disableGutters>
 					<Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
 						<img src={Logo} width={32} height={32} alt={`${APP_NAME} Logo`} />
