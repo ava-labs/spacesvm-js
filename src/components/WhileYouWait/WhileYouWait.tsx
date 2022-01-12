@@ -1,12 +1,11 @@
 import { memo, useState } from 'react'
 import { IoSearch } from 'react-icons/io5'
-import { Button, Divider, Grid, InputAdornment, TextField } from '@mui/material'
+import { Button, Grid, InputAdornment, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/system'
 
 import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
-import { WhileYouWait } from '@/components/WhileYouWait'
 
 const ClaimButton = styled(Button)(({ theme }) => ({
 	color: 'white',
@@ -24,13 +23,15 @@ const ClaimButton = styled(Button)(({ theme }) => ({
 	},
 }))
 
-export const Home = memo(() => {
+export const WhileYouWait = memo(() => {
 	const [domain, setDomain] = useState<string>('')
 
 	return (
-		<Page>
-			<PageTitle align="center">Claim your domain</PageTitle>
-			<PageSubtitle align="center">Needs to be unique</PageSubtitle>
+		<>
+			<Typography variant="h6">While you wait...</Typography>
+			<Typography color="textSecondary" variant="body2">
+				Might aswell fill these out
+			</Typography>
 
 			<Grid container spacing={6} flexDirection="column" alignItems="center">
 				<Grid item>
@@ -56,8 +57,6 @@ export const Home = memo(() => {
 					</ClaimButton>
 				</Grid>
 			</Grid>
-
-			<WhileYouWait />
-		</Page>
+		</>
 	)
 })
