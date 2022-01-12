@@ -21,14 +21,32 @@ const SetButton = styled(Button)(({ theme }) => ({
 export const WhileYouWait = memo(() => {
 	const [showAfterDelay, setShowAfterDelay] = useState<boolean>(false)
 	const [delay] = useState<number>(2500)
-	const [keyText, setKeyText] = useState<string>('')
-	const [propertyText, setPropertyText] = useState<string>('')
+	const [formValues, setFormValues] = useState<{ keyText?: string; valueText?: string }[]>([
+		{ keyText: '', valueText: '' },
+	])
 
 	useEffect(() => {
 		setTimeout(() => {
 			setShowAfterDelay(true)
 		}, delay)
 	}, [delay])
+
+	const handleChange = (i: any, e: any) => {
+		const newFormValues = [...formValues]
+		// @ts-ignore
+		newFormValues[i][e.target.name] = e.target.value
+		setFormValues(newFormValues)
+	}
+
+	const addFormFields = () => {
+		setFormValues([...formValues, { keyText: '', valueText: '' }])
+	}
+
+	const removeFormFields = (i) => {
+		const newFormValues = [...formValues]
+		newFormValues.splice(i, 1)
+		setFormValues(newFormValues)
+	}
 
 	return (
 		<Slide direction="up" mountOnEnter in={showAfterDelay}>
@@ -39,47 +57,67 @@ export const WhileYouWait = memo(() => {
 					While you wait...
 				</Typography>
 				<Typography align="center" color="textSecondary" variant="body2">
-					Might aswell fill these out
+					Might aswell fill these out with something 🤓
 				</Typography>
 
-				<Grid sx={{ mt: 2 }} container spacing={5} flexDirection="row" alignItems="center">
-					<Grid item xs={12} sm={5}>
-						<TextField
-							variant="filled"
-							value={keyText}
-							onChange={(e) => setKeyText(e.target.value)}
-							placeholder="Key"
-							fullWidth
-							InputProps={{
-								sx: { fontSize: 32, fontWeight: 900 },
-							}}
-						/>
-					</Grid>
-					<Grid item xs={12} sm={5}>
-						<TextField
-							variant="filled"
-							value={propertyText}
-							onChange={(e) => setPropertyText(e.target.value)}
-							placeholder="Value"
-							fullWidth
-							InputProps={{
-								sx: { fontSize: 32, fontWeight: 900 },
-							}}
-						/>
-					</Grid>
-					<Grid item xs={12} sm={2}>
-						<SetButton
-							fullWidth
-							disabled={keyText.length === 0 || propertyText.length === 0}
-							variant="contained"
-							size="large"
-						>
-							Set
-						</SetButton>
-					</Grid>
-				</Grid>
+				{formValues.map(
+					({ keyText, valueText }, i) =>
+						i < 5 && (
+							<Grid
+								key={i}
+								sx={{ mt: 2 }}
+								container
+								spacing={5}
+								flexDirection="row"
+								alignItems="center"
+								justifyContent="center"
+							>
+								<Grid item xs={12} sm={4}>
+									<TextField
+										variant="filled"
+										value={keyText}
+										name="keyText"
+										onChange={(e) => handleChange(i, e)}
+										placeholder="Key"
+										fullWidth
+										InputProps={{
+											sx: { fontSize: 32, fontWeight: 900 },
+										}}
+									/>
+								</Grid>
+								<Grid item xs={12} sm={4}>
+									<TextField
+										variant="filled"
+										value={valueText}
+										name="valueText"
+										onChange={(e) => handleChange(i, e)}
+										placeholder="Value"
+										fullWidth
+										InputProps={{
+											sx: { fontSize: 32, fontWeight: 900 },
+										}}
+									/>
+								</Grid>
+								<Grid item xs={12} sm={2}>
+									<SetButton
+										fullWidth
+										disabled={keyText?.length === 0 || valueText?.length === 0}
+										variant="contained"
+										size="large"
+									>
+										Set
+									</SetButton>
+								</Grid>
+							</Grid>
+						),
+				)}
 
-				<Button startIcon={<IoAdd />} sx={{ mt: 4 }}>
+				<Button
+					disabled={formValues.length >= 5}
+					onClick={() => addFormFields()}
+					startIcon={<IoAdd />}
+					sx={{ margin: 'auto', mt: 4, display: 'flex' }}
+				>
 					Add more
 				</Button>
 			</div>
