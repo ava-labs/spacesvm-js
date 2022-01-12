@@ -1,1 +1,0 @@
-export { RouteAdapter } from './RouteAdapter'

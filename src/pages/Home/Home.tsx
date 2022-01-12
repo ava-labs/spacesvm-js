@@ -9,7 +9,7 @@ import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { WhileYouWait } from '@/components/WhileYouWait'
-import { getPrefixInfo, getQuarkValue, isAlreadyClaimed } from '@/utils/quarkvm'
+import { isAlreadyClaimed } from '@/utils/quarkvm'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
 	color: 'white',
