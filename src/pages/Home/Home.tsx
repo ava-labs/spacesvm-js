@@ -2,6 +2,8 @@ import { memo, useState } from 'react'
 import { IoSearch } from 'react-icons/io5'
 import { Button, CircularProgress, Grid, Grow, InputAdornment, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/system'
+// @ts-ignore
+import FakeProgress from 'fake-progress'
 
 import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
@@ -9,7 +11,7 @@ import { PageTitle } from '@/components/PageTitle'
 import { WhileYouWait } from '@/components/WhileYouWait'
 import { getQuarkValue } from '@/utils/quarkvm'
 
-const ClaimButton = styled(Button)(({ theme }) => ({
+const ClaimButton = styled(Button)(({ theme, progress }: any) => ({
 	color: 'white',
 	backgroundColor: '#523df1',
 	padding: theme.spacing(1, 10),
@@ -18,6 +20,7 @@ const ClaimButton = styled(Button)(({ theme }) => ({
 	minWidth: 320,
 	fontWeight: 900,
 	fontSize: 24,
+	position: 'relative',
 	boxShadow: '0 0 40px rgb(82 61 241 / 60%)',
 	'&:hover': {
 		backgroundColor: '#7a68ff',
@@ -26,17 +29,53 @@ const ClaimButton = styled(Button)(({ theme }) => ({
 	'&.Mui-disabled': {
 		backgroundColor: 'hsla(0,0%,100%,.1)',
 	},
+	'&:after': {
+		content: "''",
+		zIndex: 2,
+		position: 'absolute',
+		top: 0,
+		right: 0,
+		bottom: 0,
+		left: 0,
+		borderRadius: 9999,
+		clipPath: `inset(0 ${100 - progress}% 0 0)`,
+		backgroundColor: '#e70256',
+		backgroundImage: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
+		transition: 'clip-path 1s ease',
+	},
 }))
 
 export const Home = memo(() => {
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [domain, setDomain] = useState<string>('')
+	const [progress, setProgress] = useState<number>(0)
 
 	const onFormSubmit = async (e: any) => {
 		e.preventDefault()
 		setShowWhileYouWait(true)
 
+		const p = new FakeProgress({
+			timeConstant: 10000,
+			autoStart: true,
+		})
+
+		const onEachSecond = () => {
+			console.log('Progress is ' + (p.progress * 100).toFixed(1) + ' %')
+			setProgress(p.progress * 100)
+		}
+
+		const onEnd = () => {
+			p.end()
+			clearInterval(interval)
+			console.log('Ended. Progress is ' + (p.progress * 100).toFixed(1) + ' %')
+		}
+
+		const interval = setInterval(onEachSecond, 1000)
+
 		const data = await getQuarkValue('connor', 'potato')
+
+		// Call `onEnd` here
+		// onEnd()
 		console.log(`data`, data)
 	}
 
@@ -52,8 +91,7 @@ export const Home = memo(() => {
 							disabled={showWhileYouWait}
 							value={domain}
 							onChange={(e) => setDomain(e.target.value)}
-							placeholder="Username"
-							name="something"
+							placeholder="Desired username"
 							fullWidth
 							autoFocus
 							InputProps={{
@@ -77,8 +115,10 @@ export const Home = memo(() => {
 							disabled={domain.length === 0 || showWhileYouWait}
 							variant="contained"
 							size="large"
+							// @ts-ignore
+							progress={progress}
 						>
-							{showWhileYouWait ? <CircularProgress /> : 'Claim'}
+							{showWhileYouWait ? <CircularProgress color="inherit" sx={{ zIndex: 3 }} /> : 'Claim'}
 						</ClaimButton>
 					</Grid>
 				</Grid>
