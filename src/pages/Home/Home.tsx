@@ -7,6 +7,7 @@ import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { WhileYouWait } from '@/components/WhileYouWait'
+import { getQuarkValue } from '@/utils/quarkvm'
 
 const ClaimButton = styled(Button)(({ theme }) => ({
 	color: 'white',
@@ -31,12 +32,12 @@ export const Home = memo(() => {
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [domain, setDomain] = useState<string>('')
 
-	const onFormSubmit = (e: any) => {
+	const onFormSubmit = async (e: any) => {
 		e.preventDefault()
-
-		console.info('CLAIMING DOMAIN...')
-
 		setShowWhileYouWait(true)
+
+		const data = await getQuarkValue('connor', 'potato')
+		console.log(`data`, data)
 	}
 
 	return (

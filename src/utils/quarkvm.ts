@@ -1,31 +1,33 @@
-export const mine = () => {}
+import { API_DOMAIN } from '@/constants'
 
-export const setValue = (key: any) => {}
-
-export const checkKeyClaimed = async (key: any) => {
-	const response = await fetch(
-		'http://3.80.126.27:37549/ext/bc/PWapoqFxsYJosghkRx5eBVZizvp9fPyKPGvdTBkoZYNdKj8Au/public',
-		{
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
+const fetchQuark = async (method: string, params = {}) => {
+	const response = await fetch(`${API_DOMAIN}/public`, {
+		headers: {
+			'Content-Type': 'application/json',
 		},
-	)
+		method: 'POST',
+		body: JSON.stringify({
+			jsonrpc: '2.0',
+			method: `quarkvm.${method}`,
+			params,
+			id: 1,
+		}),
+	})
 
 	const reader = response.body?.getReader()
-
-	const data = await reader?.read()
-	console.log(`data`, data)
+	const encodedData = await reader?.read()
+	return JSON.parse(new TextDecoder().decode(encodedData?.value))?.result
 }
 
-// curl --location --request POST 'http://3.80.126.27:37549/ext/bc/PWapoqFxsYJosghkRx5eBVZizvp9fPyKPGvdTBkoZYNdKj8Au/public' \
-// --header 'Content-Type: application/json' \
-// --data-raw '{
-//     "jsonrpc": "2.0",
-//     "method": "quarkvm.prefixInfo",
-//     "params":{
-//         "prefix":"cGF0cmljay5hdmF4"
-//     },
-//     "id": 1
-// }'
+export const getQuarkValue = async (prefix: string, key: string) =>
+	await fetchQuark('resolve', { path: `${prefix}/${key}` })
+
+export const getLatestBlockID = async () => {
+	const blockData = await fetchQuark('lastAccepted')
+	return blockData?.blockId
+}
+
+// export const getPrefixInfo = async (prefix: string) => {
+// 	const prefixData = await fetchQuark('prefixInfo', { pfx: new TextEncoder().encode('connor') })
+// 	console.log(`prefixData`, prefixData)
+// }
