@@ -97,7 +97,7 @@ export const Home = memo(() => {
 				</div>
 			</Grow>
 
-			<WhileYouWait show={showWhileYouWait} />
+			{showWhileYouWait && <WhileYouWait />}
 		</Page>
 	)
 })

@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { IoAdd } from 'react-icons/io5'
 import { Button, Divider, Grid, Slide, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/system'
@@ -18,24 +18,20 @@ const SetButton = styled(Button)(({ theme }) => ({
 	},
 }))
 
-type WhileYouWaitProps = {
-	show?: boolean
-}
-
-export const WhileYouWait = memo(({ show = false }: WhileYouWaitProps) => {
+export const WhileYouWait = memo(() => {
+	const [showAfterDelay, setShowAfterDelay] = useState<boolean>(false)
+	const [delay] = useState<number>(2500)
 	const [keyText, setKeyText] = useState<string>('')
 	const [propertyText, setPropertyText] = useState<string>('')
 
+	useEffect(() => {
+		setTimeout(() => {
+			setShowAfterDelay(true)
+		}, delay)
+	}, [delay])
+
 	return (
-		<Slide
-			direction="up"
-			mountOnEnter
-			in={show}
-			style={{
-				//@ts-ignore
-				transitionDelay: 2500,
-			}}
-		>
+		<Slide direction="up" mountOnEnter in={showAfterDelay}>
 			<div>
 				<Divider sx={{ my: 8 }} />
 
