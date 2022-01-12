@@ -6,6 +6,9 @@ export const commonOverrides: ThemeOptions['components'] = {
 			root: {
 				fontFamily: 'DM Serif Display',
 			},
+			input: {
+				paddingTop: 12,
+			},
 		},
 	},
 	MuiTooltip: {
