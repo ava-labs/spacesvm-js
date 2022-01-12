@@ -1,0 +1,1 @@
+export { LogoLink } from './LogoLink'

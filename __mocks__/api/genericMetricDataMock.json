@@ -1,0 +1,4194 @@
+{
+	"1632960000": [
+		{
+			"timestamp": "2021-09-30T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "43860250.000000"
+		},
+		{
+			"timestamp": "2021-09-30T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "170813.000000"
+		},
+		{
+			"timestamp": "2021-09-30T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-09-30T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "852433.000000"
+		},
+		{
+			"timestamp": "2021-09-30T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1116157.000000"
+		},
+		{
+			"timestamp": "2021-09-30T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "6317913.000000"
+		},
+		{
+			"timestamp": "2021-09-30T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "6514736.000000"
+		},
+		{
+			"timestamp": "2021-09-30T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "37560.000000"
+		}
+	],
+	"1633046400": [
+		{
+			"timestamp": "2021-10-01T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "748802.000000"
+		},
+		{
+			"timestamp": "2021-10-01T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-01T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1207263.000000"
+		},
+		{
+			"timestamp": "2021-10-01T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "40560550.000000"
+		},
+		{
+			"timestamp": "2021-10-01T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "5596214.000000"
+		},
+		{
+			"timestamp": "2021-10-01T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "6017896.000000"
+		},
+		{
+			"timestamp": "2021-10-01T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "194298.000000"
+		},
+		{
+			"timestamp": "2021-10-01T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "36607.000000"
+		}
+	],
+	"1633132800": [
+		{
+			"timestamp": "2021-10-02T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "31722.000000"
+		},
+		{
+			"timestamp": "2021-10-02T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "39214311.000000"
+		},
+		{
+			"timestamp": "2021-10-02T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "161068.000000"
+		},
+		{
+			"timestamp": "2021-10-02T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1117899.000000"
+		},
+		{
+			"timestamp": "2021-10-02T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-02T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "5612301.000000"
+		},
+		{
+			"timestamp": "2021-10-02T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "5926012.000000"
+		},
+		{
+			"timestamp": "2021-10-02T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "769332.000000"
+		}
+	],
+	"1633219200": [
+		{
+			"timestamp": "2021-10-03T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "153561.000000"
+		},
+		{
+			"timestamp": "2021-10-03T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-03T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "40337184.000000"
+		},
+		{
+			"timestamp": "2021-10-03T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "6065413.000000"
+		},
+		{
+			"timestamp": "2021-10-03T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "771971.000000"
+		},
+		{
+			"timestamp": "2021-10-03T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "5603591.000000"
+		},
+		{
+			"timestamp": "2021-10-03T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1130224.000000"
+		},
+		{
+			"timestamp": "2021-10-03T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "31617.000000"
+		}
+	],
+	"1633305600": [
+		{
+			"timestamp": "2021-10-04T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "43132497.000000"
+		},
+		{
+			"timestamp": "2021-10-04T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-04T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "5434709.000000"
+		},
+		{
+			"timestamp": "2021-10-04T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "5835348.000000"
+		},
+		{
+			"timestamp": "2021-10-04T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "33217.000000"
+		},
+		{
+			"timestamp": "2021-10-04T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "251518.000000"
+		},
+		{
+			"timestamp": "2021-10-04T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1121513.000000"
+		},
+		{
+			"timestamp": "2021-10-04T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "816661.000000"
+		}
+	],
+	"1633392000": [
+		{
+			"timestamp": "2021-10-05T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1235674.000000"
+		},
+		{
+			"timestamp": "2021-10-05T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-05T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "41480589.000000"
+		},
+		{
+			"timestamp": "2021-10-05T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "285422.000000"
+		},
+		{
+			"timestamp": "2021-10-05T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "6564313.000000"
+		},
+		{
+			"timestamp": "2021-10-05T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "872749.000000"
+		},
+		{
+			"timestamp": "2021-10-05T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4878227.000000"
+		},
+		{
+			"timestamp": "2021-10-05T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "31108.000000"
+		}
+	],
+	"1633478400": [
+		{
+			"timestamp": "2021-10-06T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "6414466.000000"
+		},
+		{
+			"timestamp": "2021-10-06T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3631411.000000"
+		},
+		{
+			"timestamp": "2021-10-06T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "229308.000000"
+		},
+		{
+			"timestamp": "2021-10-06T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "28683.000000"
+		},
+		{
+			"timestamp": "2021-10-06T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-06T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "41425680.000000"
+		},
+		{
+			"timestamp": "2021-10-06T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1337833.000000"
+		},
+		{
+			"timestamp": "2021-10-06T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "911024.000000"
+		}
+	],
+	"1633564800": [
+		{
+			"timestamp": "2021-10-07T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "39898494.000000"
+		},
+		{
+			"timestamp": "2021-10-07T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-07T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1344295.000000"
+		},
+		{
+			"timestamp": "2021-10-07T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7816968.000000"
+		},
+		{
+			"timestamp": "2021-10-07T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3677975.000000"
+		},
+		{
+			"timestamp": "2021-10-07T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "1019497.000000"
+		},
+		{
+			"timestamp": "2021-10-07T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "192434.000000"
+		},
+		{
+			"timestamp": "2021-10-07T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "26212.000000"
+		}
+	],
+	"1633651200": [
+		{
+			"timestamp": "2021-10-08T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3724682.000000"
+		},
+		{
+			"timestamp": "2021-10-08T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-08T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1287034.000000"
+		},
+		{
+			"timestamp": "2021-10-08T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "6139101.000000"
+		},
+		{
+			"timestamp": "2021-10-08T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "219455.000000"
+		},
+		{
+			"timestamp": "2021-10-08T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "1043325.000000"
+		},
+		{
+			"timestamp": "2021-10-08T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "25912.000000"
+		},
+		{
+			"timestamp": "2021-10-08T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "45448004.000000"
+		}
+	],
+	"1633737600": [
+		{
+			"timestamp": "2021-10-09T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "806469.000000"
+		},
+		{
+			"timestamp": "2021-10-09T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "36597.000000"
+		},
+		{
+			"timestamp": "2021-10-09T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "2914816.000000"
+		},
+		{
+			"timestamp": "2021-10-09T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1191856.000000"
+		},
+		{
+			"timestamp": "2021-10-09T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "180294.000000"
+		},
+		{
+			"timestamp": "2021-10-09T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "6045124.000000"
+		},
+		{
+			"timestamp": "2021-10-09T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-09T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "34996161.000000"
+		}
+	],
+	"1633824000": [
+		{
+			"timestamp": "2021-10-10T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-10T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1137901.000000"
+		},
+		{
+			"timestamp": "2021-10-10T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "32185231.000000"
+		},
+		{
+			"timestamp": "2021-10-10T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "6270206.000000"
+		},
+		{
+			"timestamp": "2021-10-10T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3160976.000000"
+		},
+		{
+			"timestamp": "2021-10-10T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "230529.000000"
+		},
+		{
+			"timestamp": "2021-10-10T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "809164.000000"
+		},
+		{
+			"timestamp": "2021-10-10T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "41559.000000"
+		}
+	],
+	"1633910400": [
+		{
+			"timestamp": "2021-10-11T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "6947911.000000"
+		},
+		{
+			"timestamp": "2021-10-11T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1183486.000000"
+		},
+		{
+			"timestamp": "2021-10-11T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-11T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "829533.000000"
+		},
+		{
+			"timestamp": "2021-10-11T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "44862179.000000"
+		},
+		{
+			"timestamp": "2021-10-11T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3222565.000000"
+		},
+		{
+			"timestamp": "2021-10-11T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "37902.000000"
+		},
+		{
+			"timestamp": "2021-10-11T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "250070.000000"
+		}
+	],
+	"1633996800": [
+		{
+			"timestamp": "2021-10-12T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1203566.000000"
+		},
+		{
+			"timestamp": "2021-10-12T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7366768.000000"
+		},
+		{
+			"timestamp": "2021-10-12T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "766492.000000"
+		},
+		{
+			"timestamp": "2021-10-12T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "39015.000000"
+		},
+		{
+			"timestamp": "2021-10-12T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-12T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3118037.000000"
+		},
+		{
+			"timestamp": "2021-10-12T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "244210.000000"
+		},
+		{
+			"timestamp": "2021-10-12T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "47992582.000000"
+		}
+	],
+	"1634083200": [
+		{
+			"timestamp": "2021-10-13T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-13T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "736855.000000"
+		},
+		{
+			"timestamp": "2021-10-13T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1189854.000000"
+		},
+		{
+			"timestamp": "2021-10-13T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3436941.000000"
+		},
+		{
+			"timestamp": "2021-10-13T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "201622.000000"
+		},
+		{
+			"timestamp": "2021-10-13T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "49945800.000000"
+		},
+		{
+			"timestamp": "2021-10-13T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "8429278.000000"
+		},
+		{
+			"timestamp": "2021-10-13T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "32918.000000"
+		}
+	],
+	"1634169600": [
+		{
+			"timestamp": "2021-10-14T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3554769.000000"
+		},
+		{
+			"timestamp": "2021-10-14T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "176739.000000"
+		},
+		{
+			"timestamp": "2021-10-14T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "52694042.000000"
+		},
+		{
+			"timestamp": "2021-10-14T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "31659.000000"
+		},
+		{
+			"timestamp": "2021-10-14T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7766813.000000"
+		},
+		{
+			"timestamp": "2021-10-14T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1227097.000000"
+		},
+		{
+			"timestamp": "2021-10-14T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-14T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "712604.000000"
+		}
+	],
+	"1634256000": [
+		{
+			"timestamp": "2021-10-15T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "727413.000000"
+		},
+		{
+			"timestamp": "2021-10-15T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1302993.000000"
+		},
+		{
+			"timestamp": "2021-10-15T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3892580.000000"
+		},
+		{
+			"timestamp": "2021-10-15T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "224402.000000"
+		},
+		{
+			"timestamp": "2021-10-15T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "6974309.000000"
+		},
+		{
+			"timestamp": "2021-10-15T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "34374.000000"
+		},
+		{
+			"timestamp": "2021-10-15T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "53662881.000000"
+		},
+		{
+			"timestamp": "2021-10-15T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		}
+	],
+	"1634342400": [
+		{
+			"timestamp": "2021-10-16T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "182453.000000"
+		},
+		{
+			"timestamp": "2021-10-16T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-16T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "48764442.000000"
+		},
+		{
+			"timestamp": "2021-10-16T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "6078395.000000"
+		},
+		{
+			"timestamp": "2021-10-16T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1181031.000000"
+		},
+		{
+			"timestamp": "2021-10-16T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "626344.000000"
+		},
+		{
+			"timestamp": "2021-10-16T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "27880.000000"
+		},
+		{
+			"timestamp": "2021-10-16T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3001486.000000"
+		}
+	],
+	"1634428800": [
+		{
+			"timestamp": "2021-10-17T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "35581.000000"
+		},
+		{
+			"timestamp": "2021-10-17T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1144184.000000"
+		},
+		{
+			"timestamp": "2021-10-17T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "161121.000000"
+		},
+		{
+			"timestamp": "2021-10-17T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "48272301.000000"
+		},
+		{
+			"timestamp": "2021-10-17T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "2877540.000000"
+		},
+		{
+			"timestamp": "2021-10-17T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7022554.000000"
+		},
+		{
+			"timestamp": "2021-10-17T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-17T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "681054.000000"
+		}
+	],
+	"1634515200": [
+		{
+			"timestamp": "2021-10-18T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "196489.000000"
+		},
+		{
+			"timestamp": "2021-10-18T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "31372.000000"
+		},
+		{
+			"timestamp": "2021-10-18T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "661594.000000"
+		},
+		{
+			"timestamp": "2021-10-18T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "8093323.000000"
+		},
+		{
+			"timestamp": "2021-10-18T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1197673.000000"
+		},
+		{
+			"timestamp": "2021-10-18T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4506655.000000"
+		},
+		{
+			"timestamp": "2021-10-18T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-18T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "53504058.000000"
+		}
+	],
+	"1634601600": [
+		{
+			"timestamp": "2021-10-19T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "9126940.000000"
+		},
+		{
+			"timestamp": "2021-10-19T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1243503.000000"
+		},
+		{
+			"timestamp": "2021-10-19T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "36025.000000"
+		},
+		{
+			"timestamp": "2021-10-19T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "748981.000000"
+		},
+		{
+			"timestamp": "2021-10-19T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "52425895.000000"
+		},
+		{
+			"timestamp": "2021-10-19T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-19T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "188584.000000"
+		},
+		{
+			"timestamp": "2021-10-19T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4181009.000000"
+		}
+	],
+	"1634688000": [
+		{
+			"timestamp": "2021-10-20T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "619839.000000"
+		},
+		{
+			"timestamp": "2021-10-20T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-20T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "51763920.000000"
+		},
+		{
+			"timestamp": "2021-10-20T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7812142.000000"
+		},
+		{
+			"timestamp": "2021-10-20T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1259885.000000"
+		},
+		{
+			"timestamp": "2021-10-20T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3563413.000000"
+		},
+		{
+			"timestamp": "2021-10-20T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "283279.000000"
+		},
+		{
+			"timestamp": "2021-10-20T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "31422.000000"
+		}
+	],
+	"1634774400": [
+		{
+			"timestamp": "2021-10-21T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1277275.000000"
+		},
+		{
+			"timestamp": "2021-10-21T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-21T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3309325.000000"
+		},
+		{
+			"timestamp": "2021-10-21T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "47688856.000000"
+		},
+		{
+			"timestamp": "2021-10-21T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "27044.000000"
+		},
+		{
+			"timestamp": "2021-10-21T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "8824346.000000"
+		},
+		{
+			"timestamp": "2021-10-21T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "286179.000000"
+		},
+		{
+			"timestamp": "2021-10-21T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "686708.000000"
+		}
+	],
+	"1634860800": [
+		{
+			"timestamp": "2021-10-22T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-22T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "48822941.000000"
+		},
+		{
+			"timestamp": "2021-10-22T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "8146057.000000"
+		},
+		{
+			"timestamp": "2021-10-22T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "26192.000000"
+		},
+		{
+			"timestamp": "2021-10-22T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "420001.000000"
+		},
+		{
+			"timestamp": "2021-10-22T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3492471.000000"
+		},
+		{
+			"timestamp": "2021-10-22T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "693551.000000"
+		},
+		{
+			"timestamp": "2021-10-22T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1256044.000000"
+		}
+	],
+	"1634947200": [
+		{
+			"timestamp": "2021-10-23T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "42294520.000000"
+		},
+		{
+			"timestamp": "2021-10-23T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3295464.000000"
+		},
+		{
+			"timestamp": "2021-10-23T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-23T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "24445.000000"
+		},
+		{
+			"timestamp": "2021-10-23T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "546360.000000"
+		},
+		{
+			"timestamp": "2021-10-23T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1235169.000000"
+		},
+		{
+			"timestamp": "2021-10-23T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "329813.000000"
+		},
+		{
+			"timestamp": "2021-10-23T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7447761.000000"
+		}
+	],
+	"1635033600": [
+		{
+			"timestamp": "2021-10-24T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7160341.000000"
+		},
+		{
+			"timestamp": "2021-10-24T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "43727063.000000"
+		},
+		{
+			"timestamp": "2021-10-24T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1261312.000000"
+		},
+		{
+			"timestamp": "2021-10-24T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "657794.000000"
+		},
+		{
+			"timestamp": "2021-10-24T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "331435.000000"
+		},
+		{
+			"timestamp": "2021-10-24T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3332072.000000"
+		},
+		{
+			"timestamp": "2021-10-24T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "38788.000000"
+		},
+		{
+			"timestamp": "2021-10-24T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		}
+	],
+	"1635120000": [
+		{
+			"timestamp": "2021-10-25T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "8331025.000000"
+		},
+		{
+			"timestamp": "2021-10-25T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4209189.000000"
+		},
+		{
+			"timestamp": "2021-10-25T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1299495.000000"
+		},
+		{
+			"timestamp": "2021-10-25T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "708626.000000"
+		},
+		{
+			"timestamp": "2021-10-25T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "26696.000000"
+		},
+		{
+			"timestamp": "2021-10-25T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "360481.000000"
+		},
+		{
+			"timestamp": "2021-10-25T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "49863786.000000"
+		},
+		{
+			"timestamp": "2021-10-25T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		}
+	],
+	"1635206400": [
+		{
+			"timestamp": "2021-10-26T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3972270.000000"
+		},
+		{
+			"timestamp": "2021-10-26T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "53453434.000000"
+		},
+		{
+			"timestamp": "2021-10-26T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "470623.000000"
+		},
+		{
+			"timestamp": "2021-10-26T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "45962.000000"
+		},
+		{
+			"timestamp": "2021-10-26T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1344772.000000"
+		},
+		{
+			"timestamp": "2021-10-26T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "802986.000000"
+		},
+		{
+			"timestamp": "2021-10-26T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-26T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "10000079.000000"
+		}
+	],
+	"1635292800": [
+		{
+			"timestamp": "2021-10-27T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-27T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "894894.000000"
+		},
+		{
+			"timestamp": "2021-10-27T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "314319.000000"
+		},
+		{
+			"timestamp": "2021-10-27T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4189350.000000"
+		},
+		{
+			"timestamp": "2021-10-27T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1370504.000000"
+		},
+		{
+			"timestamp": "2021-10-27T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "51498.000000"
+		},
+		{
+			"timestamp": "2021-10-27T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "52544805.000000"
+		},
+		{
+			"timestamp": "2021-10-27T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "10608079.000000"
+		}
+	],
+	"1635379200": [
+		{
+			"timestamp": "2021-10-28T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "283370.000000"
+		},
+		{
+			"timestamp": "2021-10-28T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "37721.000000"
+		},
+		{
+			"timestamp": "2021-10-28T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1510502.000000"
+		},
+		{
+			"timestamp": "2021-10-28T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "10841297.000000"
+		},
+		{
+			"timestamp": "2021-10-28T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-28T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4631149.000000"
+		},
+		{
+			"timestamp": "2021-10-28T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "803209.000000"
+		},
+		{
+			"timestamp": "2021-10-28T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "55952128.000000"
+		}
+	],
+	"1635465600": [
+		{
+			"timestamp": "2021-10-29T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-29T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "62138134.000000"
+		},
+		{
+			"timestamp": "2021-10-29T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1456333.000000"
+		},
+		{
+			"timestamp": "2021-10-29T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "277968.000000"
+		},
+		{
+			"timestamp": "2021-10-29T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "6552129.000000"
+		},
+		{
+			"timestamp": "2021-10-29T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "12074976.000000"
+		},
+		{
+			"timestamp": "2021-10-29T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "33851.000000"
+		},
+		{
+			"timestamp": "2021-10-29T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "611111.000000"
+		}
+	],
+	"1635552000": [
+		{
+			"timestamp": "2021-10-30T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "21005.000000"
+		},
+		{
+			"timestamp": "2021-10-30T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1379095.000000"
+		},
+		{
+			"timestamp": "2021-10-30T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "55967102.000000"
+		},
+		{
+			"timestamp": "2021-10-30T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3852983.000000"
+		},
+		{
+			"timestamp": "2021-10-30T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-30T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "649705.000000"
+		},
+		{
+			"timestamp": "2021-10-30T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "260017.000000"
+		},
+		{
+			"timestamp": "2021-10-30T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "10354008.000000"
+		}
+	],
+	"1635638400": [
+		{
+			"timestamp": "2021-10-31T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "25183.000000"
+		},
+		{
+			"timestamp": "2021-10-31T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-10-31T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "603809.000000"
+		},
+		{
+			"timestamp": "2021-10-31T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1304184.000000"
+		},
+		{
+			"timestamp": "2021-10-31T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3402645.000000"
+		},
+		{
+			"timestamp": "2021-10-31T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "287583.000000"
+		},
+		{
+			"timestamp": "2021-10-31T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "60414760.000000"
+		},
+		{
+			"timestamp": "2021-10-31T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "9281462.000000"
+		}
+	],
+	"1635724800": [
+		{
+			"timestamp": "2021-11-01T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4101525.000000"
+		},
+		{
+			"timestamp": "2021-11-01T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "10031033.000000"
+		},
+		{
+			"timestamp": "2021-11-01T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "25769.000000"
+		},
+		{
+			"timestamp": "2021-11-01T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "650440.000000"
+		},
+		{
+			"timestamp": "2021-11-01T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "255203.000000"
+		},
+		{
+			"timestamp": "2021-11-01T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1341733.000000"
+		},
+		{
+			"timestamp": "2021-11-01T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-11-01T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "60503150.000000"
+		}
+	],
+	"1635811200": [
+		{
+			"timestamp": "2021-11-02T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "727660.000000"
+		},
+		{
+			"timestamp": "2021-11-02T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "59827360.000000"
+		},
+		{
+			"timestamp": "2021-11-02T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4197646.000000"
+		},
+		{
+			"timestamp": "2021-11-02T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "24051.000000"
+		},
+		{
+			"timestamp": "2021-11-02T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "279974.000000"
+		},
+		{
+			"timestamp": "2021-11-02T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1395656.000000"
+		},
+		{
+			"timestamp": "2021-11-02T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-11-02T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "11133939.000000"
+		}
+	],
+	"1635897600": [
+		{
+			"timestamp": "2021-11-03T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "23020.000000"
+		},
+		{
+			"timestamp": "2021-11-03T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "761321.000000"
+		},
+		{
+			"timestamp": "2021-11-03T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "297357.000000"
+		},
+		{
+			"timestamp": "2021-11-03T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-11-03T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "62028484.000000"
+		},
+		{
+			"timestamp": "2021-11-03T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1417221.000000"
+		},
+		{
+			"timestamp": "2021-11-03T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4155133.000000"
+		},
+		{
+			"timestamp": "2021-11-03T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "11298245.000000"
+		}
+	],
+	"1635984000": [
+		{
+			"timestamp": "2021-11-04T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-11-04T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "61970204.000000"
+		},
+		{
+			"timestamp": "2021-11-04T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1352186.000000"
+		},
+		{
+			"timestamp": "2021-11-04T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "304436.000000"
+		},
+		{
+			"timestamp": "2021-11-04T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "20008.000000"
+		},
+		{
+			"timestamp": "2021-11-04T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3404889.000000"
+		},
+		{
+			"timestamp": "2021-11-04T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "12181896.000000"
+		},
+		{
+			"timestamp": "2021-11-04T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "670288.000000"
+		}
+	],
+	"1636070400": [
+		{
+			"timestamp": "2021-11-05T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "21539.000000"
+		},
+		{
+			"timestamp": "2021-11-05T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-11-05T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1339661.000000"
+		},
+		{
+			"timestamp": "2021-11-05T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "343850.000000"
+		},
+		{
+			"timestamp": "2021-11-05T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3373143.000000"
+		},
+		{
+			"timestamp": "2021-11-05T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "747180.000000"
+		},
+		{
+			"timestamp": "2021-11-05T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "10458494.000000"
+		},
+		{
+			"timestamp": "2021-11-05T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "62205879.000000"
+		}
+	],
+	"1636156800": [
+		{
+			"timestamp": "2021-11-06T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "10586212.000000"
+		},
+		{
+			"timestamp": "2021-11-06T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "2794350.000000"
+		},
+		{
+			"timestamp": "2021-11-06T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "382106.000000"
+		},
+		{
+			"timestamp": "2021-11-06T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-11-06T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "55699776.000000"
+		},
+		{
+			"timestamp": "2021-11-06T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "20000.000000"
+		},
+		{
+			"timestamp": "2021-11-06T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1255921.000000"
+		},
+		{
+			"timestamp": "2021-11-06T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "674345.000000"
+		}
+	],
+	"1636243200": [
+		{
+			"timestamp": "2021-11-07T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "752014.000000"
+		},
+		{
+			"timestamp": "2021-11-07T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "20533.000000"
+		},
+		{
+			"timestamp": "2021-11-07T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "55057365.000000"
+		},
+		{
+			"timestamp": "2021-11-07T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1276998.000000"
+		},
+		{
+			"timestamp": "2021-11-07T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "309120.000000"
+		},
+		{
+			"timestamp": "2021-11-07T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-11-07T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "10346559.000000"
+		},
+		{
+			"timestamp": "2021-11-07T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "2852923.000000"
+		}
+	],
+	"1636329600": [
+		{
+			"timestamp": "2021-11-08T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1329018.000000"
+		},
+		{
+			"timestamp": "2021-11-08T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		},
+		{
+			"timestamp": "2021-11-08T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "60775612.000000"
+		},
+		{
+			"timestamp": "2021-11-08T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "756179.000000"
+		},
+		{
+			"timestamp": "2021-11-08T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "556581.000000"
+		},
+		{
+			"timestamp": "2021-11-08T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "22725.000000"
+		},
+		{
+			"timestamp": "2021-11-08T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4490310.000000"
+		},
+		{
+			"timestamp": "2021-11-08T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "9961142.000000"
+		}
+	],
+	"1636416000": [
+		{
+			"timestamp": "2021-11-09T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1334145.000000"
+		},
+		{
+			"timestamp": "2021-11-09T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3536571.000000"
+		},
+		{
+			"timestamp": "2021-11-09T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "20942.000000"
+		},
+		{
+			"timestamp": "2021-11-09T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "661545.000000"
+		},
+		{
+			"timestamp": "2021-11-09T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "453806.000000"
+		},
+		{
+			"timestamp": "2021-11-09T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "61415305.000000"
+		},
+		{
+			"timestamp": "2021-11-09T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "11189730.000000"
+		},
+		{
+			"timestamp": "2021-11-09T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		}
+	],
+	"1636502400": [
+		{
+			"timestamp": "2021-11-10T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4257161.000000"
+		},
+		{
+			"timestamp": "2021-11-10T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1390746.000000"
+		},
+		{
+			"timestamp": "2021-11-10T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "12161484.000000"
+		},
+		{
+			"timestamp": "2021-11-10T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "789361.000000"
+		},
+		{
+			"timestamp": "2021-11-10T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "466196.000000"
+		},
+		{
+			"timestamp": "2021-11-10T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "29098.000000"
+		},
+		{
+			"timestamp": "2021-11-10T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "56847835.000000"
+		},
+		{
+			"timestamp": "2021-11-10T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "0.000000"
+		}
+	],
+	"1636588800": [
+		{
+			"timestamp": "2021-11-11T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4078992.000000"
+		},
+		{
+			"timestamp": "2021-11-11T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1347643.000000"
+		},
+		{
+			"timestamp": "2021-11-11T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "353876.000000"
+		},
+		{
+			"timestamp": "2021-11-11T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "21954.000000"
+		},
+		{
+			"timestamp": "2021-11-11T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "711.000000"
+		},
+		{
+			"timestamp": "2021-11-11T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "63561732.000000"
+		},
+		{
+			"timestamp": "2021-11-11T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "686915.000000"
+		},
+		{
+			"timestamp": "2021-11-11T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "12179592.000000"
+		}
+	],
+	"1636675200": [
+		{
+			"timestamp": "2021-11-12T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "30009.000000"
+		},
+		{
+			"timestamp": "2021-11-12T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "68758323.000000"
+		},
+		{
+			"timestamp": "2021-11-12T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "660548.000000"
+		},
+		{
+			"timestamp": "2021-11-12T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "22942.000000"
+		},
+		{
+			"timestamp": "2021-11-12T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "329236.000000"
+		},
+		{
+			"timestamp": "2021-11-12T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "12178956.000000"
+		},
+		{
+			"timestamp": "2021-11-12T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3976077.000000"
+		},
+		{
+			"timestamp": "2021-11-12T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1345131.000000"
+		}
+	],
+	"1636761600": [
+		{
+			"timestamp": "2021-11-13T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "519992.000000"
+		},
+		{
+			"timestamp": "2021-11-13T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "22352.000000"
+		},
+		{
+			"timestamp": "2021-11-13T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "11493392.000000"
+		},
+		{
+			"timestamp": "2021-11-13T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3255182.000000"
+		},
+		{
+			"timestamp": "2021-11-13T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "68899242.000000"
+		},
+		{
+			"timestamp": "2021-11-13T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "589986.000000"
+		},
+		{
+			"timestamp": "2021-11-13T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "23402.000000"
+		},
+		{
+			"timestamp": "2021-11-13T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1300464.000000"
+		}
+	],
+	"1636848000": [
+		{
+			"timestamp": "2021-11-14T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "577738.000000"
+		},
+		{
+			"timestamp": "2021-11-14T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "393929.000000"
+		},
+		{
+			"timestamp": "2021-11-14T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "68175224.000000"
+		},
+		{
+			"timestamp": "2021-11-14T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1275744.000000"
+		},
+		{
+			"timestamp": "2021-11-14T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "11588766.000000"
+		},
+		{
+			"timestamp": "2021-11-14T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3362999.000000"
+		},
+		{
+			"timestamp": "2021-11-14T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "28680.000000"
+		},
+		{
+			"timestamp": "2021-11-14T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "22832.000000"
+		}
+	],
+	"1636934400": [
+		{
+			"timestamp": "2021-11-15T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "13101907.000000"
+		},
+		{
+			"timestamp": "2021-11-15T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4020338.000000"
+		},
+		{
+			"timestamp": "2021-11-15T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "636679.000000"
+		},
+		{
+			"timestamp": "2021-11-15T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "514023.000000"
+		},
+		{
+			"timestamp": "2021-11-15T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "24282.000000"
+		},
+		{
+			"timestamp": "2021-11-15T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "22207.000000"
+		},
+		{
+			"timestamp": "2021-11-15T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "74689321.000000"
+		},
+		{
+			"timestamp": "2021-11-15T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1289636.000000"
+		}
+	],
+	"1637020800": [
+		{
+			"timestamp": "2021-11-16T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "734536.000000"
+		},
+		{
+			"timestamp": "2021-11-16T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "459272.000000"
+		},
+		{
+			"timestamp": "2021-11-16T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "26817.000000"
+		},
+		{
+			"timestamp": "2021-11-16T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "73288962.000000"
+		},
+		{
+			"timestamp": "2021-11-16T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "41841.000000"
+		},
+		{
+			"timestamp": "2021-11-16T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "14758407.000000"
+		},
+		{
+			"timestamp": "2021-11-16T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4195442.000000"
+		},
+		{
+			"timestamp": "2021-11-16T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1310153.000000"
+		}
+	],
+	"1637107200": [
+		{
+			"timestamp": "2021-11-17T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3653167.000000"
+		},
+		{
+			"timestamp": "2021-11-17T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "45970.000000"
+		},
+		{
+			"timestamp": "2021-11-17T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "24849.000000"
+		},
+		{
+			"timestamp": "2021-11-17T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "74625262.000000"
+		},
+		{
+			"timestamp": "2021-11-17T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "13140488.000000"
+		},
+		{
+			"timestamp": "2021-11-17T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "704740.000000"
+		},
+		{
+			"timestamp": "2021-11-17T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "534001.000000"
+		},
+		{
+			"timestamp": "2021-11-17T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1353219.000000"
+		}
+	],
+	"1637193600": [
+		{
+			"timestamp": "2021-11-18T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "664674.000000"
+		},
+		{
+			"timestamp": "2021-11-18T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "747358.000000"
+		},
+		{
+			"timestamp": "2021-11-18T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "13805375.000000"
+		},
+		{
+			"timestamp": "2021-11-18T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "69451489.000000"
+		},
+		{
+			"timestamp": "2021-11-18T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "22115.000000"
+		},
+		{
+			"timestamp": "2021-11-18T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1284250.000000"
+		},
+		{
+			"timestamp": "2021-11-18T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "43657.000000"
+		},
+		{
+			"timestamp": "2021-11-18T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4039183.000000"
+		}
+	],
+	"1637280000": [
+		{
+			"timestamp": "2021-11-19T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "23953.000000"
+		},
+		{
+			"timestamp": "2021-11-19T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1255788.000000"
+		},
+		{
+			"timestamp": "2021-11-19T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "34463.000000"
+		},
+		{
+			"timestamp": "2021-11-19T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "14165602.000000"
+		},
+		{
+			"timestamp": "2021-11-19T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "73367404.000000"
+		},
+		{
+			"timestamp": "2021-11-19T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3791493.000000"
+		},
+		{
+			"timestamp": "2021-11-19T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "519677.000000"
+		},
+		{
+			"timestamp": "2021-11-19T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "662811.000000"
+		}
+	],
+	"1637366400": [
+		{
+			"timestamp": "2021-11-20T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "587912.000000"
+		},
+		{
+			"timestamp": "2021-11-20T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3389758.000000"
+		},
+		{
+			"timestamp": "2021-11-20T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "14608381.000000"
+		},
+		{
+			"timestamp": "2021-11-20T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "627392.000000"
+		},
+		{
+			"timestamp": "2021-11-20T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "66239467.000000"
+		},
+		{
+			"timestamp": "2021-11-20T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1160128.000000"
+		},
+		{
+			"timestamp": "2021-11-20T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "40913.000000"
+		},
+		{
+			"timestamp": "2021-11-20T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "29313.000000"
+		}
+	],
+	"1637452800": [
+		{
+			"timestamp": "2021-11-21T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "616540.000000"
+		},
+		{
+			"timestamp": "2021-11-21T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "13994207.000000"
+		},
+		{
+			"timestamp": "2021-11-21T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3334471.000000"
+		},
+		{
+			"timestamp": "2021-11-21T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "31205.000000"
+		},
+		{
+			"timestamp": "2021-11-21T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "65166800.000000"
+		},
+		{
+			"timestamp": "2021-11-21T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1260939.000000"
+		},
+		{
+			"timestamp": "2021-11-21T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "669756.000000"
+		},
+		{
+			"timestamp": "2021-11-21T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "34871.000000"
+		}
+	],
+	"1637539200": [
+		{
+			"timestamp": "2021-11-22T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "14310590.000000"
+		},
+		{
+			"timestamp": "2021-11-22T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "610864.000000"
+		},
+		{
+			"timestamp": "2021-11-22T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "32683.000000"
+		},
+		{
+			"timestamp": "2021-11-22T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "69351059.000000"
+		},
+		{
+			"timestamp": "2021-11-22T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1221508.000000"
+		},
+		{
+			"timestamp": "2021-11-22T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "655417.000000"
+		},
+		{
+			"timestamp": "2021-11-22T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3937083.000000"
+		},
+		{
+			"timestamp": "2021-11-22T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "35599.000000"
+		}
+	],
+	"1637625600": [
+		{
+			"timestamp": "2021-11-23T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "15293782.000000"
+		},
+		{
+			"timestamp": "2021-11-23T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "608527.000000"
+		},
+		{
+			"timestamp": "2021-11-23T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3852657.000000"
+		},
+		{
+			"timestamp": "2021-11-23T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "29368.000000"
+		},
+		{
+			"timestamp": "2021-11-23T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "62559407.000000"
+		},
+		{
+			"timestamp": "2021-11-23T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "784448.000000"
+		},
+		{
+			"timestamp": "2021-11-23T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1264994.000000"
+		},
+		{
+			"timestamp": "2021-11-23T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "32060.000000"
+		}
+	],
+	"1637712000": [
+		{
+			"timestamp": "2021-11-24T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "789054.000000"
+		},
+		{
+			"timestamp": "2021-11-24T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "31646.000000"
+		},
+		{
+			"timestamp": "2021-11-24T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "65987959.000000"
+		},
+		{
+			"timestamp": "2021-11-24T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "603653.000000"
+		},
+		{
+			"timestamp": "2021-11-24T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "14952443.000000"
+		},
+		{
+			"timestamp": "2021-11-24T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4180333.000000"
+		},
+		{
+			"timestamp": "2021-11-24T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "29780.000000"
+		},
+		{
+			"timestamp": "2021-11-24T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1342491.000000"
+		}
+	],
+	"1637798400": [
+		{
+			"timestamp": "2021-11-25T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "643920.000000"
+		},
+		{
+			"timestamp": "2021-11-25T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1301578.000000"
+		},
+		{
+			"timestamp": "2021-11-25T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4516756.000000"
+		},
+		{
+			"timestamp": "2021-11-25T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "737246.000000"
+		},
+		{
+			"timestamp": "2021-11-25T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "29682.000000"
+		},
+		{
+			"timestamp": "2021-11-25T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "16262505.000000"
+		},
+		{
+			"timestamp": "2021-11-25T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "27847.000000"
+		},
+		{
+			"timestamp": "2021-11-25T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "67489651.000000"
+		}
+	],
+	"1637884800": [
+		{
+			"timestamp": "2021-11-26T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "745600.000000"
+		},
+		{
+			"timestamp": "2021-11-26T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "45277.000000"
+		},
+		{
+			"timestamp": "2021-11-26T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "62451930.000000"
+		},
+		{
+			"timestamp": "2021-11-26T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "33672.000000"
+		},
+		{
+			"timestamp": "2021-11-26T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "15902366.000000"
+		},
+		{
+			"timestamp": "2021-11-26T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "700988.000000"
+		},
+		{
+			"timestamp": "2021-11-26T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1297524.000000"
+		},
+		{
+			"timestamp": "2021-11-26T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4798077.000000"
+		}
+	],
+	"1637971200": [
+		{
+			"timestamp": "2021-11-27T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "64705072.000000"
+		},
+		{
+			"timestamp": "2021-11-27T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "15354587.000000"
+		},
+		{
+			"timestamp": "2021-11-27T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "24535.000000"
+		},
+		{
+			"timestamp": "2021-11-27T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "686559.000000"
+		},
+		{
+			"timestamp": "2021-11-27T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "29741.000000"
+		},
+		{
+			"timestamp": "2021-11-27T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1213284.000000"
+		},
+		{
+			"timestamp": "2021-11-27T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3924512.000000"
+		},
+		{
+			"timestamp": "2021-11-27T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "516142.000000"
+		}
+	],
+	"1638057600": [
+		{
+			"timestamp": "2021-11-28T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3960528.000000"
+		},
+		{
+			"timestamp": "2021-11-28T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "31142.000000"
+		},
+		{
+			"timestamp": "2021-11-28T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "15275590.000000"
+		},
+		{
+			"timestamp": "2021-11-28T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "506723.000000"
+		},
+		{
+			"timestamp": "2021-11-28T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "19873.000000"
+		},
+		{
+			"timestamp": "2021-11-28T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1135653.000000"
+		},
+		{
+			"timestamp": "2021-11-28T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "66109694.000000"
+		},
+		{
+			"timestamp": "2021-11-28T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "724362.000000"
+		}
+	],
+	"1638144000": [
+		{
+			"timestamp": "2021-11-29T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "541509.000000"
+		},
+		{
+			"timestamp": "2021-11-29T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "29027.000000"
+		},
+		{
+			"timestamp": "2021-11-29T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "738866.000000"
+		},
+		{
+			"timestamp": "2021-11-29T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "65081297.000000"
+		},
+		{
+			"timestamp": "2021-11-29T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4161885.000000"
+		},
+		{
+			"timestamp": "2021-11-29T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1247688.000000"
+		},
+		{
+			"timestamp": "2021-11-29T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "26287.000000"
+		},
+		{
+			"timestamp": "2021-11-29T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "15299829.000000"
+		}
+	],
+	"1638230400": [
+		{
+			"timestamp": "2021-11-30T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "37031.000000"
+		},
+		{
+			"timestamp": "2021-11-30T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "539943.000000"
+		},
+		{
+			"timestamp": "2021-11-30T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1280926.000000"
+		},
+		{
+			"timestamp": "2021-11-30T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4234941.000000"
+		},
+		{
+			"timestamp": "2021-11-30T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "64804159.000000"
+		},
+		{
+			"timestamp": "2021-11-30T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "710290.000000"
+		},
+		{
+			"timestamp": "2021-11-30T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "14831893.000000"
+		},
+		{
+			"timestamp": "2021-11-30T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "29471.000000"
+		}
+	],
+	"1638316800": [
+		{
+			"timestamp": "2021-12-01T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "30050.000000"
+		},
+		{
+			"timestamp": "2021-12-01T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "15103274.000000"
+		},
+		{
+			"timestamp": "2021-12-01T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3805326.000000"
+		},
+		{
+			"timestamp": "2021-12-01T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "549246.000000"
+		},
+		{
+			"timestamp": "2021-12-01T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "793173.000000"
+		},
+		{
+			"timestamp": "2021-12-01T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "29514.000000"
+		},
+		{
+			"timestamp": "2021-12-01T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1221643.000000"
+		},
+		{
+			"timestamp": "2021-12-01T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "63291940.000000"
+		}
+	],
+	"1638403200": [
+		{
+			"timestamp": "2021-12-02T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4159677.000000"
+		},
+		{
+			"timestamp": "2021-12-02T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "750907.000000"
+		},
+		{
+			"timestamp": "2021-12-02T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "25427.000000"
+		},
+		{
+			"timestamp": "2021-12-02T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "30556.000000"
+		},
+		{
+			"timestamp": "2021-12-02T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "13079730.000000"
+		},
+		{
+			"timestamp": "2021-12-02T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "548172.000000"
+		},
+		{
+			"timestamp": "2021-12-02T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1265286.000000"
+		},
+		{
+			"timestamp": "2021-12-02T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "59313945.000000"
+		}
+	],
+	"1638489600": [
+		{
+			"timestamp": "2021-12-03T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "10906939.000000"
+		},
+		{
+			"timestamp": "2021-12-03T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "64223925.000000"
+		},
+		{
+			"timestamp": "2021-12-03T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "34657.000000"
+		},
+		{
+			"timestamp": "2021-12-03T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "25410.000000"
+		},
+		{
+			"timestamp": "2021-12-03T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "738294.000000"
+		},
+		{
+			"timestamp": "2021-12-03T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "627682.000000"
+		},
+		{
+			"timestamp": "2021-12-03T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3935337.000000"
+		},
+		{
+			"timestamp": "2021-12-03T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1211488.000000"
+		}
+	],
+	"1638576000": [
+		{
+			"timestamp": "2021-12-04T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "822532.000000"
+		},
+		{
+			"timestamp": "2021-12-04T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "42912104.000000"
+		},
+		{
+			"timestamp": "2021-12-04T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "52205.000000"
+		},
+		{
+			"timestamp": "2021-12-04T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "655752.000000"
+		},
+		{
+			"timestamp": "2021-12-04T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "11038907.000000"
+		},
+		{
+			"timestamp": "2021-12-04T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1235697.000000"
+		},
+		{
+			"timestamp": "2021-12-04T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4384921.000000"
+		},
+		{
+			"timestamp": "2021-12-04T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "32808.000000"
+		}
+	],
+	"1638662400": [
+		{
+			"timestamp": "2021-12-05T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "44396.000000"
+		},
+		{
+			"timestamp": "2021-12-05T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "54746443.000000"
+		},
+		{
+			"timestamp": "2021-12-05T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "493018.000000"
+		},
+		{
+			"timestamp": "2021-12-05T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1386491.000000"
+		},
+		{
+			"timestamp": "2021-12-05T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "2717637.000000"
+		},
+		{
+			"timestamp": "2021-12-05T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "793855.000000"
+		},
+		{
+			"timestamp": "2021-12-05T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "28492.000000"
+		},
+		{
+			"timestamp": "2021-12-05T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "12399934.000000"
+		}
+	],
+	"1638748800": [
+		{
+			"timestamp": "2021-12-06T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3408587.000000"
+		},
+		{
+			"timestamp": "2021-12-06T00:00:00Z",
+			"chain": "Solana",
+			"valueName": "DailyTransactions",
+			"value": "59923535.000000"
+		},
+		{
+			"timestamp": "2021-12-06T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1244773.000000"
+		},
+		{
+			"timestamp": "2021-12-06T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "826476.000000"
+		},
+		{
+			"timestamp": "2021-12-06T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "30668.000000"
+		},
+		{
+			"timestamp": "2021-12-06T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "13279799.000000"
+		},
+		{
+			"timestamp": "2021-12-06T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "45998.000000"
+		},
+		{
+			"timestamp": "2021-12-06T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "639438.000000"
+		}
+	],
+	"1638835200": [
+		{
+			"timestamp": "2021-12-07T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "615379.000000"
+		},
+		{
+			"timestamp": "2021-12-07T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3576629.000000"
+		},
+		{
+			"timestamp": "2021-12-07T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "722702.000000"
+		},
+		{
+			"timestamp": "2021-12-07T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "12662661.000000"
+		},
+		{
+			"timestamp": "2021-12-07T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1224771.000000"
+		},
+		{
+			"timestamp": "2021-12-07T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "32865.000000"
+		},
+		{
+			"timestamp": "2021-12-07T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "26940.000000"
+		}
+	],
+	"1638921600": [
+		{
+			"timestamp": "2021-12-08T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "35566.000000"
+		},
+		{
+			"timestamp": "2021-12-08T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "11402535.000000"
+		},
+		{
+			"timestamp": "2021-12-08T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "684875.000000"
+		},
+		{
+			"timestamp": "2021-12-08T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "750855.000000"
+		},
+		{
+			"timestamp": "2021-12-08T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "39802.000000"
+		},
+		{
+			"timestamp": "2021-12-08T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3368110.000000"
+		},
+		{
+			"timestamp": "2021-12-08T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1296307.000000"
+		}
+	],
+	"1639008000": [
+		{
+			"timestamp": "2021-12-09T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "655432.000000"
+		},
+		{
+			"timestamp": "2021-12-09T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "27253.000000"
+		},
+		{
+			"timestamp": "2021-12-09T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3976636.000000"
+		},
+		{
+			"timestamp": "2021-12-09T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1251338.000000"
+		},
+		{
+			"timestamp": "2021-12-09T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "700843.000000"
+		},
+		{
+			"timestamp": "2021-12-09T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "37527.000000"
+		},
+		{
+			"timestamp": "2021-12-09T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "9329574.000000"
+		}
+	],
+	"1639094400": [
+		{
+			"timestamp": "2021-12-10T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "28210.000000"
+		},
+		{
+			"timestamp": "2021-12-10T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1237735.000000"
+		},
+		{
+			"timestamp": "2021-12-10T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3752389.000000"
+		},
+		{
+			"timestamp": "2021-12-10T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "668402.000000"
+		},
+		{
+			"timestamp": "2021-12-10T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "43140.000000"
+		},
+		{
+			"timestamp": "2021-12-10T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "9553421.000000"
+		},
+		{
+			"timestamp": "2021-12-10T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "670773.000000"
+		}
+	],
+	"1639180800": [
+		{
+			"timestamp": "2021-12-11T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "626314.000000"
+		},
+		{
+			"timestamp": "2021-12-11T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "603480.000000"
+		},
+		{
+			"timestamp": "2021-12-11T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3214431.000000"
+		},
+		{
+			"timestamp": "2021-12-11T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "35519.000000"
+		},
+		{
+			"timestamp": "2021-12-11T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7062304.000000"
+		},
+		{
+			"timestamp": "2021-12-11T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "33508.000000"
+		},
+		{
+			"timestamp": "2021-12-11T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1199384.000000"
+		}
+	],
+	"1639267200": [
+		{
+			"timestamp": "2021-12-12T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "595856.000000"
+		},
+		{
+			"timestamp": "2021-12-12T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7571628.000000"
+		},
+		{
+			"timestamp": "2021-12-12T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "31224.000000"
+		},
+		{
+			"timestamp": "2021-12-12T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "31956.000000"
+		},
+		{
+			"timestamp": "2021-12-12T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "625384.000000"
+		},
+		{
+			"timestamp": "2021-12-12T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1181898.000000"
+		},
+		{
+			"timestamp": "2021-12-12T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3104332.000000"
+		}
+	],
+	"1639353600": [
+		{
+			"timestamp": "2021-12-13T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "722863.000000"
+		},
+		{
+			"timestamp": "2021-12-13T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "41082.000000"
+		},
+		{
+			"timestamp": "2021-12-13T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7324529.000000"
+		},
+		{
+			"timestamp": "2021-12-13T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "4369604.000000"
+		},
+		{
+			"timestamp": "2021-12-13T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1242978.000000"
+		},
+		{
+			"timestamp": "2021-12-13T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "686638.000000"
+		},
+		{
+			"timestamp": "2021-12-13T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "39851.000000"
+		}
+	],
+	"1639440000": [
+		{
+			"timestamp": "2021-12-14T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "563294.000000"
+		},
+		{
+			"timestamp": "2021-12-14T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1214900.000000"
+		},
+		{
+			"timestamp": "2021-12-14T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "717077.000000"
+		},
+		{
+			"timestamp": "2021-12-14T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "53504.000000"
+		},
+		{
+			"timestamp": "2021-12-14T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "8139746.000000"
+		},
+		{
+			"timestamp": "2021-12-14T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "28793.000000"
+		},
+		{
+			"timestamp": "2021-12-14T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3499728.000000"
+		}
+	],
+	"1639526400": [
+		{
+			"timestamp": "2021-12-15T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7532040.000000"
+		},
+		{
+			"timestamp": "2021-12-15T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1258462.000000"
+		},
+		{
+			"timestamp": "2021-12-15T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "26855.000000"
+		},
+		{
+			"timestamp": "2021-12-15T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "731079.000000"
+		},
+		{
+			"timestamp": "2021-12-15T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "41945.000000"
+		},
+		{
+			"timestamp": "2021-12-15T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "605633.000000"
+		},
+		{
+			"timestamp": "2021-12-15T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3797173.000000"
+		}
+	],
+	"1639612800": [
+		{
+			"timestamp": "2021-12-16T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "20756.000000"
+		},
+		{
+			"timestamp": "2021-12-16T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1155456.000000"
+		},
+		{
+			"timestamp": "2021-12-16T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3234455.000000"
+		},
+		{
+			"timestamp": "2021-12-16T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "602279.000000"
+		},
+		{
+			"timestamp": "2021-12-16T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7908389.000000"
+		},
+		{
+			"timestamp": "2021-12-16T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "29135.000000"
+		},
+		{
+			"timestamp": "2021-12-16T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "734852.000000"
+		}
+	],
+	"1639699200": [
+		{
+			"timestamp": "2021-12-17T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "21004.000000"
+		},
+		{
+			"timestamp": "2021-12-17T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "8183658.000000"
+		},
+		{
+			"timestamp": "2021-12-17T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "36218.000000"
+		},
+		{
+			"timestamp": "2021-12-17T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "527569.000000"
+		},
+		{
+			"timestamp": "2021-12-17T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3092749.000000"
+		},
+		{
+			"timestamp": "2021-12-17T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "756012.000000"
+		},
+		{
+			"timestamp": "2021-12-17T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1270355.000000"
+		}
+	],
+	"1639785600": [
+		{
+			"timestamp": "2021-12-18T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7244937.000000"
+		},
+		{
+			"timestamp": "2021-12-18T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "2866389.000000"
+		},
+		{
+			"timestamp": "2021-12-18T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1159873.000000"
+		},
+		{
+			"timestamp": "2021-12-18T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "693769.000000"
+		},
+		{
+			"timestamp": "2021-12-18T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "33162.000000"
+		},
+		{
+			"timestamp": "2021-12-18T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "20749.000000"
+		},
+		{
+			"timestamp": "2021-12-18T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "659341.000000"
+		}
+	],
+	"1639872000": [
+		{
+			"timestamp": "2021-12-19T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "34497.000000"
+		},
+		{
+			"timestamp": "2021-12-19T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "645638.000000"
+		},
+		{
+			"timestamp": "2021-12-19T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "6193650.000000"
+		},
+		{
+			"timestamp": "2021-12-19T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "21604.000000"
+		},
+		{
+			"timestamp": "2021-12-19T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "587950.000000"
+		},
+		{
+			"timestamp": "2021-12-19T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3791361.000000"
+		},
+		{
+			"timestamp": "2021-12-19T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1137581.000000"
+		}
+	],
+	"1639958400": [
+		{
+			"timestamp": "2021-12-20T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "877021.000000"
+		},
+		{
+			"timestamp": "2021-12-20T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "35025.000000"
+		},
+		{
+			"timestamp": "2021-12-20T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7608186.000000"
+		},
+		{
+			"timestamp": "2021-12-20T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "570299.000000"
+		},
+		{
+			"timestamp": "2021-12-20T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "22793.000000"
+		},
+		{
+			"timestamp": "2021-12-20T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1201239.000000"
+		},
+		{
+			"timestamp": "2021-12-20T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3252303.000000"
+		}
+	],
+	"1640044800": [
+		{
+			"timestamp": "2021-12-21T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "25222.000000"
+		},
+		{
+			"timestamp": "2021-12-21T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "893548.000000"
+		},
+		{
+			"timestamp": "2021-12-21T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "8749631.000000"
+		},
+		{
+			"timestamp": "2021-12-21T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "21277.000000"
+		},
+		{
+			"timestamp": "2021-12-21T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "518561.000000"
+		},
+		{
+			"timestamp": "2021-12-21T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1203638.000000"
+		},
+		{
+			"timestamp": "2021-12-21T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3113796.000000"
+		}
+	],
+	"1640131200": [
+		{
+			"timestamp": "2021-12-22T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7812318.000000"
+		},
+		{
+			"timestamp": "2021-12-22T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1233315.000000"
+		},
+		{
+			"timestamp": "2021-12-22T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3398039.000000"
+		},
+		{
+			"timestamp": "2021-12-22T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "575293.000000"
+		},
+		{
+			"timestamp": "2021-12-22T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "22052.000000"
+		},
+		{
+			"timestamp": "2021-12-22T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "31138.000000"
+		},
+		{
+			"timestamp": "2021-12-22T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "959720.000000"
+		}
+	],
+	"1640217600": [
+		{
+			"timestamp": "2021-12-23T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1245242.000000"
+		},
+		{
+			"timestamp": "2021-12-23T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3398517.000000"
+		},
+		{
+			"timestamp": "2021-12-23T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "682389.000000"
+		},
+		{
+			"timestamp": "2021-12-23T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "23394.000000"
+		},
+		{
+			"timestamp": "2021-12-23T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "7572415.000000"
+		},
+		{
+			"timestamp": "2021-12-23T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "37084.000000"
+		},
+		{
+			"timestamp": "2021-12-23T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "827044.000000"
+		}
+	],
+	"1640304000": [
+		{
+			"timestamp": "2021-12-24T00:00:00Z",
+			"chain": "Fantom",
+			"valueName": "DailyTransactions",
+			"value": "632637.000000"
+		},
+		{
+			"timestamp": "2021-12-24T00:00:00Z",
+			"chain": "Avalanche",
+			"valueName": "DailyTransactions",
+			"value": "649323.000000"
+		},
+		{
+			"timestamp": "2021-12-24T00:00:00Z",
+			"chain": "Optimism",
+			"valueName": "DailyTransactions",
+			"value": "40579.000000"
+		},
+		{
+			"timestamp": "2021-12-24T00:00:00Z",
+			"chain": "Binance",
+			"valueName": "DailyTransactions",
+			"value": "6614747.000000"
+		},
+		{
+			"timestamp": "2021-12-24T00:00:00Z",
+			"chain": "Ethereum",
+			"valueName": "DailyTransactions",
+			"value": "1298329.000000"
+		},
+		{
+			"timestamp": "2021-12-24T00:00:00Z",
+			"chain": "Polygon",
+			"valueName": "DailyTransactions",
+			"value": "3415109.000000"
+		},
+		{
+			"timestamp": "2021-12-24T00:00:00Z",
+			"chain": "Arbitrum",
+			"valueName": "DailyTransactions",
+			"value": "19796.000000"
+		}
+	]
+}

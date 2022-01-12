@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+	<meta name="viewport" content="initial-scale=1, width=device-width" />
+	<meta content="TODO" name="description">
+	<link as="style" rel="stylesheet preload prefetch"
+		href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" type="text/css"
+		crossorigin="anonymous" />
+	<title>Quarkvm JS</title>
+	<meta name="theme-color" content="#2E69C8" />
+	<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');"
+		href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap">
+</head>
+
+<body>
+	<style>		
+		::-webkit-scrollbar {
+			width: 10px;
+			height: 10px;
+		}
+		
+		::-webkit-scrollbar-thumb {
+			border-radius: 5px;
+		}
+		
+		::-webkit-scrollbar-track {
+			border-radius: 5px;
+		}
+
+		.light ::-webkit-scrollbar-thumb {
+			background: rgba(0,0,0,0.3);
+		}
+
+		.light ::-webkit-scrollbar-track {
+			background: rgba(0,0,0,0.1);
+		}
+
+		.dark ::-webkit-scrollbar-thumb {
+			background: rgba(255,255,255,0.3);
+		}
+
+		.dark ::-webkit-scrollbar-track {
+			background: rgba(255,255,255,0.1);
+		}
+		</style>
+	<script>
+		if (global === undefined) {
+			var global = window;
+		}
+	</script>
+	<div id="root"></div>
+	<script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
