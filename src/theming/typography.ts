@@ -15,22 +15,21 @@ export const typography: ThemeOptions['typography'] = {
 		'"Segoe UI Symbol"',
 	].join(','),
 	h1: {
-		fontWeight: 700,
+		fontWeight: 900,
 	},
 	h2: {
-		fontWeight: 700,
+		fontWeight: 900,
 	},
 	h3: {
-		fontWeight: 700,
+		fontWeight: 900,
 	},
 	h4: {
-		fontWeight: 700,
-		fontSize: 28,
+		fontWeight: 900,
 	},
 	h5: {
-		fontWeight: 700,
+		fontWeight: 900,
 	},
 	h6: {
-		fontWeight: 700,
+		fontWeight: 900,
 	},
 }

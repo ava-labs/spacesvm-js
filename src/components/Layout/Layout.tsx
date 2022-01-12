@@ -5,7 +5,7 @@ export const Layout: FC = memo(({ children }) => {
 	const theme = useTheme()
 
 	return (
-		<Box sx={{ background: theme.customPalette.gradientBackground }}>
+		<Box sx={{ background: theme.customPalette.customBackground }}>
 			<Box
 				sx={{
 					p: {

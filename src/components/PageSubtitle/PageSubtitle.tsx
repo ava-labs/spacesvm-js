@@ -1,18 +1,17 @@
 import { memo } from 'react'
 import { Box, Typography } from '@mui/material'
 
-export const PageSubtitle = memo(({ children }) => (
+export const PageSubtitle = memo(({ children, ...rest }: any) => (
 	<Box
 		sx={{
 			px: {
 				xs: 1,
 				sm: 0,
-				maxWidth: 500,
 			},
 			mb: 4,
 		}}
 	>
-		<Typography color="textSecondary" paragraph>
+		<Typography color="textSecondary" variant="h6" {...rest}>
 			{children}
 		</Typography>
 	</Box>

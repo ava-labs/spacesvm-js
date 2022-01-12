@@ -14,8 +14,7 @@ const Home = pageLazyLoader('Home')
 export const Routes = () => (
 	<Suspense fallback={<></>}>
 		<Switch>
-			<Route path="/home" element={<Home />} />
-			<Route path="/" element={<Navigate replace to="/home" />} />
+			<Route path="/" element={<Home />} />
 			<Route path="*" element={<Navigate replace to="/404" />} />
 		</Switch>
 	</Suspense>

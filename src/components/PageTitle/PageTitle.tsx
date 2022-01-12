@@ -11,7 +11,7 @@ export const PageTitle = memo(({ children, ...rest }: any) => (
 			mb: 1.5,
 		}}
 	>
-		<Typography gutterBottom variant="h4" component="h2" {...rest}>
+		<Typography gutterBottom variant="h3" component="h2" {...rest}>
 			{children}
 		</Typography>
 	</Box>

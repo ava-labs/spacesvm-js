@@ -1,4 +1,6 @@
-const darkCustomPalette = {}
+const darkCustomPalette = {
+	customBackground: '##090719',
+}
 
 const lightCustomPalette = {}
 
