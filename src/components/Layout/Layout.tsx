@@ -1,6 +1,8 @@
 import { FC, memo } from 'react'
 import { Box, useTheme } from '@mui/material'
 
+import { Footer } from '../Footer'
+
 export const Layout: FC = memo(({ children }) => {
 	const theme = useTheme()
 
@@ -13,6 +15,7 @@ export const Layout: FC = memo(({ children }) => {
 						sm: 2,
 					},
 					display: 'flex',
+					flexDirection: 'column',
 					overflow: 'auto',
 					height: {
 						sm: 'unset',
@@ -21,6 +24,7 @@ export const Layout: FC = memo(({ children }) => {
 				}}
 			>
 				{children}
+				<Footer />
 			</Box>
 		</Box>
 	)

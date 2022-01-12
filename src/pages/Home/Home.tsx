@@ -69,20 +69,20 @@ const ClaimButton = styled(Button)(({ theme, progress }: any) => ({
 
 export const Home = memo(() => {
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
-	const [domain, setDomain] = useState<string>('')
+	const [username, setUsername] = useState<string>('')
 	const [progress, setProgress] = useState<number>(0)
 	const [verified, setVerified] = useState<boolean>(false)
 	const [available, setAvailable] = useState<boolean>(false)
 
 	const onVerify = async () => {
-		const claimed = await isAlreadyClaimed('connor')
+		const isClaimed = await isAlreadyClaimed(username)
 
 		setVerified(true)
-		setAvailable(!claimed)
+		setAvailable(!isClaimed)
 
 		// Call `onEnd` here
 		// onEnd()
-		console.info(`claimed`, claimed)
+		console.info(`claimed`, isClaimed)
 	}
 
 	const onClaim = async () => {
@@ -116,10 +116,10 @@ export const Home = memo(() => {
 				<Grid item>
 					<TextField
 						disabled={showWhileYouWait || (available && verified)}
-						value={domain}
+						value={username}
 						onChange={(e) => {
 							setVerified(false)
-							setDomain(e.target.value)
+							setUsername(e.target.value)
 						}}
 						placeholder="Desired username"
 						fullWidth
@@ -138,7 +138,7 @@ export const Home = memo(() => {
 					{verified && available ? (
 						<ClaimButton
 							onClick={onClaim}
-							disabled={domain.length === 0 || showWhileYouWait}
+							disabled={username.length === 0 || showWhileYouWait}
 							variant="contained"
 							size="large"
 							// @ts-ignore
@@ -149,7 +149,7 @@ export const Home = memo(() => {
 					) : (
 						<VerifyButton
 							onClick={onVerify}
-							disabled={domain.length === 0 || showWhileYouWait}
+							disabled={username.length === 0 || showWhileYouWait}
 							variant="contained"
 							size="large"
 							// @ts-ignore
@@ -182,7 +182,7 @@ export const Home = memo(() => {
 				</Grow>
 			)}
 
-			<Grow in={showWhileYouWait}>
+			<Grow mountOnEnter in={showWhileYouWait}>
 				<div>
 					<Typography align="center" sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }} gutterBottom color="textSecondary">
 						This may take a little while.
