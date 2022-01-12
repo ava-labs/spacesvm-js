@@ -1,8 +1,8 @@
 export const mine = () => {}
 
-export const setValue = (key) => {}
+export const setValue = (key: any) => {}
 
-export const checkKeyClaimed = async (key) => {
+export const checkKeyClaimed = async (key: any) => {
 	const response = await fetch(
 		'http://3.80.126.27:37549/ext/bc/PWapoqFxsYJosghkRx5eBVZizvp9fPyKPGvdTBkoZYNdKj8Au/public',
 		{
