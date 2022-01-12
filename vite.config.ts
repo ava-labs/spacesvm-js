@@ -23,12 +23,7 @@ const renderChunks = (deps: Record<string, string>) => {
 	const chunks = {}
 
 	Object.keys(deps).forEach((key) => {
-		if (
-			['react', 'react-router-dom', 'react-dom', 'lodash', 'rollup-plugin-summary', 'autosuggest-highlight'].includes(
-				key,
-			)
-		)
-			return
+		if (['react', 'react-router-dom', 'react-dom', 'lodash', 'rollup-plugin-summary'].includes(key)) return
 		chunks[key] = [key]
 	})
 	return chunks
