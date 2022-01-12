@@ -27,7 +27,7 @@ const VerifyButton = styled(Button)(({ theme }: any) => ({
 		boxShadow: '0 0 40px rgb(82 61 241 / 80%)',
 	},
 	'&.Mui-disabled': {
-		backgroundColor: 'hsla(0,0%,100%,.1)',
+		backgroundColor: 'hsla(0,0%,100%,0.1)',
 	},
 }))
 
@@ -48,7 +48,7 @@ const ClaimButton = styled(Button)(({ theme, progress }: any) => ({
 		boxShadow: '0 0 40px rgb(231 2 86 / 80%)',
 	},
 	'&.Mui-disabled': {
-		backgroundColor: 'hsla(0,0%,100%,.1)',
+		backgroundColor: 'hsla(0,0%,100%,0.1)',
 		backgroundImage: 'unset',
 	},
 	'&:after': {
