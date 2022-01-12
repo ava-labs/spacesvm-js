@@ -5,5 +5,5 @@ it('renders copyright text', () => {
 	const { getByText } = render(<Footer />)
 
 	expect(getByText(/©/i)).toBeInTheDocument()
-	expect(getByText(/Chain Metrics/i)).toBeInTheDocument()
+	expect(getByText(/Quark/i)).toBeInTheDocument()
 })
