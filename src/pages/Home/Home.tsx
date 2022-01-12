@@ -9,7 +9,7 @@ import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { WhileYouWait } from '@/components/WhileYouWait'
-import { getPrefixInfo, getQuarkValue } from '@/utils/quarkvm'
+import { getPrefixInfo, getQuarkValue, isAlreadyClaimed } from '@/utils/quarkvm'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
 	color: 'white',
@@ -75,14 +75,14 @@ export const Home = memo(() => {
 	const [available, setAvailable] = useState<boolean>(false)
 
 	const onVerify = async () => {
-		const data = await getQuarkValue('connor', 'potato')
+		const claimed = await isAlreadyClaimed('connor')
 
 		setVerified(true)
-		setAvailable(!data.exists)
+		setAvailable(!claimed)
 
 		// Call `onEnd` here
 		// onEnd()
-		console.info(`data`, data)
+		console.info(`claimed`, claimed)
 	}
 
 	const onClaim = async () => {
