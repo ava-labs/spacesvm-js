@@ -6,7 +6,7 @@ export const darkPalette: PaletteOptions = {
 		main: '#60D4C6',
 	},
 	background: {
-		paper: '#00000026',
+		paper: '#00000088',
 	},
 	text: {
 		primary: '#FFFFFF',

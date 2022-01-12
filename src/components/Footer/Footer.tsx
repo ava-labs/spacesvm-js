@@ -18,6 +18,6 @@ export const Footer = memo(() => (
 					{`© ${new Date().getFullYear()} — ${APP_NAME}`}
 				</Typography>
 			</Grid>
-		</Grid>{' '}
+		</Grid>
 	</>
 ))

@@ -2,7 +2,6 @@ import { memo, PropsWithChildren } from 'react'
 import { Box, Container, Fade } from '@mui/material'
 import { useDocumentTitle } from '@react-hookz/web'
 
-//import { Footer } from '@/components/Footer'
 import { APP_NAME } from '@/constants'
 
 type PageProps = {
@@ -14,23 +13,24 @@ export const Page = memo(({ title, children }: PropsWithChildren<PageProps>) => 
 
 	return (
 		<Fade in>
-			<Container component="main" maxWidth="xl" disableGutters>
+			<Container component="main" maxWidth="xl" disableGutters sx={{ display: 'flex', flex: 1 }}>
 				<Box
 					sx={{
-						minHeight: 'calc(100vh - 179px)',
+						minHeight: 'calc(100vh - 380px)',
+						display: 'flex',
+						flexDirection: 'column',
 						flexGrow: 1,
 						px: {
 							xs: 0,
 							sm: 2,
 							md: 5,
 						},
-						pt: 3,
+						pt: 0,
 						pb: 8,
 					}}
 				>
 					{children}
 				</Box>
-				{/*<Footer />*/}
 			</Container>
 		</Fade>
 	)
