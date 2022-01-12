@@ -36,7 +36,12 @@ export const getLatestBlockID = async () => {
 }
 
 export const getPrefixInfo = async (prefix: string) => {
-	const prefixData = await fetchQuark('prefixInfo', { prefix: btoa(prefix) })
+	const prefixData = await fetchQuark('prefixInfo', {
+		prefix: btoa(
+			// using `encodeURIComponent` in case someone pass non Latin1 chars like `😀` since btoa doesn't support them
+			encodeURIComponent(prefix),
+		),
+	})
 	if (!prefixData.info) return
 	return prefixData
 }
