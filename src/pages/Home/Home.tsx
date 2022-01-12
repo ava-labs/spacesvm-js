@@ -2,6 +2,8 @@ import { memo, useState } from 'react'
 import { IoSearch } from 'react-icons/io5'
 import { Button, CircularProgress, Grid, Grow, InputAdornment, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/system'
+// @ts-ignore
+import FakeProgress from 'fake-progress'
 
 import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
@@ -9,7 +11,7 @@ import { PageTitle } from '@/components/PageTitle'
 import { WhileYouWait } from '@/components/WhileYouWait'
 import { getPrefixInfo, getQuarkValue } from '@/utils/quarkvm'
 
-const ClaimButton = styled(Button)(({ theme }) => ({
+const VerifyButton = styled(Button)(({ theme }: any) => ({
 	color: 'white',
 	backgroundColor: '#523df1',
 	padding: theme.spacing(1, 10),
@@ -18,6 +20,7 @@ const ClaimButton = styled(Button)(({ theme }) => ({
 	minWidth: 320,
 	fontWeight: 900,
 	fontSize: 24,
+	position: 'relative',
 	boxShadow: '0 0 40px rgb(82 61 241 / 60%)',
 	'&:hover': {
 		backgroundColor: '#7a68ff',
@@ -28,62 +31,156 @@ const ClaimButton = styled(Button)(({ theme }) => ({
 	},
 }))
 
+const ClaimButton = styled(Button)(({ theme, progress }: any) => ({
+	color: 'white',
+	backgroundColor: '#e70256',
+	backgroundImage: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
+	padding: theme.spacing(1, 10),
+	borderRadius: 9999,
+	height: 80,
+	minWidth: 320,
+	fontWeight: 900,
+	fontSize: 24,
+	position: 'relative',
+	boxShadow: '0 0 40px rgb(231 2 86 / 60%)',
+	'&:hover': {
+		backgroundImage: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
+		boxShadow: '0 0 40px rgb(231 2 86 / 80%)',
+	},
+	'&.Mui-disabled': {
+		backgroundColor: 'hsla(0,0%,100%,.1)',
+		backgroundImage: 'unset',
+	},
+	'&:after': {
+		content: "''",
+		zIndex: 2,
+		position: 'absolute',
+		top: 0,
+		right: 0,
+		bottom: 0,
+		left: 0,
+		borderRadius: 9999,
+		clipPath: `inset(0 ${100 - progress}% 0 0)`,
+		backgroundColor: '#e70256',
+		backgroundImage: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
+		transition: 'clip-path 1s ease',
+	},
+}))
+
 export const Home = memo(() => {
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [domain, setDomain] = useState<string>('')
+	const [progress, setProgress] = useState<number>(0)
+	const [verified, setVerified] = useState<boolean>(false)
+	const [available, setAvailable] = useState<boolean>(false)
 
-	const onFormSubmit = async (e: any) => {
-		e.preventDefault()
+	const onVerify = async () => {
+		const data = await getQuarkValue('connor', 'potato')
+
+		setVerified(true)
+		setAvailable(!data.exists)
+
+		// Call `onEnd` here
+		// onEnd()
+		console.info(`data`, data)
+	}
+
+	const onClaim = async () => {
 		setShowWhileYouWait(true)
 
-		const data = await getPrefixInfo('connor')
-		// const data = await getQuarkValue('connor', 'potato')
-		console.log(`data`, data)
+		const p = new FakeProgress({
+			timeConstant: 10000,
+			autoStart: true,
+		})
+
+		const onEachSecond = () => {
+			console.log('Progress is ' + (p.progress * 100).toFixed(1) + ' %')
+			setProgress(p.progress * 100)
+		}
+
+		const onEnd = () => {
+			p.end()
+			clearInterval(interval)
+			console.log('Ended. Progress is ' + (p.progress * 100).toFixed(1) + ' %')
+		}
+
+		const interval = setInterval(onEachSecond, 1000)
 	}
 
 	return (
 		<Page>
-			<form onSubmit={onFormSubmit} autoComplete="new-password">
-				<PageTitle align="center">Claim your username</PageTitle>
-				<PageSubtitle align="center">Needs to be unique</PageSubtitle>
+			<PageTitle align="center">Claim your username</PageTitle>
+			<PageSubtitle align="center">Needs to be unique</PageSubtitle>
 
-				<Grid container spacing={4} flexDirection="column" alignItems="center">
-					<Grid item>
-						<TextField
-							disabled={showWhileYouWait}
-							value={domain}
-							onChange={(e) => setDomain(e.target.value)}
-							placeholder="Username"
-							name="something"
-							fullWidth
-							autoFocus
-							InputProps={{
-								sx: { fontSize: 80, fontWeight: 900 },
-								startAdornment: (
-									<InputAdornment sx={{ marginRight: 4 }} position="start">
-										<IoSearch color="grey" />
-									</InputAdornment>
-								),
-							}}
-							inputProps={{
-								autoComplete: 'new-password',
-								'data-lpignore': true,
-								'allow-1password': 'no',
-							}}
-						/>
-					</Grid>
-					<Grid item>
+			<Grid container spacing={4} flexDirection="column" alignItems="center">
+				<Grid item>
+					<TextField
+						disabled={showWhileYouWait || (available && verified)}
+						value={domain}
+						onChange={(e) => {
+							setVerified(false)
+							setDomain(e.target.value)
+						}}
+						placeholder="Desired username"
+						fullWidth
+						autoFocus
+						InputProps={{
+							sx: { fontSize: 80, fontWeight: 900 },
+							startAdornment: (
+								<InputAdornment sx={{ marginRight: 4 }} position="start">
+									<IoSearch color="grey" />
+								</InputAdornment>
+							),
+						}}
+					/>
+				</Grid>
+				<Grid item>
+					{verified && available ? (
 						<ClaimButton
-							type="submit"
+							onClick={onClaim}
 							disabled={domain.length === 0 || showWhileYouWait}
 							variant="contained"
 							size="large"
+							// @ts-ignore
+							progress={progress}
 						>
-							{showWhileYouWait ? <CircularProgress /> : 'Claim'}
+							{showWhileYouWait ? <CircularProgress color="inherit" sx={{ zIndex: 3 }} /> : 'Claim'}
 						</ClaimButton>
-					</Grid>
+					) : (
+						<VerifyButton
+							onClick={onVerify}
+							disabled={domain.length === 0 || showWhileYouWait}
+							variant="contained"
+							size="large"
+							// @ts-ignore
+							progress={progress}
+						>
+							{showWhileYouWait ? <CircularProgress color="inherit" sx={{ zIndex: 3 }} /> : 'Verify availability'}
+						</VerifyButton>
+					)}
 				</Grid>
-			</form>
+			</Grid>
+
+			{!showWhileYouWait && (
+				<Grow in={verified}>
+					<div>
+						{available ? (
+							<Typography
+								align="center"
+								sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }}
+								gutterBottom
+								color="lemonchiffon"
+							>
+								This username is available!
+							</Typography>
+						) : (
+							<Typography align="center" sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }} gutterBottom color="error">
+								This username is already taken
+							</Typography>
+						)}
+					</div>
+				</Grow>
+			)}
 
 			<Grow in={showWhileYouWait}>
 				<div>

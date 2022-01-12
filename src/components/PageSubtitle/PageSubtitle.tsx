@@ -11,7 +11,7 @@ export const PageSubtitle = memo(({ children, ...rest }: any) => (
 			mb: 4,
 		}}
 	>
-		<Typography color="textSecondary" variant="h6" {...rest}>
+		<Typography color="textSecondary" variant="h6" component="h2" {...rest}>
 			{children}
 		</Typography>
 	</Box>

@@ -10,7 +10,7 @@ const SetButton = styled(Button)(({ theme }) => ({
 	borderRadius: 9999,
 	height: 80,
 	fontWeight: 900,
-	minWidth: 240,
+	//minWidth: 240,
 	fontSize: 24,
 	boxShadow: '0 0 40px rgb(82 61 241 / 60%)',
 	'&:hover': {

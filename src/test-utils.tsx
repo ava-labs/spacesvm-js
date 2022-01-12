@@ -1,33 +1,15 @@
 /* istanbul ignore file */
 
 import { FC } from 'react'
-import { QueryClient, QueryClientProvider, setLogger } from 'react-query'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material'
 import { render } from '@testing-library/react'
 
 import { darkTheme } from '@/theming/theme'
 
-const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			retry: false,
-			cacheTime: Infinity,
-		},
-	},
-})
-
-setLogger({
-	log: console.log, // eslint-disable-line no-console
-	warn: console.warn, // eslint-disable-line no-console
-	error: () => {}, // suppress network errors when testing
-})
-
 const AllTheProviders: FC = ({ children }) => (
 	<ThemeProvider theme={darkTheme}>
-		<QueryClientProvider client={queryClient}>
-			<BrowserRouter>{children}</BrowserRouter>
-		</QueryClientProvider>
+		<BrowserRouter>{children}</BrowserRouter>
 	</ThemeProvider>
 )
 
