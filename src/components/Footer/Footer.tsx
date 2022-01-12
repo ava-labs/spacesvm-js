@@ -14,7 +14,7 @@ export const Footer = memo(() => (
 				</Link>
 			</Grid>
 			<Grid item>
-				<Typography component="footer" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="center">
+				<Typography component="footer" variant="body2" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="center">
 					{`© ${new Date().getFullYear()} — ${APP_NAME}`}
 				</Typography>
 			</Grid>

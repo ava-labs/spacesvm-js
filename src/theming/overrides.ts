@@ -8,6 +8,13 @@ export const commonOverrides: ThemeOptions['components'] = {
 			},
 		},
 	},
+	MuiFilledInput: {
+		styleOverrides: {
+			root: {
+				fontFamily: 'DM Serif Display',
+			},
+		},
+	},
 	MuiTooltip: {
 		styleOverrides: {
 			tooltip: {

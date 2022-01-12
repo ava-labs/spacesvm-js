@@ -125,7 +125,7 @@ export const Home = memo(() => {
 						fullWidth
 						autoFocus
 						InputProps={{
-							sx: { fontSize: 80, fontWeight: 900 },
+							sx: { fontSize: 80, fontWeight: 900, fontFamily: 'DM Serif Display' },
 							startAdornment: (
 								<InputAdornment sx={{ marginRight: 4 }} position="start">
 									<IoSearch color="grey" />
@@ -184,13 +184,31 @@ export const Home = memo(() => {
 
 			<Grow mountOnEnter in={showWhileYouWait}>
 				<div>
-					<Typography align="center" sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }} gutterBottom color="textSecondary">
+					<Typography
+						align="center"
+						sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }}
+						variant="body2"
+						gutterBottom
+						color="textSecondary"
+					>
 						This may take a little while.
 					</Typography>
-					<Typography align="center" sx={{ m: 'auto', mt: 1, maxWidth: 860 }} gutterBottom color="textSecondary">
+					<Typography
+						variant="body2"
+						align="center"
+						sx={{ m: 'auto', mt: 1, maxWidth: 860 }}
+						gutterBottom
+						color="textSecondary"
+					>
 						Instead of requiring you to spend a token to make a claim, we instead require to compute some work.
 					</Typography>
-					<Typography align="center" sx={{ m: 'auto', mt: 1, maxWidth: 860 }} gutterBottom color="textSecondary">
+					<Typography
+						variant="body2"
+						align="center"
+						sx={{ m: 'auto', mt: 1, maxWidth: 860 }}
+						gutterBottom
+						color="textSecondary"
+					>
 						This can take a few minutes and is only required once to claim your domain.
 						<br />
 						Whenever updating keys in your domain it will take much less time.

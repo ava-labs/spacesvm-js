@@ -1,4 +1,4 @@
-# Quarkvm JS 📈
+# QuarkVM 📈
 
 This is the frontend codebase for Quarkvm JS:
 https://quark.pages.dev

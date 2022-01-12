@@ -57,7 +57,7 @@ export const WhileYouWait = memo(() => {
 			<div>
 				<Divider sx={{ my: 8 }} />
 
-				<Typography gutterBottom align="center" variant="h6">
+				<Typography gutterBottom align="center" variant="h6" fontFamily="DM Serif Display">
 					While you wait...
 				</Typography>
 				<Typography align="center" color="textSecondary" variant="body2">
