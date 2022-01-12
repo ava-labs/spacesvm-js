@@ -24,10 +24,8 @@ export const Page = memo(({ title, children }: PropsWithChildren<PageProps>) => 
 							sm: 2,
 							md: 5,
 						},
-						py: {
-							xs: 1,
-							sm: 2,
-						},
+						pt: 3,
+						pb: 8,
 					}}
 				>
 					{children}

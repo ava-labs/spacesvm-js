@@ -29,10 +29,11 @@ export const WhileYouWait = memo(({ show = false }: WhileYouWaitProps) => {
 	return (
 		<Slide
 			direction="up"
+			mountOnEnter
 			in={show}
 			style={{
 				//@ts-ignore
-				transitionDelay: 1500,
+				transitionDelay: 2500,
 			}}
 		>
 			<div>
