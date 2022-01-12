@@ -46,7 +46,7 @@ export const WhileYouWait = memo(() => {
 		setFormValues([...formValues, { keyText: '', valueText: '', loading: false }])
 	}
 
-	const removeFormFields = (i) => {
+	const removeFormFields = (i: number) => {
 		const newFormValues = [...formValues]
 		newFormValues.splice(i, 1)
 		setFormValues(newFormValues)
