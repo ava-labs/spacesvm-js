@@ -89,7 +89,7 @@ export const WhileYouWait = memo(() => {
 											sx: { fontSize: 32, fontWeight: 900 },
 										}}
 										inputProps={{
-											spellcheck: 'false',
+											spellCheck: 'false',
 										}}
 									/>
 								</Grid>
@@ -106,7 +106,7 @@ export const WhileYouWait = memo(() => {
 											sx: { fontSize: 32, fontWeight: 900 },
 										}}
 										inputProps={{
-											spellcheck: 'false',
+											spellCheck: 'false',
 										}}
 									/>
 								</Grid>

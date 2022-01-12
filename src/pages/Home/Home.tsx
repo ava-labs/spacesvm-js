@@ -141,7 +141,7 @@ export const Home = memo(() => {
 							),
 						}}
 						inputProps={{
-							spellcheck: 'false',
+							spellCheck: 'false',
 						}}
 					/>
 				</Grid>
