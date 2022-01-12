@@ -1,8 +1,10 @@
 const darkCustomPalette = {
-	customBackground: '##090719',
+	customBackground: '#090719',
 }
 
-const lightCustomPalette = {}
+const lightCustomPalette = {
+	customBackground: '#090719',
+}
 
 export type CustomPalette = {
 	[Key in keyof typeof darkCustomPalette]: typeof darkCustomPalette[Key]
