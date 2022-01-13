@@ -62,4 +62,22 @@ export const getIsTxConfirmed = async (txId: string) => {
 	return data.confirmed
 }
 
-export const issueTx = async () => await fetchQuark('issueTx')
+// export const claimPrefix = async (signature: string, prefix: string) => {
+// 	const message = await getClaimPayload(prefix)
+// 	return await fetchQuark('issueTxHR', { signature, message: atob(message) })
+// }
+
+// export const setKeyValue = async (signature: string, prefix: string, key: string, value: string) => {
+// 	const message = await getSetPayload(prefix, key, value)
+// 	return await fetchQuark('issueTxHR', { signature, message: atob(message) })
+// }
+
+// export const transfer = async (signature: string, prefix: string, to: string, value: string) => {
+// 	const message = await getTransferPayload(prefix, to, value)
+// 	return await fetchQuark('issueTxHR', { signature, message: atob(message) })
+// }
+
+// export const lifeline = async (signature: string, prefix: string) => {
+// 	const message = await getLifelinePayload(prefix)
+// 	return await fetchQuark('issueTxHR', { signature, message: atob(message) })
+// }

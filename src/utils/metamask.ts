@@ -1,5 +1,7 @@
 import MetaMaskOnboarding from '@metamask/onboarding'
 
+import { getClaimPayload, PayloadData } from './quarkPayloads'
+
 declare global {
 	interface Window {
 		ethereum: any
@@ -15,22 +17,13 @@ export const mmRequestAccounts = async () => {
 	return ethereum.request({ method: 'eth_requestAccounts' })
 }
 
-export const ethSign = async (username: string): Promise<string | undefined> => {
+export const signTransaction = async (payload: any): Promise<string | undefined> => {
 	if (!metaMaskExists) return
-
-	const msgParams = [
-		{
-			type: 'string',
-			name: 'Username',
-			value: username,
-		},
-	]
-
 	try {
-		const from = await mmRequestAccounts()
+		const accounts = await mmRequestAccounts()
 		const signature = await ethereum.request({
 			method: 'eth_signTypedData',
-			params: [msgParams, from[0]],
+			params: [payload, accounts[0]],
 		})
 		return signature
 	} catch (error) {

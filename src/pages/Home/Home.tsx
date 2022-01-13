@@ -24,8 +24,9 @@ import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
-import { ethSign } from '@/utils/metamask'
+import { signTransaction } from '@/utils/metamask'
 import { msToTime } from '@/utils/msToTime'
+import { getClaimPayload } from '@/utils/quarkPayloads'
 import { isAlreadyClaimed } from '@/utils/quarkvm'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
@@ -111,7 +112,8 @@ export const Home = memo(() => {
 
 	const onClaim = async () => {
 		setWaitingForMetaMask(true)
-		const signature = await ethSign(username)
+		const claimPayload = await getClaimPayload(username)
+		const signature = await signTransaction(claimPayload)
 		setWaitingForMetaMask(false)
 		if (!signature) return
 
