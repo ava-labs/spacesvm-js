@@ -48,7 +48,7 @@ const VerifyButton = styled(Button)(({ theme }: any) => ({
 	},
 }))
 
-const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
+export const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 	backgroundColor: '#e70256',
 	backgroundImage: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
 	padding: theme.spacing(1, 10),
@@ -371,12 +371,7 @@ export const Home = memo(() => {
 					<Grow in={verified}>
 						<div>
 							{available ? (
-								<Typography
-									align="center"
-									sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }}
-									gutterBottom
-									color="lemonchiffon"
-								>
+								<Typography align="center" sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }} gutterBottom color="#f67916">
 									This username is available!
 								</Typography>
 							) : (
