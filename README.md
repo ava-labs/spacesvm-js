@@ -1,6 +1,6 @@
 # Spaces ⚛️
 
-This is the frontend codebase for Quarkvm JS:
+This is the frontend codebase for QuarkVM:
 https://quark.pages.dev
 
 ## Getting started 🏃
