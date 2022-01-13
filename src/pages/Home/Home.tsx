@@ -2,16 +2,18 @@ import { memo, useState } from 'react'
 import { IoSearch } from 'react-icons/io5'
 // @ts-ignore
 import faker from '@faker-js/faker/locale/en'
-import { Button, CircularProgress, Grid, Grow, InputAdornment, TextField, Typography } from '@mui/material'
+import { Button, CircularProgress, Fade, Grid, Grow, InputAdornment, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/system'
 // @ts-ignore
 import FakeProgress from 'fake-progress'
 
+import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
+import { ethSign, mmRequestAccounts } from '@/utils/metamask'
 import { isAlreadyClaimed } from '@/utils/quarkvm'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
@@ -74,6 +76,7 @@ const USERNAMES = new Array(50).fill(null).map(() => faker.name.firstName())
 
 export const Home = memo(() => {
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
+	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
 	const [username, setUsername] = useState<string>('')
 	const [progress, setProgress] = useState<number>(0)
 	const [verified, setVerified] = useState<boolean>(false)
@@ -91,6 +94,15 @@ export const Home = memo(() => {
 	}
 
 	const onClaim = async () => {
+		setWaitingForMetaMask(true)
+		const signature = await ethSign(username)
+		setWaitingForMetaMask(false)
+		if (!signature) return
+
+		onSigned()
+	}
+
+	const onSigned = async () => {
 		setShowWhileYouWait(true)
 
 		const p = new FakeProgress({
@@ -164,7 +176,15 @@ export const Home = memo(() => {
 							// @ts-ignore
 							progress={progress}
 						>
-							{showWhileYouWait ? <CircularProgress color="inherit" sx={{ zIndex: 3 }} /> : 'Claim'}
+							{waitingForMetaMask ? (
+								<Fade in={waitingForMetaMask}>
+									<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
+								</Fade>
+							) : showWhileYouWait ? (
+								<CircularProgress color="inherit" sx={{ zIndex: 3 }} />
+							) : (
+								'Claim'
+							)}
 						</ClaimButton>
 					) : (
 						<VerifyButton
