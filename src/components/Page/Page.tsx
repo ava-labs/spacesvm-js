@@ -16,7 +16,7 @@ export const Page = memo(({ title, children }: PropsWithChildren<PageProps>) => 
 			<Container component="main" maxWidth="xl" disableGutters sx={{ display: 'flex', flex: 1 }}>
 				<Box
 					sx={{
-						minHeight: 'calc(100vh - 380px)',
+						minHeight: 'calc(100vh - 221px)',
 						display: 'flex',
 						flexDirection: 'column',
 						flexGrow: 1,

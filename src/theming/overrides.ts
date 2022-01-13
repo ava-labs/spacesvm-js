@@ -24,9 +24,13 @@ export const commonOverrides: ThemeOptions['components'] = {
 	MuiButton: {
 		styleOverrides: {
 			root: {
+				borderRadius: 9999,
 				whiteSpace: 'nowrap',
 				textTransform: 'unset',
 				minWidth: 42,
+			},
+			outlined: {
+				color: '#fff',
 			},
 			contained: {
 				textTransform: 'unset',

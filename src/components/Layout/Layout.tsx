@@ -16,13 +16,12 @@ export const Layout: FC = memo(({ children }) => {
 						xs: 1,
 						sm: 2,
 					},
-					mt: 6,
 					display: 'flex',
 					flexDirection: 'column',
 					overflow: 'auto',
 					height: {
 						sm: 'unset',
-						md: 'calc(100vh - 48px)',
+						md: '100vh',
 					},
 				}}
 			>

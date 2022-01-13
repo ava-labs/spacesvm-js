@@ -4,13 +4,11 @@ import { Button, CircularProgress, Divider, Grid, Slide, TextField, Typography }
 import { styled } from '@mui/system'
 
 const SetButton = styled(Button)(({ theme }) => ({
-	color: 'white',
+	color: '#fff',
 	backgroundColor: '#523df1',
 	padding: theme.spacing(1),
-	borderRadius: 9999,
 	height: 80,
 	fontWeight: 900,
-	//minWidth: 240,
 	fontSize: 24,
 	boxShadow: '0 0 40px rgb(82 61 241 / 60%)',
 	'&:hover': {
@@ -78,6 +76,7 @@ export const WhileYouWait = memo(() => {
 							>
 								<Grid item xs={12} sm={4}>
 									<TextField
+										color="secondary"
 										disabled={loading}
 										variant="filled"
 										value={keyText}
@@ -95,6 +94,7 @@ export const WhileYouWait = memo(() => {
 								</Grid>
 								<Grid item xs={12} sm={4}>
 									<TextField
+										color="secondary"
 										disabled={loading}
 										variant="filled"
 										value={valueText}
@@ -127,7 +127,7 @@ export const WhileYouWait = memo(() => {
 										variant="contained"
 										size="large"
 									>
-										{loading ? <CircularProgress /> : 'Set'}
+										{loading ? <CircularProgress color="secondary" /> : 'Set'}
 									</SetButton>
 								</Grid>
 							</Grid>
@@ -138,6 +138,8 @@ export const WhileYouWait = memo(() => {
 					disabled={formValues.length >= 5}
 					onClick={() => addFormFields()}
 					startIcon={<IoAdd />}
+					variant="outlined"
+					color="secondary"
 					sx={{ margin: 'auto', mt: 4, display: 'flex' }}
 				>
 					Add more
