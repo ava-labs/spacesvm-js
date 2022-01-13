@@ -6,33 +6,36 @@ import { SnackbarProvider } from 'notistack'
 import { Layout } from '@/components/Layout'
 import { useThemeLocalStorage } from '@/hooks/useThemeLocalStorage'
 import { Routes } from '@/pages/Routes'
+import { MetaMaskProvider } from '@/providers/MetaMaskProvider'
 import { darkTheme, lightTheme } from '@/theming/theme'
 
 export const App = memo(() => {
 	const themeLocalStorage = useThemeLocalStorage()
 
 	return (
-		<BrowserRouter>
-			<ThemeProvider theme={themeLocalStorage === 'light' ? lightTheme : darkTheme}>
-				<CssBaseline />
+		<MetaMaskProvider>
+			<BrowserRouter>
+				<ThemeProvider theme={themeLocalStorage === 'light' ? lightTheme : darkTheme}>
+					<CssBaseline />
 
-				<SnackbarProvider
-					dense
-					autoHideDuration={3500}
-					maxSnack={3}
-					preventDuplicate
-					anchorOrigin={{
-						vertical: 'top',
-						horizontal: 'center',
-					}}
-					// @ts-ignore
-					TransitionComponent={Grow}
-				>
-					<Layout>
-						<Routes />
-					</Layout>
-				</SnackbarProvider>
-			</ThemeProvider>
-		</BrowserRouter>
+					<SnackbarProvider
+						dense
+						autoHideDuration={3500}
+						maxSnack={3}
+						preventDuplicate
+						anchorOrigin={{
+							vertical: 'top',
+							horizontal: 'center',
+						}}
+						// @ts-ignore
+						TransitionComponent={Grow}
+					>
+						<Layout>
+							<Routes />
+						</Layout>
+					</SnackbarProvider>
+				</ThemeProvider>
+			</BrowserRouter>
+		</MetaMaskProvider>
 	)
 })

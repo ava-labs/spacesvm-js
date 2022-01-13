@@ -9,12 +9,7 @@ export const Layout: FC = memo(({ children }) => {
 
 	return (
 		<Box sx={{ background: theme.customPalette.customBackground }}>
-			<AppBar
-				walletAddress={
-					// TODO: change this to be dynamic
-					'0xeB4Fc761FAb7501abe8cD04b2d831a45E8913DdC'
-				}
-			/>
+			<AppBar />
 			<Box
 				sx={{
 					p: {
