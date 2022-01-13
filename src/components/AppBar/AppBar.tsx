@@ -7,7 +7,16 @@ import { APP_NAME } from '@/constants'
 
 export const AppBar = memo(() => (
 	<Box sx={{ flexGrow: 1 }}>
-		<MuiAppBar position="fixed" elevation={0} color="primary" sx={{ backdropFilter: 'blur(5px)' }}>
+		<MuiAppBar
+			position="fixed"
+			elevation={0}
+			color="transparent"
+			sx={{
+				backdropFilter: 'blur(5px)',
+				// for scrollbar not to be blurry
+				mr: '10px',
+			}}
+		>
 			<Toolbar>
 				<Container maxWidth="xl" disableGutters>
 					<Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
