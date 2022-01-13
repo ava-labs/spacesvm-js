@@ -242,7 +242,6 @@ export const Home = memo(() => {
 							item
 							sx={{
 								height: '100%',
-								display: 'flex',
 								display: {
 									xs: 'none',
 									md: 'flex',
