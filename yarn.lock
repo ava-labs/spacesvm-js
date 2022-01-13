@@ -1894,10 +1894,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.0.tgz#6734f8ebc106a0860dff7f92bf90df193f0935d7"
   integrity sha512-zrsUxjLOKAzdewIDRWy9nsV1GQsKBCWaGwsZQlCgr6/q+vjyZhFgqedLfFBuI9anTPEUT4APq9Mu0SZBTzIcGQ==
 
-"@react-hookz/web@12.1.1":
-  version "12.1.1"
-  resolved "https://registry.yarnpkg.com/@react-hookz/web/-/web-12.1.1.tgz#b3aa420931911f890d9f95729c2e462d4d55cfb7"
-  integrity sha512-PiyDjwr7HOSZgLoH7pwiffou1sxqB8oT57+mF1WAcpvEpO9jIP7ZJ+jZEL6jquHPsf1tETUQnbY6AQUyhw90yg==
+"@react-hookz/web@12.1.2":
+  version "12.1.2"
+  resolved "https://registry.yarnpkg.com/@react-hookz/web/-/web-12.1.2.tgz#065ef3157135e104a84d03fdafdafcf5bf3693cb"
+  integrity sha512-jtdwcNflKjZlEyP9Sv2mk9N1t79nOF8y/dCxTNItaMppDtF+OVBD85Orh8CuI55V7EFxLhEFtSo4DmeYp8ReXA==
 
 "@rollup/pluginutils@^4.1.2":
   version "4.1.2"
@@ -6751,10 +6751,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite@2.7.10:
-  version "2.7.10"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.7.10.tgz#d12c4c10e56a0ecf7890cb529c15996c6111218f"
-  integrity sha512-KEY96ntXUid1/xJihJbgmLZx7QSC2D4Tui0FdS0Old5OokYzFclcofhtxtjDdGOk/fFpPbHv9yw88+rB93Tb8w==
+vite@2.7.11:
+  version "2.7.11"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.7.11.tgz#b3caca377c202db887afda16b85b0ab111146bd9"
+  integrity sha512-W1OVwJmtuxnzt9HwZ1AebVLgvsgNpe4TK/sxvF+1x2y8MRnTEHvaPqxy9A67IYb5BR0Q+nENmLYa3QfESmp5GQ==
   dependencies:
     esbuild "^0.13.12"
     postcss "^8.4.5"

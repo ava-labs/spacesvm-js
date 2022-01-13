@@ -58,7 +58,7 @@ export const AppBar = memo(({ walletAddress }: AppBarProps) => {
 										variant="h4"
 										component="div"
 										color="textPrimary"
-										sx={{ fontFamily: 'DM Serif Display', ml: 1 }}
+										sx={{ fontFamily: 'DM Serif Display', ml: 2, letterSpacing: 8 }}
 									>
 										{APP_NAME}
 									</Typography>

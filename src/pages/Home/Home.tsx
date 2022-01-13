@@ -299,7 +299,7 @@ export const Home = memo(() => {
 								<Typography variant="h6" gutterBottom>
 									Cost{' '}
 									<Typography component="span" color="textSecondary">
-										(AVAX)
+										(SPC)
 									</Typography>
 								</Typography>
 								<Typography variant="body2" color="textSecondary">
