@@ -6,7 +6,7 @@ declare global {
 
 const ethereum = window.ethereum
 
-export const metaMaskExists = typeof ethereum !== undefined && ethereum.isMetaMask
+export const metaMaskExists = typeof ethereum !== undefined && ethereum?.isMetaMask
 
 export const mmRequestAccounts = async () => {
 	if (!metaMaskExists) return
