@@ -372,11 +372,11 @@ export const Home = memo(() => {
 						<div>
 							{available ? (
 								<Typography align="center" sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }} gutterBottom color="#f67916">
-									This username is available!
+									This space is available!
 								</Typography>
 							) : (
 								<Typography align="center" sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }} gutterBottom color="error">
-									This username is already taken
+									This space is already taken
 								</Typography>
 							)}
 						</div>
