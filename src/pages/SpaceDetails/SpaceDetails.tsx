@@ -110,7 +110,14 @@ export const SpaceDetails = memo(() => {
 									<Typography sx={{ mb: 4 }} variant="h3" align="center" fontFamily="DM Serif Display">
 										This space hasn't been claimed yet!
 									</Typography>
-									<ClaimButton component={Link} to="/" fullWidth variant="contained" size="large">
+									<ClaimButton
+										//@ts-ignore
+										component={Link}
+										to="/"
+										fullWidth
+										variant="contained"
+										size="large"
+									>
 										Claim it now!
 									</ClaimButton>
 								</Box>
