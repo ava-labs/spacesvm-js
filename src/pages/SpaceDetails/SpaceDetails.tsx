@@ -1,6 +1,19 @@
 import { memo, useCallback, useEffect, useState } from 'react'
+import { IoConstructOutline, IoTrashOutline } from 'react-icons/io5'
 import { Link, useParams } from 'react-router-dom'
-import { Avatar, Box, Button, Card, CardContent, Grid, LinearProgress, Typography, useTheme } from '@mui/material'
+import {
+	Avatar,
+	Box,
+	Button,
+	Card,
+	CardContent,
+	Grid,
+	IconButton,
+	LinearProgress,
+	Tooltip,
+	Typography,
+	useTheme,
+} from '@mui/material'
 
 import { ClaimButton } from '../Home/Home'
 
@@ -35,7 +48,7 @@ export const SpaceDetails = memo(() => {
 						<Grid
 							item
 							xs={12}
-							sm={6}
+							sm={5}
 							sx={{
 								height: {
 									xs: 'unset',
@@ -47,13 +60,14 @@ export const SpaceDetails = memo(() => {
 								alignItems: 'center',
 							}}
 						>
-							<PageTitle align="center" variant="h2">
+							<PageTitle align="center" variant="h2" sx={{ mb: 0 }}>
 								✨🔭
 							</PageTitle>
 							<PageTitle
 								align="center"
 								variant="h1"
 								sx={{
+									mb: 0,
 									wordBreak: 'break-all',
 									backgroundSize: '400% 100%',
 									backgroundClip: 'text',
@@ -68,15 +82,20 @@ export const SpaceDetails = memo(() => {
 								{spaceId}
 							</PageTitle>
 							{isClaimed && (
-								<Typography variant="caption" component="p" align="center" color="textSecondary">
-									Expires on: 21/12/2034
-								</Typography>
+								<>
+									<Typography variant="caption" component="p" align="center" color="textSecondary">
+										Expires on: 21/12/2034
+									</Typography>
+									<Button sx={{ mt: 4 }} variant="outlined" color="secondary">
+										Extend expiration date
+									</Button>
+								</>
 							)}
 						</Grid>
 						<Grid
 							item
 							xs={12}
-							sm={6}
+							sm={7}
 							sx={{
 								p: 8,
 								background: (theme) => theme.palette.background.default,
@@ -92,16 +111,45 @@ export const SpaceDetails = memo(() => {
 									<Card
 										key={el}
 										elevation={0}
-										sx={{ display: 'flex', mb: 4, alignItems: 'center', backgroundColor: 'transparent' }}
+										sx={{
+											display: 'flex',
+											mb: 4,
+											p: 4,
+											backgroundColor: 'transparent',
+											border: '1px solid transparent',
+											'&:hover': {
+												border: (theme) => `1px solid ${theme.palette.divider}`,
+												'.actions': {
+													opacity: 1,
+												},
+											},
+										}}
 									>
 										<Avatar sx={{ mr: 2 }}>{el}</Avatar>
-										<Box sx={{ display: 'flex', flexDirection: 'column' }}>
-											<CardContent>
-												<Typography variant="h4">Key</Typography>
-												<Typography variant="subtitle1" color="textSecondary">
-													Value
+										<Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+											<CardContent sx={{ pt: 0 }}>
+												<Typography variant="h4">
+													Key{el} - Value{el}
 												</Typography>
 											</CardContent>
+										</Box>
+										<Box className="actions">
+											<Grid container spacing={1} wrap="nowrap">
+												<Grid item>
+													<Tooltip placement="top" title="Edit">
+														<IconButton>
+															<IoConstructOutline />
+														</IconButton>
+													</Tooltip>
+												</Grid>
+												<Grid item>
+													<Tooltip placement="top" title="Delete">
+														<IconButton color="primary">
+															<IoTrashOutline />
+														</IconButton>
+													</Tooltip>
+												</Grid>
+											</Grid>
 										</Box>
 									</Card>
 								))

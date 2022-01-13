@@ -19,6 +19,7 @@ import {
 import { styled } from '@mui/system'
 // @ts-ignore
 import FakeProgress from 'fake-progress'
+import { useSnackbar } from 'notistack'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { Page } from '@/components/Page'
@@ -87,6 +88,7 @@ const USERNAMES = shuffleArray(FIRST_NAMES)
 
 export const Home = memo(() => {
 	const { signClaimPayload } = useMetaMask()
+	const { enqueueSnackbar } = useSnackbar()
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
 	const [username, setUsername] = useState<string>('')
@@ -101,8 +103,6 @@ export const Home = memo(() => {
 		setVerified(true)
 		setAvailable(!isClaimed)
 
-		// Call `onEnd` here
-		// onEnd()
 		console.info(`claimed`, isClaimed)
 	}
 
@@ -118,6 +118,11 @@ export const Home = memo(() => {
 		if (!signature) return
 
 		onSigned()
+
+		// Call `onEnd` here
+		// onEnd()
+		// Display a snackbar to let user know that it's ready
+		// enqueueSnackbar('Your space is ready!')
 	}
 
 	const onSigned = async () => {
