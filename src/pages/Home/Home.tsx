@@ -170,7 +170,7 @@ export const Home = memo(() => {
 				</DialogContent>
 			</Dialog>
 
-			<form onSubmit={handleSubmit} autoComplete="off" style={{ paddingTop: 42 }}>
+			<form onSubmit={handleSubmit} autoComplete="off">
 				<PageTitle align="center">Claim your space</PageTitle>
 				<PageSubtitle align="center">Needs to be unique.</PageSubtitle>
 

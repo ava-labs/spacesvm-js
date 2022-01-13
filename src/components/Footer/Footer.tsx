@@ -1,11 +1,11 @@
 import { memo } from 'react'
 import { IoLogoGithub } from 'react-icons/io5'
-import { Divider, Grid, Link, Typography } from '@mui/material'
+import { Box, Divider, Grid, Link, Typography } from '@mui/material'
 
 import { APP_NAME } from '@/constants'
 
 export const Footer = memo(() => (
-	<>
+	<Box mb={2}>
 		<Divider sx={{ my: 4 }} />
 		<Grid container spacing={1} flexDirection="column" alignItems="center">
 			<Grid item>
@@ -25,5 +25,5 @@ export const Footer = memo(() => (
 				</Typography>
 			</Grid>
 		</Grid>
-	</>
+	</Box>
 ))

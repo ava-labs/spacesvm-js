@@ -2,7 +2,6 @@ import { FC, memo } from 'react'
 import { Box, useTheme } from '@mui/material'
 
 import { AppBar } from '../AppBar'
-import { Footer } from '../Footer'
 
 export const Layout: FC = memo(({ children }) => {
 	const theme = useTheme()
@@ -12,10 +11,6 @@ export const Layout: FC = memo(({ children }) => {
 			<AppBar />
 			<Box
 				sx={{
-					p: {
-						xs: 1,
-						sm: 2,
-					},
 					display: 'flex',
 					flexDirection: 'column',
 					overflow: 'auto',
@@ -26,7 +21,6 @@ export const Layout: FC = memo(({ children }) => {
 				}}
 			>
 				{children}
-				<Footer />
 			</Box>
 		</Box>
 	)
