@@ -2,6 +2,7 @@ import { Button, Tooltip } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 
 const obfuscateAddress = (str: string): string => {
 	const firstChars = str.substr(0, 5)
@@ -12,11 +13,19 @@ const obfuscateAddress = (str: string): string => {
 export const MetaMaskSelect = () => {
 	const { enqueueSnackbar } = useSnackbar()
 
-	const walletAddress = '0xeB4Fc761FAb7501abe8cD04b2d831a45E8913DdC'
+	const { currentAddress, connectToMetaMask } = useMetaMask()
 
-	const setClipboard = async (text: string) => {
+	const handleMetaMaskClick = () => {
+		if (!currentAddress) {
+			connectToMetaMask()
+			return
+		}
+		setClipboard()
+	}
+
+	const setClipboard = async () => {
 		const type = 'text/plain'
-		const blob = new Blob([text], { type })
+		const blob = new Blob([currentAddress], { type })
 		const data = [new ClipboardItem({ [type]: blob })]
 
 		navigator.clipboard.write(data).then(
@@ -30,16 +39,14 @@ export const MetaMaskSelect = () => {
 	}
 
 	return (
-		<Tooltip title="MetaMask address">
+		<Tooltip title={currentAddress ? 'Copy address' : 'Connect to MetaMask'}>
 			<Button
 				startIcon={<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />}
 				variant="outlined"
 				color="secondary"
-				onClick={async () => {
-					await setClipboard(walletAddress)
-				}}
+				onClick={handleMetaMaskClick}
 			>
-				{obfuscateAddress(walletAddress)}
+				{currentAddress ? obfuscateAddress(currentAddress) : 'Connect'}
 			</Button>
 		</Tooltip>
 	)

@@ -1,37 +1,37 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
-import { mmRequestAccounts } from '@/utils/metamask'
+import { metaMaskExists, mmRequestAccounts } from '@/utils/metamask'
 
-const MetaMaskContext = React.createContext({})
+const ethereum = window.ethereum
 
-// type MetaMask = {
-// 	accounts: string[]
-// 	selectedAccount?: string
-// 	currentBalance?: number
-// }
+const MetaMaskContext = React.createContext({} as any)
 
 export const MetaMaskProvider = ({ children }: any) => {
 	const [accounts, setAccounts] = useState([])
-	const [selectedAccount, setSelectedAccount] = useState<string | undefined>()
+	const [currentAddress, setCurrentAddress] = useState<string | undefined>()
 
-	/**
-	 * Lots of legic to implement still
-	 */
+	useEffect(() => {
+		if (!metaMaskExists) return
 
-	const linkToMetaMask = async () => {
+		setCurrentAddress(ethereum.selectedAddress)
+
+		// Listen for changes to the connected account selections
+		return ethereum.on('accountsChanged', (accounts: any) => {
+			setCurrentAddress(accounts[0])
+		})
+	}, [])
+
+	const connectToMetaMask = async () => {
 		const accounts = await mmRequestAccounts()
 		setAccounts(accounts)
 	}
-
-	const selectAccount = (address: string) => setSelectedAccount(address)
 
 	return (
 		<MetaMaskContext.Provider
 			value={{
 				accounts,
-				selectedAccount,
-				selectAccount,
-				linkToMetaMask,
+				currentAddress,
+				connectToMetaMask,
 			}}
 		>
 			{children}
