@@ -25,7 +25,6 @@ import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
 import { signTransaction } from '@/utils/metamask'
-import { msToTime } from '@/utils/msToTime'
 import { getClaimPayload } from '@/utils/quarkPayloads'
 import { isAlreadyClaimed } from '@/utils/quarkvm'
 
@@ -92,7 +91,7 @@ export const Home = memo(() => {
 	const [progress, setProgress] = useState<number>(0)
 	const [verified, setVerified] = useState<boolean>(false)
 	const [available, setAvailable] = useState<boolean>(false)
-	const [timeEstimate, setTimeEstimate] = useState<number>()
+	const [costEstimate, setCostEstimate] = useState<number>()
 
 	const onVerify = async () => {
 		const isClaimed = await isAlreadyClaimed(username)
@@ -107,7 +106,7 @@ export const Home = memo(() => {
 
 	useEffect(() => {
 		// bogus formula for now
-		setTimeEstimate(username.length * 9000)
+		setCostEstimate(username.length * 9000)
 	}, [username])
 
 	const onClaim = async () => {
@@ -231,7 +230,7 @@ export const Home = memo(() => {
 							<Grid item>
 								<Box
 									position="relative"
-									width={72}
+									width={144}
 									height={72}
 									display="flex"
 									alignItems="center"
@@ -240,16 +239,16 @@ export const Home = memo(() => {
 										'&:before': {
 											position: 'absolute',
 											content: "''",
-											background: timeEstimate
+											background: costEstimate
 												? 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)'
 												: 'linear-gradient(100deg,#565656,#777777,#868686)',
 											top: '50%',
 											left: '50%',
-											width: '128%',
-											height: '128%',
+											width: '115%',
+											height: '125%',
 											transform: 'translate3d(-50%,-50%,0)',
 											filter: 'blur(8px)',
-											borderRadius: 9999,
+											borderRadius: 3,
 											zIndex: 1,
 										},
 										'&:after': {
@@ -260,7 +259,7 @@ export const Home = memo(() => {
 											left: 0,
 											zIndex: 2,
 											position: 'absolute',
-											borderRadius: 9999,
+											borderRadius: 3,
 											backgroundColor: (theme) => theme.customPalette.customBackground,
 										},
 									}}
@@ -269,19 +268,36 @@ export const Home = memo(() => {
 										noWrap
 										variant="h6"
 										align="center"
-										style={{ zIndex: 3, lineHeight: 1, fontSize: timeEstimate ? '1.25rem' : 36, position: 'relative' }}
+										style={{
+											zIndex: 3,
+											marginTop: 4,
+											lineHeight: 1,
+											fontSize: costEstimate ? '1.5rem' : 36,
+											position: 'relative',
+										}}
 									>
-										{timeEstimate ? (
-											<div dangerouslySetInnerHTML={{ __html: msToTime(timeEstimate, { showMs: false }) }} />
+										{costEstimate ? (
+											<>
+												{new Intl.NumberFormat('en-US').format(costEstimate)}
+												<Typography color="textSecondary" variant="caption" component="p">
+													USD{' '}
+													{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+														.format(costEstimate || 0)
+														.slice(0, -3)}
+												</Typography>
+											</>
 										) : (
-											<span style={{ position: 'relative', top: -1 }}>⏱</span>
+											<span style={{ position: 'relative', top: -1 }}>💰</span>
 										)}
 									</Typography>
 								</Box>
 							</Grid>
 							<Grid item>
 								<Typography variant="h6" gutterBottom>
-									Time estimate
+									Cost{' '}
+									<Typography component="span" color="textSecondary">
+										(AVAX)
+									</Typography>
 								</Typography>
 								<Typography variant="body2" color="textSecondary">
 									The{' '}
@@ -292,9 +308,9 @@ export const Home = memo(() => {
 									<br />
 									the{' '}
 									<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
-										longer
+										more
 									</Typography>{' '}
-									it will take to claim.
+									it will cost to claim.
 								</Typography>
 							</Grid>
 						</Grid>
