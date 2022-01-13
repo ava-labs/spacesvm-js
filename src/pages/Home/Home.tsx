@@ -197,7 +197,7 @@ export const Home = memo(() => {
 									// @ts-ignore
 									progress={progress}
 								>
-									a{' '}
+									Verify
 								</VerifyButton>
 							)}
 						</Grid>
