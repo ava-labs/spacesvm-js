@@ -1,5 +1,6 @@
 import { memo, useEffect, useState } from 'react'
 import { IoSearch } from 'react-icons/io5'
+import { Link } from 'react-router-dom'
 import {
 	Box,
 	Button,
@@ -375,7 +376,15 @@ export const Home = memo(() => {
 									This space is available!
 								</Typography>
 							) : (
-								<Typography align="center" sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }} gutterBottom color="error">
+								<Typography
+									align="center"
+									// @ts-ignore
+									component={Link}
+									sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860, display: 'block' }}
+									to={`/spaces/${username}`}
+									gutterBottom
+									color="error"
+								>
 									This space is already taken
 								</Typography>
 							)}
