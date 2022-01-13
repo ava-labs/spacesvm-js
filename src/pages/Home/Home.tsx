@@ -1,7 +1,5 @@
 import { memo, useEffect, useState } from 'react'
 import { IoSearch } from 'react-icons/io5'
-// @ts-ignore
-import faker from '@faker-js/faker/locale/en'
 import {
 	Box,
 	Button,
@@ -25,9 +23,11 @@ import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
+import { FIRST_NAMES } from '@/constants/firstNames'
 import { onboardToMetamask, signTransaction } from '@/utils/metamask'
 import { getClaimPayload } from '@/utils/quarkPayloads'
 import { isAlreadyClaimed } from '@/utils/quarkvm'
+import { shuffleArray } from '@/utils/shuffleArray'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
@@ -81,7 +81,7 @@ const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 	},
 }))
 
-const USERNAMES = new Array(50).fill(null).map(() => faker.name.firstName())
+const USERNAMES = shuffleArray(FIRST_NAMES)
 
 export const Home = memo(() => {
 	const { enqueueSnackbar } = useSnackbar()
