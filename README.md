@@ -1,7 +1,7 @@
 # Spaces ⚛️
 
 This is the frontend codebase for QuarkVM:
-https://quark.pages.dev
+https://spaces.pages.dev
 
 ## Getting started 🏃
 
