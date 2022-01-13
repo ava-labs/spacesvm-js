@@ -135,9 +135,7 @@ export const Home = memo(() => {
 		<Page>
 			<form onSubmit={handleSubmit} autoComplete="off" style={{ paddingTop: 42 }}>
 				<PageTitle align="center">Claim your username</PageTitle>
-				<PageSubtitle align="center">
-					Needs to be unique. The shorter the username, the longer it will take to claim.
-				</PageSubtitle>
+				<PageSubtitle align="center">Needs to be unique.</PageSubtitle>
 
 				<Grid container spacing={4} flexDirection="column" alignItems="center">
 					<Grid item>
