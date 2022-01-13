@@ -9,7 +9,7 @@ export const darkPalette: PaletteOptions = {
 		main: '#523df1',
 	},
 	background: {
-		paper: '#00000088',
+		paper: '#252334',
 	},
 }
 
@@ -22,6 +22,6 @@ export const lightPalette: PaletteOptions = {
 		main: '#523df1',
 	},
 	background: {
-		paper: '#FFFFFF50',
+		paper: '#FFFFFF',
 	},
 }

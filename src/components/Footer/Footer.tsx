@@ -9,7 +9,13 @@ export const Footer = memo(() => (
 		<Divider sx={{ my: 4 }} />
 		<Grid container spacing={1} flexDirection="column" alignItems="center">
 			<Grid item>
-				<Link title="Github" href="https://github.com/ava-labs/spacesvm-js" target="_blank" color="inherit">
+				<Link
+					title="Github"
+					href="https://github.com/ava-labs/spacesvm-js"
+					rel="noopener noreferrer"
+					target="_blank"
+					color="inherit"
+				>
 					<IoLogoGithub size={32} />
 				</Link>
 			</Grid>

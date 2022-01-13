@@ -18,6 +18,15 @@ export const commonOverrides: ThemeOptions['components'] = {
 			},
 		},
 	},
+	MuiDialog: {
+		styleOverrides: {
+			paper: {
+				backgroundImage: 'unset',
+				borderRadius: 18,
+				padding: 18,
+			},
+		},
+	},
 	MuiButton: {
 		styleOverrides: {
 			root: {

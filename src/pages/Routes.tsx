@@ -10,11 +10,13 @@ const pageLazyLoader = (key: string): LazyExoticComponent<any> =>
 
 // Lazy loading all pages
 const Home = pageLazyLoader('Home')
+const SpaceDetails = pageLazyLoader('SpaceDetails')
 
 export const Routes = () => (
 	<Suspense fallback={<></>}>
 		<Switch>
 			<Route path="/" element={<Home />} />
+			<Route path="/spaces/:spaceId" element={<SpaceDetails />} />
 			<Route path="*" element={<Navigate replace to="/404" />} />
 		</Switch>
 	</Suspense>

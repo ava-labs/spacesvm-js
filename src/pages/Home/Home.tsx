@@ -1,11 +1,12 @@
 import { memo, useEffect, useState } from 'react'
 import { IoSearch } from 'react-icons/io5'
-// @ts-ignore
-import faker from '@faker-js/faker/locale/en'
 import {
 	Box,
 	Button,
 	CircularProgress,
+	Dialog,
+	DialogContent,
+	DialogTitle,
 	Divider,
 	Fade,
 	Grid,
@@ -17,7 +18,6 @@ import {
 import { styled } from '@mui/system'
 // @ts-ignore
 import FakeProgress from 'fake-progress'
-import { useSnackbar } from 'notistack'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { Page } from '@/components/Page'
@@ -25,10 +25,10 @@ import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
+import { FIRST_NAMES } from '@/constants/firstNames'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
-import { signWithMetaMask } from '@/utils/metamask'
-import { getClaimPayload } from '@/utils/quarkPayloads'
 import { isAlreadyClaimed } from '@/utils/quarkvm'
+import { shuffleArray } from '@/utils/shuffleArray'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
@@ -82,7 +82,7 @@ const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 	},
 }))
 
-const USERNAMES = new Array(50).fill(null).map(() => faker.name.firstName())
+const USERNAMES = shuffleArray(FIRST_NAMES)
 
 export const Home = memo(() => {
 	const { signClaimPayload } = useMetaMask()
@@ -147,6 +147,25 @@ export const Home = memo(() => {
 
 	return (
 		<Page>
+			<Dialog open={waitingForMetaMask} maxWidth="xs">
+				<DialogTitle>
+					<Typography variant="h5" fontFamily="DM Serif Display" align="center" sx={{ position: 'relative' }}>
+						Please sign the message in your wallet to continue.{' '}
+						<span style={{ position: 'absolute', fontSize: 42, transform: 'translateX(12px) translateY(-11px)' }}>
+							👉
+						</span>
+					</Typography>
+				</DialogTitle>
+				<DialogContent>
+					<Typography align="center" color="textSecondary">
+						Verify that you’re the owner of this Ethereum address and any associated Spaces.
+					</Typography>
+					<Box sx={{ mt: 4 }} display="flex" justifyContent="center">
+						<CircularProgress color="secondary" disableShrink />
+					</Box>
+				</DialogContent>
+			</Dialog>
+
 			<form onSubmit={handleSubmit} autoComplete="off" style={{ paddingTop: 42 }}>
 				<PageTitle align="center">Claim your space</PageTitle>
 				<PageSubtitle align="center">Needs to be unique.</PageSubtitle>
@@ -188,11 +207,24 @@ export const Home = memo(() => {
 							)}
 						</TypewrittingInput>
 					</Grid>
-					<Grid item container justifyContent="center" alignItems="center" spacing={4} wrap="nowrap">
+					<Grid
+						item
+						container
+						justifyContent="center"
+						alignItems="center"
+						spacing={4}
+						sx={{
+							flexWrap: {
+								xs: 'wrap',
+								md: 'nowrap',
+							},
+						}}
+					>
 						<Grid item>
 							{verified && available ? (
 								<ClaimButton
 									onClick={onClaim}
+									fullWidth
 									disabled={username.length === 0 || showWhileYouWait || waitingForMetaMask}
 									variant="contained"
 									size="large"
@@ -213,6 +245,7 @@ export const Home = memo(() => {
 								<VerifyButton
 									type="submit"
 									onClick={onVerify}
+									fullWidth
 									disabled={username.length === 0 || showWhileYouWait}
 									variant="contained"
 									size="large"
@@ -223,8 +256,23 @@ export const Home = memo(() => {
 								</VerifyButton>
 							)}
 						</Grid>
-						<Grid item sx={{ height: '100%', display: 'flex' }}>
-							<Divider flexItem orientation="vertical" sx={{ height: 60, mr: 1 }} />
+						<Grid
+							item
+							sx={{
+								height: '100%',
+								display: {
+									xs: 'none',
+									md: 'flex',
+								},
+							}}
+						>
+							<Divider
+								flexItem
+								orientation="vertical"
+								sx={{
+									height: 60,
+								}}
+							/>
 						</Grid>
 						<Grid item container wrap="nowrap" spacing={4} alignItems="center" flexBasis="content">
 							<Grid item>
@@ -236,17 +284,20 @@ export const Home = memo(() => {
 									alignItems="center"
 									justifyContent="center"
 									sx={{
+										ml: 2,
 										'&:before': {
 											position: 'absolute',
 											content: "''",
 											background: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
 											top: '50%',
 											left: '50%',
-											width: '115%',
-											height: '125%',
+											width: costEstimate ? '115%' : '100%',
+											height: costEstimate ? '125%' : '100%',
 											transform: 'translate3d(-50%,-50%,0)',
 											filter: `blur(8px) ${!costEstimate ? 'grayscale(0.92) opacity(0.5)' : ''}`,
-											transition: 'filter 0.250s ease',
+											transitionProperty: 'width, height, filter',
+											transitionDuration: '0.2s',
+											transitionTimingFunction: 'ease',
 											borderRadius: 3,
 											zIndex: 1,
 										},

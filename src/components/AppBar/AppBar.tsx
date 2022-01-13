@@ -38,10 +38,11 @@ export const AppBar = memo(() => (
 							</Link>
 						</Grid>
 
-						<Grid item container alignItems="center" justifyContent="flex-end" spacing={3}>
+						<Grid item container alignItems="center" justifyContent="flex-end" wrap="nowrap" spacing={3}>
 							<Grid item>
 								<ThemeToggle />
 							</Grid>
+
 							<Grid item>
 								<MetaMaskSelect />
 							</Grid>
