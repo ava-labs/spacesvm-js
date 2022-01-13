@@ -18,7 +18,6 @@ import {
 import { styled } from '@mui/system'
 // @ts-ignore
 import FakeProgress from 'fake-progress'
-import { useSnackbar } from 'notistack'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { Page } from '@/components/Page'
@@ -27,8 +26,7 @@ import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
 import { FIRST_NAMES } from '@/constants/firstNames'
-import { onboardToMetamask, signTransaction } from '@/utils/metamask'
-import { getClaimPayload } from '@/utils/quarkPayloads'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { isAlreadyClaimed } from '@/utils/quarkvm'
 import { shuffleArray } from '@/utils/shuffleArray'
 
@@ -87,7 +85,7 @@ const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 const USERNAMES = shuffleArray(FIRST_NAMES)
 
 export const Home = memo(() => {
-	const { enqueueSnackbar } = useSnackbar()
+	const { signClaimPayload } = useMetaMask()
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
 	const [username, setUsername] = useState<string>('')
@@ -114,9 +112,7 @@ export const Home = memo(() => {
 
 	const onClaim = async () => {
 		setWaitingForMetaMask(true)
-		onboardToMetamask(enqueueSnackbar)
-		const claimPayload = await getClaimPayload(username)
-		const signature = await signTransaction(claimPayload)
+		const signature = await signClaimPayload(username)
 		setWaitingForMetaMask(false)
 		if (!signature) return
 

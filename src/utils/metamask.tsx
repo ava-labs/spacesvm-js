@@ -1,9 +1,3 @@
-import { IoDownloadOutline } from 'react-icons/io5'
-import MetaMaskOnboarding from '@metamask/onboarding'
-import { Button } from '@mui/material'
-
-const onboarding = new MetaMaskOnboarding()
-
 declare global {
 	interface Window {
 		ethereum: any
@@ -19,7 +13,7 @@ export const mmRequestAccounts = async () => {
 	return ethereum.request({ method: 'eth_requestAccounts' })
 }
 
-export const signTransaction = async (payload: any): Promise<string | undefined> => {
+export const signWithMetaMask = async (payload: any): Promise<string | undefined> => {
 	try {
 		const accounts = await mmRequestAccounts()
 		const signature = await ethereum.request({
@@ -31,24 +25,4 @@ export const signTransaction = async (payload: any): Promise<string | undefined>
 		// eslint-disable-next-line no-console
 		console.error(error)
 	}
-}
-
-// Display an install notification if MetaMask not installed
-export const onboardToMetamask = (enqueueSnackbar: any) => {
-	if (metaMaskExists) return
-	enqueueSnackbar('MetaMask needs to be installed.', {
-		variant: 'warning',
-		persist: true,
-		action: (
-			<Button
-				startIcon={<IoDownloadOutline />}
-				variant="outlined"
-				color="inherit"
-				onClick={() => onboarding.startOnboarding()}
-				sx={{ ml: 1, mr: -1 }}
-			>
-				Download MetaMask
-			</Button>
-		),
-	})
 }

@@ -13,29 +13,29 @@ export const App = memo(() => {
 	const themeLocalStorage = useThemeLocalStorage()
 
 	return (
-		<MetaMaskProvider>
-			<BrowserRouter>
-				<ThemeProvider theme={themeLocalStorage === 'light' ? lightTheme : darkTheme}>
-					<CssBaseline />
+		<BrowserRouter>
+			<ThemeProvider theme={themeLocalStorage === 'light' ? lightTheme : darkTheme}>
+				<CssBaseline />
 
-					<SnackbarProvider
-						dense
-						autoHideDuration={3500}
-						maxSnack={3}
-						preventDuplicate
-						anchorOrigin={{
-							vertical: 'top',
-							horizontal: 'center',
-						}}
-						// @ts-ignore
-						TransitionComponent={Grow}
-					>
+				<SnackbarProvider
+					dense
+					autoHideDuration={3500}
+					maxSnack={3}
+					preventDuplicate
+					anchorOrigin={{
+						vertical: 'top',
+						horizontal: 'center',
+					}}
+					// @ts-ignore
+					TransitionComponent={Grow}
+				>
+					<MetaMaskProvider>
 						<Layout>
 							<Routes />
 						</Layout>
-					</SnackbarProvider>
-				</ThemeProvider>
-			</BrowserRouter>
-		</MetaMaskProvider>
+					</MetaMaskProvider>
+				</SnackbarProvider>
+			</ThemeProvider>
+		</BrowserRouter>
 	)
 })
