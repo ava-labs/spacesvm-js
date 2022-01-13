@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { CssBaseline, ThemeProvider } from '@mui/material'
+import { CssBaseline, Grow, ThemeProvider } from '@mui/material'
+import { SnackbarProvider } from 'notistack'
 
 import { Layout } from '@/components/Layout'
 import { useThemeLocalStorage } from '@/hooks/useThemeLocalStorage'
@@ -15,9 +16,21 @@ export const App = memo(() => {
 			<ThemeProvider theme={themeLocalStorage === 'light' ? lightTheme : darkTheme}>
 				<CssBaseline />
 
-				<Layout>
-					<Routes />
-				</Layout>
+				<SnackbarProvider
+					dense
+					autoHideDuration={2500}
+					maxSnack={3}
+					anchorOrigin={{
+						vertical: 'top',
+						horizontal: 'center',
+					}}
+					// @ts-ignore
+					TransitionComponent={Grow}
+				>
+					<Layout>
+						<Routes />
+					</Layout>
+				</SnackbarProvider>
 			</ThemeProvider>
 		</BrowserRouter>
 	)
