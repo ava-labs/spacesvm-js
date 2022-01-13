@@ -25,7 +25,8 @@ import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
-import { onboardToMetamask, signTransaction } from '@/utils/metamask'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
+import { signWithMetaMask } from '@/utils/metamask'
 import { getClaimPayload } from '@/utils/quarkPayloads'
 import { isAlreadyClaimed } from '@/utils/quarkvm'
 
@@ -84,7 +85,7 @@ const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 const USERNAMES = new Array(50).fill(null).map(() => faker.name.firstName())
 
 export const Home = memo(() => {
-	const { enqueueSnackbar } = useSnackbar()
+	const { signClaimPayload } = useMetaMask()
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
 	const [username, setUsername] = useState<string>('')
@@ -111,9 +112,7 @@ export const Home = memo(() => {
 
 	const onClaim = async () => {
 		setWaitingForMetaMask(true)
-		onboardToMetamask(enqueueSnackbar)
-		const claimPayload = await getClaimPayload(username)
-		const signature = await signTransaction(claimPayload)
+		const signature = await signClaimPayload(username)
 		setWaitingForMetaMask(false)
 		if (!signature) return
 
