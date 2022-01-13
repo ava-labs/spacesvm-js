@@ -189,11 +189,24 @@ export const Home = memo(() => {
 							)}
 						</TypewrittingInput>
 					</Grid>
-					<Grid item container justifyContent="center" alignItems="center" spacing={4} wrap="nowrap">
+					<Grid
+						item
+						container
+						justifyContent="center"
+						alignItems="center"
+						spacing={4}
+						sx={{
+							flexWrap: {
+								xs: 'wrap',
+								md: 'nowrap',
+							},
+						}}
+					>
 						<Grid item>
 							{verified && available ? (
 								<ClaimButton
 									onClick={onClaim}
+									fullWidth
 									disabled={username.length === 0 || showWhileYouWait || waitingForMetaMask}
 									variant="contained"
 									size="large"
@@ -214,6 +227,7 @@ export const Home = memo(() => {
 								<VerifyButton
 									type="submit"
 									onClick={onVerify}
+									fullWidth
 									disabled={username.length === 0 || showWhileYouWait}
 									variant="contained"
 									size="large"
@@ -224,8 +238,24 @@ export const Home = memo(() => {
 								</VerifyButton>
 							)}
 						</Grid>
-						<Grid item sx={{ height: '100%', display: 'flex' }}>
-							<Divider flexItem orientation="vertical" sx={{ height: 60, mr: 1 }} />
+						<Grid
+							item
+							sx={{
+								height: '100%',
+								display: 'flex',
+								display: {
+									xs: 'none',
+									md: 'flex',
+								},
+							}}
+						>
+							<Divider
+								flexItem
+								orientation="vertical"
+								sx={{
+									height: 60,
+								}}
+							/>
 						</Grid>
 						<Grid item container wrap="nowrap" spacing={4} alignItems="center" flexBasis="content">
 							<Grid item>
@@ -237,17 +267,20 @@ export const Home = memo(() => {
 									alignItems="center"
 									justifyContent="center"
 									sx={{
+										ml: 2,
 										'&:before': {
 											position: 'absolute',
 											content: "''",
 											background: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
 											top: '50%',
 											left: '50%',
-											width: '115%',
-											height: '125%',
+											width: costEstimate ? '115%' : '100%',
+											height: costEstimate ? '125%' : '100%',
 											transform: 'translate3d(-50%,-50%,0)',
 											filter: `blur(8px) ${!costEstimate ? 'grayscale(0.92) opacity(0.5)' : ''}`,
-											transition: 'filter 0.250s ease',
+											transitionProperty: 'width, height, filter',
+											transitionDuration: '0.2s',
+											transitionTimingFunction: 'ease',
 											borderRadius: 3,
 											zIndex: 1,
 										},
