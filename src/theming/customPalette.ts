@@ -3,7 +3,7 @@ const darkCustomPalette = {
 }
 
 const lightCustomPalette = {
-	customBackground: '#090719',
+	customBackground: '#f7f7f7',
 }
 
 export type CustomPalette = {

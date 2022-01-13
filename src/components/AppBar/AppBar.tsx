@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { AppBar as MuiAppBar, Box, Button, Container, Grid, Toolbar, Tooltip, Typography } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
+import { ThemeToggle } from '../ThemeToggle'
+
 import Logo from '@/assets/favicon.png'
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { APP_NAME } from '@/constants'
@@ -27,7 +29,7 @@ export const AppBar = memo(({ walletAddress }: AppBarProps) => {
 
 		navigator.clipboard.write(data).then(
 			() => {
-				enqueueSnackbar('Address copied!')
+				enqueueSnackbar('MetaMask address copied!')
 			},
 			() => {
 				enqueueSnackbar("Can't copy!", { variant: 'error' })
@@ -50,7 +52,7 @@ export const AppBar = memo(({ walletAddress }: AppBarProps) => {
 			>
 				<Toolbar>
 					<Container maxWidth="xl" disableGutters>
-						<Grid container alignItems="center" justifyContent="space-between">
+						<Grid container alignItems="center" justifyContent="space-between" wrap="nowrap">
 							<Grid item>
 								<Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
 									<img src={Logo} width={32} height={32} alt={`${APP_NAME} Logo`} />
@@ -64,22 +66,28 @@ export const AppBar = memo(({ walletAddress }: AppBarProps) => {
 									</Typography>
 								</Link>
 							</Grid>
-							{walletAddress && (
+
+							<Grid item container alignItems="center" justifyContent="flex-end" spacing={3}>
 								<Grid item>
-									<Tooltip title="Copy address">
-										<Button
-											startIcon={<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />}
-											variant="outlined"
-											color="secondary"
-											onClick={async () => {
-												await setClipboard(walletAddress)
-											}}
-										>
-											{obfuscateAddress(walletAddress)}
-										</Button>
-									</Tooltip>
+									<ThemeToggle />
 								</Grid>
-							)}
+								{walletAddress && (
+									<Grid item>
+										<Tooltip title="MetaMask address">
+											<Button
+												startIcon={<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />}
+												variant="outlined"
+												color="secondary"
+												onClick={async () => {
+													await setClipboard(walletAddress)
+												}}
+											>
+												{obfuscateAddress(walletAddress)}
+											</Button>
+										</Tooltip>
+									</Grid>
+								)}
+							</Grid>
 						</Grid>
 					</Container>
 				</Toolbar>

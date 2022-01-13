@@ -30,7 +30,6 @@ import { getClaimPayload } from '@/utils/quarkPayloads'
 import { isAlreadyClaimed } from '@/utils/quarkvm'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
-	color: '#fff',
 	backgroundColor: '#523df1',
 	padding: theme.spacing(1, 10),
 	height: 80,
@@ -49,7 +48,6 @@ const VerifyButton = styled(Button)(({ theme }: any) => ({
 }))
 
 const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
-	color: '#fff',
 	backgroundColor: '#e70256',
 	backgroundImage: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
 	padding: theme.spacing(1, 10),
@@ -196,7 +194,7 @@ export const Home = memo(() => {
 							{verified && available ? (
 								<ClaimButton
 									onClick={onClaim}
-									disabled={username.length === 0 || showWhileYouWait}
+									disabled={username.length === 0 || showWhileYouWait || waitingForMetaMask}
 									variant="contained"
 									size="large"
 									// @ts-ignore

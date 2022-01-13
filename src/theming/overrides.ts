@@ -14,10 +14,7 @@ export const commonOverrides: ThemeOptions['components'] = {
 	MuiTooltip: {
 		styleOverrides: {
 			tooltip: {
-				backgroundColor: '#000000EE',
-			},
-			arrow: {
-				color: '#000000EE',
+				borderRadius: 9999,
 			},
 		},
 	},
@@ -30,7 +27,7 @@ export const commonOverrides: ThemeOptions['components'] = {
 				minWidth: 42,
 			},
 			outlined: {
-				color: '#fff',
+				color: 'inherit',
 			},
 			contained: {
 				textTransform: 'unset',
@@ -48,4 +45,13 @@ export const commonOverrides: ThemeOptions['components'] = {
 
 export const lightOverrides: ThemeOptions['components'] = {}
 
-export const darkOverrides: ThemeOptions['components'] = {}
+export const darkOverrides: ThemeOptions['components'] = {
+	MuiTooltip: {
+		styleOverrides: {
+			tooltip: {
+				backgroundColor: '#000000EE',
+				border: '1px solid #FFFFFF33',
+			},
+		},
+	},
+}

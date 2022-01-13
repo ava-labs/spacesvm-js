@@ -4,7 +4,6 @@ import { Button, CircularProgress, Divider, Grid, Slide, TextField, Typography }
 import { styled } from '@mui/system'
 
 const SetButton = styled(Button)(({ theme }) => ({
-	color: '#fff',
 	backgroundColor: '#523df1',
 	padding: theme.spacing(1),
 	height: 80,
