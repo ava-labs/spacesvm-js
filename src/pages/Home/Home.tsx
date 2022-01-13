@@ -148,7 +148,7 @@ export const Home = memo(() => {
 	return (
 		<Page>
 			<form onSubmit={handleSubmit} autoComplete="off" style={{ paddingTop: 42 }}>
-				<PageTitle align="center">Claim your username</PageTitle>
+				<PageTitle align="center">Claim your space</PageTitle>
 				<PageSubtitle align="center">Needs to be unique.</PageSubtitle>
 
 				<Grid container spacing={4} flexDirection="column" alignItems="center">
