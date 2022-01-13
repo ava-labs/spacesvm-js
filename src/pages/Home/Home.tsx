@@ -240,15 +240,14 @@ export const Home = memo(() => {
 										'&:before': {
 											position: 'absolute',
 											content: "''",
-											background: costEstimate
-												? 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)'
-												: 'linear-gradient(100deg,#565656,#777777,#868686)',
+											background: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
 											top: '50%',
 											left: '50%',
 											width: '115%',
 											height: '125%',
 											transform: 'translate3d(-50%,-50%,0)',
-											filter: 'blur(8px)',
+											filter: `blur(8px) ${!costEstimate ? 'grayscale(0.92) opacity(0.5)' : ''}`,
+											transition: 'filter 0.250s ease',
 											borderRadius: 3,
 											zIndex: 1,
 										},
