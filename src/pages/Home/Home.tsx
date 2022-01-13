@@ -4,6 +4,9 @@ import {
 	Box,
 	Button,
 	CircularProgress,
+	Dialog,
+	DialogContent,
+	DialogTitle,
 	Divider,
 	Fade,
 	Grid,
@@ -148,6 +151,22 @@ export const Home = memo(() => {
 
 	return (
 		<Page>
+			<Dialog open={waitingForMetaMask} maxWidth="xs">
+				<DialogTitle>
+					<Typography variant="h5" fontFamily="DM Serif Display" align="center" sx={{ position: 'relative' }}>
+						Please sign the message in your wallet to continue.{' '}
+						<span style={{ position: 'absolute', fontSize: 42, transform: 'translateX(12px) translateY(-11px)' }}>
+							👉
+						</span>
+					</Typography>
+				</DialogTitle>
+				<DialogContent>
+					<Typography align="center" color="textSecondary">
+						Verify that you’re the owner of this Ethereum address and any associated Spaces.
+					</Typography>
+				</DialogContent>
+			</Dialog>
+
 			<form onSubmit={handleSubmit} autoComplete="off" style={{ paddingTop: 42 }}>
 				<PageTitle align="center">Claim your space</PageTitle>
 				<PageSubtitle align="center">Needs to be unique.</PageSubtitle>
