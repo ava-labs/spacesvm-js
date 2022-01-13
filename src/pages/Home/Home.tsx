@@ -43,7 +43,7 @@ const VerifyButton = styled(Button)(({ theme }: any) => ({
 		boxShadow: '0 0 40px rgb(82 61 241 / 80%)',
 	},
 	'&.Mui-disabled': {
-		backgroundColor: 'hsla(0,0%,100%,0.1)',
+		backgroundColor: theme.palette.mode === 'dark' ? 'hsla(0,0%,100%,0.1)' : 'hsla(0,0%,0%,0.1)',
 	},
 }))
 
