@@ -17,6 +17,7 @@ import {
 import { styled } from '@mui/system'
 // @ts-ignore
 import FakeProgress from 'fake-progress'
+import { useSnackbar } from 'notistack'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { Page } from '@/components/Page'
@@ -85,6 +86,7 @@ const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 const USERNAMES = new Array(50).fill(null).map(() => faker.name.firstName())
 
 export const Home = memo(() => {
+	const { enqueueSnackbar } = useSnackbar()
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
 	const [username, setUsername] = useState<string>('')
@@ -112,7 +114,7 @@ export const Home = memo(() => {
 	const onClaim = async () => {
 		setWaitingForMetaMask(true)
 		const claimPayload = await getClaimPayload(username)
-		const signature = await signTransaction(claimPayload)
+		const signature = await signTransaction(claimPayload, enqueueSnackbar)
 		setWaitingForMetaMask(false)
 		if (!signature) return
 

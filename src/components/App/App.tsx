@@ -18,8 +18,9 @@ export const App = memo(() => {
 
 				<SnackbarProvider
 					dense
-					autoHideDuration={2500}
+					autoHideDuration={3500}
 					maxSnack={3}
+					preventDuplicate
 					anchorOrigin={{
 						vertical: 'top',
 						horizontal: 'center',
