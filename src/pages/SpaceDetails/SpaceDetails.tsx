@@ -144,7 +144,7 @@ export const SpaceDetails = memo(() => {
 												</Grid>
 												<Grid item>
 													<Tooltip placement="top" title="Delete">
-														<IconButton color="primary">
+														<IconButton color="primary" edge="end">
 															<IoTrashOutline />
 														</IconButton>
 													</Tooltip>
