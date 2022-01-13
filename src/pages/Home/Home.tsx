@@ -164,6 +164,9 @@ export const Home = memo(() => {
 					<Typography align="center" color="textSecondary">
 						Verify that you’re the owner of this Ethereum address and any associated Spaces.
 					</Typography>
+					<Box sx={{ mt: 4 }} display="flex" justifyContent="center">
+						<CircularProgress color="secondary" disableShrink />
+					</Box>
 				</DialogContent>
 			</Dialog>
 
