@@ -1,7 +1,3 @@
-import MetaMaskOnboarding from '@metamask/onboarding'
-
-import { getClaimPayload, PayloadData } from './quarkPayloads'
-
 declare global {
 	interface Window {
 		ethereum: any
@@ -27,6 +23,7 @@ export const signTransaction = async (payload: any): Promise<string | undefined>
 		})
 		return signature
 	} catch (error) {
+		// eslint-disable-next-line no-console
 		console.error(error)
 	}
 }
