@@ -25,7 +25,7 @@ import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
-import { signTransaction } from '@/utils/metamask'
+import { onboardToMetamask, signTransaction } from '@/utils/metamask'
 import { getClaimPayload } from '@/utils/quarkPayloads'
 import { isAlreadyClaimed } from '@/utils/quarkvm'
 
@@ -113,8 +113,9 @@ export const Home = memo(() => {
 
 	const onClaim = async () => {
 		setWaitingForMetaMask(true)
+		onboardToMetamask(enqueueSnackbar)
 		const claimPayload = await getClaimPayload(username)
-		const signature = await signTransaction(claimPayload, enqueueSnackbar)
+		const signature = await signTransaction(claimPayload)
 		setWaitingForMetaMask(false)
 		if (!signature) return
 
