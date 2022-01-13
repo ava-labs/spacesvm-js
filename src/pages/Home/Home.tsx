@@ -1,8 +1,19 @@
-import { memo, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { IoSearch } from 'react-icons/io5'
 // @ts-ignore
 import faker from '@faker-js/faker/locale/en'
-import { Button, CircularProgress, Grid, Grow, InputAdornment, TextField, Typography } from '@mui/material'
+import {
+	Avatar,
+	Box,
+	Button,
+	CircularProgress,
+	Divider,
+	Grid,
+	Grow,
+	InputAdornment,
+	TextField,
+	Typography,
+} from '@mui/material'
 import { styled } from '@mui/system'
 // @ts-ignore
 import FakeProgress from 'fake-progress'
@@ -12,6 +23,7 @@ import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
+import { msToTime } from '@/utils/msToTime'
 import { isAlreadyClaimed } from '@/utils/quarkvm'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
@@ -78,6 +90,7 @@ export const Home = memo(() => {
 	const [progress, setProgress] = useState<number>(0)
 	const [verified, setVerified] = useState<boolean>(false)
 	const [available, setAvailable] = useState<boolean>(false)
+	const [timeEstimate, setTimeEstimate] = useState<number>()
 
 	const onVerify = async () => {
 		const isClaimed = await isAlreadyClaimed(username)
@@ -89,6 +102,11 @@ export const Home = memo(() => {
 		// onEnd()
 		console.info(`claimed`, isClaimed)
 	}
+
+	useEffect(() => {
+		// bogus formula for now
+		setTimeEstimate(username.length * 9000)
+	}, [username])
 
 	const onClaim = async () => {
 		setShowWhileYouWait(true)
@@ -115,7 +133,9 @@ export const Home = memo(() => {
 	return (
 		<Page>
 			<PageTitle align="center">Claim your username</PageTitle>
-			<PageSubtitle align="center">Needs to be unique</PageSubtitle>
+			<PageSubtitle align="center">
+				Needs to be unique. The shorter the username, the longer it will take to claim.
+			</PageSubtitle>
 
 			<Grid container spacing={4} flexDirection="column" alignItems="center">
 				<Grid item>
@@ -154,30 +174,106 @@ export const Home = memo(() => {
 						)}
 					</TypewrittingInput>
 				</Grid>
-				<Grid item>
-					{verified && available ? (
-						<ClaimButton
-							onClick={onClaim}
-							disabled={username.length === 0 || showWhileYouWait}
-							variant="contained"
-							size="large"
-							// @ts-ignore
-							progress={progress}
-						>
-							{showWhileYouWait ? <CircularProgress color="inherit" sx={{ zIndex: 3 }} /> : 'Claim'}
-						</ClaimButton>
-					) : (
-						<VerifyButton
-							onClick={onVerify}
-							disabled={username.length === 0 || showWhileYouWait}
-							variant="contained"
-							size="large"
-							// @ts-ignore
-							progress={progress}
-						>
-							{showWhileYouWait ? <CircularProgress color="inherit" sx={{ zIndex: 3 }} /> : 'Verify availability'}
-						</VerifyButton>
-					)}
+				<Grid item container justifyContent="center" alignItems="center" spacing={4} wrap="nowrap">
+					<Grid item>
+						{verified && available ? (
+							<ClaimButton
+								onClick={onClaim}
+								disabled={username.length === 0 || showWhileYouWait}
+								variant="contained"
+								size="large"
+								// @ts-ignore
+								progress={progress}
+							>
+								{showWhileYouWait ? <CircularProgress color="inherit" sx={{ zIndex: 3 }} /> : 'Claim'}
+							</ClaimButton>
+						) : (
+							<VerifyButton
+								onClick={onVerify}
+								disabled={username.length === 0 || showWhileYouWait}
+								variant="contained"
+								size="large"
+								// @ts-ignore
+								progress={progress}
+							>
+								{showWhileYouWait ? <CircularProgress color="inherit" sx={{ zIndex: 3 }} /> : 'Verify availability'}
+							</VerifyButton>
+						)}
+					</Grid>
+					<Grid item sx={{ height: '100%', display: 'flex' }}>
+						<Divider flexItem orientation="vertical" />
+					</Grid>
+					<Grid item container wrap="nowrap" spacing={4} alignItems="center" flexBasis="content">
+						<Grid item>
+							<Box
+								position="relative"
+								width={72}
+								height={72}
+								display="flex"
+								alignItems="center"
+								justifyContent="center"
+								sx={{
+									'&:before': {
+										position: 'absolute',
+										content: "''",
+										background: timeEstimate
+											? 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)'
+											: 'linear-gradient(100deg,#565656,#777777,#868686)',
+										top: '50%',
+										left: '50%',
+										width: '128%',
+										height: '128%',
+										transform: 'translate3d(-50%,-50%,0)',
+										filter: 'blur(8px)',
+										borderRadius: 9999,
+										zIndex: 1,
+									},
+									'&:after': {
+										content: "''",
+										top: 0,
+										right: 0,
+										bottom: 0,
+										left: 0,
+										zIndex: 2,
+										position: 'absolute',
+										borderRadius: 9999,
+										backgroundColor: (theme) => theme.customPalette.customBackground,
+									},
+								}}
+							>
+								<Typography
+									noWrap
+									variant="h6"
+									align="center"
+									style={{ zIndex: 3, lineHeight: 1, fontSize: timeEstimate ? '1.25rem' : 36, position: 'relative' }}
+								>
+									{timeEstimate ? (
+										<div dangerouslySetInnerHTML={{ __html: msToTime(timeEstimate, { showMs: false }) }} />
+									) : (
+										'⏱'
+									)}
+								</Typography>
+							</Box>
+						</Grid>
+						<Grid item>
+							<Typography variant="h6" gutterBottom>
+								Time estimate
+							</Typography>
+							<Typography variant="body2" color="textSecondary">
+								The{' '}
+								<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
+									shorter
+								</Typography>{' '}
+								the username,
+								<br />
+								the{' '}
+								<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
+									longer
+								</Typography>{' '}
+								it will take to claim.
+							</Typography>
+						</Grid>
+					</Grid>
 				</Grid>
 			</Grid>
 

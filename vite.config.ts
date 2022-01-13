@@ -13,7 +13,6 @@ const getBundleVisualizerPlugin = () =>
 			template: 'treemap', // or sunburst
 			open: true,
 			gzipSize: true,
-			brotliSize: true,
 		}),
 		apply: 'build',
 		enforce: 'post',
