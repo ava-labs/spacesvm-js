@@ -39,7 +39,7 @@ export const MetaMaskSelect = () => {
 	}
 
 	return (
-		<Tooltip title={currentAddress ? 'MetaMask address' : 'Connect to MetaMask'}>
+		<Tooltip title={currentAddress ? 'Copy address' : 'Connect to MetaMask'}>
 			<Button
 				startIcon={<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />}
 				variant="outlined"

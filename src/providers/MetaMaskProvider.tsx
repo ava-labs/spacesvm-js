@@ -16,7 +16,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 		setCurrentAddress(ethereum.selectedAddress)
 
 		// Listen for changes to the connected account selections
-		return ethereum.on('accountsChanged', function (accounts) {
+		return ethereum.on('accountsChanged', (accounts: any) => {
 			setCurrentAddress(accounts[0])
 		})
 	}, [])
@@ -26,14 +26,11 @@ export const MetaMaskProvider = ({ children }: any) => {
 		setAccounts(accounts)
 	}
 
-	const selectAccount = (address: string) => setCurrentAddress(address)
-
 	return (
 		<MetaMaskContext.Provider
 			value={{
 				accounts,
 				currentAddress,
-				selectAccount,
 				connectToMetaMask,
 			}}
 		>
