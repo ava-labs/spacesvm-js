@@ -95,14 +95,14 @@ export const SpaceDetails = memo(() => {
 												},
 											}}
 											variant="caption"
-											component="p"
+											component="div"
 											display="block"
 											align="center"
 											color="textSecondary"
 										>
 											<Grid container alignItems="center" spacing={1}>
 												<Grid item>
-													<div>Expires {formatDistanceToNow(new Date(details.expiry * 1000), { addSuffix: true })}</div>
+													Expires {formatDistanceToNow(new Date(details.expiry * 1000), { addSuffix: true })}
 												</Grid>
 												<Grid item sx={{ display: 'flex' }}>
 													<IoInformationCircleOutline size={15} />
@@ -123,7 +123,7 @@ export const SpaceDetails = memo(() => {
 							sm={7}
 							sx={{
 								p: 8,
-								background: (theme) => theme.palette.background.default,
+								background: (theme) => theme.palette.background.paper,
 								borderTopLeftRadius: 24,
 								borderBottomLeftRadius: 24,
 								boxShadow: '-90px 0 200px 0 rgb(82 61 241 / 6%)',
@@ -132,7 +132,7 @@ export const SpaceDetails = memo(() => {
 							}}
 						>
 							{details ? (
-								[0, 1, 2, 3, 4, 5, 6, 7].map((el) => (
+								[0, 1, 2, 3, 4, 5, 6, 7].map((el, i) => (
 									<Card
 										key={el}
 										elevation={0}

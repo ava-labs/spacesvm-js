@@ -226,16 +226,18 @@ export const Home = memo(() => {
 										endAdornment: (
 											<InputAdornment position="end" sx={{ width: 80, height: 80 }}>
 												{verified && available && (
-													<Tooltip placement="top" title="Clear">
-														<IconButton
-															onClick={() => {
-																setVerified(false)
-																setUsername('')
-															}}
-														>
-															<IoClose size={64} color="grey" />
-														</IconButton>
-													</Tooltip>
+													<Fade in>
+														<Tooltip placement="top" title="Clear">
+															<IconButton
+																onClick={() => {
+																	setVerified(false)
+																	setUsername('')
+																}}
+															>
+																<IoClose size={64} color="grey" />
+															</IconButton>
+														</Tooltip>
+													</Fade>
 												)}
 											</InputAdornment>
 										),
