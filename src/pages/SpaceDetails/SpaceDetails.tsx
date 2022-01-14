@@ -111,7 +111,7 @@ export const SpaceDetails = memo(() => {
 										</Typography>
 									</Tooltip>
 
-									<Button sx={{ mt: 2 }} variant="outlined" color="secondary">
+									<Button disabled sx={{ mt: 2 }} variant="outlined" color="secondary">
 										Extend expiration date
 									</Button>
 								</>
@@ -162,16 +162,20 @@ export const SpaceDetails = memo(() => {
 											<Grid container spacing={1} wrap="nowrap">
 												<Grid item>
 													<Tooltip placement="top" title="Edit">
-														<IconButton>
-															<IoConstructOutline />
-														</IconButton>
+														<div>
+															<IconButton disabled>
+																<IoConstructOutline />
+															</IconButton>
+														</div>
 													</Tooltip>
 												</Grid>
 												<Grid item>
 													<Tooltip placement="top" title="Delete">
-														<IconButton color="primary" edge="end">
-															<IoTrashOutline />
-														</IconButton>
+														<div>
+															<IconButton disabled color="primary">
+																<IoTrashOutline />
+															</IconButton>
+														</div>
 													</Tooltip>
 												</Grid>
 											</Grid>

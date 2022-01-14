@@ -423,7 +423,7 @@ export const Home = memo(() => {
 									// @ts-ignore
 									component={Link}
 									sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860, display: 'block' }}
-									to={`/spaces/${username}`}
+									to={`/spaces/${username}/`}
 									gutterBottom
 									color="error"
 								>
