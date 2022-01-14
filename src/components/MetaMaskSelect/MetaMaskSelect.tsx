@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Button, Grid, keyframes, Tooltip, Typography, useTheme } from '@mui/material'
+import { Box, Button, Grid, keyframes, Tooltip, Typography, useTheme } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
-
-const obfuscateAddress = (str: string): string => {
-	const firstChars = str.substr(0, 5)
-	const lastChars = str.substr(-4)
-	return `${firstChars}...${lastChars}`
-}
+import { obfuscateAddress } from '@/utils/obfuscateAddress'
 
 const growWidth = keyframes`
 	0% {
@@ -33,7 +28,7 @@ const GrowingGrid = ({ sx, children, ...rest }: any) => (
 	<Grid
 		sx={{
 			...sx,
-			animation: `0.3s ${growWidth} ease-in-out`,
+			animation: `1s ${growWidth} ease`,
 			animationDirection: 'forwards',
 		}}
 		{...rest}
@@ -46,7 +41,7 @@ const ShrinkingGrid = ({ sx, children, ...rest }: any) => (
 	<Grid
 		sx={{
 			...sx,
-			animation: `0.3s ${shrinkWidth} ease-in-out`,
+			animation: `1s ${shrinkWidth} ease`,
 			animationDirection: 'backwards',
 			animationFillMode: 'forwards',
 		}}
@@ -59,7 +54,6 @@ const ShrinkingGrid = ({ sx, children, ...rest }: any) => (
 export const MetaMaskSelect = () => {
 	const { enqueueSnackbar } = useSnackbar()
 	const theme = useTheme()
-
 	const { currentAddress, connectToMetaMask, balance } = useMetaMask()
 	const [displayBalance, setDisplayBalance] = useState(balance)
 
@@ -96,7 +90,7 @@ export const MetaMaskSelect = () => {
 		<Grid
 			container
 			sx={{
-				backgroundColor: 'hsla(0,0%,100%,0.05)',
+				backgroundColor: (theme) => theme.palette.background.paper,
 				borderRadius: 99999,
 			}}
 		>
@@ -117,17 +111,32 @@ export const MetaMaskSelect = () => {
 				</Tooltip>
 			</Grid>
 			<AnimatedGrid item>
-				<Typography
-					noWrap
-					variant="h6"
-					align="center"
-					sx={{ height: '100%', mx: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
-				>
-					{displayBalance?.toFixed(2)}
-					<Typography component="span" color="textSecondary" sx={{ ml: 1 }}>
-						SPC
-					</Typography>
-				</Typography>
+				<Tooltip title="SPC balance">
+					<Box display="flex" alignItems="center" height="100%">
+						{displayBalance && (
+							<Typography
+								noWrap
+								variant="h6"
+								display="flex"
+								sx={{
+									mx: 2,
+									'&:hover': {
+										cursor: 'help',
+									},
+								}}
+							>
+								{displayBalance?.toFixed(2)}
+								<Typography
+									component="span"
+									color="textSecondary"
+									sx={{ ml: 1, display: 'flex', alignItems: 'center' }}
+								>
+									SPC
+								</Typography>
+							</Typography>
+						)}
+					</Box>
+				</Tooltip>
 			</AnimatedGrid>
 		</Grid>
 	)

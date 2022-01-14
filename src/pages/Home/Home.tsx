@@ -93,7 +93,7 @@ export const Home = memo(() => {
 	const navigate = useNavigate()
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
-	const [username, setUsername] = useState<string>(searchParams.get('ref') || '') // pre-fill if ?ref=something in URL
+	const [username, setUsername] = useState<string>(searchParams.get('ref')?.toLowerCase() || '') // pre-fill if ?ref=something in URL
 	const [progress, setProgress] = useState<number>(0)
 	const [verified, setVerified] = useState<boolean>(false)
 	const [available, setAvailable] = useState<boolean>(false)
@@ -191,7 +191,7 @@ export const Home = memo(() => {
 
 			<form onSubmit={handleSubmit} autoComplete="off">
 				<PageTitle align="center">Claim your space</PageTitle>
-				<PageSubtitle align="center">Needs to be unique.</PageSubtitle>
+				<PageSubtitle align="center">Needs to be unique and lowercase.</PageSubtitle>
 
 				<Grid container spacing={4} flexDirection="column" alignItems="center">
 					<Grid item>
@@ -202,7 +202,7 @@ export const Home = memo(() => {
 									value={username}
 									onChange={(e) => {
 										setVerified(false)
-										setUsername(e.target.value)
+										setUsername(e.target.value.toLowerCase())
 									}}
 									placeholder={currentText}
 									fullWidth
