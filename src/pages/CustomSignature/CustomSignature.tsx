@@ -1,8 +1,10 @@
-import { Button, Card, Grid, Link, styled, TextareaAutosize, Typography } from '@mui/material'
+import { Button, Card, Grid, styled, TextareaAutosize, Typography } from '@mui/material'
 
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
+import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { signWithMetaMask } from '@/utils/metamask'
+import { shuffleArray } from '@/utils/shuffleArray'
 
 const JsonTextArea = styled(TextareaAutosize)`
 	width: 100%;
@@ -34,6 +36,18 @@ const jsonPlaceholder = `[
 ]
 `
 
+const DEV_NAMES = shuffleArray([
+	'Patrick',
+	'Connor',
+	'other Conor',
+	'Cohan',
+	'Dhruba',
+	'Gabriel',
+	'Gyuho',
+	'Jiten',
+	'Xander',
+])
+
 export const CustomSignature = () => {
 	const [json, setJson] = useState<string>('')
 	const [signature, setSignature] = useState<string | null>(null)
@@ -61,7 +75,11 @@ export const CustomSignature = () => {
 	return (
 		<Page>
 			<PageTitle variant="h3" sx={{ mt: 3 }}>
-				Hi, Patrick!
+				Hi,{' '}
+				<TypewrittingInput waitBeforeDeleteMs={2000} strings={DEV_NAMES}>
+					{({ currentText }) => <span>{currentText}</span>}
+				</TypewrittingInput>
+				!
 			</PageTitle>
 			<Grid container sx={{ width: '100%', height: '100%', minHeight: 200 }} spacing={1}>
 				<Grid item md={5} xs={12}>
