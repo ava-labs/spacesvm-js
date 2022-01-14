@@ -21,7 +21,6 @@ import {
 import { styled } from '@mui/system'
 // @ts-ignore
 import FakeProgress from 'fake-progress'
-import { useSnackbar } from 'notistack'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { Page } from '@/components/Page'
@@ -94,7 +93,6 @@ export const Home = memo(() => {
 	const { signClaimPayload } = useMetaMask()
 	const [searchParams] = useSearchParams()
 	const navigate = useNavigate()
-	const { enqueueSnackbar } = useSnackbar()
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
 	const [username, setUsername] = useState<string>(searchParams.get('ref') || '') // pre-fill if ?ref=something in URL
