@@ -27,12 +27,10 @@ import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
-import { USERNAME_REGEX, USERNAMES } from '@/constants'
-import { FIRST_NAMES } from '@/constants/firstNames'
+import { USERNAME_REGEX, USERNAME_REGEX_QUERY, USERNAMES } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { calculateClaimCost } from '@/utils/calculateCost'
 import { isAlreadyClaimed } from '@/utils/quarkvm'
-import { shuffleArray } from '@/utils/shuffleArray'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
@@ -92,7 +90,9 @@ export const Home = memo(() => {
 	const navigate = useNavigate()
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
-	const [username, setUsername] = useState<string>(searchParams.get('ref')?.toLowerCase() || '') // pre-fill if ?ref=something in URL
+	const [username, setUsername] = useState<string>(
+		searchParams.get('ref')?.toLowerCase().replace(USERNAME_REGEX_QUERY, '') || '',
+	) // pre-fill if ?ref=something in URL
 	const [progress, setProgress] = useState<number>(0)
 	const [verified, setVerified] = useState<boolean>(false)
 	const [available, setAvailable] = useState<boolean>(false)

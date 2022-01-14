@@ -19,6 +19,7 @@ import { ClaimButton } from '../Home/Home'
 
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
+import { USERNAME_REGEX_QUERY } from '@/constants'
 import { getPrefixInfo } from '@/utils/quarkvm'
 
 export const SpaceDetails = memo(() => {
@@ -80,7 +81,7 @@ export const SpaceDetails = memo(() => {
 										'linear-gradient(60deg,rgba(239,0,143,.5),rgba(110,195,244,.5),rgba(112,56,255,.5),rgba(255,186,39,.5))',
 								}}
 							>
-								{spaceId}
+								{spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')}
 							</PageTitle>
 							{details && (
 								<>
@@ -102,7 +103,7 @@ export const SpaceDetails = memo(() => {
 												<Grid item>
 													Expires {formatDistanceToNow(new Date(details.expiry * 1000), { addSuffix: true })}
 												</Grid>
-												<Grid item sx={{ display: 'flex' }}>
+												<Grid item sx={{ display: 'flex', mt: '2px' }}>
 													<IoInformationCircleOutline size={15} />
 												</Grid>
 											</Grid>
