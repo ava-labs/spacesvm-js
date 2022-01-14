@@ -24,6 +24,8 @@ export const MetaMaskProvider = ({ children }: any) => {
 
 		// Listen for changes to the connected account selections
 		return ethereum.on('accountsChanged', (accounts: any) => {
+			console.log('---')
+			console.log(accounts)
 			setCurrentAddress(accounts[0])
 		})
 	}, [])

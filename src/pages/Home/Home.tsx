@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react'
-import { IoSearch } from 'react-icons/io5'
-import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom'
+import { IoClose, IoSearch } from 'react-icons/io5'
+import { createSearchParams, Link, useNavigate, useSearchParams } from 'react-router-dom'
 import {
 	Box,
 	Button,
@@ -12,8 +12,10 @@ import {
 	Fade,
 	Grid,
 	Grow,
+	IconButton,
 	InputAdornment,
 	TextField,
+	Tooltip,
 	Typography,
 } from '@mui/material'
 import { styled } from '@mui/system'
@@ -89,6 +91,7 @@ const USERNAMES = shuffleArray(FIRST_NAMES)
 export const Home = memo(() => {
 	const { signClaimPayload } = useMetaMask()
 	const [searchParams] = useSearchParams()
+	const navigate = useNavigate()
 	const { enqueueSnackbar } = useSnackbar()
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
@@ -99,6 +102,14 @@ export const Home = memo(() => {
 	const [costEstimate, setCostEstimate] = useState<number>()
 
 	const onVerify = async () => {
+		// setting `?ref=USERNAME` in URL to persist refresh
+		navigate({
+			pathname: '',
+			search: `?${createSearchParams({
+				ref: username,
+			})}`,
+		})
+
 		const isClaimed = await isAlreadyClaimed(username)
 
 		setVerified(true)
@@ -156,7 +167,13 @@ export const Home = memo(() => {
 		<Page>
 			<Dialog open={waitingForMetaMask} maxWidth="xs">
 				<DialogTitle>
-					<Typography variant="h5" fontFamily="DM Serif Display" align="center" sx={{ position: 'relative' }}>
+					<Typography
+						variant="h5"
+						component="p"
+						fontFamily="DM Serif Display"
+						align="center"
+						sx={{ position: 'relative' }}
+					>
 						Please sign the message in your wallet to continue.{' '}
 						<span style={{ position: 'absolute', fontSize: 42, transform: 'translateX(12px) translateY(-11px)' }}>
 							👉
@@ -204,6 +221,22 @@ export const Home = memo(() => {
 										startAdornment: (
 											<InputAdornment sx={{ marginRight: 4 }} position="start">
 												<IoSearch color="grey" />
+											</InputAdornment>
+										),
+										endAdornment: (
+											<InputAdornment position="end" sx={{ width: 80, height: 80 }}>
+												{verified && available && (
+													<Tooltip placement="top" title="Clear">
+														<IconButton
+															onClick={() => {
+																setVerified(false)
+																setUsername('')
+															}}
+														>
+															<IoClose size={64} color="grey" />
+														</IconButton>
+													</Tooltip>
+												)}
 											</InputAdornment>
 										),
 									}}
