@@ -43,10 +43,19 @@ export const getPrefixInfo = async (prefix: string) => {
 		),
 	})
 	if (!prefixData.info) return
-	return prefixData
+	return prefixData.info
 }
 
-export const isAlreadyClaimed = async (prefix: string) => !!(await getPrefixInfo(prefix))
+export const checkIsClaimed = async (prefix: string) => {
+	const response = await fetchQuark('claimed', {
+		prefix: btoa(
+			// using `encodeURIComponent` in case someone pass non Latin1 chars like `😀` since btoa doesn't support them
+			encodeURIComponent(prefix),
+		),
+	})
+	if (!response) throw 'Unable to validate prefix'
+	return response.claimed
+}
 
 // Requests for the estimated difficulty from VM.
 export const estimateDifficulty = async () => await fetchQuark('difficultyEstimate')

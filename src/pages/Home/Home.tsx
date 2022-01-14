@@ -21,7 +21,6 @@ import {
 import { styled } from '@mui/system'
 // @ts-ignore
 import FakeProgress from 'fake-progress'
-import { useSnackbar } from 'notistack'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { Page } from '@/components/Page'
@@ -31,7 +30,7 @@ import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
 import { FIRST_NAMES } from '@/constants/firstNames'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
-import { isAlreadyClaimed } from '@/utils/quarkvm'
+import { checkIsClaimed } from '@/utils/quarkvm'
 import { shuffleArray } from '@/utils/shuffleArray'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
@@ -92,7 +91,6 @@ export const Home = memo(() => {
 	const { signClaimPayload } = useMetaMask()
 	const [searchParams] = useSearchParams()
 	const navigate = useNavigate()
-	const { enqueueSnackbar } = useSnackbar()
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
 	const [username, setUsername] = useState<string>(searchParams.get('ref') || '') // pre-fill if ?ref=something in URL
@@ -110,7 +108,7 @@ export const Home = memo(() => {
 			})}`,
 		})
 
-		const isClaimed = await isAlreadyClaimed(username)
+		const isClaimed = await checkIsClaimed(username)
 
 		setVerified(true)
 		setAvailable(!isClaimed)
