@@ -161,7 +161,7 @@ export const SpaceDetails = memo(() => {
 									<ClaimButton
 										//@ts-ignore
 										component={Link}
-										to="/"
+										to={`/?ref=${spaceId}`}
 										fullWidth
 										variant="contained"
 										size="large"

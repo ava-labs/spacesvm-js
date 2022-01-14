@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react'
 import { IoSearch } from 'react-icons/io5'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom'
 import {
 	Box,
 	Button,
@@ -88,10 +88,11 @@ const USERNAMES = shuffleArray(FIRST_NAMES)
 
 export const Home = memo(() => {
 	const { signClaimPayload } = useMetaMask()
+	const [searchParams] = useSearchParams()
 	const { enqueueSnackbar } = useSnackbar()
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
-	const [username, setUsername] = useState<string>('')
+	const [username, setUsername] = useState<string>(searchParams.get('ref') || '') // pre-fill if ?ref=something in URL
 	const [progress, setProgress] = useState<number>(0)
 	const [verified, setVerified] = useState<boolean>(false)
 	const [available, setAvailable] = useState<boolean>(false)
