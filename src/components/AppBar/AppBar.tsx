@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { AppBar as MuiAppBar, Box, Container, Grid, Toolbar, Typography } from '@mui/material'
 
+import { MetaMaskSelect } from '../MetaMaskSelect'
 import { ThemeToggle } from '../ThemeToggle'
-import { MetaMaskSelect } from './MetaMaskSelect'
 
 import Logo from '@/assets/favicon.png'
 import { APP_NAME } from '@/constants'
