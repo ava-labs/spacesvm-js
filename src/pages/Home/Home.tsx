@@ -241,7 +241,7 @@ export const Home = memo(() => {
 										),
 									}}
 									inputProps={{
-										maxlength: 255,
+										maxLength: 255,
 										spellCheck: 'false',
 									}}
 								/>
