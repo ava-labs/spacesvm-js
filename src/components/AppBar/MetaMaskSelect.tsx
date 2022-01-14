@@ -1,4 +1,5 @@
-import { Button, Fade, Grid, Tooltip, Typography, useTheme } from '@mui/material'
+import { useEffect, useState } from 'react'
+import { Button, Grid, keyframes, Tooltip, Typography, useTheme } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
@@ -10,11 +11,69 @@ const obfuscateAddress = (str: string): string => {
 	return `${firstChars}...${lastChars}`
 }
 
+const growWidth = keyframes`
+	0% {
+		max-width: 0;
+		padding-left: 0;
+		padding-right: 0;
+	}
+	100% {
+		max-width: 200px;
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+`
+
+const shrinkWidth = keyframes`
+	0% {
+		max-width: 200px;
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+	100% {
+		max-width: 0;
+		padding-left: 0;
+		padding-right: 0;
+	}
+`
+
+const GrowingGrid = ({ sx, children, ...rest }: any) => (
+	<Grid
+		sx={{
+			...sx,
+			animation: `0.5s ${growWidth} ease-in-out`,
+			animationDirection: 'forwards',
+		}}
+		{...rest}
+	>
+		{children}
+	</Grid>
+)
+
+const ShrinkingGrid = ({ sx, children, ...rest }: any) => (
+	<Grid
+		sx={{
+			...sx,
+			animation: `0.5s ${shrinkWidth} ease-in-out`,
+			animationDirection: 'backwards',
+			animationFillMode: 'forwards',
+		}}
+		{...rest}
+	>
+		{children}
+	</Grid>
+)
+
 export const MetaMaskSelect = () => {
 	const { enqueueSnackbar } = useSnackbar()
 	const theme = useTheme()
 
 	const { currentAddress, connectToMetaMask, balance } = useMetaMask()
+	const [displayBalance, setDisplayBalance] = useState(balance)
+
+	useEffect(() => {
+		if (balance !== null) setDisplayBalance(balance)
+	}, [balance, setDisplayBalance])
 
 	const handleMetaMaskClick = () => {
 		if (!currentAddress) {
@@ -38,6 +97,8 @@ export const MetaMaskSelect = () => {
 			},
 		)
 	}
+
+	const AnimatedGrid = balance ? GrowingGrid : ShrinkingGrid
 
 	return (
 		<Grid
@@ -63,29 +124,21 @@ export const MetaMaskSelect = () => {
 					</Button>
 				</Tooltip>
 			</Grid>
-			<Grid
-				item
-				sx={{
-					transitionProperty: 'width, padding',
-					transitionDuration: '0.2s',
-					mx: balance ? 2 : 0,
-					width: balance ? 120 : 0,
-				}}
-			>
-				<Fade in={!!balance}>
+			<AnimatedGrid item sx={{ px: 1 }}>
+				{displayBalance && (
 					<Typography
 						noWrap
 						variant="h6"
 						align="center"
 						style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
 					>
-						{balance?.toFixed(2)}
+						{displayBalance?.toFixed(2)}
 						<Typography component="span" color="textSecondary" sx={{ ml: 1 }}>
 							SPC
 						</Typography>
 					</Typography>
-				</Fade>
-			</Grid>
+				)}
+			</AnimatedGrid>
 		</Grid>
 	)
 }
