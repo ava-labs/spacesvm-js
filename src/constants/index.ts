@@ -1,3 +1,7 @@
+import { FIRST_NAMES } from './firstNames'
+
+import { shuffleArray } from '@/utils/shuffleArray'
+
 // localStorage keys
 export const THEME_LOCAL_STORAGE_KEY = 'spaces-theme'
 
@@ -11,3 +15,9 @@ export const APP_NAME = 'Spaces'
 export const ONE_MINUTES_IN_MS = 60000
 export const TEN_MINUTES_IN_MS = 600000
 export const PRICE_PER_SPC = 0.05 // $0.05 per SPC, bogus for now
+
+// regexes
+export const USERNAME_REGEX = /^[a-zA-Z0-9.]{1,256}$/
+
+// variables
+export const USERNAMES = shuffleArray(FIRST_NAMES)

@@ -27,6 +27,7 @@ import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
+import { USERNAME_REGEX, USERNAMES } from '@/constants'
 import { FIRST_NAMES } from '@/constants/firstNames'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { calculateClaimCost } from '@/utils/calculateCost'
@@ -84,8 +85,6 @@ export const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 		transition: 'clip-path 1s ease',
 	},
 }))
-
-const USERNAMES = shuffleArray(FIRST_NAMES)
 
 export const Home = memo(() => {
 	const { signClaimPayload } = useMetaMask()
@@ -181,7 +180,7 @@ export const Home = memo(() => {
 				</DialogTitle>
 				<DialogContent>
 					<Typography align="center" color="textSecondary">
-						Verify that you’re the owner of this Ethereum address and any associated Spaces.
+						Verify that you're the owner of this Ethereum address and any associated Spaces.
 					</Typography>
 					<Box sx={{ mt: 4 }} display="flex" justifyContent="center">
 						<CircularProgress color="secondary" disableShrink />
@@ -201,8 +200,10 @@ export const Home = memo(() => {
 									disabled={showWhileYouWait || (available && verified)}
 									value={username}
 									onChange={(e) => {
-										setVerified(false)
-										setUsername(e.target.value.toLowerCase())
+										if (e.target.value === '' || USERNAME_REGEX.test(e.target.value)) {
+											setVerified(false)
+											setUsername(e.target.value.toLowerCase())
+										}
 									}}
 									placeholder={currentText}
 									fullWidth
