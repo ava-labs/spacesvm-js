@@ -63,7 +63,7 @@ export const CustomSignature = () => {
 			<PageTitle variant="h3" sx={{ mt: 3 }}>
 				Hi, Patrick!
 			</PageTitle>
-			<Grid container sx={{ width: '100%', height: 700 }} spacing={1}>
+			<Grid container sx={{ width: '100%', height: '100%', minHeight: 200 }} spacing={1}>
 				<Grid item md={5} xs={12}>
 					<Grid container justifyContent="space-between" alignItems="end">
 						<Grid item>
