@@ -29,7 +29,6 @@ export const SpaceDetails = memo(() => {
 
 	const onVerify = useCallback(async () => {
 		const infos = await getPrefixInfo(spaceId || '')
-		console.log(infos)
 
 		setDetails(infos)
 		setLoading(false)
@@ -131,7 +130,7 @@ export const SpaceDetails = memo(() => {
 							}}
 						>
 							{details ? (
-								[0, 1, 2, 3, 4, 5, 6, 7].map((el, i) => (
+								[0, 1, 2, 3, 4, 5, 6, 7].map((el) => (
 									<Card
 										key={el}
 										elevation={0}
