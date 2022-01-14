@@ -10,6 +10,9 @@ const JsonTextArea = styled(TextareaAutosize)`
 	min-width: 100%;
 	border: 0;
 	outline: none;
+	max-height: 100%;
+	overflow-y: scroll !important;
+	resize: none;
 `
 
 const jsonPlaceholder = `[
@@ -60,7 +63,7 @@ export const CustomSignature = () => {
 			<PageTitle variant="h3" sx={{ mt: 3 }}>
 				Hi, Patrick!
 			</PageTitle>
-			<Grid container sx={{ width: '100%', height: 800 }} spacing={1}>
+			<Grid container sx={{ width: '100%', height: 700 }} spacing={1}>
 				<Grid item md={5} xs={12}>
 					<Grid container justifyContent="space-between" alignItems="end">
 						<Grid item>
@@ -72,14 +75,12 @@ export const CustomSignature = () => {
 							</Button>
 						</Grid>
 					</Grid>
-					<Card sx={{ p: 2, height: '100%' }}>
-						<JsonTextArea
-							onChange={(e) => setJson(e.target.value)}
-							value={json}
-							placeholder={jsonPlaceholder}
-							sx={{ borderRadius: 2, padding: 2 }}
-						/>
-					</Card>
+					<JsonTextArea
+						onChange={(e) => setJson(e.target.value)}
+						value={json}
+						placeholder={jsonPlaceholder}
+						sx={{ borderRadius: 2, padding: 2, height: '100% !important' }}
+					/>
 				</Grid>
 				<Grid item md={2} xs={12}>
 					<Button
