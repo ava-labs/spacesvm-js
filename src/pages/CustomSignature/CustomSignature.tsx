@@ -40,7 +40,7 @@ export const CustomSignature = () => {
 			const parsedJson = JSON.parse(json)
 			const signature = await signWithMetaMask(parsedJson)
 			if (!signature) {
-				setError('Unable to sign payload.')
+				setError('Must sign in metamask!')
 				return
 			}
 
@@ -63,8 +63,8 @@ export const CustomSignature = () => {
 					<Typography variant="h6">Input:</Typography>
 					<JsonTextArea onChange={(e) => setJson(e.target.value)} placeholder={jsonPlaceholder} />
 				</Grid>
-				<Grid item md={2} xs={12} justifyContent="center" alignItems="center">
-					<Button variant="contained" fullWidth sx={{ mt: 4 }} onClick={signJson}>
+				<Grid item md={2} xs={12}>
+					<Button variant="contained" fullWidth sx={{ mt: 16 }} onClick={signJson}>
 						<Typography variant="button" fontSize={20} sx={{ verticalAlign: 'middle' }}>
 							Sign
 							<span style={{ marginLeft: 8 }}>➡️</span>
