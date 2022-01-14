@@ -205,7 +205,7 @@ export const Home = memo(() => {
 											setUsername(e.target.value.toLowerCase())
 										}
 									}}
-									placeholder={currentText}
+									placeholder={currentText.toLowerCase()}
 									fullWidth
 									autoFocus
 									InputProps={{
