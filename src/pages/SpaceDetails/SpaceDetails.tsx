@@ -31,6 +31,7 @@ export const SpaceDetails = memo(() => {
 	const onVerify = useCallback(async () => {
 		const infos = await getPrefixInfo(spaceId || '')
 
+		console.log(infos)
 		setDetails(infos)
 		setLoading(false)
 	}, [spaceId])
