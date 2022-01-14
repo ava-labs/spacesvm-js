@@ -78,13 +78,15 @@ export const CustomSignature = () => {
 				</Grid>
 				<Grid item md={5} xs={12}>
 					<Typography variant="h6">Signature:</Typography>
-					<Card sx={{ height: 800, width: '100%', p: 1, maxWidth: 900 }}>
+					<Card sx={{ height: 800, width: '100%', p: 2, maxWidth: 900 }}>
 						{error ? (
 							<Typography color="red" fontFamily="monospace">
 								{error}
 							</Typography>
 						) : (
-							<Typography fontFamily="monospace">{signature}</Typography>
+							<Typography fontFamily="monospace" sx={{ overflowWrap: 'anywhere' }}>
+								{signature}
+							</Typography>
 						)}
 					</Card>
 				</Grid>
