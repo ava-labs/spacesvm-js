@@ -14,26 +14,18 @@ const obfuscateAddress = (str: string): string => {
 const growWidth = keyframes`
 	0% {
 		max-width: 0;
-		padding-left: 0;
-		padding-right: 0;
 	}
 	100% {
 		max-width: 200px;
-		padding-left: 8px;
-		padding-right: 8px;
 	}
 `
 
 const shrinkWidth = keyframes`
 	0% {
 		max-width: 200px;
-		padding-left: 8px;
-		padding-right: 8px;
 	}
 	100% {
 		max-width: 0;
-		padding-left: 0;
-		padding-right: 0;
 	}
 `
 
@@ -124,20 +116,18 @@ export const MetaMaskSelect = () => {
 					</Button>
 				</Tooltip>
 			</Grid>
-			<AnimatedGrid item sx={{ px: 1 }}>
-				{displayBalance && (
-					<Typography
-						noWrap
-						variant="h6"
-						align="center"
-						style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
-					>
-						{displayBalance?.toFixed(2)}
-						<Typography component="span" color="textSecondary" sx={{ ml: 1 }}>
-							SPC
-						</Typography>
+			<AnimatedGrid item>
+				<Typography
+					noWrap
+					variant="h6"
+					align="center"
+					sx={{ height: '100%', mx: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
+				>
+					{displayBalance?.toFixed(2)}
+					<Typography component="span" color="textSecondary" sx={{ ml: 1 }}>
+						SPC
 					</Typography>
-				)}
+				</Typography>
 			</AnimatedGrid>
 		</Grid>
 	)
