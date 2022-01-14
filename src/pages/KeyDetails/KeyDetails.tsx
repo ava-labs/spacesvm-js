@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { Typography, useTheme } from '@mui/material'
 
 import { Page } from '@/components/Page'
@@ -8,15 +8,22 @@ export const KeyDetails = () => {
 	const { spaceId, key } = useParams()
 	const theme = useTheme()
 	const [value, setValue] = useState<string | null>(null)
+	const [isInvalidPage, setIsInvalidPage] = useState<boolean>(false)
 
 	useEffect(() => {
 		const getValue = async () => {
 			if (!spaceId || !key) return
 			const value = await getQuarkValue(spaceId, key)
+			if (value === undefined) {
+				setIsInvalidPage(true)
+				return
+			}
 			setValue(value)
 		}
 		getValue()
 	}, [spaceId, key])
+
+	if (isInvalidPage) return <Navigate replace to="/404" />
 
 	return (
 		<Page>

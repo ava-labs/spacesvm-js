@@ -27,6 +27,7 @@ export const pingQuark = async () => fetchQuark('ping')
 
 export const getQuarkValue = async (prefix: string, key: string) => {
 	const response = await fetchQuark('resolve', { path: `${prefix}/${key}` })
+	if (!response?.exists) return
 	return atob(response?.value)
 }
 
