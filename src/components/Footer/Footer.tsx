@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { IoLogoGithub } from 'react-icons/io5'
 import { Box, Divider, Grid, Link, Typography } from '@mui/material'
 

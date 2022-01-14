@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { Box, Typography } from '@mui/material'
 
 export const PageSubtitle = memo(({ children, ...rest }: any) => (

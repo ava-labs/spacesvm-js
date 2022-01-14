@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import isEqual from 'lodash/isEqual'
 
 import { useEventListener } from './useEventListener'

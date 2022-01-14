@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { AppBar as MuiAppBar, Box, Container, Grid, Toolbar, Typography } from '@mui/material'
 

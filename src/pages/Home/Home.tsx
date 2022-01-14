@@ -1,4 +1,3 @@
-import { memo, useEffect, useState } from 'react'
 import { IoClose, IoSearch } from 'react-icons/io5'
 import { createSearchParams, Link, useNavigate, useSearchParams } from 'react-router-dom'
 import {
