@@ -68,7 +68,7 @@ export const MetaMaskSelect = () => {
 				sx={{
 					transitionProperty: 'width, padding',
 					transitionDuration: '0.2s',
-					px: balance ? 1 : 0,
+					mx: balance ? 2 : 0,
 					width: balance ? 120 : 0,
 				}}
 			>
@@ -80,7 +80,7 @@ export const MetaMaskSelect = () => {
 						style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
 					>
 						{balance?.toFixed(2)}
-						<Typography component="span" sx={{ ml: 1 }}>
+						<Typography component="span" color="textSecondary" sx={{ ml: 1 }}>
 							SPC
 						</Typography>
 					</Typography>
