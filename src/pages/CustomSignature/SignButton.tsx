@@ -6,7 +6,6 @@ export const SignButton = styled(Button)(({ progress = 0 }: any) => ({
 	backgroundImage: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
 	fontWeight: 900,
 	fontSize: 24,
-	position: 'relative',
 	boxShadow: '0 0 40px rgb(231 2 86 / 60%)',
 	height: 50,
 	'&:hover': {

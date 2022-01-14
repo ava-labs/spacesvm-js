@@ -1,6 +1,6 @@
 import { API_DOMAIN } from '@/constants'
 
-const fetchQuark = async (method: string, params = {}) => {
+export const fetchQuark = async (method: string, params = {}) => {
 	const response = await fetch(`${API_DOMAIN}/public`, {
 		headers: {
 			'Content-Type': 'application/json',
