@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import summary from 'rollup-plugin-summary'
 import bundleVisualizer from 'rollup-plugin-visualizer'
+import AutoImport from 'unplugin-auto-import/vite'
 import { defineConfig, Plugin } from 'vite'
 
 import { dependencies } from './package.json'
@@ -36,6 +37,24 @@ const renderChunks = (deps: Record<string, string>) => {
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [
+		AutoImport({
+			imports: [
+				'react',
+				{
+					react: [
+						// named imports
+						'memo',
+						'createContext',
+					],
+				},
+			],
+			dts: './src/auto-imports.d.ts',
+			eslintrc: {
+				enabled: true, // Default `false`
+				filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
+				globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+			},
+		}),
 		react(),
 		svgr(),
 		// @ts-ignore

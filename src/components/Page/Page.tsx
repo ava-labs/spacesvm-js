@@ -1,4 +1,4 @@
-import { memo, PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 import { Box, Container, Fade } from '@mui/material'
 import { useDocumentTitle } from '@react-hookz/web'
 

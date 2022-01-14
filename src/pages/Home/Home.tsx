@@ -1,4 +1,3 @@
-import { memo, useEffect, useState } from 'react'
 import { IoClose, IoSearch } from 'react-icons/io5'
 import { createSearchParams, Link, useNavigate, useSearchParams } from 'react-router-dom'
 import {
@@ -30,7 +29,8 @@ import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
 import { FIRST_NAMES } from '@/constants/firstNames'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
-import { checkIsClaimed } from '@/utils/quarkvm'
+import { calculateClaimCost } from '@/utils/calculateCost'
+import { isAlreadyClaimed } from '@/utils/quarkvm'
 import { shuffleArray } from '@/utils/shuffleArray'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
@@ -108,7 +108,7 @@ export const Home = memo(() => {
 			})}`,
 		})
 
-		const isClaimed = await checkIsClaimed(username)
+		const isClaimed = await isAlreadyClaimed(username)
 
 		setVerified(true)
 		setAvailable(!isClaimed)
@@ -117,8 +117,9 @@ export const Home = memo(() => {
 	}
 
 	useEffect(() => {
-		// bogus formula for now
-		setCostEstimate(username.length * 9000)
+		if (username.length > 0) {
+			setCostEstimate(calculateClaimCost(username))
+		}
 	}, [username])
 
 	const onClaim = async () => {
@@ -224,21 +225,24 @@ export const Home = memo(() => {
 										endAdornment: (
 											<InputAdornment position="end" sx={{ width: 80, height: 80 }}>
 												{verified && available && (
-													<Tooltip placement="top" title="Clear">
-														<IconButton
-															onClick={() => {
-																setVerified(false)
-																setUsername('')
-															}}
-														>
-															<IoClose size={64} color="grey" />
-														</IconButton>
-													</Tooltip>
+													<Fade in>
+														<Tooltip placement="top" title="Clear">
+															<IconButton
+																onClick={() => {
+																	setVerified(false)
+																	setUsername('')
+																}}
+															>
+																<IoClose size={64} color="grey" />
+															</IconButton>
+														</Tooltip>
+													</Fade>
 												)}
 											</InputAdornment>
 										),
 									}}
 									inputProps={{
+										maxLength: 255,
 										spellCheck: 'false',
 									}}
 								/>
@@ -367,12 +371,12 @@ export const Home = memo(() => {
 										{costEstimate ? (
 											<>
 												{new Intl.NumberFormat('en-US').format(costEstimate)}
-												<Typography color="textSecondary" variant="caption" component="p">
+												{/*<Typography color="textSecondary" variant="caption" component="p">
 													USD{' '}
 													{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
-														.format(costEstimate || 0)
+														.format(costEstimate * PRICE_PER_SPC || 0)
 														.slice(0, -3)}
-												</Typography>
+										</Typography>*/}
 											</>
 										) : (
 											<span style={{ position: 'relative', top: -1 }}>💰</span>

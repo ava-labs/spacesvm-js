@@ -1,4 +1,3 @@
-import React, { useContext, useEffect, useState } from 'react'
 import { IoDownloadOutline } from 'react-icons/io5'
 import MetaMaskOnboarding from '@metamask/onboarding'
 import { Button } from '@mui/material'
@@ -10,7 +9,7 @@ import { getAddressBalance } from '@/utils/quarkvm'
 
 const ethereum = window.ethereum
 
-const MetaMaskContext = React.createContext({} as any)
+const MetaMaskContext = createContext({} as any)
 
 const onboarding = new MetaMaskOnboarding()
 

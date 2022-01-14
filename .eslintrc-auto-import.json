@@ -1,0 +1,13 @@
+{
+  "globals": {
+    "createContext": true,
+    "memo": true,
+    "useCallback": true,
+    "useContext": true,
+    "useEffect": true,
+    "useMemo": true,
+    "useReducer": true,
+    "useRef": true,
+    "useState": true
+  }
+}

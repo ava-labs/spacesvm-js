@@ -1,5 +1,4 @@
-import { memo, useCallback, useEffect, useState } from 'react'
-import { IoConstructOutline, IoTrashOutline } from 'react-icons/io5'
+import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
 import { Link, useParams } from 'react-router-dom'
 import {
 	Avatar,
@@ -14,24 +13,26 @@ import {
 	Typography,
 	useTheme,
 } from '@mui/material'
+import { formatDistanceToNow } from 'date-fns'
 
 import { ClaimButton } from '../Home/Home'
 
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
-import { checkIsClaimed } from '@/utils/quarkvm'
+import { getPrefixInfo } from '@/utils/quarkvm'
 
 export const SpaceDetails = memo(() => {
-	const [isClaimed, setIsClaimed] = useState<boolean>(false)
+	const [details, setDetails] = useState<any>()
 	const [loading, setLoading] = useState<boolean>(true)
 	const { spaceId } = useParams()
 	const theme = useTheme()
 
 	const onVerify = useCallback(async () => {
-		const isClaimed = await checkIsClaimed(spaceId || '')
+		const infos = await getPrefixInfo(spaceId || '')
+		console.log(infos)
 
+		setDetails(infos)
 		setLoading(false)
-		setIsClaimed(isClaimed)
 	}, [spaceId])
 
 	useEffect(() => {
@@ -68,6 +69,7 @@ export const SpaceDetails = memo(() => {
 								variant="h1"
 								sx={{
 									mb: 0,
+									lineHeight: 1,
 									wordBreak: 'break-all',
 									backgroundSize: '400% 100%',
 									backgroundClip: 'text',
@@ -81,12 +83,34 @@ export const SpaceDetails = memo(() => {
 							>
 								{spaceId}
 							</PageTitle>
-							{isClaimed && (
+							{details && (
 								<>
-									<Typography variant="caption" component="p" align="center" color="textSecondary">
-										Expires on: 21/12/2034
-									</Typography>
-									<Button sx={{ mt: 4 }} variant="outlined" color="secondary">
+									<Tooltip title={new Date(details.expiry * 1000).toLocaleString()} placement="right">
+										<Typography
+											sx={{
+												py: 1,
+												'&:hover': {
+													cursor: 'help',
+												},
+											}}
+											variant="caption"
+											component="div"
+											display="block"
+											align="center"
+											color="textSecondary"
+										>
+											<Grid container alignItems="center" spacing={1}>
+												<Grid item>
+													Expires {formatDistanceToNow(new Date(details.expiry * 1000), { addSuffix: true })}
+												</Grid>
+												<Grid item sx={{ display: 'flex' }}>
+													<IoInformationCircleOutline size={15} />
+												</Grid>
+											</Grid>
+										</Typography>
+									</Tooltip>
+
+									<Button sx={{ mt: 2 }} variant="outlined" color="secondary">
 										Extend expiration date
 									</Button>
 								</>
@@ -98,7 +122,7 @@ export const SpaceDetails = memo(() => {
 							sm={7}
 							sx={{
 								p: 8,
-								background: (theme) => theme.palette.background.default,
+								background: (theme) => theme.palette.background.paper,
 								borderTopLeftRadius: 24,
 								borderBottomLeftRadius: 24,
 								boxShadow: '-90px 0 200px 0 rgb(82 61 241 / 6%)',
@@ -106,8 +130,8 @@ export const SpaceDetails = memo(() => {
 								height: 'calc(100vh - 64px)',
 							}}
 						>
-							{isClaimed ? (
-								[0, 1, 2, 3, 4, 5, 6, 7].map((el) => (
+							{details ? (
+								[0, 1, 2, 3, 4, 5, 6, 7].map((el, i) => (
 									<Card
 										key={el}
 										elevation={0}

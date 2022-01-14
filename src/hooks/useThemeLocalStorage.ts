@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import { THEME_LOCAL_STORAGE_KEY } from '@/constants'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 

@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { CssBaseline, Grow, ThemeProvider } from '@mui/material'
 import { SnackbarProvider } from 'notistack'
