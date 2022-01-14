@@ -64,7 +64,12 @@ export const CustomSignature = () => {
 					<JsonTextArea onChange={(e) => setJson(e.target.value)} placeholder={jsonPlaceholder} />
 				</Grid>
 				<Grid item md={2} xs={12}>
-					<Button variant="contained" fullWidth sx={{ mt: 16 }} onClick={signJson}>
+					<Button
+						variant="contained"
+						fullWidth
+						onClick={signJson}
+						sx={{ mt: 16, background: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)' }}
+					>
 						<Typography variant="button" fontSize={20} sx={{ verticalAlign: 'middle' }}>
 							Sign
 							<span style={{ marginLeft: 8 }}>➡️</span>
