@@ -1,4 +1,5 @@
-import { Link, Typography, useTheme } from '@mui/material'
+import { Link } from 'react-router-dom'
+import { Link as MuiLink, Typography, useTheme } from '@mui/material'
 import { Box } from '@mui/system'
 
 import { Page } from '@/components/Page'
@@ -18,8 +19,8 @@ export const Page404 = () => {
 					color="textSecondary"
 					sx={{
 						fontSize: '12rem',
-						fontWeight: 800,
-						letterSpacing: 8,
+						fontWeight: 900,
+						letterSpacing: 32,
 						textAlign: 'center',
 						fontFamily: 'DM Serif Display',
 					}}
@@ -47,11 +48,16 @@ export const Page404 = () => {
 					</Typography>
 				</Typography>
 
-				<Typography variant="caption" component="div" sx={{ textAlign: 'center', mt: 4 }}>
+				<Typography gutterBottom variant="caption" component="div" sx={{ textAlign: 'center', mt: 4 }}>
 					Looks like something went wrong...
 				</Typography>
-				<Typography variant="caption" component="div" sx={{ textAlign: 'center' }}>
-					<Link href="/">Head on back to safe territory!</Link>
+				<Typography variant="body1" component="div" sx={{ textAlign: 'center' }} color="inherit">
+					<MuiLink // @ts-ignore
+						component={Link}
+						to="/"
+					>
+						Head on back to safe territory!
+					</MuiLink>
 				</Typography>
 			</Box>
 		</Page>
