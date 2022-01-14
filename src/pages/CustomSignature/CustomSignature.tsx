@@ -7,9 +7,9 @@ import {
 	Fade,
 	Grid,
 	Slide,
-	Stepper,
 	styled,
 	TextareaAutosize,
+	Tooltip,
 	Typography,
 } from '@mui/material'
 import { Box } from '@mui/system'
@@ -21,9 +21,8 @@ import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
-import { API_DOMAIN } from '@/constants'
 import { signWithMetaMask } from '@/utils/metamask'
-import { fetchQuark, getPrefixInfo } from '@/utils/quarkvm'
+import { getLatestBlockID, getPrefixInfo } from '@/utils/quarkvm'
 import { shuffleArray } from '@/utils/shuffleArray'
 
 const JsonTextArea = styled(TextareaAutosize)`
@@ -53,8 +52,7 @@ const jsonPlaceholder = `[
     "name": "Type",
     "value": "claim"
   }
-]
-`
+]`
 
 const DEV_NAMES = shuffleArray([
 	'Patrick',
@@ -132,16 +130,37 @@ export const CustomSignature = () => {
 		}
 	}
 
+	const setSampleJson = async () => {
+		try {
+			const latestBlockId = await getLatestBlockID()
+			const sampleData = JSON.parse(jsonPlaceholder)
+			const sampleDataWithLatestBlock = sampleData.map((datum: any) =>
+				datum.name === 'BlockID'
+					? {
+							...datum,
+							value: latestBlockId,
+					  }
+					: datum,
+			)
+			const sampleJson = JSON.stringify(sampleDataWithLatestBlock, null, 2)
+			setJson(sampleJson)
+		} catch (err) {
+			// eslint-disable-next-line no-console
+			console.error(err)
+			setJson(jsonPlaceholder)
+		}
+	}
+
 	return (
 		<Page>
-			<PageTitle variant="h3" sx={{ mt: 3 }}>
+			<PageTitle variant="h3" gutterBottom sx={{ mt: 3 }}>
 				Hi,{' '}
 				<TypewrittingInput waitBeforeDeleteMs={2000} strings={DEV_NAMES}>
 					{({ currentText }) => <span>{currentText}</span>}
 				</TypewrittingInput>
 				!
 			</PageTitle>
-			<Grid container sx={{ width: '100%', height: '100%', minHeight: 200 }} spacing={1}>
+			<Grid container sx={{ width: '100%', height: '100%', minHeight: 200 }} spacing={4}>
 				<Grid item md={4} xs={12} sx={{ position: 'relative' }}>
 					<SignButton
 						variant="contained"
@@ -162,23 +181,29 @@ export const CustomSignature = () => {
 					</SignButton>
 					<Grid container justifyContent="space-between" alignItems="end">
 						<Grid item>
-							<Typography variant="h6">Input:</Typography>
+							<Typography variant="h6" gutterBottom>
+								Input:
+							</Typography>
 						</Grid>
 						<Grid item>
-							<Button variant="text" sx={{ py: 0 }} onClick={() => setJson(jsonPlaceholder)}>
-								Fill with sample.
-							</Button>
+							<Tooltip title="We'll automagically include the latest Block ID ✨" placement="top">
+								<Button variant="text" sx={{ py: 0, mb: 1 }} onClick={setSampleJson}>
+									Fill with sample.
+								</Button>
+							</Tooltip>
 						</Grid>
 					</Grid>
 					<JsonTextArea
 						onChange={(e) => setJson(e.target.value)}
 						value={json}
 						placeholder={jsonPlaceholder}
-						sx={{ borderRadius: 2, padding: 2, height: '100% !important' }}
+						sx={{ borderRadius: 4, padding: 2, height: '100% !important' }}
 					/>
 				</Grid>
 				<Grid item md={8} xs={12}>
-					<Typography variant="h6">Signature:</Typography>
+					<Typography variant="h6" gutterBottom>
+						Signature:
+					</Typography>
 					<Card sx={{ height: '100%', width: '100%', p: 2, maxWidth: 900, overflow: 'auto' }}>
 						<Fade mountOnEnter in={!!(signature?.length || signatureError?.length)}>
 							{signatureError ? (
