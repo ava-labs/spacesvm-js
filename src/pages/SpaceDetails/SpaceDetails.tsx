@@ -56,6 +56,7 @@ export const SpaceDetails = memo(() => {
 									xs: 'unset',
 									sm: 'calc(100vh - 128px)',
 								},
+								p: 2,
 								display: 'flex',
 								flexDirection: 'column',
 								justifyContent: 'center',
@@ -122,7 +123,10 @@ export const SpaceDetails = memo(() => {
 							xs={12}
 							sm={7}
 							sx={{
-								p: 8,
+								p: {
+									xs: 2,
+									sm: 8,
+								},
 								background: (theme) => theme.palette.background.paper,
 								borderTopLeftRadius: 24,
 								borderBottomLeftRadius: 24,
