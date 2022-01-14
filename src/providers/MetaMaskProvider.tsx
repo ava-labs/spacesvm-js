@@ -6,6 +6,7 @@ import { useSnackbar } from 'notistack'
 
 import { metaMaskExists, mmRequestAccounts, signWithMetaMask } from '@/utils/metamask'
 import { getClaimPayload } from '@/utils/quarkPayloads'
+import { getAddressBalance } from '@/utils/quarkvm'
 
 const ethereum = window.ethereum
 
@@ -19,13 +20,9 @@ export const MetaMaskProvider = ({ children }: any) => {
 
 	useEffect(() => {
 		if (!metaMaskExists) return
-
 		setCurrentAddress(ethereum.selectedAddress)
-
 		// Listen for changes to the connected account selections
 		return ethereum.on('accountsChanged', (accounts: any) => {
-			console.log('---')
-			console.log(accounts)
 			setCurrentAddress(accounts[0])
 		})
 	}, [])
@@ -63,10 +60,24 @@ export const MetaMaskProvider = ({ children }: any) => {
 		return signature
 	}
 
+	const [balance, setBalance] = useState<number | null>(null)
+	useEffect(() => {
+		if (!currentAddress) {
+			setBalance(null)
+			return
+		}
+		const getBalance = async () => {
+			const balance = await getAddressBalance(currentAddress)
+			setBalance(balance)
+		}
+		getBalance()
+	}, [currentAddress])
+
 	return (
 		<MetaMaskContext.Provider
 			value={{
 				currentAddress,
+				balance,
 				connectToMetaMask,
 				onboardToMetaMask,
 				signClaimPayload,

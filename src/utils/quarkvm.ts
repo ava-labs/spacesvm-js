@@ -90,3 +90,11 @@ export const getIsTxConfirmed = async (txId: string) => {
 // 	const message = await getLifelinePayload(prefix)
 // 	return await fetchQuark('issueTxHR', { signature, message: atob(message) })
 // }
+
+export const getAddressBalance = async (address: string) => Math.random() * 50 // some random balance for now
+
+// export const getAddressBalance = async (address: string) => {
+// 	const response = await fetchQuark('balance', { address })
+// 	if (!response) throw 'Invalid address'
+// 	return response.balance
+// }
