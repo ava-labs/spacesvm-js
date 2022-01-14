@@ -16,13 +16,13 @@ const growWidth = keyframes`
 		max-width: 0;
 	}
 	100% {
-		max-width: 200px;
+		max-width: 300px;
 	}
 `
 
 const shrinkWidth = keyframes`
 	0% {
-		max-width: 200px;
+		max-width: 300px;
 	}
 	100% {
 		max-width: 0;
@@ -33,7 +33,7 @@ const GrowingGrid = ({ sx, children, ...rest }: any) => (
 	<Grid
 		sx={{
 			...sx,
-			animation: `0.5s ${growWidth} ease-in-out`,
+			animation: `0.3s ${growWidth} ease-in-out`,
 			animationDirection: 'forwards',
 		}}
 		{...rest}
@@ -46,7 +46,7 @@ const ShrinkingGrid = ({ sx, children, ...rest }: any) => (
 	<Grid
 		sx={{
 			...sx,
-			animation: `0.5s ${shrinkWidth} ease-in-out`,
+			animation: `0.3s ${shrinkWidth} ease-in-out`,
 			animationDirection: 'backwards',
 			animationFillMode: 'forwards',
 		}}
