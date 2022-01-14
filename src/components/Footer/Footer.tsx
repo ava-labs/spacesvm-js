@@ -21,7 +21,10 @@ export const Footer = memo(() => (
 			</Grid>
 			<Grid item>
 				<Typography component="footer" variant="body2" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="center">
-					{`© ${new Date().getFullYear()} — ${APP_NAME}`}
+					{`© ${new Date().getFullYear()} ${APP_NAME} — `}
+					<Link color="inherit" href="https://www.avax.network/" rel="noopener noreferrer" target="_blank">
+						Built with Avalanche
+					</Link>
 				</Typography>
 			</Grid>
 		</Grid>

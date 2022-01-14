@@ -28,7 +28,6 @@ import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
-import { PRICE_PER_SPC } from '@/constants'
 import { FIRST_NAMES } from '@/constants/firstNames'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { calculateClaimCost } from '@/utils/calculateCost'
@@ -242,6 +241,7 @@ export const Home = memo(() => {
 										),
 									}}
 									inputProps={{
+										maxlength: 255,
 										spellCheck: 'false',
 									}}
 								/>
@@ -370,12 +370,12 @@ export const Home = memo(() => {
 										{costEstimate ? (
 											<>
 												{new Intl.NumberFormat('en-US').format(costEstimate)}
-												<Typography color="textSecondary" variant="caption" component="p">
+												{/*<Typography color="textSecondary" variant="caption" component="p">
 													USD{' '}
 													{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 														.format(costEstimate * PRICE_PER_SPC || 0)
 														.slice(0, -3)}
-												</Typography>
+										</Typography>*/}
 											</>
 										) : (
 											<span style={{ position: 'relative', top: -1 }}>💰</span>
