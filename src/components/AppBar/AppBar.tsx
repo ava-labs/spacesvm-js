@@ -1,3 +1,4 @@
+import { isBrowser } from 'react-device-detect'
 import { Link } from 'react-router-dom'
 import { AppBar as MuiAppBar, Box, Container, Grid, Toolbar, Typography } from '@mui/material'
 
@@ -42,9 +43,11 @@ export const AppBar = memo(() => (
 								<ThemeToggle />
 							</Grid>
 
-							<Grid item>
-								<MetaMaskSelect />
-							</Grid>
+							{isBrowser && (
+								<Grid item>
+									<MetaMaskSelect />
+								</Grid>
+							)}
 						</Grid>
 					</Grid>
 				</Container>

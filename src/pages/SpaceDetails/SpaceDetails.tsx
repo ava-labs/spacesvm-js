@@ -19,6 +19,7 @@ import { ClaimButton } from '../Home/Home'
 
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
+import { USERNAME_REGEX_QUERY } from '@/constants'
 import { getPrefixInfo } from '@/utils/quarkvm'
 
 export const SpaceDetails = memo(() => {
@@ -30,6 +31,7 @@ export const SpaceDetails = memo(() => {
 	const onVerify = useCallback(async () => {
 		const infos = await getPrefixInfo(spaceId || '')
 
+		console.log(infos)
 		setDetails(infos)
 		setLoading(false)
 	}, [spaceId])
@@ -54,6 +56,7 @@ export const SpaceDetails = memo(() => {
 									xs: 'unset',
 									sm: 'calc(100vh - 128px)',
 								},
+								p: 2,
 								display: 'flex',
 								flexDirection: 'column',
 								justifyContent: 'center',
@@ -80,7 +83,7 @@ export const SpaceDetails = memo(() => {
 										'linear-gradient(60deg,rgba(239,0,143,.5),rgba(110,195,244,.5),rgba(112,56,255,.5),rgba(255,186,39,.5))',
 								}}
 							>
-								{spaceId}
+								{spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')}
 							</PageTitle>
 							{details && (
 								<>
@@ -102,14 +105,14 @@ export const SpaceDetails = memo(() => {
 												<Grid item>
 													Expires {formatDistanceToNow(new Date(details.expiry * 1000), { addSuffix: true })}
 												</Grid>
-												<Grid item sx={{ display: 'flex' }}>
+												<Grid item sx={{ display: 'flex', mt: '2px' }}>
 													<IoInformationCircleOutline size={15} />
 												</Grid>
 											</Grid>
 										</Typography>
 									</Tooltip>
 
-									<Button sx={{ mt: 2 }} variant="outlined" color="secondary">
+									<Button disabled sx={{ mt: 2 }} variant="outlined" color="secondary">
 										Extend expiration date
 									</Button>
 								</>
@@ -120,7 +123,10 @@ export const SpaceDetails = memo(() => {
 							xs={12}
 							sm={7}
 							sx={{
-								p: 8,
+								p: {
+									xs: 2,
+									sm: 8,
+								},
 								background: (theme) => theme.palette.background.paper,
 								borderTopLeftRadius: 24,
 								borderBottomLeftRadius: 24,
@@ -160,16 +166,20 @@ export const SpaceDetails = memo(() => {
 											<Grid container spacing={1} wrap="nowrap">
 												<Grid item>
 													<Tooltip placement="top" title="Edit">
-														<IconButton>
-															<IoConstructOutline />
-														</IconButton>
+														<div>
+															<IconButton disabled>
+																<IoConstructOutline />
+															</IconButton>
+														</div>
 													</Tooltip>
 												</Grid>
 												<Grid item>
 													<Tooltip placement="top" title="Delete">
-														<IconButton color="primary" edge="end">
-															<IoTrashOutline />
-														</IconButton>
+														<div>
+															<IconButton disabled color="primary">
+																<IoTrashOutline />
+															</IconButton>
+														</div>
 													</Tooltip>
 												</Grid>
 											</Grid>

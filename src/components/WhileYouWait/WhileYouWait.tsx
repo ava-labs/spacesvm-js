@@ -2,6 +2,8 @@ import { IoAdd } from 'react-icons/io5'
 import { Button, CircularProgress, Divider, Grid, Slide, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/system'
 
+import { USERNAME_REGEX } from '@/constants'
+
 const SetButton = styled(Button)(({ theme }) => ({
 	backgroundColor: '#523df1',
 	padding: theme.spacing(1),
@@ -33,8 +35,17 @@ export const WhileYouWait = memo(() => {
 
 	const handleChange = (i: any, e: any) => {
 		const newFormValues = [...formValues]
-		// @ts-ignore
-		newFormValues[i][e.target.name] = e.target.value
+
+		if (e.target.name === 'keyText') {
+			if (e.target.value === '' || USERNAME_REGEX.test(e.target.value)) {
+				// @ts-ignore
+				newFormValues[i][e.target.name] = e.target.value.toLowerCase()
+			}
+		} else {
+			// @ts-ignore
+			newFormValues[i][e.target.name] = e.target.value
+		}
+
 		setFormValues(newFormValues)
 	}
 

@@ -17,7 +17,8 @@ export const TEN_MINUTES_IN_MS = 600000
 export const PRICE_PER_SPC = 0.05 // $0.05 per SPC, bogus for now
 
 // regexes
-export const USERNAME_REGEX = /^[a-zA-Z0-9.]{1,256}$/
+export const USERNAME_REGEX = /^[\w\s.]{1,256}$/
+export const USERNAME_REGEX_QUERY = /[^\w\s.]/gi
 
 // variables
 export const USERNAMES = shuffleArray(FIRST_NAMES)

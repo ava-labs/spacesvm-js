@@ -27,6 +27,13 @@ export const commonOverrides: ThemeOptions['components'] = {
 			},
 		},
 	},
+	MuiPaper: {
+		styleOverrides: {
+			rounded: {
+				borderRadius: 16,
+			},
+		},
+	},
 	MuiButton: {
 		styleOverrides: {
 			root: {
