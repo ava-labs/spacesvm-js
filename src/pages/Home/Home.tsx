@@ -29,8 +29,10 @@ import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
+import { PRICE_PER_SPC } from '@/constants'
 import { FIRST_NAMES } from '@/constants/firstNames'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
+import { calculateClaimCost } from '@/utils/calculateCost'
 import { isAlreadyClaimed } from '@/utils/quarkvm'
 import { shuffleArray } from '@/utils/shuffleArray'
 
@@ -119,8 +121,9 @@ export const Home = memo(() => {
 	}
 
 	useEffect(() => {
-		// bogus formula for now
-		setCostEstimate(username.length * 9000)
+		if (username.length > 0) {
+			setCostEstimate(calculateClaimCost(username))
+		}
 	}, [username])
 
 	const onClaim = async () => {
@@ -372,7 +375,7 @@ export const Home = memo(() => {
 												<Typography color="textSecondary" variant="caption" component="p">
 													USD{' '}
 													{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
-														.format(costEstimate || 0)
+														.format(costEstimate * PRICE_PER_SPC || 0)
 														.slice(0, -3)}
 												</Typography>
 											</>

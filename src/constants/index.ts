@@ -10,3 +10,4 @@ export const APP_NAME = 'Spaces'
 // units
 export const ONE_MINUTES_IN_MS = 60000
 export const TEN_MINUTES_IN_MS = 600000
+export const PRICE_PER_SPC = 0.05 // $0.05 per SPC, bogus for now
