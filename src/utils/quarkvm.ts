@@ -46,7 +46,7 @@ export const getPrefixInfo = async (prefix: string) => {
 	return prefixData.info
 }
 
-export const checkIsClaimed = async (prefix: string) => {
+export const isAlreadyClaimed = async (prefix: string) => {
 	const response = await fetchQuark('claimed', {
 		prefix: btoa(
 			// using `encodeURIComponent` in case someone pass non Latin1 chars like `😀` since btoa doesn't support them

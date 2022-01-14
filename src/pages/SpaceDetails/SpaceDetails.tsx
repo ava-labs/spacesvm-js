@@ -19,7 +19,7 @@ import { ClaimButton } from '../Home/Home'
 
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
-import { checkIsClaimed } from '@/utils/quarkvm'
+import { isAlreadyClaimed } from '@/utils/quarkvm'
 
 export const SpaceDetails = memo(() => {
 	const [isClaimed, setIsClaimed] = useState<boolean>(false)
@@ -28,7 +28,7 @@ export const SpaceDetails = memo(() => {
 	const theme = useTheme()
 
 	const onVerify = useCallback(async () => {
-		const isClaimed = await checkIsClaimed(spaceId || '')
+		const isClaimed = await isAlreadyClaimed(spaceId || '')
 
 		setLoading(false)
 		setIsClaimed(isClaimed)
