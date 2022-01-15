@@ -2,7 +2,7 @@ import { Navigate, useParams } from 'react-router-dom'
 import { Typography, useTheme } from '@mui/material'
 
 import { Page } from '@/components/Page'
-import { getQuarkValue } from '@/utils/quarkvm'
+import { getSpacesValue } from '@/utils/quarkvm'
 
 export const KeyDetails = () => {
 	const { spaceId, key } = useParams()
@@ -13,7 +13,7 @@ export const KeyDetails = () => {
 	useEffect(() => {
 		const getValue = async () => {
 			if (!spaceId || !key) return
-			const value = await getQuarkValue(spaceId, key)
+			const value = await getSpacesValue(spaceId, key)
 			if (value === undefined) {
 				setIsInvalidPage(true)
 				return
