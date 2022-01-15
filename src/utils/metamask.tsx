@@ -1,13 +1,8 @@
-import { ethers } from 'ethers'
-
 declare global {
 	interface Window {
 		ethereum: any
 	}
 }
-
-const provider = new ethers.providers.Web3Provider(window.ethereum)
-const signer = provider.getSigner()
 
 const ethereum = window.ethereum
 

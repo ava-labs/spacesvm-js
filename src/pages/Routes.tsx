@@ -22,7 +22,7 @@ export const Routes = () => (
 			<Route path="/spaces/:spaceId/:key" element={<KeyDetails />} />
 			<Route path="/spaces/:spaceId" element={<SpaceDetails />} />
 			<Route path="/spaces/" element={<SpaceDetails />} />
-			<Route path="/custom-signature" element={<CustomSignature />} />
+			<Route path="/custom-transaction" element={<CustomSignature />} />
 			<Route path="/404" element={<Page404 />} />
 			<Route path="*" element={<Navigate replace to="/404" />} />
 		</Switch>
