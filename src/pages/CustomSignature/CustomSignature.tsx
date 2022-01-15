@@ -21,8 +21,9 @@ import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { signWithMetaMask, signWithMetaMaskV4 } from '@/utils/metamask'
-import { getLatestBlockID, getPrefixInfo } from '@/utils/quarkvm'
+import { fetchSpaces, getLatestBlockID, getPrefixInfo } from '@/utils/quarkvm'
 import { shuffleArray } from '@/utils/shuffleArray'
 
 const JsonTextArea = styled(TextareaAutosize)`
@@ -34,6 +35,14 @@ const JsonTextArea = styled(TextareaAutosize)`
 	max-height: 100%;
 	overflow-y: auto !important;
 	resize: none;
+`
+
+const SectionTitle = styled(Typography)`
+	width: fit-content;
+	background-image: linear-gradient(100deg, #aa039f, #ed014d, #f67916);
+	background-clip: text;
+	text-fill-color: transparent;
+	filter: contrast(30%) brightness(200%);
 `
 
 const jsonPlaceholder = `{
@@ -88,6 +97,7 @@ const DEV_NAMES = shuffleArray([
 ])
 
 export const CustomSignature = () => {
+	const { currentAddress } = useMetaMask()
 	const [json, setJson] = useState<string>('')
 	const [isSigning, setIsSigning] = useState<boolean>(false)
 	const [signature, setSignature] = useState<string | null>(null)
@@ -126,22 +136,10 @@ export const CustomSignature = () => {
 		setIsSubmitting(true)
 
 		try {
-			// const res = await fetch(`${API_DOMAIN}/public`, {
-			// 	headers: {
-			// 		'Content-Type': 'application/json',
-			// 	},
-			// 	method: 'POST',
-			// 	body: JSON.stringify({
-			// 		jsonrpc: '2.0',
-			// 		method: `quarkvm.issueTx`,
-			// 		params: JSON.stringify({
-			// 			payload: JSON.parse(json),
-			// 			signature,
-			// 		}),
-			// 		id: 1,
-			// 	}),
-			// })
-			const res = await getPrefixInfo('connor')
+			const res = await fetchSpaces('issueTx', {
+				payload: json,
+				signature,
+			})
 
 			setIsSubmitting(false)
 			setResponse(res)
@@ -222,7 +220,7 @@ export const CustomSignature = () => {
 				</Grid>
 				<Grid item md={8} xs={12}>
 					<Typography variant="h6" gutterBottom>
-						Signature:
+						Output:
 					</Typography>
 					<Card sx={{ height: '100%', width: '100%', p: 2, maxWidth: 900, overflow: 'auto' }}>
 						<Fade mountOnEnter in={!!(signature?.length || signatureError?.length)}>
@@ -231,21 +229,28 @@ export const CustomSignature = () => {
 									{signatureError}
 								</Typography>
 							) : (
-								<Typography fontFamily="monospace" sx={{ overflowWrap: 'anywhere' }}>
-									{signature}
-								</Typography>
+								<div>
+									<SectionTitle variant="h6" gutterBottom>
+										Signature:
+									</SectionTitle>
+									<Typography fontFamily="monospace" sx={{ overflowWrap: 'anywhere' }}>
+										{signature}
+									</Typography>
+								</div>
 							)}
 						</Fade>
 
 						<Slide direction="up" mountOnEnter in={!!signature?.length}>
 							<div>
 								<Divider sx={{ my: 2 }} />
+
 								<SubmitButton
 									disabled={!signature?.length}
 									variant="contained"
 									sx={{
 										display: 'flex',
 										margin: '0 auto',
+										my: 2,
 									}}
 									onClick={() => submitRequest()}
 								>
@@ -262,16 +267,22 @@ export const CustomSignature = () => {
 						</Slide>
 						<Slide direction="up" mountOnEnter in={!!(response || submitError)}>
 							<Box sx={{ maxHeight: 0, pb: 2 }}>
+								<SectionTitle variant="h6" gutterBottom>
+									Response:
+								</SectionTitle>
 								{submitError ? (
 									<Typography fontFamily="monospace" color="red" sx={{ overflowWrap: 'anywhere', mt: 2 }}>
 										{submitError}
 									</Typography>
 								) : (
-									<pre>
-										<Typography fontFamily="monospace" sx={{ overflowWrap: 'anywhere', mt: 2 }}>
-											{JSON.stringify(response, null, 2)}
-										</Typography>
-									</pre>
+									<>
+										<pre>
+											<Typography fontFamily="monospace" sx={{ overflowWrap: 'anywhere', mt: 2 }}>
+												{JSON.stringify(response, null, 2)}
+											</Typography>
+										</pre>
+										<Divider sx={{ mt: 20 }} />
+									</>
 								)}
 							</Box>
 						</Slide>
