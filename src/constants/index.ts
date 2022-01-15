@@ -6,7 +6,7 @@ import { shuffleArray } from '@/utils/shuffleArray'
 export const THEME_LOCAL_STORAGE_KEY = 'spaces-theme'
 
 // api
-export const API_DOMAIN = 'https://memeshowdown.com/ext/bc/2YHDBE4amtva97XHV3PoGaPrJEjimxrRxJFqzHpsqf1XKUWUib'
+export const API_DOMAIN = 'https://memeshowdown.com/ext/bc/83qHz3yUpJ8ksUMR7Wo6eJsYPp9uFFCFpmEEVabSoh8t8ovWA'
 
 // Overview
 export const APP_NAME = 'Spaces'
