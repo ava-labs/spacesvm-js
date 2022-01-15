@@ -21,7 +21,7 @@ import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
-import { signWithMetaMask } from '@/utils/metamask'
+import { signWithMetaMask, signWithMetaMaskV4 } from '@/utils/metamask'
 import { getLatestBlockID, getPrefixInfo } from '@/utils/quarkvm'
 import { shuffleArray } from '@/utils/shuffleArray'
 
@@ -36,23 +36,44 @@ const JsonTextArea = styled(TextareaAutosize)`
 	resize: none;
 `
 
-const jsonPlaceholder = `[
-  {
-    "type": "string",
-    "name": "BlockID",
-    "value": "4Cwd9xZXfiBc3djER9zBpYJw6rAYHqN1s9DCpNttbyRPVdYRb"
+const jsonPlaceholder = `{
+  "types": {
+    "Claim": [
+      {
+        "name": "blockID",
+        "type": "string"
+      },
+      {
+        "name": "price",
+        "type": "uint64"
+      },
+      {
+        "name": "space",
+        "type": "string"
+      }
+    ],
+    "EIP712Domain": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "magic",
+        "type": "uint64"
+      }
+    ]
   },
-  {
-    "type": "string",
-    "name": "Prefix",
-    "value": "connor"
+  "primaryType": "Claim",
+  "domain": {
+    "name": "Spaces",
+    "magic": "0x5"
   },
-  {
-    "type": "string",
-    "name": "Type",
-    "value": "claim"
+  "message": {
+    "blockID": "23LApG7D33xCiHtFxCfoMPoyr38sSFPCpAyQdqMSpJ14eRXUMD",
+    "price": "1337",
+    "space": "connor"
   }
-]`
+}`
 
 const DEV_NAMES = shuffleArray([
 	'Patrick',
@@ -83,7 +104,7 @@ export const CustomSignature = () => {
 		try {
 			const parsedJson = JSON.parse(json)
 			setIsSigning(true)
-			const signature = await signWithMetaMask(parsedJson)
+			const signature = await signWithMetaMaskV4(parsedJson)
 			setIsSigning(false)
 			if (!signature) {
 				setSignatureError('Must sign in metamask!')
@@ -134,14 +155,13 @@ export const CustomSignature = () => {
 		try {
 			const latestBlockId = await getLatestBlockID()
 			const sampleData = JSON.parse(jsonPlaceholder)
-			const sampleDataWithLatestBlock = sampleData.map((datum: any) =>
-				datum.name === 'BlockID'
-					? {
-							...datum,
-							value: latestBlockId,
-					  }
-					: datum,
-			)
+			const sampleDataWithLatestBlock = {
+				...sampleData,
+				message: {
+					...sampleData.message,
+					blockID: latestBlockId,
+				},
+			}
 			const sampleJson = JSON.stringify(sampleDataWithLatestBlock, null, 2)
 			setJson(sampleJson)
 		} catch (err) {
@@ -197,7 +217,7 @@ export const CustomSignature = () => {
 						onChange={(e) => setJson(e.target.value)}
 						value={json}
 						placeholder={jsonPlaceholder}
-						sx={{ borderRadius: 4, padding: 2, height: '100% !important' }}
+						sx={{ borderRadius: 4, pt: 2, pr: 2, pl: 2, pb: 20, height: '100% !important' }}
 					/>
 				</Grid>
 				<Grid item md={8} xs={12}>
