@@ -184,7 +184,7 @@ export const CustomSignature = () => {
 				!
 			</PageTitle>
 			<Grid container sx={{ width: '100%', height: '100%', minHeight: 200 }} spacing={4}>
-				<Grid item md={4} xs={12} sx={{ position: 'relative' }}>
+				<Grid item md={5} xs={12} sx={{ position: 'relative' }}>
 					<SignButton
 						variant="contained"
 						disabled={!jsonInput?.length}
@@ -223,7 +223,7 @@ export const CustomSignature = () => {
 						sx={{ borderRadius: 4, pt: 2, pr: 2, pl: 2, pb: 20, height: '100% !important' }}
 					/>
 				</Grid>
-				<Grid item md={8} xs={12}>
+				<Grid item md={7} xs={12}>
 					<Grid container justifyContent="space-between" alignItems="end">
 						<Grid item>
 							<Typography variant="h6" gutterBottom>
