@@ -2,7 +2,7 @@ import { API_DOMAIN } from '@/constants'
 
 export const fetchQuark = async (method: string, params = {}) => {
 	try {
-		const response = await fetch(`${API_DOMAIN}/public`, {
+		const response = await fetch(`${API_DOMAIN}`, {
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -27,7 +27,7 @@ export const fetchQuark = async (method: string, params = {}) => {
 
 export const fetchSpaces = async (method: string, params = {}) => {
 	try {
-		const response = await fetch(`${API_DOMAIN}/public`, {
+		const response = await fetch(`${API_DOMAIN}`, {
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -63,14 +63,10 @@ export const getLatestBlockID = async () => {
 	return blockData?.blockId
 }
 
-export const getPrefixInfo = async (space: string) => {
-	const spaceData = await fetchSpaces('info', {
+export const getSpaceData = async (space: string) =>
+	await fetchSpaces('info', {
 		space,
 	})
-	console.log(`spaceData`, spaceData)
-	if (!spaceData?.info) return
-	return spaceData.info
-}
 
 export const isAlreadyClaimed = async (space: string) => {
 	const response = await fetchSpaces('claimed', {

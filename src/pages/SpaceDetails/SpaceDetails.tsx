@@ -21,7 +21,7 @@ import { ClaimButton } from '../Home/Home'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { USERNAME_REGEX_QUERY } from '@/constants'
-import { getPrefixInfo } from '@/utils/quarkvm'
+import { getSpaceData } from '@/utils/quarkvm'
 
 export const SpaceDetails = memo(() => {
 	const [details, setDetails] = useState<any>()
@@ -31,9 +31,8 @@ export const SpaceDetails = memo(() => {
 	const theme = useTheme()
 
 	const onVerify = useCallback(async () => {
-		const infos = await getPrefixInfo(spaceId || '')
-
-		setDetails(infos)
+		const { info } = await getSpaceData(spaceId || '')
+		setDetails(info)
 		setLoading(false)
 	}, [spaceId])
 
