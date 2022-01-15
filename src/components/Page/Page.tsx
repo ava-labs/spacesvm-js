@@ -4,7 +4,7 @@ import { useDocumentTitle } from '@react-hookz/web'
 
 import { Footer } from '../Footer'
 
-import { APP_NAME } from '@/constants'
+import { APP_NAME, APP_SLOGAN } from '@/constants'
 
 type PageProps = {
 	title?: string
@@ -13,7 +13,7 @@ type PageProps = {
 }
 
 export const Page = memo(({ title, showFooter = true, children, noPadding = false }: PropsWithChildren<PageProps>) => {
-	useDocumentTitle(title ? `${title} — ${APP_NAME}` : `${APP_NAME}`)
+	useDocumentTitle(title ? `${title} — ${APP_NAME}` : `${APP_NAME} — ${APP_SLOGAN}`)
 
 	return (
 		<Fade in>

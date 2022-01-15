@@ -15,7 +15,6 @@ export const ThemeToggle = () => {
 						aria-label="Dark theme toggle"
 						sx={{ opacity: themeLocalStorage === 'dark' ? 1 : 0.5 }}
 						size="small"
-						edge="start"
 						onClick={() => setThemeLocalStorage('dark')}
 					>
 						<FiMoon />
