@@ -23,6 +23,29 @@ export const fetchQuark = async (method: string, params = {}) => {
 	return data?.result
 }
 
+export const fetchSpaces = async (method: string, params = {}) => {
+	const response = await fetch(`${API_DOMAIN}/public`, {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		method: 'POST',
+		body: JSON.stringify({
+			jsonrpc: '2.0',
+			method: `spacesvm.${method}`,
+			params,
+			id: 1,
+		}),
+	})
+
+	const reader = response.body?.getReader()
+	const encodedData = await reader?.read()
+
+	const data = JSON.parse(new TextDecoder().decode(encodedData?.value))
+	if (data.error) throw data.error
+
+	return data?.result
+}
+
 export const pingQuark = async () => fetchQuark('ping')
 
 export const getQuarkValue = async (prefix: string, key: string) => {
