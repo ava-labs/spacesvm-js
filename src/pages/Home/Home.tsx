@@ -115,9 +115,11 @@ export const Home = memo(() => {
 	}
 
 	useEffect(() => {
-		if (username.length > 0) {
-			setCostEstimate(calculateClaimCost(username))
+		if (username.length === 0) {
+			setCostEstimate(undefined)
+			return
 		}
+		setCostEstimate(calculateClaimCost(username))
 	}, [username])
 
 	const onClaim = async () => {
