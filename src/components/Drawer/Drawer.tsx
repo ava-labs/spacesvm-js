@@ -1,3 +1,4 @@
+import { Twemoji } from 'react-emoji-render'
 import { IoMenu } from 'react-icons/io5'
 import { NavLink } from 'react-router-dom'
 import {
@@ -40,8 +41,13 @@ export const Drawer = memo(() => {
 				</Typography>
 				<List sx={{ mt: 4, ml: -2 }}>
 					{[
-						{ label: 'Home', emoji: '🏠', url: '/' },
-						{ label: 'GitHub', emoji: '👨‍💻', url: 'https://github.com/ava-labs/spacesvm-js', isExternal: true },
+						{ label: 'Home', emoji: <Twemoji svg text="🏠" />, url: '/' },
+						{
+							label: 'GitHub',
+							emoji: <Twemoji svg text="👨‍💻" />,
+							url: 'https://github.com/ava-labs/spacesvm-js',
+							isExternal: true,
+						},
 					].map(({ label, emoji, url, isExternal }) => (
 						<ListItem
 							component={isExternal ? 'a' : NavLink}
