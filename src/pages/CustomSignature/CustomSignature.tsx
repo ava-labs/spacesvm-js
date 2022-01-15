@@ -238,7 +238,7 @@ export const CustomSignature = () => {
 						)}
 					</Grid>
 
-					<Card sx={{ height: '100%', width: '100%', p: 2, maxWidth: 900, overflow: 'auto' }}>
+					<Card sx={{ height: '100%', width: '100%', p: 2, overflow: 'auto' }}>
 						<Fade mountOnEnter in={!!(signature?.length || signatureError?.length)}>
 							{signatureError ? (
 								<Typography color="red" fontFamily="monospace">
