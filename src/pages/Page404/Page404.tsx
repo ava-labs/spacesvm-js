@@ -1,11 +1,12 @@
+import { Twemoji } from 'react-emoji-render'
 import { Link } from 'react-router-dom'
-import { Link as MuiLink, Typography, useTheme } from '@mui/material'
-import { Box } from '@mui/system'
+import { Box, Link as MuiLink, Typography, useTheme } from '@mui/material'
 
 import { Page } from '@/components/Page'
 
-export const Page404 = () => {
+export const Page404 = memo(() => {
 	const theme = useTheme()
+
 	return (
 		<Page>
 			<Box
@@ -37,6 +38,7 @@ export const Page404 = () => {
 							backgroundSize: '400% 100%',
 							backgroundClip: 'text',
 							textFillColor: 'transparent',
+							mr: 1,
 							backgroundColor: theme.palette.mode === 'dark' ? 'white' : 'unset',
 							animation: 'hue 5s infinite alternate',
 							caretColor: '#523df1',
@@ -46,6 +48,7 @@ export const Page404 = () => {
 					>
 						space!
 					</Typography>
+					<Twemoji svg text="🛸" />
 				</Typography>
 
 				<Typography gutterBottom variant="caption" component="div" sx={{ textAlign: 'center', mt: 4 }}>
@@ -62,4 +65,4 @@ export const Page404 = () => {
 			</Box>
 		</Page>
 	)
-}
+})

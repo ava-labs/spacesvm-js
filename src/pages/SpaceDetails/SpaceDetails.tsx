@@ -1,3 +1,4 @@
+import { Twemoji } from 'react-emoji-render'
 import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
 import { Link, useParams } from 'react-router-dom'
 import {
@@ -64,7 +65,7 @@ export const SpaceDetails = memo(() => {
 							}}
 						>
 							<PageTitle align="center" variant="h2" sx={{ mb: 0 }}>
-								✨🔭
+								<Twemoji svg text="✨🔭" />
 							</PageTitle>
 							<PageTitle
 								align="center"

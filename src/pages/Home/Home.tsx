@@ -1,4 +1,5 @@
 import { isMobile } from 'react-device-detect'
+import { Twemoji } from 'react-emoji-render'
 import { IoClose, IoSearch } from 'react-icons/io5'
 import { createSearchParams, Link, useNavigate, useSearchParams } from 'react-router-dom'
 import {
@@ -387,7 +388,9 @@ export const Home = memo(() => {
 										</Typography>*/}
 												</>
 											) : (
-												<span style={{ position: 'relative', top: -1 }}>💰</span>
+												<span style={{ position: 'relative', top: -1 }}>
+													<Twemoji svg text="💰" />
+												</span>
 											)}
 										</Typography>
 									</Box>
