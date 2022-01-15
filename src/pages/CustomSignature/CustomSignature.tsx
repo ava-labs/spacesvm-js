@@ -240,20 +240,23 @@ export const CustomSignature = () => {
 
 					<Card sx={{ height: '100%', width: '100%', p: 2, overflow: 'auto' }}>
 						<Fade mountOnEnter in={!!(signature?.length || signatureError?.length)}>
-							{signatureError ? (
-								<Typography color="red" fontFamily="monospace">
-									{signatureError}
-								</Typography>
-							) : (
-								<div>
-									<SectionTitle variant="h6" gutterBottom>
-										Signature:
-									</SectionTitle>
-									<Typography fontFamily="monospace" sx={{ overflowWrap: 'anywhere' }}>
-										{signature}
+							<div>
+								{signatureError && (
+									<Typography color="red" fontFamily="monospace">
+										{signatureError}
 									</Typography>
-								</div>
-							)}
+								)}
+								{signature && (
+									<>
+										<SectionTitle variant="h6" gutterBottom>
+											Signature:
+										</SectionTitle>
+										<Typography fontFamily="monospace" sx={{ overflowWrap: 'anywhere' }}>
+											{signature}
+										</Typography>
+									</>
+								)}
+							</div>
 						</Fade>
 
 						<Slide direction="up" mountOnEnter in={!!signature?.length}>
