@@ -108,13 +108,9 @@ export const Home = memo(() => {
 				ref: username,
 			})}`,
 		})
-
 		const isClaimed = await isAlreadyClaimed(username)
-
 		setVerified(true)
 		setAvailable(!isClaimed)
-
-		console.info(`claimed`, isClaimed)
 	}
 
 	useEffect(() => {
@@ -128,13 +124,7 @@ export const Home = memo(() => {
 		const signature = await signClaimPayload(username)
 		setWaitingForMetaMask(false)
 		if (!signature) return
-
 		onSigned()
-
-		// Call `onEnd` here
-		// onEnd()
-		// Display a snackbar to let user know that it's ready
-		// enqueueSnackbar('Your space is ready!')
 	}
 
 	const onSigned = async () => {

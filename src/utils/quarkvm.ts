@@ -121,3 +121,30 @@ export const getAddressBalance = async (address: string) => fetchSpaces('balance
 // 	if (!response) throw 'Invalid address'
 // 	return response.balance
 // }
+
+export enum TxType {
+	Claim = 'Claim',
+	Lifeline = 'Lifeline',
+	Set = 'Set',
+	Delete = 'Delete',
+	Move = 'Move',
+	Transfer = 'Transfer',
+}
+
+type TransactionInfo = {
+	type: TxType
+	space?: string
+	key?: string
+	value?: string
+	to?: string
+	units?: string
+}
+
+export const getSuggestedFee = async (transactionInfo: TransactionInfo) =>
+	await fetchSpaces('suggestedFee', { input: transactionInfo })
+
+export const claimSpace = async (typedData, signature) => {
+	console.log(`typedData, signature`, typedData, signature)
+	const res = await fetchSpaces('issueTx', { typedData, signature })
+	console.log(`res`, res)
+}
