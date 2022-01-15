@@ -40,7 +40,8 @@ const SectionTitle = styled(Typography)`
 	background-image: linear-gradient(100deg, #aa039f, #ed014d, #f67916);
 	background-clip: text;
 	text-fill-color: transparent;
-	filter: contrast(30%) brightness(200%);
+	filter: ${({ theme }) =>
+		theme.palette.mode === 'dark' ? 'contrast(30%) brightness(200%)' : 'contrast(60%) brightness(100%)'};
 `
 
 const jsonPlaceholder = `{
@@ -222,9 +223,21 @@ export const CustomSignature = () => {
 					/>
 				</Grid>
 				<Grid item md={8} xs={12}>
-					<Typography variant="h6" gutterBottom>
-						Output:
-					</Typography>
+					<Grid container justifyContent="space-between" alignItems="end">
+						<Grid item>
+							<Typography variant="h6" gutterBottom>
+								Output:
+							</Typography>
+						</Grid>
+						{(!!signature || !!signatureError || !!response || !!submitError) && (
+							<Grid item>
+								<Button variant="text" sx={{ py: 0, mb: 1 }} onClick={clearOutput}>
+									Clear output.
+								</Button>
+							</Grid>
+						)}
+					</Grid>
+
 					<Card sx={{ height: '100%', width: '100%', p: 2, maxWidth: 900, overflow: 'auto' }}>
 						<Fade mountOnEnter in={!!(signature?.length || signatureError?.length)}>
 							{signatureError ? (
