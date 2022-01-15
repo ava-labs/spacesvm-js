@@ -1,15 +1,26 @@
 import { IoMenu } from 'react-icons/io5'
 import { NavLink } from 'react-router-dom'
-import { Drawer as MuiDrawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material'
+import {
+	Drawer as MuiDrawer,
+	IconButton,
+	List,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
+	Tooltip,
+	Typography,
+} from '@mui/material'
 
 export const Drawer = memo(() => {
 	const [open, setOpen] = useState<boolean>(false)
 
 	return (
 		<>
-			<IconButton onClick={() => setOpen(true)}>
-				<IoMenu />
-			</IconButton>
+			<Tooltip title="Menu">
+				<IconButton onClick={() => setOpen(true)}>
+					<IoMenu />
+				</IconButton>
+			</Tooltip>
 			<MuiDrawer
 				PaperProps={{
 					sx: {
