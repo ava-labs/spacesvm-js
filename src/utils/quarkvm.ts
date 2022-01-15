@@ -34,9 +34,18 @@ export const isConnectedToSpacesVM = async () => {
 	}
 }
 
-export const getSpacesValue = async (prefix: string, key: string) => {
+export const querySpace = async (space: string) => {
+	const response = await fetchSpaces('info', {
+		space,
+	})
+	return {
+		...response,
+		values: response.values.map(({ key, value }: any) => ({ key, value: atob(value) })),
+	}
+}
+
+export const querySpaceKey = async (prefix: string, key: string) => {
 	const response = await fetchSpaces('resolve', { path: `${prefix}/${key}` })
-	console.log(`response`, response)
 	if (!response?.exists) return
 	return atob(response?.value)
 }
@@ -45,11 +54,6 @@ export const getLatestBlockID = async () => {
 	const blockData = await fetchSpaces('lastAccepted')
 	return blockData?.blockId
 }
-
-export const getSpaceData = async (space: string) =>
-	await fetchSpaces('info', {
-		space,
-	})
 
 export const isAlreadyClaimed = async (space: string) => {
 	const response = await fetchSpaces('claimed', {

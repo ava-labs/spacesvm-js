@@ -21,18 +21,20 @@ import { ClaimButton } from '../Home/Home'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { USERNAME_REGEX_QUERY } from '@/constants'
-import { getSpaceData } from '@/utils/quarkvm'
+import { querySpace } from '@/utils/quarkvm'
 
 export const SpaceDetails = memo(() => {
 	const [details, setDetails] = useState<any>()
+	const [spacesValues, setSpacesValues] = useState<any>()
 	const [loading, setLoading] = useState<boolean>(true)
 	const { spaceId } = useParams()
 	const spaceIdTrimmed = spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')
 	const theme = useTheme()
 
 	const onVerify = useCallback(async () => {
-		const { info } = await getSpaceData(spaceId || '')
+		const { info, values } = await querySpace(spaceId || '')
 		setDetails(info)
+		setSpacesValues(values)
 		setLoading(false)
 	}, [spaceId])
 
@@ -135,10 +137,10 @@ export const SpaceDetails = memo(() => {
 								height: 'calc(100vh - 64px)',
 							}}
 						>
-							{details ? (
-								[0, 1, 2, 3, 4, 5, 6, 7].map((el) => (
+							{spacesValues ? (
+								spacesValues.map(({ key, value }, i) => (
 									<Card
-										key={el}
+										key={key}
 										elevation={0}
 										sx={{
 											display: 'flex',
@@ -154,11 +156,11 @@ export const SpaceDetails = memo(() => {
 											},
 										}}
 									>
-										<Avatar sx={{ mr: 2 }}>{el}</Avatar>
+										<Avatar sx={{ mr: 2 }}>{i + 1}</Avatar>
 										<Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
 											<CardContent sx={{ pt: 0 }}>
 												<Typography variant="h4">
-													Key{el} - Value{el}
+													{key} - {value}
 												</Typography>
 											</CardContent>
 										</Box>
