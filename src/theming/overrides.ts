@@ -27,6 +27,13 @@ export const commonOverrides: ThemeOptions['components'] = {
 			},
 		},
 	},
+	MuiDrawer: {
+		styleOverrides: {
+			paper: {
+				backgroundImage: 'unset',
+			},
+		},
+	},
 	MuiPaper: {
 		styleOverrides: {
 			rounded: {

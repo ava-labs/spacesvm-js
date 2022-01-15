@@ -2,6 +2,7 @@ import { isBrowser } from 'react-device-detect'
 import { Link } from 'react-router-dom'
 import { AppBar as MuiAppBar, Box, Container, Grid, Toolbar, Typography } from '@mui/material'
 
+import { Drawer } from '../Drawer'
 import { MetaMaskSelect } from '../MetaMaskSelect'
 import { ThemeToggle } from '../ThemeToggle'
 
@@ -38,7 +39,7 @@ export const AppBar = memo(() => (
 							</Link>
 						</Grid>
 
-						<Grid item container alignItems="center" justifyContent="flex-end" wrap="nowrap" spacing={3}>
+						<Grid item container alignItems="center" justifyContent="flex-end" wrap="nowrap" spacing={2}>
 							<Grid item>
 								<ThemeToggle />
 							</Grid>
@@ -48,6 +49,10 @@ export const AppBar = memo(() => (
 									<MetaMaskSelect />
 								</Grid>
 							)}
+
+							<Grid item>
+								<Drawer />
+							</Grid>
 						</Grid>
 					</Grid>
 				</Container>
