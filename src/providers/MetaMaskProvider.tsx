@@ -66,8 +66,8 @@ export const MetaMaskProvider = ({ children }: any) => {
 			return
 		}
 		const getBalance = async () => {
-			const balance = await getAddressBalance(currentAddress)
-			setBalance(balance)
+			const response = await getAddressBalance(currentAddress)
+			response?.balance && setBalance(response.balance)
 		}
 		getBalance()
 	}, [currentAddress])

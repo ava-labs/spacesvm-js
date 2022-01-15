@@ -8,7 +8,7 @@ export const Layout: FC = memo(({ children }) => {
 
 	return (
 		<Box sx={{ background: theme.customPalette.customBackground }}>
-			<AppBar />
+			{!window.location.href.includes('/ping') && <AppBar />}
 			<Box
 				sx={{
 					display: 'flex',

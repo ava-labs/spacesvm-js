@@ -1,93 +1,92 @@
 import { API_DOMAIN } from '@/constants'
 
 export const fetchQuark = async (method: string, params = {}) => {
-	const response = await fetch(`${API_DOMAIN}/public`, {
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		method: 'POST',
-		body: JSON.stringify({
-			jsonrpc: '2.0',
-			method: `quarkvm.${method}`,
-			params,
-			id: 1,
-		}),
-	})
-
-	const reader = response.body?.getReader()
-	const encodedData = await reader?.read()
-
-	const data = JSON.parse(new TextDecoder().decode(encodedData?.value))
-	if (data.error) throw data.error
-
-	return data?.result
+	try {
+		const response = await fetch(`${API_DOMAIN}/public`, {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			method: 'POST',
+			body: JSON.stringify({
+				jsonrpc: '2.0',
+				method: `quarkvm.${method}`,
+				params,
+				id: 1,
+			}),
+		})
+		const reader = response.body?.getReader()
+		const encodedData = await reader?.read()
+		const data = JSON.parse(new TextDecoder().decode(encodedData?.value))
+		if (data.error) throw data.error
+		return data?.result
+	} catch (err) {
+		// console.error(err)
+		return
+	}
 }
 
 export const fetchSpaces = async (method: string, params = {}) => {
-	const response = await fetch(`${API_DOMAIN}/public`, {
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		method: 'POST',
-		body: JSON.stringify({
-			jsonrpc: '2.0',
-			method: `spacesvm.${method}`,
-			params,
-			id: 1,
-		}),
-	})
-
-	const reader = response.body?.getReader()
-	const encodedData = await reader?.read()
-
-	const data = JSON.parse(new TextDecoder().decode(encodedData?.value))
-	if (data.error) throw data.error
-
-	return data?.result
+	try {
+		const response = await fetch(`${API_DOMAIN}/public`, {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			method: 'POST',
+			body: JSON.stringify({
+				jsonrpc: '2.0',
+				method: `spacesvm.${method}`,
+				params,
+				id: 1,
+			}),
+		})
+		const reader = response.body?.getReader()
+		const encodedData = await reader?.read()
+		if (encodedData?.value === undefined) return
+		const data = JSON.parse(new TextDecoder().decode(encodedData?.value))
+		if (data.error) throw data.error
+		return data?.result
+	} catch (err) {
+		console.error(err)
+	}
 }
 
-export const pingQuark = async () => fetchQuark('ping')
+export const pingSpaces = async () => fetchSpaces('ping')
 
 export const getQuarkValue = async (prefix: string, key: string) => {
-	const response = await fetchQuark('resolve', { path: `${prefix}/${key}` })
+	const response = await fetchSpaces('resolve', { path: `${prefix}/${key}` })
 	if (!response?.exists) return
 	return atob(response?.value)
 }
 
 export const getLatestBlockID = async () => {
-	const blockData = await fetchQuark('lastAccepted')
+	const blockData = await fetchSpaces('lastAccepted')
 	return blockData?.blockId
 }
 
-export const getPrefixInfo = async (prefix: string) => {
-	const prefixData = await fetchQuark('prefixInfo', {
-		prefix: btoa(
-			// using `encodeURIComponent` in case someone pass non Latin1 chars like `😀` since btoa doesn't support them
-			encodeURIComponent(prefix),
-		),
+export const getPrefixInfo = async (space: string) => {
+	const spaceData = await fetchSpaces('info', {
+		space,
 	})
-	if (!prefixData.info) return
-	return prefixData.info
+	console.log(`spaceData`, spaceData)
+	if (!spaceData?.info) return
+	return spaceData.info
 }
 
-export const isAlreadyClaimed = async (prefix: string) => {
-	const response = await fetchQuark('claimed', {
-		prefix: btoa(
-			// using `encodeURIComponent` in case someone pass non Latin1 chars like `😀` since btoa doesn't support them
-			encodeURIComponent(prefix),
-		),
+export const isAlreadyClaimed = async (space: string) => {
+	const response = await fetchSpaces('claimed', {
+		space,
 	})
-	if (!response) throw 'Unable to validate prefix'
+	if (!response) throw 'Unable to validate space'
 	return response.claimed
 }
 
 // Requests for the estimated difficulty from VM.
-export const estimateDifficulty = async () => await fetchQuark('difficultyEstimate')
+export const estimateDifficulty = async () => await fetchSpaces('difficultyEstimate')
 
 // Checks the validity of the blockID.
 // Returns "true" if the block is valid.
 // TODO: check if this works...
-export const getIsValidBlockId = async (blockId: string) => await fetchQuark('validBlockID', { blockId })
+export const getIsValidBlockId = async (blockId: string) => await fetchSpaces('validBlockID', { blockId })
 
 // Checks the status of the transaction, and returns "true" if confirmed.
 export const getIsTxConfirmed = async (txId: string) => {
@@ -115,7 +114,7 @@ export const getIsTxConfirmed = async (txId: string) => {
 // 	return await fetchQuark('issueTxHR', { signature, message: atob(message) })
 // }
 
-export const getAddressBalance = async (address: string) => Math.random() * 50000 // some random balance for now
+export const getAddressBalance = async (address: string) => fetchSpaces('balance', { address }) // some random balance for now
 
 // export const getAddressBalance = async (address: string) => {
 // 	const response = await fetchQuark('balance', { address })

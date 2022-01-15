@@ -14,6 +14,7 @@ const SpaceDetails = pageLazyLoader('SpaceDetails')
 const KeyDetails = pageLazyLoader('KeyDetails')
 const Page404 = pageLazyLoader('Page404')
 const CustomSignature = pageLazyLoader('CustomSignature')
+const PingSpaces = pageLazyLoader('PingSpaces')
 
 export const Routes = () => (
 	<Suspense fallback={<></>}>
@@ -23,6 +24,7 @@ export const Routes = () => (
 			<Route path="/spaces/:spaceId" element={<SpaceDetails />} />
 			<Route path="/spaces/" element={<SpaceDetails />} />
 			<Route path="/custom-transaction" element={<CustomSignature />} />
+			<Route path="/ping" element={<PingSpaces />} />
 			<Route path="/404" element={<Page404 />} />
 			<Route path="*" element={<Navigate replace to="/404" />} />
 		</Switch>

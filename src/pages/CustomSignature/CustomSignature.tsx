@@ -48,7 +48,7 @@ const jsonPlaceholder = `{
   "types": {
     "Claim": [
       {
-        "name": "blockID",
+        "name": "space",
         "type": "string"
       },
       {
@@ -56,7 +56,7 @@ const jsonPlaceholder = `{
         "type": "uint64"
       },
       {
-        "name": "space",
+        "name": "blockID",
         "type": "string"
       }
     ],
@@ -74,12 +74,12 @@ const jsonPlaceholder = `{
   "primaryType": "Claim",
   "domain": {
     "name": "Spaces",
-    "magic": "0x5"
+    "magic": "1"
   },
   "message": {
-    "blockID": "23LApG7D33xCiHtFxCfoMPoyr38sSFPCpAyQdqMSpJ14eRXUMD",
-    "price": "1337",
-    "space": "connor"
+    "blockID": "YRiMVk2mjmdAoFQ7kkksu6BzJG48nBZxx68xJfY6hnWRZ1oPU",
+    "price": "1",
+    "space": "connoraf"
   }
 }`
 
@@ -110,6 +110,7 @@ export const CustomSignature = () => {
 		clearOutput()
 		try {
 			const parsedJson = JSON.parse(jsonInput)
+			console.log(`parsedJson`, parsedJson)
 			setIsSigning(true)
 			const signature = await signWithMetaMaskV4(parsedJson)
 			setIsSigning(false)
@@ -119,7 +120,7 @@ export const CustomSignature = () => {
 			}
 
 			// eslint-disable-next-line no-console
-			console.log(signature)
+			console.log('signature', signature)
 			setSignatureError(null)
 			setSignature(signature)
 		} catch (err: any) {
@@ -141,7 +142,7 @@ export const CustomSignature = () => {
 
 		try {
 			const res = await fetchSpaces('issueTx', {
-				payload: jsonInput,
+				typedData: jsonInput,
 				signature,
 			})
 
