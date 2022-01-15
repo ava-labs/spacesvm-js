@@ -26,12 +26,12 @@ export const SpaceDetails = memo(() => {
 	const [details, setDetails] = useState<any>()
 	const [loading, setLoading] = useState<boolean>(true)
 	const { spaceId } = useParams()
+	const spaceIdTrimmed = spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')
 	const theme = useTheme()
 
 	const onVerify = useCallback(async () => {
 		const infos = await getPrefixInfo(spaceId || '')
 
-		console.log(infos)
 		setDetails(infos)
 		setLoading(false)
 	}, [spaceId])
@@ -41,7 +41,7 @@ export const SpaceDetails = memo(() => {
 	}, [onVerify])
 
 	return (
-		<Page showFooter={false} noPadding>
+		<Page title={spaceIdTrimmed} showFooter={false} noPadding>
 			<Box style={{ paddingTop: 64 }}>
 				{loading ? (
 					<LinearProgress color="secondary" />
@@ -83,7 +83,7 @@ export const SpaceDetails = memo(() => {
 										'linear-gradient(60deg,rgba(239,0,143,.5),rgba(110,195,244,.5),rgba(112,56,255,.5),rgba(255,186,39,.5))',
 								}}
 							>
-								{spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')}
+								{spaceIdTrimmed}
 							</PageTitle>
 							{details && (
 								<>
