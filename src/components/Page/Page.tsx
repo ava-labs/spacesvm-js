@@ -17,11 +17,15 @@ export const Page = memo(({ title, showFooter = true, children, noPadding = fals
 
 	return (
 		<Fade in>
-			<div>
-				<Container component="main" maxWidth="xl" disableGutters sx={{ display: 'flex', flex: 1 }}>
+			<div style={{ height: '100%' }}>
+				<Container
+					component="main"
+					maxWidth="xl"
+					disableGutters
+					sx={{ display: 'flex', flex: 1, height: '100%', flexDirection: 'column' }}
+				>
 					<Box
 						sx={{
-							minHeight: 'calc(100vh - 163px)',
 							display: 'flex',
 							flexDirection: 'column',
 							flexGrow: 1,
@@ -35,8 +39,8 @@ export const Page = memo(({ title, showFooter = true, children, noPadding = fals
 					>
 						{children}
 					</Box>
+					{showFooter && <Footer />}
 				</Container>
-				{showFooter && <Footer />}
 			</div>
 		</Fade>
 	)

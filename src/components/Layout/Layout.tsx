@@ -14,10 +14,7 @@ export const Layout: FC = memo(({ children }) => {
 					display: 'flex',
 					flexDirection: 'column',
 					overflow: 'auto',
-					height: {
-						sm: 'unset',
-						md: '100vh',
-					},
+					height: '100vh',
 				}}
 			>
 				{children}
