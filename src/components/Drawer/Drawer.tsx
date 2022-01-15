@@ -26,7 +26,8 @@ export const Drawer = memo(() => {
 					sx: {
 						backgroundColor: (theme) => theme.customPalette.customBackground,
 						borderLeft: '2px solid hsla(0, 0%, 100%, 0.2)',
-						minWidth: '40vw',
+						width: '40vw',
+						minWidth: 280,
 						p: 6,
 					},
 				}}
