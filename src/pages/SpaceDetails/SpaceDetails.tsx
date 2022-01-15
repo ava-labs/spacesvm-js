@@ -21,7 +21,7 @@ import { ClaimButton } from '../Home/Home'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { USERNAME_REGEX_QUERY } from '@/constants'
-import { querySpace } from '@/utils/quarkvm'
+import { querySpace, SpaceKeyValue } from '@/utils/quarkvm'
 
 export const SpaceDetails = memo(() => {
 	const [details, setDetails] = useState<any>()
@@ -138,7 +138,7 @@ export const SpaceDetails = memo(() => {
 							}}
 						>
 							{spacesValues ? (
-								spacesValues.map(({ key, value }, i) => (
+								spacesValues.map(({ key, value }: SpaceKeyValue, i: number) => (
 									<Card
 										key={key}
 										elevation={0}

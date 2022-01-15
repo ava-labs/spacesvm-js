@@ -34,13 +34,18 @@ export const isConnectedToSpacesVM = async () => {
 	}
 }
 
+export type SpaceKeyValue = {
+	key: string
+	value: string
+}
+
 export const querySpace = async (space: string) => {
 	const response = await fetchSpaces('info', {
 		space,
 	})
 	return {
 		...response,
-		values: response.values.map(({ key, value }: any) => ({ key, value: atob(value) })),
+		values: response.values.map(({ key, value }: SpaceKeyValue) => ({ key, value: atob(value) })),
 	}
 }
 
