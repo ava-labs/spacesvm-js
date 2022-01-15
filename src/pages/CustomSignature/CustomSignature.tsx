@@ -1,4 +1,3 @@
-import { FiSend } from 'react-icons/fi'
 import {
 	Button,
 	Card,
@@ -21,9 +20,8 @@ import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
-import { useMetaMask } from '@/providers/MetaMaskProvider'
-import { signWithMetaMask, signWithMetaMaskV4 } from '@/utils/metamask'
-import { fetchSpaces, getLatestBlockID, getPrefixInfo } from '@/utils/quarkvm'
+import { signWithMetaMaskV4 } from '@/utils/metamask'
+import { fetchSpaces, getLatestBlockID } from '@/utils/quarkvm'
 import { shuffleArray } from '@/utils/shuffleArray'
 
 const JsonTextArea = styled(TextareaAutosize)`
@@ -97,8 +95,7 @@ const DEV_NAMES = shuffleArray([
 ])
 
 export const CustomSignature = () => {
-	const { currentAddress } = useMetaMask()
-	const [json, setJson] = useState<string>('')
+	const [jsonInput, setJsonInput] = useState<string>('')
 	const [isSigning, setIsSigning] = useState<boolean>(false)
 	const [signature, setSignature] = useState<string | null>(null)
 	const [signatureError, setSignatureError] = useState<string | null>(null)
@@ -108,11 +105,10 @@ export const CustomSignature = () => {
 	const [submitError, setSubmitError] = useState<string | null>(null)
 
 	const signJson = async () => {
-		if (!json?.length) return
-		setSignature('')
-		setResponse(null)
+		if (!jsonInput?.length) return
+		clearOutput()
 		try {
-			const parsedJson = JSON.parse(json)
+			const parsedJson = JSON.parse(jsonInput)
 			setIsSigning(true)
 			const signature = await signWithMetaMaskV4(parsedJson)
 			setIsSigning(false)
@@ -131,13 +127,20 @@ export const CustomSignature = () => {
 		}
 	}
 
+	const clearOutput = () => {
+		setSignature(null)
+		setResponse(null)
+		setSignatureError(null)
+		setSubmitError(null)
+	}
+
 	const submitRequest = async () => {
 		if (!signature?.length || isSubmitting) return
 		setIsSubmitting(true)
 
 		try {
 			const res = await fetchSpaces('issueTx', {
-				payload: json,
+				payload: jsonInput,
 				signature,
 			})
 
@@ -161,11 +164,11 @@ export const CustomSignature = () => {
 				},
 			}
 			const sampleJson = JSON.stringify(sampleDataWithLatestBlock, null, 2)
-			setJson(sampleJson)
+			setJsonInput(sampleJson)
 		} catch (err) {
 			// eslint-disable-next-line no-console
 			console.error(err)
-			setJson(jsonPlaceholder)
+			setJsonInput(jsonPlaceholder)
 		}
 	}
 
@@ -182,7 +185,7 @@ export const CustomSignature = () => {
 				<Grid item md={4} xs={12} sx={{ position: 'relative' }}>
 					<SignButton
 						variant="contained"
-						disabled={!json?.length}
+						disabled={!jsonInput?.length}
 						onClick={signJson}
 						sx={{ position: 'absolute', right: 0, bottom: 0, mr: 4 }}
 					>
@@ -212,8 +215,8 @@ export const CustomSignature = () => {
 						</Grid>
 					</Grid>
 					<JsonTextArea
-						onChange={(e) => setJson(e.target.value)}
-						value={json}
+						onChange={(e) => setJsonInput(e.target.value)}
+						value={jsonInput}
 						placeholder={jsonPlaceholder}
 						sx={{ borderRadius: 4, pt: 2, pr: 2, pl: 2, pb: 20, height: '100% !important' }}
 					/>
@@ -258,8 +261,7 @@ export const CustomSignature = () => {
 										<CircularProgress color="inherit" />
 									) : (
 										<>
-											Submit
-											<FiSend style={{ marginLeft: 8 }} />
+											Submit <span style={{ marginLeft: 8 }}>🚀</span>
 										</>
 									)}
 								</SubmitButton>
