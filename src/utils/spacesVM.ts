@@ -1,5 +1,5 @@
 import { API_DOMAIN } from '@/constants'
-import { SpaceKeyValue, TransactionInfo, TxType } from '@/types'
+import { SpaceKeyValue, TransactionInfo } from '@/types'
 
 export const fetchSpaces = async (method: string, params = {}) => {
 	const response = await fetch(`${API_DOMAIN}`, {

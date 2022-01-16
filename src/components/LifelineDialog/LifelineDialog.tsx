@@ -1,5 +1,4 @@
 import { Twemoji } from 'react-emoji-render'
-import { BsDash, BsDashLg, BsPlus, BsPlusLg } from 'react-icons/bs'
 import { IoAdd, IoRemove } from 'react-icons/io5'
 import { useParams } from 'react-router-dom'
 import {
