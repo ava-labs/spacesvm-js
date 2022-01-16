@@ -32,9 +32,9 @@ export const SpaceDetails = memo(() => {
 	const theme = useTheme()
 
 	const onVerify = useCallback(async () => {
-		const { info, values } = await querySpace(spaceId || '')
-		setDetails(info)
-		setSpacesValues(values)
+		const spaceData = await querySpace(spaceId || '')
+		setDetails(spaceData?.info)
+		setSpacesValues(spaceData?.values)
 		setLoading(false)
 	}, [spaceId])
 

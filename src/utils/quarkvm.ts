@@ -40,12 +40,16 @@ export type SpaceKeyValue = {
 }
 
 export const querySpace = async (space: string) => {
-	const response = await fetchSpaces('info', {
-		space,
-	})
-	return {
-		...response,
-		values: response.values.map(({ key, value }: SpaceKeyValue) => ({ key, value: atob(value) })),
+	try {
+		const response = await fetchSpaces('info', {
+			space,
+		})
+		return {
+			...response,
+			values: response.values.map(({ key, value }: SpaceKeyValue) => ({ key, value: atob(value) })),
+		}
+	} catch (err) {
+		return
 	}
 }
 
