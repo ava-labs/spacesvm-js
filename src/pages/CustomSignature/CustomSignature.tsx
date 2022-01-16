@@ -33,9 +33,18 @@ const SectionTitle = styled(Typography)`
 		theme.palette.mode === 'dark' ? 'contrast(30%) brightness(200%)' : 'contrast(60%) brightness(100%)'};
 `
 
-const jsonPlaceholder = `{
+const inputSample = `{
   "type": "claim",
   "space": "connor"
+}`
+
+const inputPlaceholder = `{
+  "type":<string>,
+  "space":<string>,
+  "key":<string>,
+  "value":<base64 encoded>,
+  "to":<hex encoded>,
+  "units":<uint64>
 }`
 
 const DEV_NAMES = shuffleArray([
@@ -133,7 +142,7 @@ export const CustomSignature = () => {
 						</SectionTitle>
 					</Grid>
 					<Grid item>
-						<Button variant="text" sx={{ py: 0, mb: 1 }} onClick={() => setJsonInput(jsonPlaceholder)}>
+						<Button variant="text" sx={{ py: 0, mb: 1 }} onClick={() => setJsonInput(inputSample)}>
 							Fill with sample.
 						</Button>
 					</Grid>
@@ -142,7 +151,7 @@ export const CustomSignature = () => {
 					<JsonTextArea
 						onChange={(e) => setJsonInput(e.target.value)}
 						value={jsonInput}
-						placeholder={jsonPlaceholder}
+						placeholder={inputPlaceholder}
 						sx={{ borderRadius: 4, p: 2, height: '100% !important' }}
 					/>
 				</Card>
