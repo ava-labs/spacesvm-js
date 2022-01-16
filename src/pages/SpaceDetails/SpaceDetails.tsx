@@ -19,7 +19,7 @@ import {
 	Tooltip,
 	Typography,
 } from '@mui/material'
-import { format, formatDistanceToNow } from 'date-fns'
+import { formatDistanceToNow } from 'date-fns'
 
 import { ClaimButton } from '../Home/Home'
 

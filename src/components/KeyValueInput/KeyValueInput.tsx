@@ -1,5 +1,5 @@
 import { IoAdd } from 'react-icons/io5'
-import { Button, CircularProgress, Grid, Grow, Slide, TextField } from '@mui/material'
+import { Button, CircularProgress, Grid, Grow, TextField } from '@mui/material'
 import { styled } from '@mui/system'
 
 import { USERNAME_REGEX } from '@/constants'
