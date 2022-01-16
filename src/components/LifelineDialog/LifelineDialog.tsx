@@ -93,7 +93,8 @@ export const LifelineDialog = ({ open, close, existingExpiry }: LifelineDialogPr
 		<Dialog open={open} onClose={handleClose} maxWidth="xs">
 			<DialogTitle>
 				<Typography variant="h5" component="p" fontFamily="DM Serif Display" align="center">
-					Extend some life to {spaceId} before it expires! <Twemoji svg text=":hourglass:" />
+					Extend some life to <span style={{ color: '#e70256' }}>{spaceId}</span> before it expires!{' '}
+					<Twemoji svg text=":hourglass:" />
 				</Typography>
 			</DialogTitle>
 			<DialogContent sx={{ mt: 2, overflowY: 'hidden' }}>
@@ -108,6 +109,7 @@ export const LifelineDialog = ({ open, close, existingExpiry }: LifelineDialogPr
 								align="right"
 								lineHeight={1}
 								sx={{
+									cursor: 'help',
 									backgroundSize: '400% 100%',
 									backgroundClip: 'text',
 									textFillColor: 'transparent',
