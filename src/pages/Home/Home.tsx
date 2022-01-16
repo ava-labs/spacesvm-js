@@ -1,4 +1,5 @@
 import { isMobile } from 'react-device-detect'
+import { Twemoji } from 'react-emoji-render'
 import { IoCheckmarkCircle, IoClose, IoSearch } from 'react-icons/io5'
 import { createSearchParams, Link, useNavigate, useSearchParams } from 'react-router-dom'
 import {
@@ -21,16 +22,14 @@ import {
 	useTheme,
 } from '@mui/material'
 import { styled } from '@mui/system'
-// @ts-ignore
-import FakeProgress from 'fake-progress'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import Treasure from '@/assets/treasure.png'
+import { ClaimedDialog } from '@/components/ClaimedDialog'
 import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
-import { WhileYouWait } from '@/components/WhileYouWait'
 import { USERNAME_REGEX, USERNAME_REGEX_QUERY, USERNAMES } from '@/constants'
 import { TxType } from '@/types'
 import { calculateClaimCost } from '@/utils/calculateCost'
@@ -92,12 +91,11 @@ export const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 export const Home = memo(() => {
 	const [searchParams] = useSearchParams()
 	const navigate = useNavigate()
-	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
+	const [showClaimedDialog, setShowClaimedDialog] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
 	const [username, setUsername] = useState<string>(
 		searchParams.get('ref')?.toLowerCase().replace(USERNAME_REGEX_QUERY, '') || '',
 	) // pre-fill if ?ref=something in URL
-	const [progress, setProgress] = useState<number>(0)
 	const theme = useTheme()
 	const [verified, setVerified] = useState<boolean>(false)
 	const [available, setAvailable] = useState<boolean>(false)
@@ -135,25 +133,7 @@ export const Home = memo(() => {
 	}
 
 	const onSigned = async () => {
-		setShowWhileYouWait(true)
-
-		const p = new FakeProgress({
-			timeConstant: 10000,
-			autoStart: true,
-		})
-
-		const onEachSecond = () => {
-			console.log('Progress is ' + (p.progress * 100).toFixed(1) + ' %')
-			setProgress(p.progress * 100)
-		}
-
-		const onEnd = () => {
-			p.end()
-			clearInterval(interval)
-			console.log('Ended. Progress is ' + (p.progress * 100).toFixed(1) + ' %')
-		}
-
-		const interval = setInterval(onEachSecond, 1000)
+		setShowClaimedDialog(true)
 	}
 
 	const handleSubmit = (e: any) => {
@@ -162,6 +142,8 @@ export const Home = memo(() => {
 
 	return (
 		<Page>
+			<ClaimedDialog spaceId={username} open={showClaimedDialog} onClose={() => setShowClaimedDialog(false)} />
+
 			<Dialog open={waitingForMetaMask} maxWidth="xs">
 				<DialogTitle>
 					<Typography
@@ -172,8 +154,8 @@ export const Home = memo(() => {
 						sx={{ position: 'relative' }}
 					>
 						Please sign the message in your wallet to continue.{' '}
-						<span style={{ position: 'absolute', fontSize: 42, transform: 'translateX(12px) translateY(-11px)' }}>
-							👉
+						<span style={{ position: 'absolute', fontSize: 36, transform: 'translateX(8px) translateY(-3px)' }}>
+							<Twemoji svg text="👉" />
 						</span>
 					</Typography>
 				</DialogTitle>
@@ -201,7 +183,7 @@ export const Home = memo(() => {
 							<TypewrittingInput waitBeforeDeleteMs={2000} strings={USERNAMES}>
 								{({ currentText }) => (
 									<TextField
-										disabled={showWhileYouWait || (available && verified)}
+										disabled={available && verified}
 										value={username}
 										onChange={(e) => {
 											if (e.target.value === '' || USERNAME_REGEX.test(e.target.value)) {
@@ -272,18 +254,14 @@ export const Home = memo(() => {
 									<ClaimButton
 										onClick={onClaim}
 										fullWidth
-										disabled={username.length === 0 || showWhileYouWait || waitingForMetaMask}
+										disabled={username.length === 0 || waitingForMetaMask}
 										variant="contained"
 										size="large"
-										// @ts-ignore
-										progress={progress}
 									>
 										{waitingForMetaMask ? (
 											<Fade in={waitingForMetaMask}>
 												<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
 											</Fade>
-										) : showWhileYouWait ? (
-											<CircularProgress color="inherit" sx={{ zIndex: 3 }} />
 										) : (
 											'Claim'
 										)}
@@ -293,11 +271,9 @@ export const Home = memo(() => {
 										type="submit"
 										onClick={onVerify}
 										fullWidth
-										disabled={username.length === 0 || showWhileYouWait}
+										disabled={username.length === 0}
 										variant="contained"
 										size="large"
-										// @ts-ignore
-										progress={progress}
 									>
 										Verify
 									</VerifyButton>
@@ -374,15 +350,7 @@ export const Home = memo(() => {
 											}}
 										>
 											{costEstimate ? (
-												<>
-													{new Intl.NumberFormat('en-US').format(costEstimate)}
-													{/*<Typography color="textSecondary" variant="caption" component="p">
-													USD{' '}
-													{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
-														.format(costEstimate * PRICE_PER_SPC || 0)
-														.slice(0, -3)}
-										</Typography>*/}
-												</>
+												new Intl.NumberFormat('en-US').format(costEstimate)
 											) : (
 												<span style={{ position: 'relative', top: -1 }}>
 													<img src={Treasure} height="42" width="42" alt="Treasure" />
@@ -416,73 +384,35 @@ export const Home = memo(() => {
 						</Grid>
 					</Grid>
 
-					{!showWhileYouWait && (
-						<Grow in={verified}>
-							<div>
-								{available ? (
-									<Alert
-										icon={
-											<IoCheckmarkCircle style={{ position: 'relative', top: 2, color: theme.palette.success.light }} />
-										}
-										severity="success"
-										sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 480, justifyContent: 'center' }}
-									>
-										<Typography>This space is available!</Typography>
-									</Alert>
-								) : (
-									<Typography
-										align="center"
-										// @ts-ignore
-										component={Link}
-										sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860, display: 'block' }}
-										to={`/spaces/${username}/`}
-										gutterBottom
-										color="error"
-									>
-										This space is already taken
-									</Typography>
-								)}
-							</div>
-						</Grow>
-					)}
-
-					<Grow mountOnEnter in={showWhileYouWait}>
+					<Grow in={verified}>
 						<div>
-							<Typography
-								align="center"
-								sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }}
-								variant="body2"
-								gutterBottom
-								color="textSecondary"
-							>
-								This may take a little while...
-							</Typography>
-							<Typography
-								variant="body2"
-								align="center"
-								sx={{ m: 'auto', mt: 1, maxWidth: 860 }}
-								gutterBottom
-								color="textSecondary"
-							>
-								Instead of requiring you to spend a token to make a claim, we instead require to compute some work.
-							</Typography>
-							<Typography
-								variant="body2"
-								align="center"
-								sx={{ m: 'auto', mt: 1, maxWidth: 860 }}
-								gutterBottom
-								color="textSecondary"
-							>
-								This can take a few minutes and is only required once to claim your domain.
-								<br />
-								Whenever updating keys in your domain it will take much less time.
-							</Typography>
+							{available ? (
+								<Alert
+									icon={
+										<IoCheckmarkCircle style={{ position: 'relative', top: 2, color: theme.palette.success.light }} />
+									}
+									severity="success"
+									sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 480, justifyContent: 'center' }}
+								>
+									<Typography>This space is available!</Typography>
+								</Alert>
+							) : (
+								<Typography
+									align="center"
+									// @ts-ignore
+									component={Link}
+									sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860, display: 'block' }}
+									to={`/spaces/${username}/`}
+									gutterBottom
+									color="error"
+								>
+									This space is already taken
+								</Typography>
+							)}
 						</div>
 					</Grow>
 				</form>
 			)}
-
-			{showWhileYouWait && <WhileYouWait />}
 		</Page>
 	)
 })

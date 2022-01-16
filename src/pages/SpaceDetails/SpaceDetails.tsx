@@ -25,6 +25,7 @@ import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { USERNAME_REGEX_QUERY } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
+import { rainbowText } from '@/theming/rainbowText'
 import { SpaceKeyValue } from '@/types'
 import { querySpace } from '@/utils/spacesVM'
 
@@ -82,24 +83,15 @@ export const SpaceDetails = memo(() => {
 								alignItems: 'center',
 							}}
 						>
-							<PageTitle align="center" variant="h2" sx={{ mb: 0 }}>
+							<PageTitle align="center" variant="h2" sx={{ mb: 2 }}>
 								<Twemoji svg text="✨🔭" />
 							</PageTitle>
 							<PageTitle
 								align="center"
 								variant="h1"
 								sx={{
+									...rainbowText,
 									mb: 0,
-									lineHeight: 1,
-									wordBreak: 'break-all',
-									backgroundSize: '400% 100%',
-									backgroundClip: 'text',
-									textFillColor: 'transparent',
-									backgroundColor: theme.palette.mode === 'dark' ? 'white' : 'unset',
-									animation: 'hue 5s infinite alternate',
-									caretColor: '#523df1',
-									backgroundImage:
-										'linear-gradient(60deg,rgba(239,0,143,.5),rgba(110,195,244,.5),rgba(112,56,255,.5),rgba(255,186,39,.5))',
 								}}
 							>
 								{spaceIdTrimmed}
