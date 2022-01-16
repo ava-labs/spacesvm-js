@@ -1,6 +1,5 @@
 import { isMobile } from 'react-device-detect'
-import { Twemoji } from 'react-emoji-render'
-import { IoClose, IoSearch } from 'react-icons/io5'
+import { IoCheckmarkCircle, IoClose, IoSearch } from 'react-icons/io5'
 import { createSearchParams, Link, useNavigate, useSearchParams } from 'react-router-dom'
 import {
 	Alert,
@@ -19,12 +18,14 @@ import {
 	TextField,
 	Tooltip,
 	Typography,
+	useTheme,
 } from '@mui/material'
 import { styled } from '@mui/system'
 // @ts-ignore
 import FakeProgress from 'fake-progress'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
+import Treasure from '@/assets/treasure.png'
 import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
@@ -97,6 +98,7 @@ export const Home = memo(() => {
 		searchParams.get('ref')?.toLowerCase().replace(USERNAME_REGEX_QUERY, '') || '',
 	) // pre-fill if ?ref=something in URL
 	const [progress, setProgress] = useState<number>(0)
+	const theme = useTheme()
 	const [verified, setVerified] = useState<boolean>(false)
 	const [available, setAvailable] = useState<boolean>(false)
 	const [costEstimate, setCostEstimate] = useState<number>()
@@ -383,7 +385,7 @@ export const Home = memo(() => {
 												</>
 											) : (
 												<span style={{ position: 'relative', top: -1 }}>
-													<Twemoji svg text="💰" />
+													<img src={Treasure} height="42" width="42" alt="Treasure" />
 												</span>
 											)}
 										</Typography>
@@ -418,14 +420,22 @@ export const Home = memo(() => {
 						<Grow in={verified}>
 							<div>
 								{available ? (
-									<Typography
-										align="center"
-										sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }}
-										gutterBottom
-										color="#f67916"
+									<Alert
+										icon={
+											<IoCheckmarkCircle style={{ position: 'relative', top: 2, color: theme.palette.success.light }} />
+										}
+										severity="success"
+										sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 480, justifyContent: 'center' }}
 									>
-										This space is available!
-									</Typography>
+										<Typography
+											align="center"
+											//sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }}
+											//gutterBottom
+											//color="#f67916"
+										>
+											This space is available!
+										</Typography>
+									</Alert>
 								) : (
 									<Typography
 										align="center"
