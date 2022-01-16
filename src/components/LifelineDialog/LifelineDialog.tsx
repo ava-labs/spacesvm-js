@@ -74,6 +74,7 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 			// show some sort of failure dialog
 			return
 		}
+		setIsDone(true)
 		refreshSpaceDetails()
 	}
 
