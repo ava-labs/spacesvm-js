@@ -7,14 +7,19 @@ import {
 	Button,
 	Card,
 	CardContent,
+	Chip,
 	Grid,
+	Grow,
 	IconButton,
 	LinearProgress,
+	Table,
+	TableBody,
+	TableCell,
+	TableRow,
 	Tooltip,
 	Typography,
-	useTheme,
 } from '@mui/material'
-import { formatDistanceToNow } from 'date-fns'
+import { format, formatDistanceToNow } from 'date-fns'
 
 import { ClaimButton } from '../Home/Home'
 
@@ -31,10 +36,10 @@ import { querySpace } from '@/utils/spacesVM'
 
 export const SpaceDetails = memo(() => {
 	const navigate = useNavigate()
-	const theme = useTheme()
 	const { spaceId } = useParams()
 	const { currentAddress } = useMetaMask()
 	const [details, setDetails] = useState<any>()
+	const [showDetailsTable, setShowDetailsTable] = useState<boolean>(false)
 	const [spaceValues, setSpaceValues] = useState<any>()
 	const [loading, setLoading] = useState<boolean>(true)
 	const spaceIdTrimmed = spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')
@@ -44,6 +49,7 @@ export const SpaceDetails = memo(() => {
 
 	const refreshSpaceDetails = useCallback(async () => {
 		const spaceData = await querySpace(spaceId || '')
+		console.log(spaceData)
 		setDetails(spaceData?.info)
 		setSpaceValues(spaceData?.values)
 		setLoading(false)
@@ -70,11 +76,11 @@ export const SpaceDetails = memo(() => {
 						<Grid
 							item
 							xs={12}
-							sm={5}
+							md={5}
 							sx={{
 								height: {
 									xs: 'unset',
-									sm: 'calc(100vh - 128px)',
+									md: 'calc(100vh - 128px)',
 								},
 								p: 2,
 								display: 'flex',
@@ -116,32 +122,57 @@ export const SpaceDetails = memo(() => {
 												<Grid item>
 													Expires {formatDistanceToNow(new Date(details.expiry * 1000), { addSuffix: true })}
 												</Grid>
-												<Grid item sx={{ display: 'flex', mt: '1px' }}>
+												<Grid item sx={{ display: 'flex', mt: '0px' }}>
 													<IoInformationCircleOutline size={14} />
 												</Grid>
 											</Grid>
 										</Typography>
 									</Tooltip>
 
-									<Button
-										sx={{ mt: 2 }}
-										variant="outlined"
-										color="secondary"
-										onClick={() => setLifelineDialogOpen(true)}
-									>
-										Extend expiration date
-									</Button>
+									<Grid container sx={{ mt: 2 }} alignItems="center" justifyContent="center" spacing={1}>
+										<Grid item>
+											<Button variant="outlined" color="secondary" onClick={() => setLifelineDialogOpen(true)}>
+												Extend expiration date
+											</Button>
+										</Grid>
+										<Grid item>
+											<Button color="secondary" onClick={() => setShowDetailsTable(!showDetailsTable)}>
+												{showDetailsTable ? 'Hide' : 'Show'} details
+											</Button>
+										</Grid>
+									</Grid>
+
+									<Grow in={showDetailsTable} mountOnEnter unmountOnExit>
+										<Table sx={{ mt: 2 }}>
+											<TableBody>
+												<TableRow>
+													<TableCell>Owner</TableCell>
+													<TableCell>
+														<Chip sx={{ ml: -1 }} label={details.owner} />
+													</TableCell>
+												</TableRow>
+												<TableRow>
+													<TableCell sx={{ whiteSpace: 'nowrap' }}>Created on</TableCell>
+													<TableCell>{new Date(details.created * 1000).toLocaleString()}</TableCell>
+												</TableRow>
+												<TableRow>
+													<TableCell sx={{ whiteSpace: 'nowrap' }}>Last updated on</TableCell>
+													<TableCell>{new Date(details.lastUpdated * 1000).toLocaleString()}</TableCell>
+												</TableRow>
+											</TableBody>
+										</Table>
+									</Grow>
 								</>
 							)}
 						</Grid>
 						<Grid
 							item
 							xs={12}
-							sm={7}
+							md={7}
 							sx={{
 								p: {
 									xs: 2,
-									sm: 8,
+									md: 8,
 								},
 								background: (theme) => theme.palette.background.paper,
 								borderTopLeftRadius: 24,
