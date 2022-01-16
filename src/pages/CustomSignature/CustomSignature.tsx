@@ -106,6 +106,12 @@ export const CustomSignature = () => {
 		setIsSubmitting(true)
 
 		try {
+			// eslint-disable-next-line no-console
+			console.log(`issueTx Params:`, {
+				typedData,
+				signature,
+			})
+
 			const res = await fetchSpaces('issueTx', {
 				typedData,
 				signature,
