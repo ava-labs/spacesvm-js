@@ -221,7 +221,7 @@ export const Home = memo(() => {
 																		setUsername('')
 																	}}
 																>
-																	<IoClose size={64} color="grey" />
+																	<IoClose size={'4rem'} color="grey" />
 																</IconButton>
 															</Tooltip>
 														</Fade>
