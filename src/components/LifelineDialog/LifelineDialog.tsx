@@ -23,7 +23,7 @@ import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { rainbowText } from '@/theming/rainbowText'
 import { TxType } from '@/types'
 import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { getSuggestedFee, issueTransaction } from '@/utils/spacesVM'
+import { getSuggestedFee, issueAndConfirmTransaction, issueTransaction } from '@/utils/spacesVM'
 
 const SubmitButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
@@ -69,7 +69,7 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 		const signature = await signWithMetaMaskV4(typedData)
 		setIsSigning(false)
 		if (!signature) return
-		const result = await issueTransaction(typedData, signature)
+		const result = await issueAndConfirmTransaction(typedData, signature)
 		if (result) setIsDone(true)
 		refreshSpaceDetails()
 	}
