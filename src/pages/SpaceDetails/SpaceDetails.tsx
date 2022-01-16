@@ -18,6 +18,7 @@ import { formatDistanceToNow } from 'date-fns'
 
 import { ClaimButton } from '../Home/Home'
 
+import { LifelineDialog } from '@/components/LifelineDialog'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { USERNAME_REGEX_QUERY } from '@/constants'
@@ -31,6 +32,7 @@ export const SpaceDetails = memo(() => {
 	const { spaceId } = useParams()
 	const spaceIdTrimmed = spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')
 	const theme = useTheme()
+	const [lifelineDialogOpen, setLifelineDialogOpen] = useState<boolean>(false)
 
 	const onVerify = useCallback(async () => {
 		const spaceData = await querySpace(spaceId || '')
@@ -115,7 +117,12 @@ export const SpaceDetails = memo(() => {
 										</Typography>
 									</Tooltip>
 
-									<Button disabled sx={{ mt: 2 }} variant="outlined" color="secondary">
+									<Button
+										sx={{ mt: 2 }}
+										variant="outlined"
+										color="secondary"
+										onClick={() => setLifelineDialogOpen(true)}
+									>
 										Extend expiration date
 									</Button>
 								</>
@@ -210,6 +217,13 @@ export const SpaceDetails = memo(() => {
 					</Grid>
 				)}
 			</Box>
+			{details?.expiry && (
+				<LifelineDialog
+					open={lifelineDialogOpen}
+					close={() => setLifelineDialogOpen(false)}
+					existingExpiry={details.expiry}
+				/>
+			)}
 		</Page>
 	)
 })
