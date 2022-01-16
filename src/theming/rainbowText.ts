@@ -2,9 +2,9 @@ import { Theme } from '@mui/material'
 
 export const rainbowText: any = {
 	lineHeight: 1,
-	wordBreak: 'break-all',
 	backgroundSize: '400% 100%',
 	backgroundClip: 'text',
+	wordBreak: 'break-word',
 	textFillColor: 'transparent',
 	backgroundColor: (theme: Theme) => (theme.palette.mode === 'dark' ? '#fff' : 'unset'),
 	animation: 'hue 5s infinite alternate',

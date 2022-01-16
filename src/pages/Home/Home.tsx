@@ -24,7 +24,6 @@ import {
 import { styled } from '@mui/system'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
-import Treasure from '@/assets/treasure.png'
 import { ClaimedDialog } from '@/components/ClaimedDialog'
 import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
@@ -275,112 +274,111 @@ export const Home = memo(() => {
 										variant="contained"
 										size="large"
 									>
-										Verify
+										Check availability
 									</VerifyButton>
 								)}
 							</Grid>
-							<Grid
-								item
-								sx={{
-									height: '100%',
-									display: {
-										xs: 'none',
-										md: 'flex',
-									},
-								}}
-							>
-								<Divider
-									flexItem
-									orientation="vertical"
-									sx={{
-										height: 60,
-									}}
-								/>
-							</Grid>
-							<Grid item container wrap="nowrap" spacing={4} alignItems="center" flexBasis="content">
-								<Grid item>
-									<Box
-										position="relative"
-										width={144}
-										height={72}
-										display="flex"
-										alignItems="center"
-										justifyContent="center"
+
+							{verified && costEstimate && available && (
+								<>
+									<Grid
+										item
 										sx={{
-											ml: 2,
-											'&:before': {
-												position: 'absolute',
-												content: "''",
-												background: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
-												top: '50%',
-												left: '50%',
-												width: costEstimate ? '115%' : '100%',
-												height: costEstimate ? '125%' : '100%',
-												transform: 'translate3d(-50%,-50%,0)',
-												filter: `blur(8px) ${!costEstimate ? 'grayscale(0.92) opacity(0.5)' : ''}`,
-												transitionProperty: 'width, height, filter',
-												transitionDuration: '0.2s',
-												transitionTimingFunction: 'ease',
-												borderRadius: 3,
-												zIndex: 1,
-											},
-											'&:after': {
-												content: "''",
-												top: 0,
-												right: 0,
-												bottom: 0,
-												left: 0,
-												zIndex: 2,
-												position: 'absolute',
-												borderRadius: 3,
-												backgroundColor: (theme) => theme.customPalette.customBackground,
+											height: '100%',
+											display: {
+												xs: 'none',
+												md: 'flex',
 											},
 										}}
 									>
-										<Typography
-											noWrap
-											variant="h6"
-											align="center"
-											style={{
-												zIndex: 3,
-												marginTop: 4,
-												lineHeight: 1,
-												fontSize: costEstimate ? '1.5rem' : 36,
-												position: 'relative',
+										<Divider
+											flexItem
+											orientation="vertical"
+											sx={{
+												height: 60,
 											}}
-										>
-											{costEstimate ? (
-												new Intl.NumberFormat('en-US').format(costEstimate)
-											) : (
-												<span style={{ position: 'relative', top: -1 }}>
-													<img src={Treasure} height="42" width="42" alt="Treasure" />
-												</span>
-											)}
-										</Typography>
-									</Box>
-								</Grid>
-								<Grid item>
-									<Typography variant="h6" gutterBottom>
-										Cost{' '}
-										<Typography component="span" color="textSecondary">
-											(SPC)
-										</Typography>
-									</Typography>
-									<Typography variant="body2" color="textSecondary">
-										The{' '}
-										<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
-											shorter
-										</Typography>{' '}
-										the username,
-										<br />
-										the{' '}
-										<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
-											more
-										</Typography>{' '}
-										it will cost to claim.
-									</Typography>
-								</Grid>
-							</Grid>
+										/>
+									</Grid>
+									<Grid item container wrap="nowrap" spacing={4} alignItems="center" flexBasis="content">
+										<Grid item>
+											<Box
+												position="relative"
+												width={144}
+												height={72}
+												display="flex"
+												alignItems="center"
+												justifyContent="center"
+												sx={{
+													ml: 2,
+													'&:before': {
+														position: 'absolute',
+														content: "''",
+														background: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
+														top: '50%',
+														left: '50%',
+														width: costEstimate ? '115%' : '100%',
+														height: costEstimate ? '125%' : '100%',
+														transform: 'translate3d(-50%,-50%,0)',
+														filter: `blur(8px) ${!costEstimate ? 'grayscale(0.92) opacity(0.5)' : ''}`,
+														transitionProperty: 'width, height, filter',
+														transitionDuration: '0.2s',
+														transitionTimingFunction: 'ease',
+														borderRadius: 3,
+														zIndex: 1,
+													},
+													'&:after': {
+														content: "''",
+														top: 0,
+														right: 0,
+														bottom: 0,
+														left: 0,
+														zIndex: 2,
+														position: 'absolute',
+														borderRadius: 3,
+														backgroundColor: (theme) => theme.customPalette.customBackground,
+													},
+												}}
+											>
+												<Typography
+													noWrap
+													variant="h6"
+													align="center"
+													style={{
+														zIndex: 3,
+														marginTop: 4,
+														lineHeight: 1,
+														fontSize: costEstimate ? '1.5rem' : 36,
+														position: 'relative',
+													}}
+												>
+													{new Intl.NumberFormat('en-US').format(costEstimate)}
+												</Typography>
+											</Box>
+										</Grid>
+										<Grid item>
+											<Typography variant="h6" gutterBottom>
+												Cost{' '}
+												<Typography component="span" color="textSecondary">
+													(SPC)
+												</Typography>
+											</Typography>
+											<Typography variant="body2" color="textSecondary">
+												The{' '}
+												<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
+													shorter
+												</Typography>{' '}
+												the username,
+												<br />
+												the{' '}
+												<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
+													more
+												</Typography>{' '}
+												it will cost to claim.
+											</Typography>
+										</Grid>
+									</Grid>
+								</>
+							)}
 						</Grid>
 					</Grid>
 
