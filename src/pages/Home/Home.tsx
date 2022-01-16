@@ -268,13 +268,13 @@ export const Home = memo(() => {
 								) : (
 									<VerifyButton
 										type="submit"
-										onClick={onVerify}
+										onClick={() => (verified ? navigate(`/spaces/${username}/`) : onVerify())}
 										fullWidth
 										disabled={username.length === 0}
 										variant="contained"
 										size="large"
 									>
-										Check availability
+										{verified ? 'View space' : 'Check availability'}
 									</VerifyButton>
 								)}
 							</Grid>
@@ -397,10 +397,7 @@ export const Home = memo(() => {
 							) : (
 								<Typography
 									align="center"
-									// @ts-ignore
-									component={Link}
 									sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860, display: 'block' }}
-									to={`/spaces/${username}/`}
 									gutterBottom
 									color="error"
 								>
