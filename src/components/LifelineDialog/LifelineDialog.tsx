@@ -12,6 +12,7 @@ import {
 	Grid,
 	IconButton,
 	Link,
+	Slide,
 	styled,
 	Tooltip,
 	Typography,
@@ -95,7 +96,7 @@ export const LifelineDialog = ({ open, close, existingExpiry }: LifelineDialogPr
 					Extend some life to {spaceId} before it expires! <Twemoji svg text=":hourglass:" />
 				</Typography>
 			</DialogTitle>
-			<DialogContent sx={{ mt: 2 }}>
+			<DialogContent sx={{ mt: 2, overflowY: 'hidden' }}>
 				<Typography variant="body1" align="center" color="textSecondary">
 					Extend by:
 				</Typography>
@@ -134,16 +135,16 @@ export const LifelineDialog = ({ open, close, existingExpiry }: LifelineDialogPr
 					</Grid>
 				</Grid>
 				<Box sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>
-					<IconButton disabled={extendUnits <= 0} onClick={() => setExtendUnits(extendUnits - 1)}>
+					<IconButton disabled={isDone || extendUnits <= 0} onClick={() => setExtendUnits(extendUnits - 1)}>
 						<BsDashLg />
 					</IconButton>
-					<IconButton onClick={() => setExtendUnits(extendUnits + 1)} sx={{ ml: 2 }}>
+					<IconButton disabled={isDone} onClick={() => setExtendUnits(extendUnits + 1)} sx={{ ml: 2 }}>
 						<BsPlusLg />
 					</IconButton>
 				</Box>
 
 				{isDone ? (
-					<Fade in={isDone}>
+					<Slide direction="up" in={isDone}>
 						<div style={{ height: 78 }}>
 							<Box sx={{ mt: 4, pt: 1, display: 'flex', justifyContent: 'center' }}>
 								<Typography
@@ -168,20 +169,24 @@ export const LifelineDialog = ({ open, close, existingExpiry }: LifelineDialogPr
 								<Link onClick={handleClose}>Close</Link>
 							</Typography>
 						</div>
-					</Fade>
+					</Slide>
 				) : (
 					<Fade in={!isDone}>
 						<div>
 							<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-								<SubmitButton variant="contained" type="submit" onClick={onSubmit}>
-									{isSigning ? (
-										<Fade in={isSigning}>
-											<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
-										</Fade>
-									) : (
-										'Extend Life'
-									)}
-								</SubmitButton>
+								<Tooltip placement="top" title={extendUnits <= 0 ? 'Add hours to extend!' : ''}>
+									<Box sx={{ cursor: extendUnits <= 0 ? 'help' : 'inherit' }}>
+										<SubmitButton disabled={extendUnits <= 0} variant="contained" type="submit" onClick={onSubmit}>
+											{isSigning ? (
+												<Fade in={isSigning}>
+													<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
+												</Fade>
+											) : (
+												'Extend Life'
+											)}
+										</SubmitButton>
+									</Box>
+								</Tooltip>
 							</Box>
 							<Box sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>
 								<Typography variant="caption">Cost: {fee} SPC</Typography>

@@ -1,6 +1,6 @@
 import { Twemoji } from 'react-emoji-render'
 import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
 	Avatar,
 	Box,
@@ -27,6 +27,7 @@ import { querySpace } from '@/utils/spacesVM'
 
 export const SpaceDetails = memo(() => {
 	const [details, setDetails] = useState<any>()
+	const navigate = useNavigate()
 	const [spacesValues, setSpacesValues] = useState<any>()
 	const [loading, setLoading] = useState<boolean>(true)
 	const { spaceId } = useParams()
@@ -44,6 +45,10 @@ export const SpaceDetails = memo(() => {
 	useEffect(() => {
 		onVerify()
 	}, [onVerify])
+
+	useEffect(() => {
+		!spaceId?.length && navigate('/')
+	}, [spaceId, navigate])
 
 	return (
 		<Page title={spaceIdTrimmed} showFooter={false} noPadding>
