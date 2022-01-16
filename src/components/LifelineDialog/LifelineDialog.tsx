@@ -23,7 +23,7 @@ import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { rainbowText } from '@/theming/rainbowText'
 import { TxType } from '@/types'
 import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { getSuggestedFee, issueTransaction } from '@/utils/spacesVM'
+import { getSuggestedFee, issueAndConfirmTransaction, issueTransaction } from '@/utils/spacesVM'
 
 const SubmitButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
@@ -55,22 +55,21 @@ const checkFee = throttle(async (space, units) => getSuggestedFee({ type: TxType
 export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetails }: LifelineDialogProps) => {
 	const { spaceId } = useParams()
 	const [extendUnits, setExtendUnits] = useState(0)
-	const [typedData, setTypedData] = useState<any>()
 	const [fee, setFee] = useState(0)
 	const [isSigning, setIsSigning] = useState(false)
 	const [isDone, setIsDone] = useState(false)
 
 	const onSubmit = async () => {
 		setIsSigning(true)
-		const { typedData: latestTypedData } = await getSuggestedFee({
+		const { typedData } = await getSuggestedFee({
 			type: TxType.Lifeline,
 			space: spaceId,
 			units: extendUnits,
 		})
-		const signature = await signWithMetaMaskV4(latestTypedData)
+		const signature = await signWithMetaMaskV4(typedData)
 		setIsSigning(false)
 		if (!signature) return
-		const result = await issueTransaction(typedData, signature)
+		const result = await issueAndConfirmTransaction(typedData, signature)
 		if (result) setIsDone(true)
 		refreshSpaceDetails()
 	}
@@ -83,8 +82,7 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 
 	useEffect(() => {
 		const _checkFee = async () => {
-			const { typedData, totalCost } = await checkFee(spaceId, extendUnits)
-			setTypedData(typedData)
+			const { totalCost } = await checkFee(spaceId, extendUnits)
 			setFee(totalCost)
 		}
 		_checkFee()

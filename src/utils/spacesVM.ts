@@ -1,3 +1,5 @@
+import { tryNTimes } from './tryNTimes'
+
 import { API_DOMAIN } from '@/constants'
 import { SpaceKeyValue, TransactionInfo } from '@/types'
 
@@ -92,3 +94,35 @@ export const getSuggestedFee = async (transactionInfo: TransactionInfo) =>
  */
 export const issueTransaction = async (typedData: any, signature: string) =>
 	await fetchSpaces('issueTx', { typedData, signature })
+
+export const issueAndConfirmTransaction = async (typedData: any, signature: string): Promise<boolean> => {
+	const txResponse = await fetchSpaces('issueTx', { typedData, signature })
+	if (!txResponse?.txId) return false
+
+	const checkIsAccepted = async () => {
+		try {
+			const { accepted } = await fetchSpaces('hasTx', { txId: txResponse.txId })
+			if (accepted) return true
+			throw 'Transaction has not yet been accepted.'
+		} catch (error) {
+			throw 'Failed to fetch.'
+		}
+	}
+
+	try {
+		const response = await tryNTimes(checkIsAccepted, 10, 1000)
+		if (response) return true
+	} catch {
+		return false
+	}
+}
+
+export const hasTransaction = async (txId: string) => {
+	try {
+		const { accepted } = await fetchSpaces('hasTx', { txId })
+		if (accepted) return true
+		throw 'Not yet accepted'
+	} catch (error) {
+		throw 'Not yet accepted'
+	}
+}
