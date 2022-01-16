@@ -1,5 +1,5 @@
 import { API_DOMAIN } from '@/constants'
-import { SpaceKeyValue, TransactionInfo } from '@/types'
+import { SpaceKeyValue, TransactionInfo, TxType } from '@/types'
 
 export const fetchSpaces = async (method: string, params = {}) => {
 	const response = await fetch(`${API_DOMAIN}`, {
@@ -76,4 +76,10 @@ export const getSuggestedFee = async (transactionInfo: TransactionInfo) =>
 	await fetchSpaces('suggestedFee', { input: transactionInfo })
 
 export const claimSpace = async (typedData: any, signature: string) =>
+	await fetchSpaces('issueTx', { typedData, signature })
+
+export const extendLifeline = async (typedData: any, signature: string) =>
+	await fetchSpaces('issueTx', { typedData, signature })
+
+export const issueTransaction = async (typedData: any, signature: string) =>
 	await fetchSpaces('issueTx', { typedData, signature })

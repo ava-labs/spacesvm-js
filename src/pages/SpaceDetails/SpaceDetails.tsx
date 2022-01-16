@@ -1,6 +1,6 @@
 import { Twemoji } from 'react-emoji-render'
 import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
 	Avatar,
 	Box,
@@ -18,30 +18,41 @@ import { formatDistanceToNow } from 'date-fns'
 
 import { ClaimButton } from '../Home/Home'
 
+import { KeyValueInput } from '@/components/KeyValueInput'
+import { LifelineDialog } from '@/components/LifelineDialog'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { USERNAME_REGEX_QUERY } from '@/constants'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { SpaceKeyValue } from '@/types'
 import { querySpace } from '@/utils/spacesVM'
 
 export const SpaceDetails = memo(() => {
-	const [details, setDetails] = useState<any>()
-	const [spacesValues, setSpacesValues] = useState<any>()
-	const [loading, setLoading] = useState<boolean>(true)
-	const { spaceId } = useParams()
-	const spaceIdTrimmed = spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')
+	const navigate = useNavigate()
 	const theme = useTheme()
+	const { spaceId } = useParams()
+	const { currentAddress } = useMetaMask()
+	const [details, setDetails] = useState<any>()
+	const [spaceValues, setSpaceValues] = useState<any>()
+	const [loading, setLoading] = useState<boolean>(true)
+	const spaceIdTrimmed = spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')
+	const [lifelineDialogOpen, setLifelineDialogOpen] = useState<boolean>(false)
 
-	const onVerify = useCallback(async () => {
+	const refreshSpaceDetails = useCallback(async () => {
 		const spaceData = await querySpace(spaceId || '')
 		setDetails(spaceData?.info)
-		setSpacesValues(spaceData?.values)
+		setSpaceValues(spaceData?.values)
 		setLoading(false)
 	}, [spaceId])
 
 	useEffect(() => {
-		onVerify()
-	}, [onVerify])
+		// Give the api a second to update
+		setTimeout(refreshSpaceDetails, 1000)
+	}, [refreshSpaceDetails])
+
+	useEffect(() => {
+		!spaceId?.length && navigate('/')
+	}, [spaceId, navigate])
 
 	return (
 		<Page title={spaceIdTrimmed} showFooter={false} noPadding>
@@ -115,7 +126,12 @@ export const SpaceDetails = memo(() => {
 										</Typography>
 									</Tooltip>
 
-									<Button disabled sx={{ mt: 2 }} variant="outlined" color="secondary">
+									<Button
+										sx={{ mt: 2 }}
+										variant="outlined"
+										color="secondary"
+										onClick={() => setLifelineDialogOpen(true)}
+									>
 										Extend expiration date
 									</Button>
 								</>
@@ -138,8 +154,11 @@ export const SpaceDetails = memo(() => {
 								height: 'calc(100vh - 64px)',
 							}}
 						>
-							{spacesValues ? (
-								spacesValues.map(({ key, value }: SpaceKeyValue, i: number) => (
+							{spaceId && details?.owner === currentAddress && (
+								<KeyValueInput spaceId={spaceId} refreshSpaceDetails={refreshSpaceDetails} />
+							)}
+							{spaceValues ? (
+								spaceValues.map(({ key, value }: SpaceKeyValue, i: number) => (
 									<Card
 										key={key}
 										elevation={0}
@@ -210,6 +229,14 @@ export const SpaceDetails = memo(() => {
 					</Grid>
 				)}
 			</Box>
+			{details?.expiry && (
+				<LifelineDialog
+					open={lifelineDialogOpen}
+					close={() => setLifelineDialogOpen(false)}
+					existingExpiry={details.expiry}
+					refreshSpaceDetails={refreshSpaceDetails}
+				/>
+			)}
 		</Page>
 	)
 })
