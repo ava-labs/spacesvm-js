@@ -1,5 +1,6 @@
 import { Twemoji } from 'react-emoji-render'
 import { BsDash, BsDashLg, BsPlus, BsPlusLg } from 'react-icons/bs'
+import { IoAdd, IoRemove } from 'react-icons/io5'
 import { useParams } from 'react-router-dom'
 import {
 	Box,
@@ -28,7 +29,8 @@ import { getSuggestedFee, issueTransaction } from '@/utils/spacesVM'
 const SubmitButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
 	padding: theme.spacing(1, 10),
-	height: 50,
+	height: 60,
+	minWidth: 320,
 	fontWeight: 900,
 	fontSize: 24,
 	position: 'relative',
@@ -94,70 +96,111 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 	return (
 		<Dialog open={open} onClose={handleClose} maxWidth="xs">
 			<DialogTitle>
-				<Typography variant="h5" component="p" fontFamily="DM Serif Display" align="center">
-					Extend some life to <span style={{ color: '#e70256' }}>{spaceId}</span> before it expires!{' '}
-					<Twemoji svg text=":hourglass:" />
+				<Typography variant="h4" component="p" fontFamily="DM Serif Display" align="center">
+					Extend some life to{' '}
+					<Typography
+						variant="h4"
+						fontFamily="DM Serif Display"
+						component="span"
+						sx={{
+							backgroundSize: '400% 100%',
+							backgroundClip: 'text',
+							textFillColor: 'transparent',
+							backgroundColor: theme.palette.mode === 'dark' ? 'white' : 'unset',
+							animation: 'hue 5s infinite alternate',
+							backgroundImage:
+								'linear-gradient(60deg,rgba(239,0,143,.5),rgba(110,195,244,.5),rgba(112,56,255,.5),rgba(255,186,39,.5))',
+						}}
+					>
+						{spaceId}
+					</Typography>{' '}
+					before it expires!&nbsp;
+					<Twemoji svg text="⌛️" />
 				</Typography>
 			</DialogTitle>
 			<DialogContent sx={{ mt: 2, overflowY: 'hidden' }}>
-				<Typography variant="body1" align="center" color="textSecondary">
-					Extend by:
+				<Typography variant="body2" align="center" color="textSecondary" sx={{ mb: 1 }}>
+					Extend by
 				</Typography>
-				<Grid container spacing={1} alignItems={'flex-end'} sx={{ mt: 1 }}>
-					<Grid item xs={5} sx={{ mr: 1 }}>
-						<Tooltip placement="top" title={`Extend to ${extendToDateDisplay}`}>
-							<Typography
-								variant="h3"
-								align="right"
-								lineHeight={1}
-								sx={{
-									cursor: 'help',
-									backgroundSize: '400% 100%',
-									backgroundClip: 'text',
-									textFillColor: 'transparent',
-									backgroundColor: theme.palette.mode === 'dark' ? 'white' : 'unset',
-									animation: 'hue 5s infinite alternate',
-									backgroundImage:
-										'linear-gradient(60deg,rgba(239,0,143,.5),rgba(110,195,244,.5),rgba(112,56,255,.5),rgba(255,186,39,.5))',
-								}}
-							>
-								{extendUnits}
-							</Typography>
-						</Tooltip>
-					</Grid>
-					<Divider
-						flexItem
-						orientation="vertical"
-						sx={{
-							height: 60,
-						}}
-					/>
-					<Grid item xs={6}>
-						<Typography variant="h4" fontSize={1} width={100} lineHeight={1} component="span" color="textSecondary">
+
+				<Tooltip sx={{ cursor: 'help' }} placement="top" title={`Extend to ${extendToDateDisplay}`}>
+					<Box display="flex" alignItems="center" justifyContent="center">
+						<Typography sx={{ color: (theme) => theme.palette.secondary.light }} variant="h3">
+							{extendUnits}
+						</Typography>
+
+						<Divider flexItem orientation="vertical" sx={{ mx: 2 }} />
+
+						<Typography variant="h4" component="span" color="textSecondary">
 							hours
 						</Typography>
+					</Box>
+				</Tooltip>
+
+				<Grid container spacing={1} wrap="nowrap" justifyContent={'space-between'} alignItems="center" sx={{ mt: 1 }}>
+					<Grid item>
+						<Button
+							color="secondary"
+							size="small"
+							variant="outlined"
+							startIcon={<IoRemove />}
+							disabled={isDone || extendUnits <= 0}
+							onClick={() => setExtendUnits(Math.max(extendUnits - 24, 0))}
+						>
+							24 hours
+						</Button>
+					</Grid>
+					<Grid item>
+						<IconButton
+							sx={{
+								border: `1px solid rgba(82, 61, 241, 0.5)`,
+								'&:hover': {
+									border: (theme) => `1px solid ${theme.palette.secondary.main}`,
+								},
+								'&.Mui-disabled': {
+									border: (theme) => `1px solid ${theme.palette.action.disabled}`,
+								},
+							}}
+							color="inherit"
+							size="large"
+							disabled={isDone || extendUnits <= 0}
+							onClick={() => setExtendUnits(extendUnits - 1)}
+						>
+							<IoRemove />
+						</IconButton>
+					</Grid>
+					<Grid item>
+						<IconButton
+							sx={{
+								border: `1px solid rgba(82, 61, 241, 0.5)`,
+								'&:hover': {
+									border: (theme) => `1px solid ${theme.palette.secondary.main}`,
+								},
+								'&.Mui-disabled': {
+									border: (theme) => `1px solid ${theme.palette.action.disabled}`,
+								},
+							}}
+							size="large"
+							color="inherit"
+							disabled={isDone}
+							onClick={() => setExtendUnits(extendUnits + 1)}
+						>
+							<IoAdd />
+						</IconButton>
+					</Grid>
+					<Grid item>
+						<Button
+							variant="outlined"
+							size="small"
+							startIcon={<IoAdd />}
+							color="secondary"
+							disabled={isDone}
+							onClick={() => setExtendUnits(extendUnits + 24)}
+						>
+							24 hours
+						</Button>
 					</Grid>
 				</Grid>
-				<Box sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>
-					<Button disabled={isDone || extendUnits <= 0} onClick={() => setExtendUnits(Math.max(extendUnits - 24, 0))}>
-						<BsDash />
-						24
-					</Button>
-					<IconButton
-						disabled={isDone || extendUnits <= 0}
-						onClick={() => setExtendUnits(extendUnits - 1)}
-						sx={{ ml: 1 }}
-					>
-						<BsDashLg />
-					</IconButton>
-					<IconButton disabled={isDone} onClick={() => setExtendUnits(extendUnits + 1)} sx={{ ml: 4 }}>
-						<BsPlusLg />
-					</IconButton>
-					<Button disabled={isDone} onClick={() => setExtendUnits(extendUnits + 24)} sx={{ ml: 1 }}>
-						<BsPlus />
-						24
-					</Button>
-				</Box>
 
 				{isDone ? (
 					<Slide direction="up" in={isDone}>
@@ -198,7 +241,7 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 													<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
 												</Fade>
 											) : (
-												'Extend Life'
+												'Extend life'
 											)}
 										</SubmitButton>
 									</Box>

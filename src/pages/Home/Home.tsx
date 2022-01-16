@@ -427,14 +427,7 @@ export const Home = memo(() => {
 										severity="success"
 										sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 480, justifyContent: 'center' }}
 									>
-										<Typography
-											align="center"
-											//sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860 }}
-											//gutterBottom
-											//color="#f67916"
-										>
-											This space is available!
-										</Typography>
+										<Typography>This space is available!</Typography>
 									</Alert>
 								) : (
 									<Typography

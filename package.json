@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@honkhonk/vite-plugin-svgr": "1.1.0",
-    "@testing-library/dom": "8.11.1",
+    "@testing-library/dom": "8.11.2",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
@@ -43,7 +43,7 @@
     "@vitejs/plugin-react": "1.1.4",
     "babel-jest": "27.4.6",
     "babel-preset-react-app": "10.0.1",
-    "eslint": "8.6.0",
+    "eslint": "8.7.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-prettier": "4.0.0",
