@@ -206,7 +206,6 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 								<Typography
 									variant="h5"
 									align="right"
-									lineHeight={1}
 									sx={{
 										...rainbowText,
 									}}
