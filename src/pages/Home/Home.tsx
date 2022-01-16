@@ -31,9 +31,9 @@ import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
 import { USERNAME_REGEX, USERNAME_REGEX_QUERY, USERNAMES } from '@/constants'
-import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { calculateClaimCost } from '@/utils/calculateCost'
-import { isAlreadyClaimed } from '@/utils/quarkvm'
+import { signWithMetaMaskV4 } from '@/utils/metamask'
+import { claimSpace, getSuggestedFee, isAlreadyClaimed, TxType } from '@/utils/quarkvm'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
@@ -88,7 +88,6 @@ export const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 }))
 
 export const Home = memo(() => {
-	const { signClaimPayload } = useMetaMask()
 	const [searchParams] = useSearchParams()
 	const navigate = useNavigate()
 	const [showWhileYouWait, setShowWhileYouWait] = useState<boolean>(false)
@@ -124,9 +123,11 @@ export const Home = memo(() => {
 
 	const onClaim = async () => {
 		setWaitingForMetaMask(true)
-		const signature = await signClaimPayload(username)
+		const { typedData } = await getSuggestedFee({ type: TxType.Claim, space: username })
+		const signature = await signWithMetaMaskV4(typedData)
 		setWaitingForMetaMask(false)
 		if (!signature) return
+		const res = await claimSpace(typedData, signature)
 		onSigned()
 	}
 

@@ -3,8 +3,7 @@ import MetaMaskOnboarding from '@metamask/onboarding'
 import { Button } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
-import { metaMaskExists, mmRequestAccounts, signWithMetaMask } from '@/utils/metamask'
-import { getClaimPayload } from '@/utils/quarkPayloads'
+import { metaMaskExists, mmRequestAccounts } from '@/utils/metamask'
 import { getAddressBalance } from '@/utils/quarkvm'
 
 const ethereum = window.ethereum
@@ -49,16 +48,6 @@ export const MetaMaskProvider = ({ children }: any) => {
 		})
 	}
 
-	const signClaimPayload = async (username: string): Promise<string | undefined> => {
-		if (!metaMaskExists) {
-			onboardToMetaMask()
-			return
-		}
-		const claimPayload = await getClaimPayload(username)
-		const signature = await signWithMetaMask(claimPayload)
-		return signature
-	}
-
 	const [balance, setBalance] = useState<number | null>(null)
 	useEffect(() => {
 		if (!currentAddress) {
@@ -79,7 +68,6 @@ export const MetaMaskProvider = ({ children }: any) => {
 				balance,
 				connectToMetaMask,
 				onboardToMetaMask,
-				signClaimPayload,
 			}}
 		>
 			{children}

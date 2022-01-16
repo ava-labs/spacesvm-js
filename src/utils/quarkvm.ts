@@ -94,8 +94,5 @@ type TransactionInfo = {
 export const getSuggestedFee = async (transactionInfo: TransactionInfo) =>
 	await fetchSpaces('suggestedFee', { input: transactionInfo })
 
-export const claimSpace = async (typedData: any, signature: string) => {
-	console.log(`typedData, signature`, typedData, signature)
-	const res = await fetchSpaces('issueTx', { typedData, signature })
-	console.log(`res`, res)
-}
+export const claimSpace = async (typedData: any, signature: string) =>
+	await fetchSpaces('issueTx', { typedData, signature })
