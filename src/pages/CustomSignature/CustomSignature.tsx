@@ -2,6 +2,7 @@ import {
 	Button,
 	Card,
 	CircularProgress,
+	Container,
 	Divider,
 	Fade,
 	Grid,
@@ -47,7 +48,7 @@ const SectionTitle = styled(Typography)`
 
 const jsonPlaceholder = `{
   "type": "claim",
-  "space": "my_fancy_space_name"
+  "space": "connor"
 }`
 
 const DEV_NAMES = shuffleArray([
@@ -74,7 +75,6 @@ export const CustomSignature = () => {
 
 	const signJson = async () => {
 		if (!jsonInput?.length) return
-		clearOutput()
 		try {
 			setIsSigning(true)
 			const signature = await signWithMetaMaskV4(typedData)
@@ -99,6 +99,7 @@ export const CustomSignature = () => {
 		setResponse(null)
 		setSignatureError(null)
 		setSubmitError(null)
+		setTypedData(null)
 	}
 
 	const submitRequest = async () => {
@@ -107,7 +108,7 @@ export const CustomSignature = () => {
 
 		try {
 			// eslint-disable-next-line no-console
-			console.log(`issueTx Params:`, {
+			console.log(`Issuing Tx with Params:`, {
 				typedData,
 				signature,
 			})
@@ -120,12 +121,13 @@ export const CustomSignature = () => {
 			setIsSubmitting(false)
 			setResponse(res)
 		} catch (err: any) {
+			console.log(`err in component`, err)
 			setIsSubmitting(false)
-			setSubmitError(err.message)
+			setSubmitError(err)
 		}
 	}
 
-	const [typedData, setTypedData] = useState()
+	const [typedData, setTypedData] = useState<any>()
 	const getTypedData = async () => {
 		const { typedData } = await getSuggestedFee(JSON.parse(jsonInput))
 		setTypedData(typedData)
@@ -133,76 +135,60 @@ export const CustomSignature = () => {
 
 	return (
 		<Page>
-			<PageTitle variant="h3" gutterBottom sx={{ mt: 3 }}>
-				Hi,{' '}
-				<TypewrittingInput waitBeforeDeleteMs={2000} strings={DEV_NAMES}>
-					{({ currentText }) => <span>{currentText}</span>}
-				</TypewrittingInput>
-				!
-			</PageTitle>
-			<Grid container sx={{ width: '100%', height: '100%', minHeight: 300 }} spacing={4}>
-				<Grid item md={5} xs={12} sx={{ maxHeight: '100%' }}>
-					<Grid container justifyContent="space-between" alignItems="end">
-						<Grid item>
-							<Typography variant="h6" gutterBottom>
-								Input:
-							</Typography>
-						</Grid>
-						<Grid item>
-							<Button variant="text" sx={{ py: 0, mb: 1 }} onClick={() => setJsonInput(jsonPlaceholder)}>
-								Fill with sample.
-							</Button>
-						</Grid>
+			<Container sx={{ maxWidth: 800 }}>
+				<PageTitle variant="h3" gutterBottom sx={{ mt: 3 }}>
+					Hi,{' '}
+					<TypewrittingInput waitBeforeDeleteMs={2000} strings={DEV_NAMES}>
+						{({ currentText }) => <span>{currentText}</span>}
+					</TypewrittingInput>
+					!
+				</PageTitle>
+				<Grid container justifyContent="space-between" alignItems="flex-end">
+					<Grid item>
+						<SectionTitle variant="h5" gutterBottom>
+							Input:
+						</SectionTitle>
 					</Grid>
-					<Grid container direction="column" sx={{ height: '100%', maxHeight: '100%' }} spacing={1}>
-						<Grid item sx={{ height: 250, width: '100%', position: 'relative' }}>
-							<JsonTextArea
-								onChange={(e) => setJsonInput(e.target.value)}
-								value={jsonInput}
-								placeholder={jsonPlaceholder}
-								sx={{ borderRadius: 4, p: 2, height: '100% !important' }}
-							/>
-							<SignButton
-								variant="contained"
-								disabled={!jsonInput?.length}
-								onClick={getTypedData}
-								sx={{ position: 'absolute', right: 0, bottom: 0, mr: 2, mb: 2 }}
-							>
-								{isSigning ? (
-									<Fade in={isSigning}>
-										<img src={MetaMaskFoxLogo} alt="metamask-fox" height="100%" />
-									</Fade>
-								) : (
-									<>
-										Get Typed Data
-										<span style={{ marginLeft: 8 }}>👇</span>
-									</>
-								)}
-							</SignButton>
-						</Grid>
-						<Grid item sx={{ height: 400, width: '100%', position: 'relative' }}>
-							<Card
-								sx={{
-									height: '100%',
-									maxWidth: '100%',
-									px: 2,
-									pt: 2,
-									pb: 20,
-									overflow: 'auto',
-								}}
-							>
-								<pre>
-									<Typography fontFamily="monospace" fontSize={14} sx={{ overflowWrap: 'anywhere', mt: 2 }}>
-										{JSON.stringify(typedData, null, 2)}
-									</Typography>
-								</pre>
-							</Card>
-							<SignButton
-								variant="contained"
-								disabled={!jsonInput?.length}
-								onClick={signJson}
-								sx={{ position: 'absolute', right: 0, bottom: 0, mr: 2, mb: 2 }}
-							>
+					<Grid item>
+						<Button variant="text" sx={{ py: 0, mb: 1 }} onClick={() => setJsonInput(jsonPlaceholder)}>
+							Fill with sample.
+						</Button>
+					</Grid>
+				</Grid>
+				<Card sx={{ height: 300 }}>
+					<JsonTextArea
+						onChange={(e) => setJsonInput(e.target.value)}
+						value={jsonInput}
+						placeholder={jsonPlaceholder}
+						sx={{ borderRadius: 4, p: 2, height: '100% !important' }}
+					/>
+				</Card>
+				<Box sx={{ display: 'flex', justifyContent: 'center', my: 2 }}>
+					<Button onClick={clearOutput} sx={{ mr: 4 }}>
+						Reset
+					</Button>
+					<SignButton variant="contained" disabled={!jsonInput?.length} onClick={getTypedData}>
+						Prepare for Signing
+						<span style={{ marginLeft: 8 }}>👇</span>
+					</SignButton>
+				</Box>
+				<Slide direction="up" mountOnEnter in={!!typedData}>
+					<div>
+						<SectionTitle variant="h5" gutterBottom>
+							Typed Data:
+						</SectionTitle>
+						<Card sx={{ height: 400, px: 2, overflowY: 'scroll' }}>
+							<pre>
+								<Typography fontFamily="monospace" fontSize={12} sx={{ overflowWrap: 'anywhere', mt: 2 }}>
+									{JSON.stringify(typedData, null, 2)}
+								</Typography>
+							</pre>
+						</Card>
+						<Box sx={{ display: 'flex', justifyContent: 'center', my: 2 }}>
+							<Button onClick={clearOutput} sx={{ mr: 4 }}>
+								Reset
+							</Button>
+							<SignButton variant="contained" disabled={!jsonInput?.length} onClick={signJson}>
 								{isSigning ? (
 									<Fade in={isSigning}>
 										<img src={MetaMaskFoxLogo} alt="metamask-fox" height="100%" />
@@ -210,98 +196,66 @@ export const CustomSignature = () => {
 								) : (
 									<>
 										Sign
-										<span style={{ marginLeft: 8 }}>➡️</span>
+										<span style={{ marginLeft: 8 }}>✍</span>
 									</>
 								)}
 							</SignButton>
-						</Grid>
-					</Grid>
-				</Grid>
-				<Grid item md={7} xs={12}>
-					<Grid container justifyContent="space-between" alignItems="end">
-						<Grid item>
-							<Typography variant="h6" gutterBottom>
-								Output:
-							</Typography>
-						</Grid>
-						{(!!signature || !!signatureError || !!response || !!submitError) && (
-							<Grid item>
-								<Button variant="text" sx={{ py: 0, mb: 1 }} onClick={clearOutput}>
-									Clear output.
-								</Button>
-							</Grid>
-						)}
-					</Grid>
-
-					<Card sx={{ height: '100%', width: '100%', p: 2, overflow: 'auto' }}>
-						<Fade mountOnEnter in={!!(signature?.length || signatureError?.length)}>
-							<div>
-								{signatureError && (
-									<Typography color="red" fontFamily="monospace">
-										{signatureError}
+						</Box>
+					</div>
+				</Slide>
+				<Slide direction="up" mountOnEnter in={!!signature?.length || !!signatureError?.length}>
+					<div>
+						<SectionTitle variant="h5" gutterBottom>
+							Signature:
+						</SectionTitle>
+						<Card sx={{ p: 2 }}>
+							{signatureError ? (
+								<Typography fontFamily="monospace" fontSize={24} color="red" sx={{ overflowWrap: 'anywhere' }}>
+									{signatureError}
+								</Typography>
+							) : (
+								<Typography fontFamily="monospace" fontSize={24} sx={{ overflowWrap: 'anywhere' }}>
+									{signature}
+								</Typography>
+							)}
+						</Card>
+						<Box sx={{ display: 'flex', justifyContent: 'center', my: 2 }}>
+							<Button onClick={clearOutput} sx={{ mr: 4 }}>
+								Reset
+							</Button>
+							<SubmitButton variant="contained" disabled={!!signatureError} onClick={submitRequest}>
+								Submit
+								<span style={{ marginLeft: 8 }}>🚀</span>
+							</SubmitButton>
+						</Box>
+					</div>
+				</Slide>
+				<Slide direction="up" mountOnEnter in={!!response || !!submitError}>
+					<div>
+						<SectionTitle variant="h5" gutterBottom>
+							Response:
+						</SectionTitle>
+						<Card sx={{ p: 2 }}>
+							{submitError ? (
+								<pre>
+									<Typography fontFamily="monospace" fontSize={24} color="red" sx={{ overflowWrap: 'anywhere' }}>
+										{JSON.stringify(submitError, null, 2)}
 									</Typography>
-								)}
-								{signature && (
-									<>
-										<SectionTitle variant="h6" gutterBottom>
-											Signature:
-										</SectionTitle>
-										<Typography fontFamily="monospace" sx={{ overflowWrap: 'anywhere' }}>
-											{signature}
-										</Typography>
-									</>
-								)}
-							</div>
-						</Fade>
-
-						<Slide direction="up" mountOnEnter in={!!signature?.length}>
-							<div>
-								<Divider sx={{ my: 2 }} />
-
-								<SubmitButton
-									disabled={!signature?.length}
-									variant="contained"
-									sx={{
-										display: 'flex',
-										margin: '0 auto',
-										my: 2,
-									}}
-									onClick={() => submitRequest()}
-								>
-									{isSubmitting ? (
-										<CircularProgress color="inherit" />
-									) : (
-										<>
-											Submit <span style={{ marginLeft: 8 }}>🚀</span>
-										</>
-									)}
-								</SubmitButton>
-							</div>
-						</Slide>
-						<Slide direction="up" mountOnEnter in={!!(response || submitError)}>
-							<Box sx={{ maxHeight: 0, pb: 2 }}>
-								<SectionTitle variant="h6" gutterBottom>
-									Response:
-								</SectionTitle>
-								{submitError ? (
-									<Typography fontFamily="monospace" color="red" sx={{ overflowWrap: 'anywhere', mt: 2 }}>
-										{submitError}
+								</pre>
+							) : (
+								<pre>
+									<Typography fontFamily="monospace" fontSize={24} sx={{ overflowWrap: 'anywhere' }}>
+										{JSON.stringify(response, null, 2)}
 									</Typography>
-								) : (
-									<>
-										<pre>
-											<Typography fontFamily="monospace" sx={{ overflowWrap: 'anywhere', mt: 2 }}>
-												{JSON.stringify(response, null, 2)}
-											</Typography>
-										</pre>
-										<Divider sx={{ mt: 20 }} />
-									</>
-								)}
-							</Box>
-						</Slide>
-					</Card>
-				</Grid>
-			</Grid>
+								</pre>
+							)}
+						</Card>
+						<Button onClick={clearOutput} sx={{ mr: 4 }}>
+							Reset
+						</Button>
+					</div>
+				</Slide>
+			</Container>
 		</Page>
 	)
 }

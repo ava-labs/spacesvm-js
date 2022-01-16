@@ -1,28 +1,24 @@
 import { API_DOMAIN } from '@/constants'
 
 export const fetchSpaces = async (method: string, params = {}) => {
-	try {
-		const response = await fetch(`${API_DOMAIN}`, {
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			method: 'POST',
-			body: JSON.stringify({
-				jsonrpc: '2.0',
-				method: `spacesvm.${method}`,
-				params,
-				id: 1,
-			}),
-		})
-		const reader = response.body?.getReader()
-		const encodedData = await reader?.read()
-		if (encodedData?.value === undefined) return
-		const data = JSON.parse(new TextDecoder().decode(encodedData?.value))
-		if (data.error) throw data.error
-		return data?.result
-	} catch (err) {
-		console.error(err)
-	}
+	const response = await fetch(`${API_DOMAIN}`, {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		method: 'POST',
+		body: JSON.stringify({
+			jsonrpc: '2.0',
+			method: `spacesvm.${method}`,
+			params,
+			id: 1,
+		}),
+	})
+	const reader = response.body?.getReader()
+	const encodedData = await reader?.read()
+	if (encodedData?.value === undefined) return
+	const data = JSON.parse(new TextDecoder().decode(encodedData?.value))
+	if (data.error) throw data.error
+	return data?.result
 }
 
 export const isConnectedToSpacesVM = async () => {
