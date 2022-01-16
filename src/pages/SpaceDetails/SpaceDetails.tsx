@@ -44,16 +44,13 @@ export const SpaceDetails = memo(() => {
 	}, [spaceId])
 
 	useEffect(() => {
-		refreshSpaceDetails()
+		// Give the api a second to update
+		setTimeout(refreshSpaceDetails, 1000)
 	}, [refreshSpaceDetails])
 
 	useEffect(() => {
 		!spaceId?.length && navigate('/')
 	}, [spaceId, navigate])
-
-	const addSpaceValue = (key: string, value: string) => {
-		setSpaceValues([...spaceValues, { key, value }])
-	}
 
 	return (
 		<Page title={spaceIdTrimmed} showFooter={false} noPadding>
@@ -155,7 +152,7 @@ export const SpaceDetails = memo(() => {
 								height: 'calc(100vh - 64px)',
 							}}
 						>
-							{spaceId && <KeyValueInput spaceId={spaceId} addSpaceValue={addSpaceValue} />}
+							{spaceId && <KeyValueInput spaceId={spaceId} refreshSpaceDetails={refreshSpaceDetails} />}
 							{spaceValues ? (
 								spaceValues.map(({ key, value }: SpaceKeyValue, i: number) => (
 									<Card

@@ -25,10 +25,10 @@ const SetButton = styled(Button)(({ theme }) => ({
 
 type KeyValueInputProps = {
 	spaceId: string
-	addSpaceValue: any
+	refreshSpaceDetails: any
 }
 
-export const KeyValueInput = memo(({ spaceId, addSpaceValue }: KeyValueInputProps) => {
+export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails }: KeyValueInputProps) => {
 	const [formValues, setFormValues] = useState<{ keyText?: string; valueText?: string; loading?: boolean }[]>([])
 
 	const handleChange = (i: any, e: any) => {
@@ -70,7 +70,8 @@ export const KeyValueInput = memo(({ spaceId, addSpaceValue }: KeyValueInputProp
 		if (!signature) return
 		const result = await issueTransaction(typedData, signature)
 		if (!result) return
-		addSpaceValue(keyText, valueText)
+		// Give the blockchain a chance to update... yes I know this is bad code but its easy for now <3
+		setTimeout(refreshSpaceDetails, 1000)
 		handleChange(i, {
 			target: {
 				name: 'loading',
