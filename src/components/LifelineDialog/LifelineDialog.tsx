@@ -1,5 +1,5 @@
 import { Twemoji } from 'react-emoji-render'
-import { BsDashLg, BsPlusLg } from 'react-icons/bs'
+import { BsDash, BsDashLg, BsPlus, BsPlusLg } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
 import {
 	Box,
@@ -53,7 +53,7 @@ const checkFee = throttle(async (space, units) => getSuggestedFee({ type: TxType
 export const LifelineDialog = ({ open, close, existingExpiry }: LifelineDialogProps) => {
 	const { spaceId } = useParams()
 	const theme = useTheme()
-	const [extendUnits, setExtendUnits] = useState(1)
+	const [extendUnits, setExtendUnits] = useState(0)
 	const [typedData, setTypedData] = useState<any>()
 	const [fee, setFee] = useState(0)
 	const [isSigning, setIsSigning] = useState(false)
@@ -85,7 +85,7 @@ export const LifelineDialog = ({ open, close, existingExpiry }: LifelineDialogPr
 
 	const handleClose = () => {
 		setIsDone(false)
-		setExtendUnits(1)
+		setExtendUnits(0)
 		close()
 	}
 
@@ -135,12 +135,24 @@ export const LifelineDialog = ({ open, close, existingExpiry }: LifelineDialogPr
 					</Grid>
 				</Grid>
 				<Box sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>
-					<IconButton disabled={isDone || extendUnits <= 0} onClick={() => setExtendUnits(extendUnits - 1)}>
+					<Button disabled={isDone || extendUnits <= 0} onClick={() => setExtendUnits(Math.max(extendUnits - 24, 0))}>
+						<BsDash />
+						24
+					</Button>
+					<IconButton
+						disabled={isDone || extendUnits <= 0}
+						onClick={() => setExtendUnits(extendUnits - 1)}
+						sx={{ ml: 1 }}
+					>
 						<BsDashLg />
 					</IconButton>
-					<IconButton disabled={isDone} onClick={() => setExtendUnits(extendUnits + 1)} sx={{ ml: 2 }}>
+					<IconButton disabled={isDone} onClick={() => setExtendUnits(extendUnits + 1)} sx={{ ml: 4 }}>
 						<BsPlusLg />
 					</IconButton>
+					<Button disabled={isDone} onClick={() => setExtendUnits(extendUnits + 24)} sx={{ ml: 1 }}>
+						<BsPlus />
+						24
+					</Button>
 				</Box>
 
 				{isDone ? (
