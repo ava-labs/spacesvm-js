@@ -21,7 +21,7 @@ import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { fetchSpaces, getLatestBlockID } from '@/utils/quarkvm'
+import { fetchSpaces, getSuggestedFee } from '@/utils/quarkvm'
 import { shuffleArray } from '@/utils/shuffleArray'
 
 const JsonTextArea = styled(TextareaAutosize)`
@@ -33,6 +33,7 @@ const JsonTextArea = styled(TextareaAutosize)`
 	max-height: 100%;
 	overflow-y: auto !important;
 	resize: none;
+	font-size: 14px;
 `
 
 const SectionTitle = styled(Typography)`
@@ -45,42 +46,8 @@ const SectionTitle = styled(Typography)`
 `
 
 const jsonPlaceholder = `{
-  "types": {
-    "Claim": [
-      {
-        "name": "space",
-        "type": "string"
-      },
-      {
-        "name": "price",
-        "type": "uint64"
-      },
-      {
-        "name": "blockID",
-        "type": "string"
-      }
-    ],
-    "EIP712Domain": [
-      {
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "name": "magic",
-        "type": "uint64"
-      }
-    ]
-  },
-  "primaryType": "Claim",
-  "domain": {
-    "name": "Spaces",
-    "magic": "1"
-  },
-  "message": {
-    "blockID": "YRiMVk2mjmdAoFQ7kkksu6BzJG48nBZxx68xJfY6hnWRZ1oPU",
-    "price": "1",
-    "space": "connoraf"
-  }
+  "type": "claim",
+  "space": "my_fancy_space_name"
 }`
 
 const DEV_NAMES = shuffleArray([
@@ -109,10 +76,8 @@ export const CustomSignature = () => {
 		if (!jsonInput?.length) return
 		clearOutput()
 		try {
-			const parsedJson = JSON.parse(jsonInput)
-			console.log(`parsedJson`, parsedJson)
 			setIsSigning(true)
-			const signature = await signWithMetaMaskV4(parsedJson)
+			const signature = await signWithMetaMaskV4(typedData)
 			setIsSigning(false)
 			if (!signature) {
 				setSignatureError('Must sign in metamask!')
@@ -142,7 +107,7 @@ export const CustomSignature = () => {
 
 		try {
 			const res = await fetchSpaces('issueTx', {
-				typedData: jsonInput,
+				typedData,
 				signature,
 			})
 
@@ -154,24 +119,10 @@ export const CustomSignature = () => {
 		}
 	}
 
-	const setSampleJson = async () => {
-		try {
-			const latestBlockId = await getLatestBlockID()
-			const sampleData = JSON.parse(jsonPlaceholder)
-			const sampleDataWithLatestBlock = {
-				...sampleData,
-				message: {
-					...sampleData.message,
-					blockID: latestBlockId,
-				},
-			}
-			const sampleJson = JSON.stringify(sampleDataWithLatestBlock, null, 2)
-			setJsonInput(sampleJson)
-		} catch (err) {
-			// eslint-disable-next-line no-console
-			console.error(err)
-			setJsonInput(jsonPlaceholder)
-		}
+	const [typedData, setTypedData] = useState()
+	const getTypedData = async () => {
+		const { typedData } = await getSuggestedFee(JSON.parse(jsonInput))
+		setTypedData(typedData)
 	}
 
 	return (
@@ -183,25 +134,8 @@ export const CustomSignature = () => {
 				</TypewrittingInput>
 				!
 			</PageTitle>
-			<Grid container sx={{ width: '100%', height: '100%', minHeight: 200 }} spacing={4}>
-				<Grid item md={5} xs={12} sx={{ position: 'relative' }}>
-					<SignButton
-						variant="contained"
-						disabled={!jsonInput?.length}
-						onClick={signJson}
-						sx={{ position: 'absolute', right: 0, bottom: 0, mr: 4 }}
-					>
-						{isSigning ? (
-							<Fade in={isSigning}>
-								<img src={MetaMaskFoxLogo} alt="metamask-fox" height="100%" />
-							</Fade>
-						) : (
-							<>
-								Sign
-								<span style={{ marginLeft: 8 }}>➡️</span>
-							</>
-						)}
-					</SignButton>
+			<Grid container sx={{ width: '100%', height: '100%', minHeight: 300 }} spacing={4}>
+				<Grid item md={5} xs={12} sx={{ maxHeight: '100%' }}>
 					<Grid container justifyContent="space-between" alignItems="end">
 						<Grid item>
 							<Typography variant="h6" gutterBottom>
@@ -209,19 +143,73 @@ export const CustomSignature = () => {
 							</Typography>
 						</Grid>
 						<Grid item>
-							<Tooltip title="We'll automagically include the latest Block ID ✨" placement="top">
-								<Button variant="text" sx={{ py: 0, mb: 1 }} onClick={setSampleJson}>
-									Fill with sample.
-								</Button>
-							</Tooltip>
+							<Button variant="text" sx={{ py: 0, mb: 1 }} onClick={() => setJsonInput(jsonPlaceholder)}>
+								Fill with sample.
+							</Button>
 						</Grid>
 					</Grid>
-					<JsonTextArea
-						onChange={(e) => setJsonInput(e.target.value)}
-						value={jsonInput}
-						placeholder={jsonPlaceholder}
-						sx={{ borderRadius: 4, pt: 2, pr: 2, pl: 2, pb: 20, height: '100% !important' }}
-					/>
+					<Grid container direction="column" sx={{ height: '100%', maxHeight: '100%' }} spacing={1}>
+						<Grid item sx={{ height: 250, width: '100%', position: 'relative' }}>
+							<JsonTextArea
+								onChange={(e) => setJsonInput(e.target.value)}
+								value={jsonInput}
+								placeholder={jsonPlaceholder}
+								sx={{ borderRadius: 4, p: 2, height: '100% !important' }}
+							/>
+							<SignButton
+								variant="contained"
+								disabled={!jsonInput?.length}
+								onClick={getTypedData}
+								sx={{ position: 'absolute', right: 0, bottom: 0, mr: 2, mb: 2 }}
+							>
+								{isSigning ? (
+									<Fade in={isSigning}>
+										<img src={MetaMaskFoxLogo} alt="metamask-fox" height="100%" />
+									</Fade>
+								) : (
+									<>
+										Get Typed Data
+										<span style={{ marginLeft: 8 }}>👇</span>
+									</>
+								)}
+							</SignButton>
+						</Grid>
+						<Grid item sx={{ height: 400, width: '100%', position: 'relative' }}>
+							<Card
+								sx={{
+									height: '100%',
+									maxWidth: '100%',
+									px: 2,
+									pt: 2,
+									pb: 20,
+									overflow: 'auto',
+								}}
+							>
+								<pre>
+									<Typography fontFamily="monospace" fontSize={14} sx={{ overflowWrap: 'anywhere', mt: 2 }}>
+										{JSON.stringify(typedData, null, 2)}
+									</Typography>
+								</pre>
+							</Card>
+							<SignButton
+								variant="contained"
+								disabled={!jsonInput?.length}
+								onClick={signJson}
+								sx={{ position: 'absolute', right: 0, bottom: 0, mr: 2, mb: 2 }}
+							>
+								{isSigning ? (
+									<Fade in={isSigning}>
+										<img src={MetaMaskFoxLogo} alt="metamask-fox" height="100%" />
+									</Fade>
+								) : (
+									<>
+										Sign
+										<span style={{ marginLeft: 8 }}>➡️</span>
+									</>
+								)}
+							</SignButton>
+						</Grid>
+					</Grid>
 				</Grid>
 				<Grid item md={7} xs={12}>
 					<Grid container justifyContent="space-between" alignItems="end">
