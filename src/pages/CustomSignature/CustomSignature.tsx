@@ -1,17 +1,4 @@
-import {
-	Button,
-	Card,
-	CircularProgress,
-	Container,
-	Divider,
-	Fade,
-	Grid,
-	Slide,
-	styled,
-	TextareaAutosize,
-	Tooltip,
-	Typography,
-} from '@mui/material'
+import { Button, Card, Container, Fade, Grid, Slide, styled, TextareaAutosize, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 
 import { SignButton } from './SignButton'
@@ -105,23 +92,19 @@ export const CustomSignature = () => {
 	const submitRequest = async () => {
 		if (!signature?.length || isSubmitting) return
 		setIsSubmitting(true)
-
 		try {
 			// eslint-disable-next-line no-console
 			console.log(`Issuing Tx with Params:`, {
 				typedData,
 				signature,
 			})
-
 			const res = await fetchSpaces('issueTx', {
 				typedData,
 				signature,
 			})
-
 			setIsSubmitting(false)
 			setResponse(res)
 		} catch (err: any) {
-			console.log(`err in component`, err)
 			setIsSubmitting(false)
 			setSubmitError(err)
 		}
