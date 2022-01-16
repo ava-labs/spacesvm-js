@@ -62,7 +62,12 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 
 	const onSubmit = async () => {
 		setIsSigning(true)
-		const signature = await signWithMetaMaskV4(typedData)
+		const { typedData: latestTypedData } = await getSuggestedFee({
+			type: TxType.Lifeline,
+			space: spaceId,
+			units: extendUnits,
+		})
+		const signature = await signWithMetaMaskV4(latestTypedData)
 		setIsSigning(false)
 		if (!signature) return
 		const result = await issueTransaction(typedData, signature)
