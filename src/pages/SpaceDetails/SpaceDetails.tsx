@@ -1,4 +1,5 @@
 import { Twemoji } from 'react-emoji-render'
+import { BsPlus } from 'react-icons/bs'
 import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
@@ -35,7 +36,7 @@ export const SpaceDetails = memo(() => {
 	const theme = useTheme()
 	const [lifelineDialogOpen, setLifelineDialogOpen] = useState<boolean>(false)
 
-	const onVerify = useCallback(async () => {
+	const updateSpaceDetails = useCallback(async () => {
 		const spaceData = await querySpace(spaceId || '')
 		setDetails(spaceData?.info)
 		setSpacesValues(spaceData?.values)
@@ -43,8 +44,8 @@ export const SpaceDetails = memo(() => {
 	}, [spaceId])
 
 	useEffect(() => {
-		onVerify()
-	}, [onVerify])
+		updateSpaceDetails()
+	}, [updateSpaceDetails])
 
 	useEffect(() => {
 		!spaceId?.length && navigate('/')
@@ -227,6 +228,7 @@ export const SpaceDetails = memo(() => {
 					open={lifelineDialogOpen}
 					close={() => setLifelineDialogOpen(false)}
 					existingExpiry={details.expiry}
+					updateSpaceDetails={updateSpaceDetails}
 				/>
 			)}
 		</Page>
