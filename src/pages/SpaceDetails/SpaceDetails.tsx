@@ -1,5 +1,4 @@
 import { Twemoji } from 'react-emoji-render'
-import { BsPlus } from 'react-icons/bs'
 import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
@@ -19,6 +18,7 @@ import { formatDistanceToNow } from 'date-fns'
 
 import { ClaimButton } from '../Home/Home'
 
+import { KeyValueInput } from '@/components/KeyValueInput'
 import { LifelineDialog } from '@/components/LifelineDialog'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
@@ -29,27 +29,31 @@ import { querySpace } from '@/utils/spacesVM'
 export const SpaceDetails = memo(() => {
 	const [details, setDetails] = useState<any>()
 	const navigate = useNavigate()
-	const [spacesValues, setSpacesValues] = useState<any>()
+	const [spaceValues, setSpaceValues] = useState<any>()
 	const [loading, setLoading] = useState<boolean>(true)
 	const { spaceId } = useParams()
 	const spaceIdTrimmed = spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')
 	const theme = useTheme()
 	const [lifelineDialogOpen, setLifelineDialogOpen] = useState<boolean>(false)
 
-	const updateSpaceDetails = useCallback(async () => {
+	const refreshSpaceDetails = useCallback(async () => {
 		const spaceData = await querySpace(spaceId || '')
 		setDetails(spaceData?.info)
-		setSpacesValues(spaceData?.values)
+		setSpaceValues(spaceData?.values)
 		setLoading(false)
 	}, [spaceId])
 
 	useEffect(() => {
-		updateSpaceDetails()
-	}, [updateSpaceDetails])
+		refreshSpaceDetails()
+	}, [refreshSpaceDetails])
 
 	useEffect(() => {
 		!spaceId?.length && navigate('/')
 	}, [spaceId, navigate])
+
+	const addSpaceValue = (key: string, value: string) => {
+		setSpaceValues([...spaceValues, { key, value }])
+	}
 
 	return (
 		<Page title={spaceIdTrimmed} showFooter={false} noPadding>
@@ -151,8 +155,9 @@ export const SpaceDetails = memo(() => {
 								height: 'calc(100vh - 64px)',
 							}}
 						>
-							{spacesValues ? (
-								spacesValues.map(({ key, value }: SpaceKeyValue, i: number) => (
+							{spaceId && <KeyValueInput spaceId={spaceId} addSpaceValue={addSpaceValue} />}
+							{spaceValues ? (
+								spaceValues.map(({ key, value }: SpaceKeyValue, i: number) => (
 									<Card
 										key={key}
 										elevation={0}
@@ -228,7 +233,7 @@ export const SpaceDetails = memo(() => {
 					open={lifelineDialogOpen}
 					close={() => setLifelineDialogOpen(false)}
 					existingExpiry={details.expiry}
-					updateSpaceDetails={updateSpaceDetails}
+					refreshSpaceDetails={refreshSpaceDetails}
 				/>
 			)}
 		</Page>

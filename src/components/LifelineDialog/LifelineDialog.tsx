@@ -46,12 +46,12 @@ type LifelineDialogProps = {
 	open: boolean
 	close(): void
 	existingExpiry: number
-	updateSpaceDetails(): void
+	refreshSpaceDetails(): void
 }
 
 const checkFee = throttle(async (space, units) => getSuggestedFee({ type: TxType.Lifeline, space, units }), 2000)
 
-export const LifelineDialog = ({ open, close, existingExpiry, updateSpaceDetails }: LifelineDialogProps) => {
+export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetails }: LifelineDialogProps) => {
 	const { spaceId } = useParams()
 	const theme = useTheme()
 	const [extendUnits, setExtendUnits] = useState(0)
@@ -67,7 +67,7 @@ export const LifelineDialog = ({ open, close, existingExpiry, updateSpaceDetails
 		if (!signature) return
 		const result = await issueTransaction(typedData, signature)
 		if (result) setIsDone(true)
-		updateSpaceDetails()
+		refreshSpaceDetails()
 	}
 
 	const extendToDateDisplay = useMemo(() => {
