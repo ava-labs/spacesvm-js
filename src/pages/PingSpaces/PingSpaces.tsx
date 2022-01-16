@@ -1,7 +1,7 @@
 import { CircularProgress, Typography } from '@mui/material'
 
 import { Page } from '@/components/Page'
-import { isConnectedToSpacesVM } from '@/utils/quarkvm'
+import { isConnectedToSpacesVM } from '@/utils/spacesVM'
 
 export const PingSpaces = () => {
 	const [pingSuccess, setPingSuccess] = useState<boolean | null>(null)

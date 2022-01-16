@@ -13,20 +13,6 @@ export const mmRequestAccounts = async () => {
 	return ethereum.request({ method: 'eth_requestAccounts' })
 }
 
-export const signWithMetaMask = async (payload: any): Promise<string | undefined> => {
-	try {
-		const accounts = await mmRequestAccounts()
-		const signature = await ethereum.request({
-			method: 'eth_signTypedData',
-			params: [payload, accounts[0]],
-		})
-		return signature
-	} catch (error) {
-		// eslint-disable-next-line no-console
-		console.error(error)
-	}
-}
-
 export const signWithMetaMaskV4 = async (payload: any): Promise<string | undefined> => {
 	try {
 		const accounts = await mmRequestAccounts()

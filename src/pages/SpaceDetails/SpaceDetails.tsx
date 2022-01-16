@@ -21,7 +21,7 @@ import { ClaimButton } from '../Home/Home'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { USERNAME_REGEX_QUERY } from '@/constants'
-import { querySpace, SpaceKeyValue } from '@/utils/quarkvm'
+import { querySpace, SpaceKeyValue } from '@/utils/spacesVM'
 
 export const SpaceDetails = memo(() => {
 	const [details, setDetails] = useState<any>()

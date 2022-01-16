@@ -9,8 +9,8 @@ import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { fetchSpaces, getSuggestedFee } from '@/utils/quarkvm'
 import { shuffleArray } from '@/utils/shuffleArray'
+import { fetchSpaces, getSuggestedFee } from '@/utils/spacesVM'
 
 const JsonTextArea = styled(TextareaAutosize)`
 	width: 100%;

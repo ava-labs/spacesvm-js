@@ -4,7 +4,7 @@ import { Button } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
 import { metaMaskExists, mmRequestAccounts } from '@/utils/metamask'
-import { getAddressBalance } from '@/utils/quarkvm'
+import { getAddressBalance } from '@/utils/spacesVM'
 
 const ethereum = window.ethereum
 
