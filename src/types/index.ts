@@ -15,3 +15,8 @@ export type TransactionInfo = {
 	to?: string
 	units?: string
 }
+
+export type SpaceKeyValue = {
+	key: string
+	value: string
+}
