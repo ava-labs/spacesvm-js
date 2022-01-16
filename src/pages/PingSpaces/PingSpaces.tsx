@@ -11,6 +11,7 @@ export const PingSpaces = () => {
 			setPingSuccess(isConnected)
 		}
 		doPingThing()
+		setInterval(doPingThing, 3000)
 	}, [])
 
 	return (
