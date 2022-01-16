@@ -33,7 +33,7 @@ import { USERNAME_REGEX, USERNAME_REGEX_QUERY, USERNAMES } from '@/constants'
 import { TxType } from '@/types'
 import { calculateClaimCost } from '@/utils/calculateCost'
 import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { getSuggestedFee, isAlreadyClaimed, issueTransaction } from '@/utils/spacesVM'
+import { getSuggestedFee, isAlreadyClaimed, issueAndConfirmTransaction } from '@/utils/spacesVM'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
@@ -127,11 +127,15 @@ export const Home = memo(() => {
 		const signature = await signWithMetaMaskV4(typedData)
 		setWaitingForMetaMask(false)
 		if (!signature) return
-		const res = await issueTransaction(typedData, signature)
-		onSigned()
+		const claimSuccess = await issueAndConfirmTransaction(typedData, signature)
+		if (!claimSuccess) {
+			// Show something in the UI to display the claim failed
+			return
+		}
+		onClaimSuccess()
 	}
 
-	const onSigned = async () => {
+	const onClaimSuccess = async () => {
 		setShowClaimedDialog(true)
 	}
 

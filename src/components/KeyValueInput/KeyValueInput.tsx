@@ -5,7 +5,7 @@ import { styled } from '@mui/system'
 import { USERNAME_REGEX } from '@/constants'
 import { TxType } from '@/types'
 import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { getSuggestedFee, issueTransaction } from '@/utils/spacesVM'
+import { getSuggestedFee, issueAndConfirmTransaction } from '@/utils/spacesVM'
 
 const SetButton = styled(Button)(({ theme }) => ({
 	backgroundColor: '#523df1',
@@ -68,8 +68,8 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails }: KeyValueInp
 		})
 		const signature = await signWithMetaMaskV4(typedData)
 		if (!signature) return
-		const result = await issueTransaction(typedData, signature)
-		if (!result) return
+		const success = await issueAndConfirmTransaction(typedData, signature)
+		if (!success) return
 		// Give the blockchain a chance to update... yes I know this is bad code but its easy for now <3
 		setTimeout(refreshSpaceDetails, 1000)
 		handleChange(i, {

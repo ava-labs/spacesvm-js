@@ -5,7 +5,7 @@ import { Button, Dialog, DialogContent, DialogTitle, Fade, styled, Typography, u
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { TxType } from '@/types'
 import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { getSuggestedFee, issueTransaction } from '@/utils/spacesVM'
+import { getSuggestedFee, issueAndConfirmTransaction } from '@/utils/spacesVM'
 
 export const DeleteButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#e70256',
@@ -51,9 +51,12 @@ export const DeleteKeyValueDialog = ({ open, close, spaceKey, refreshSpaceDetail
 		const signature = await signWithMetaMaskV4(typedData)
 		setIsSigning(false)
 		if (!signature) return
-		const result = await issueTransaction(typedData, signature)
-		if (!result?.txId) return
-		setTimeout(refreshSpaceDetails, 1000)
+		const success = await issueAndConfirmTransaction(typedData, signature)
+		if (!success) {
+			// show some sort of failure dialog
+			return
+		}
+		refreshSpaceDetails()
 		handleClose()
 	}
 

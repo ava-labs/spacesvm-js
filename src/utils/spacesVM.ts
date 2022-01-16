@@ -110,11 +110,12 @@ export const issueAndConfirmTransaction = async (typedData: any, signature: stri
 	}
 
 	try {
-		const response = await tryNTimes(checkIsAccepted, 10, 1000)
+		const response = await tryNTimes(checkIsAccepted, 20, 500)
 		if (response) return true
 	} catch {
 		return false
 	}
+	return false
 }
 
 export const hasTransaction = async (txId: string) => {
