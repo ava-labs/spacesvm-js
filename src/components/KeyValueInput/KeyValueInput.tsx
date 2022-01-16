@@ -3,9 +3,9 @@ import { Button, CircularProgress, Grid, Grow, TextField } from '@mui/material'
 import { styled } from '@mui/system'
 
 import { USERNAME_REGEX } from '@/constants'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { TxType } from '@/types'
-import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { getSuggestedFee, issueAndConfirmTransaction } from '@/utils/spacesVM'
+import { getSuggestedFee } from '@/utils/spacesVM'
 
 const SetButton = styled(Button)(({ theme }) => ({
 	backgroundColor: '#523df1',
@@ -29,6 +29,7 @@ type KeyValueInputProps = {
 }
 
 export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails }: KeyValueInputProps) => {
+	const { signWithMetaMask, issueTx } = useMetaMask()
 	const [formValues, setFormValues] = useState<{ keyText?: string; valueText?: string; loading?: boolean }[]>([])
 
 	const handleChange = (i: any, e: any) => {
@@ -66,9 +67,9 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails }: KeyValueInp
 			key: keyText,
 			value: btoa(valueText),
 		})
-		const signature = await signWithMetaMaskV4(typedData)
+		const signature = await signWithMetaMask(typedData)
 		if (!signature) return
-		const success = await issueAndConfirmTransaction(typedData, signature)
+		const success = await issueTx(typedData, signature)
 		if (!success) return
 		// Give the blockchain a chance to update... yes I know this is bad code but its easy for now <3
 		setTimeout(refreshSpaceDetails, 1000)

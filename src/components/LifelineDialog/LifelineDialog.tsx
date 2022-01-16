@@ -20,10 +20,10 @@ import {
 import { throttle } from 'lodash'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { rainbowText } from '@/theming/rainbowText'
 import { TxType } from '@/types'
-import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { getSuggestedFee, issueAndConfirmTransaction } from '@/utils/spacesVM'
+import { getSuggestedFee } from '@/utils/spacesVM'
 
 const SubmitButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
@@ -54,6 +54,7 @@ const checkFee = throttle(async (space, units) => getSuggestedFee({ type: TxType
 
 export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetails }: LifelineDialogProps) => {
 	const { spaceId } = useParams()
+	const { issueTx, signWithMetaMask } = useMetaMask()
 	const [extendUnits, setExtendUnits] = useState(0)
 	const [fee, setFee] = useState(0)
 	const [isSigning, setIsSigning] = useState(false)
@@ -66,10 +67,10 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 			space: spaceId,
 			units: extendUnits,
 		})
-		const signature = await signWithMetaMaskV4(typedData)
+		const signature = await signWithMetaMask(typedData)
 		setIsSigning(false)
 		if (!signature) return
-		const success = await issueAndConfirmTransaction(typedData, signature)
+		const success = await issueTx(typedData, signature)
 		if (!success) {
 			// show some sort of failure dialog
 			return

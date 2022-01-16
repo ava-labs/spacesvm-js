@@ -85,16 +85,14 @@ export const getSuggestedFee = async (transactionInfo: TransactionInfo) =>
 	await fetchSpaces('suggestedFee', { input: transactionInfo })
 
 /**
- * Issues a transaction to spacesVM.  Used for claim, lifeline, set, delete, move, and transfer
+ * Issues a transaction to spacesVM and polls the VM until the transaction is confirmed.
+ * Used for claim, lifeline, set, delete, move, and transfer
  * https://github.com/ava-labs/spacesvm#transaction-types
  *
  * @param typedData typedData from getSuggestedFee
  * @param signature signed typedData
  * @returns if successful, response has a txId
  */
-export const issueTransaction = async (typedData: any, signature: string) =>
-	await fetchSpaces('issueTx', { typedData, signature })
-
 export const issueAndConfirmTransaction = async (typedData: any, signature: string): Promise<boolean> => {
 	const txResponse = await fetchSpaces('issueTx', { typedData, signature })
 	if (!txResponse?.txId) return false
@@ -116,14 +114,4 @@ export const issueAndConfirmTransaction = async (typedData: any, signature: stri
 		return false
 	}
 	return false
-}
-
-export const hasTransaction = async (txId: string) => {
-	try {
-		const { accepted } = await fetchSpaces('hasTx', { txId })
-		if (accepted) return true
-		throw 'Not yet accepted'
-	} catch (error) {
-		throw 'Not yet accepted'
-	}
 }
