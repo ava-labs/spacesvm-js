@@ -23,17 +23,19 @@ import { LifelineDialog } from '@/components/LifelineDialog'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { USERNAME_REGEX_QUERY } from '@/constants'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { SpaceKeyValue } from '@/types'
 import { querySpace } from '@/utils/spacesVM'
 
 export const SpaceDetails = memo(() => {
-	const [details, setDetails] = useState<any>()
 	const navigate = useNavigate()
+	const theme = useTheme()
+	const { spaceId } = useParams()
+	const { currentAddress } = useMetaMask()
+	const [details, setDetails] = useState<any>()
 	const [spaceValues, setSpaceValues] = useState<any>()
 	const [loading, setLoading] = useState<boolean>(true)
-	const { spaceId } = useParams()
 	const spaceIdTrimmed = spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')
-	const theme = useTheme()
 	const [lifelineDialogOpen, setLifelineDialogOpen] = useState<boolean>(false)
 
 	const refreshSpaceDetails = useCallback(async () => {
@@ -152,7 +154,9 @@ export const SpaceDetails = memo(() => {
 								height: 'calc(100vh - 64px)',
 							}}
 						>
-							{spaceId && <KeyValueInput spaceId={spaceId} refreshSpaceDetails={refreshSpaceDetails} />}
+							{spaceId && details?.owner === currentAddress && (
+								<KeyValueInput spaceId={spaceId} refreshSpaceDetails={refreshSpaceDetails} />
+							)}
 							{spaceValues ? (
 								spaceValues.map(({ key, value }: SpaceKeyValue, i: number) => (
 									<Card
