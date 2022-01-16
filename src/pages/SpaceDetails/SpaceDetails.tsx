@@ -119,8 +119,8 @@ export const SpaceDetails = memo(() => {
 												<Grid item>
 													Expires {formatDistanceToNow(new Date(details.expiry * 1000), { addSuffix: true })}
 												</Grid>
-												<Grid item sx={{ display: 'flex', mt: '2px' }}>
-													<IoInformationCircleOutline size={15} />
+												<Grid item sx={{ display: 'flex', mt: '1px' }}>
+													<IoInformationCircleOutline size={14} />
 												</Grid>
 											</Grid>
 										</Typography>
