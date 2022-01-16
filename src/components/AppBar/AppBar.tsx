@@ -6,7 +6,7 @@ import { Drawer } from '../Drawer'
 import { MetaMaskSelect } from '../MetaMaskSelect'
 import { ThemeToggle } from '../ThemeToggle'
 
-import Logo from '@/assets/favicon.png'
+import Logo from '@/assets/logo-spaces.svg'
 import { APP_NAME } from '@/constants'
 
 export const AppBar = memo(() => (
@@ -32,7 +32,7 @@ export const AppBar = memo(() => (
 									variant="h4"
 									component="div"
 									color="textPrimary"
-									sx={{ fontFamily: 'DM Serif Display', ml: 2, letterSpacing: 8 }}
+									sx={{ fontFamily: 'DM Serif Display', ml: 2, letterSpacing: 6 }}
 								>
 									{APP_NAME}
 								</Typography>
