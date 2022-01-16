@@ -16,7 +16,6 @@ import {
 	styled,
 	Tooltip,
 	Typography,
-	useTheme,
 } from '@mui/material'
 import { throttle } from 'lodash'
 
@@ -55,7 +54,6 @@ const checkFee = throttle(async (space, units) => getSuggestedFee({ type: TxType
 
 export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetails }: LifelineDialogProps) => {
 	const { spaceId } = useParams()
-	const theme = useTheme()
 	const [extendUnits, setExtendUnits] = useState(0)
 	const [typedData, setTypedData] = useState<any>()
 	const [fee, setFee] = useState(0)

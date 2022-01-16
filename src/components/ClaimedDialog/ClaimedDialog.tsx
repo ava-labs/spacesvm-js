@@ -2,6 +2,8 @@ import { Twemoji } from 'react-emoji-render'
 import { Link } from 'react-router-dom'
 import { Box, Button, Dialog, DialogContent, DialogTitle, styled, Typography } from '@mui/material'
 
+import { rainbowText } from '@/theming/rainbowText'
+
 const SeeItLiveButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
 	padding: theme.spacing(1, 10),
@@ -23,7 +25,14 @@ const SeeItLiveButton = styled(Button)(({ theme }: any) => ({
 export const ClaimedDialog = memo(({ spaceId, ...rest }: any) => (
 	<Dialog maxWidth="xs" {...rest}>
 		<DialogTitle>
-			<Typography variant="h5" component="p" fontFamily="DM Serif Display" align="center" sx={{ position: 'relative' }}>
+			<Typography
+				gutterBottom
+				variant="h5"
+				component="p"
+				fontFamily="DM Serif Display"
+				align="center"
+				sx={{ position: 'relative' }}
+			>
 				You have successfully claimed your space!{' '}
 				<span style={{ position: 'absolute', fontSize: 36, transform: 'translateX(10px) translateY(-4px)' }}>
 					<Twemoji svg text="🥳" />
@@ -31,10 +40,22 @@ export const ClaimedDialog = memo(({ spaceId, ...rest }: any) => (
 			</Typography>
 		</DialogTitle>
 		<DialogContent>
-			<Box display="flex" justifyContent="center" pt={2}>
+			<Typography
+				gutterBottom
+				variant="h3"
+				align="center"
+				fontFamily="DM Serif Display"
+				sx={{
+					...rainbowText,
+				}}
+			>
+				{spaceId}
+			</Typography>
+			<Box display="flex" justifyContent="center" mt={6}>
 				<SeeItLiveButton
 					variant="contained"
 					size="large"
+					fullWidth
 					// @ts-ignore
 					component={Link}
 					to={`/spaces/${spaceId}/`}

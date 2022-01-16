@@ -78,7 +78,7 @@ export const SpaceDetails = memo(() => {
 								alignItems: 'center',
 							}}
 						>
-							<PageTitle align="center" variant="h2" sx={{ mb: 0 }}>
+							<PageTitle align="center" variant="h2" sx={{ mb: 2 }}>
 								<Twemoji svg text="✨🔭" />
 							</PageTitle>
 							<PageTitle
