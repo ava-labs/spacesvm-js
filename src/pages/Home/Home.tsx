@@ -30,6 +30,7 @@ import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { USERNAME_REGEX, USERNAME_REGEX_QUERY, USERNAMES } from '@/constants'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { TxType } from '@/types'
 import { calculateClaimCost } from '@/utils/calculateCost'
 import { signWithMetaMaskV4 } from '@/utils/metamask'
@@ -90,6 +91,7 @@ export const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 export const Home = memo(() => {
 	const [searchParams] = useSearchParams()
 	const navigate = useNavigate()
+	const { onboardToMetaMask } = useMetaMask()
 	const [showClaimedDialog, setShowClaimedDialog] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
 	const [username, setUsername] = useState<string>(
@@ -122,6 +124,7 @@ export const Home = memo(() => {
 	}, [username])
 
 	const onClaim = async () => {
+		await onboardToMetaMask()
 		setWaitingForMetaMask(true)
 		const { typedData } = await getSuggestedFee({ type: TxType.Claim, space: username })
 		const signature = await signWithMetaMaskV4(typedData)
