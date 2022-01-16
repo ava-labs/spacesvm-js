@@ -4,6 +4,7 @@ import { useSnackbar } from 'notistack'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
+import { numberWithCommas } from '@/utils/numberUtils'
 import { obfuscateAddress } from '@/utils/obfuscateAddress'
 
 const growWidth = keyframes`
@@ -125,7 +126,7 @@ export const MetaMaskSelect = () => {
 									},
 								}}
 							>
-								{displayBalance}
+								{numberWithCommas(displayBalance)}
 								<Typography
 									component="span"
 									color="textSecondary"
