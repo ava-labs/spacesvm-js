@@ -18,6 +18,7 @@ import { formatDistanceToNow } from 'date-fns'
 
 import { ClaimButton } from '../Home/Home'
 
+import { DeleteKeyValueDialog } from '@/components/DeleteKeyValueDialog'
 import { KeyValueInput } from '@/components/KeyValueInput'
 import { LifelineDialog } from '@/components/LifelineDialog'
 import { Page } from '@/components/Page'
@@ -37,6 +38,8 @@ export const SpaceDetails = memo(() => {
 	const [loading, setLoading] = useState<boolean>(true)
 	const spaceIdTrimmed = spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')
 	const [lifelineDialogOpen, setLifelineDialogOpen] = useState<boolean>(false)
+	const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false)
+	const [focusedKeyIndex, setFocusedKeyIndex] = useState<number>()
 
 	const refreshSpaceDetails = useCallback(async () => {
 		const spaceData = await querySpace(spaceId || '')
@@ -53,6 +56,8 @@ export const SpaceDetails = memo(() => {
 	useEffect(() => {
 		!spaceId?.length && navigate('/')
 	}, [spaceId, navigate])
+
+	const isSpaceOwner = useMemo(() => details?.owner === currentAddress, [details, currentAddress])
 
 	return (
 		<Page title={spaceIdTrimmed} showFooter={false} noPadding>
@@ -154,9 +159,7 @@ export const SpaceDetails = memo(() => {
 								height: 'calc(100vh - 64px)',
 							}}
 						>
-							{spaceId && details?.owner === currentAddress && (
-								<KeyValueInput spaceId={spaceId} refreshSpaceDetails={refreshSpaceDetails} />
-							)}
+							{spaceId && isSpaceOwner && <KeyValueInput spaceId={spaceId} refreshSpaceDetails={refreshSpaceDetails} />}
 							{spaceValues ? (
 								spaceValues.map(({ key, value }: SpaceKeyValue, i: number) => (
 									<Card
@@ -198,7 +201,14 @@ export const SpaceDetails = memo(() => {
 												<Grid item>
 													<Tooltip placement="top" title="Delete">
 														<div>
-															<IconButton disabled color="primary">
+															<IconButton
+																disabled={!isSpaceOwner}
+																onClick={() => {
+																	setFocusedKeyIndex(i)
+																	setDeleteDialogOpen(true)
+																}}
+																color="primary"
+															>
 																<IoTrashOutline />
 															</IconButton>
 														</div>
@@ -235,6 +245,15 @@ export const SpaceDetails = memo(() => {
 					close={() => setLifelineDialogOpen(false)}
 					existingExpiry={details.expiry}
 					refreshSpaceDetails={refreshSpaceDetails}
+				/>
+			)}
+
+			{focusedKeyIndex !== undefined && spaceValues[focusedKeyIndex] && (
+				<DeleteKeyValueDialog
+					open={deleteDialogOpen}
+					close={() => setDeleteDialogOpen(false)}
+					refreshSpaceDetails={refreshSpaceDetails}
+					spaceKey={spaceValues[focusedKeyIndex]?.key}
 				/>
 			)}
 		</Page>

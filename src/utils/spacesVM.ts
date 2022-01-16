@@ -72,14 +72,23 @@ export const estimateDifficulty = async () => await fetchSpaces('difficultyEstim
 
 export const getAddressBalance = async (address: string) => fetchSpaces('balance', { address }) // some random balance for now
 
+/**
+ * Query spacesVM to get the fee for a transaction, and the typedData that needs to be signed
+ * in orde to submit the transaction
+ *
+ * @param transactionInfo Object containing type, space, units, key, value, and to (some optional)
+ * @returns Object wit
+ */
 export const getSuggestedFee = async (transactionInfo: TransactionInfo) =>
 	await fetchSpaces('suggestedFee', { input: transactionInfo })
 
-export const claimSpace = async (typedData: any, signature: string) =>
-	await fetchSpaces('issueTx', { typedData, signature })
-
-export const extendLifeline = async (typedData: any, signature: string) =>
-	await fetchSpaces('issueTx', { typedData, signature })
-
+/**
+ * Issues a transaction to spacesVM.  Used for claim, lifeline, set, delete, move, and transfer
+ * https://github.com/ava-labs/spacesvm#transaction-types
+ *
+ * @param typedData typedData from getSuggestedFee
+ * @param signature signed typedData
+ * @returns if successful, response has a txId
+ */
 export const issueTransaction = async (typedData: any, signature: string) =>
 	await fetchSpaces('issueTx', { typedData, signature })

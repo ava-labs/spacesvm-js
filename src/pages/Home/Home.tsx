@@ -35,7 +35,7 @@ import { USERNAME_REGEX, USERNAME_REGEX_QUERY, USERNAMES } from '@/constants'
 import { TxType } from '@/types'
 import { calculateClaimCost } from '@/utils/calculateCost'
 import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { claimSpace, getSuggestedFee, isAlreadyClaimed } from '@/utils/spacesVM'
+import { getSuggestedFee, isAlreadyClaimed, issueTransaction } from '@/utils/spacesVM'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
@@ -130,7 +130,7 @@ export const Home = memo(() => {
 		const signature = await signWithMetaMaskV4(typedData)
 		setWaitingForMetaMask(false)
 		if (!signature) return
-		const res = await claimSpace(typedData, signature)
+		const res = await issueTransaction(typedData, signature)
 		onSigned()
 	}
 

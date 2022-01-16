@@ -1,5 +1,5 @@
 import { IoAdd } from 'react-icons/io5'
-import { Button, CircularProgress, Grid, Slide, TextField } from '@mui/material'
+import { Button, CircularProgress, Grid, Grow, Slide, TextField } from '@mui/material'
 import { styled } from '@mui/system'
 
 import { USERNAME_REGEX } from '@/constants'
@@ -93,11 +93,11 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails }: KeyValueInp
 			>
 				Add more
 			</Button>
-			<Slide mountOnEnter in={true}>
-				<div>
-					{formValues.map(
-						({ keyText, valueText, loading }, i) =>
-							i < 5 && (
+			<div>
+				{formValues.map(
+					({ keyText, valueText, loading }, i) =>
+						i < 5 && (
+							<Grow in={true} key={i}>
 								<Grid key={i} sx={{ my: 4 }} container spacing={2} flexDirection="row" alignItems="center">
 									<Grid item xs={12} sm={4}>
 										<TextField
@@ -156,10 +156,10 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails }: KeyValueInp
 										</SetButton>
 									</Grid>
 								</Grid>
-							),
-					)}
-				</div>
-			</Slide>
+							</Grow>
+						),
+				)}
+			</div>
 		</>
 	)
 })
