@@ -125,7 +125,7 @@ export const MetaMaskSelect = () => {
 									},
 								}}
 							>
-								{displayBalance?.toFixed(2)}
+								{displayBalance}
 								<Typography
 									component="span"
 									color="textSecondary"
