@@ -31,9 +31,10 @@ import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { WhileYouWait } from '@/components/WhileYouWait'
 import { USERNAME_REGEX, USERNAME_REGEX_QUERY, USERNAMES } from '@/constants'
+import { TxType } from '@/types'
 import { calculateClaimCost } from '@/utils/calculateCost'
 import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { claimSpace, getSuggestedFee, isAlreadyClaimed, TxType } from '@/utils/spacesVM'
+import { claimSpace, getSuggestedFee, isAlreadyClaimed } from '@/utils/spacesVM'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',

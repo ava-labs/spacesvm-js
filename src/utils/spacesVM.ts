@@ -1,4 +1,5 @@
 import { API_DOMAIN } from '@/constants'
+import { TransactionInfo } from '@/types'
 
 export const fetchSpaces = async (method: string, params = {}) => {
 	const response = await fetch(`${API_DOMAIN}`, {
@@ -21,7 +22,10 @@ export const fetchSpaces = async (method: string, params = {}) => {
 	return data?.result
 }
 
-export const isConnectedToSpacesVM = async () => {
+/**
+ * Pings SpacesVM returns whether connected or not
+ */
+export const isConnectedToSpacesVM = async (): Promise<boolean> => {
 	try {
 		const { success } = await fetchSpaces('ping')
 		return success
@@ -72,24 +76,6 @@ export const isAlreadyClaimed = async (space: string) => {
 export const estimateDifficulty = async () => await fetchSpaces('difficultyEstimate')
 
 export const getAddressBalance = async (address: string) => fetchSpaces('balance', { address }) // some random balance for now
-
-export enum TxType {
-	Claim = 'claim',
-	Lifeline = 'lifeline',
-	Set = 'set',
-	Delete = 'delete',
-	Move = 'move',
-	Transfer = 'transfer',
-}
-
-type TransactionInfo = {
-	type: TxType
-	space?: string
-	key?: string
-	value?: string
-	to?: string
-	units?: string
-}
 
 export const getSuggestedFee = async (transactionInfo: TransactionInfo) =>
 	await fetchSpaces('suggestedFee', { input: transactionInfo })
