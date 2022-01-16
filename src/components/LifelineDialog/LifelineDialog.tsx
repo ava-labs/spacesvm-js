@@ -80,7 +80,7 @@ export const LifelineDialog = ({ open, close, existingExpiry }: LifelineDialogPr
 			setFee(totalCost)
 		}
 		_checkFee()
-	}, [extendUnits, spaceId])
+	}, [extendUnits, spaceId, open])
 
 	const handleClose = () => {
 		setIsDone(false)
@@ -141,24 +141,11 @@ export const LifelineDialog = ({ open, close, existingExpiry }: LifelineDialogPr
 						<BsPlusLg />
 					</IconButton>
 				</Box>
-				<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-					<SubmitButton variant="contained" type="submit" onClick={onSubmit}>
-						{isSigning ? (
-							<Fade in={isSigning}>
-								<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
-							</Fade>
-						) : (
-							'Extend Life'
-						)}
-					</SubmitButton>
-				</Box>
-				<Box sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>
-					<Typography variant="caption">Cost: {fee} SPC</Typography>
-				</Box>
-				{isDone && (
+
+				{isDone ? (
 					<Fade in={isDone}>
-						<div>
-							<Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
+						<div style={{ height: 78 }}>
+							<Box sx={{ mt: 4, pt: 1, display: 'flex', justifyContent: 'center' }}>
 								<Typography
 									variant="h5"
 									align="right"
@@ -177,9 +164,28 @@ export const LifelineDialog = ({ open, close, existingExpiry }: LifelineDialogPr
 									<Twemoji svg text=":tada:" />
 								</Typography>
 							</Box>
-							<Typography variant="body1" component="div" align="center" sx={{ mt: 1, cursor: 'pointer' }}>
+							<Typography variant="body1" component="div" align="center" sx={{ mt: 2, cursor: 'pointer' }}>
 								<Link onClick={handleClose}>Close</Link>
 							</Typography>
+						</div>
+					</Fade>
+				) : (
+					<Fade in={!isDone}>
+						<div>
+							<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
+								<SubmitButton variant="contained" type="submit" onClick={onSubmit}>
+									{isSigning ? (
+										<Fade in={isSigning}>
+											<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
+										</Fade>
+									) : (
+										'Extend Life'
+									)}
+								</SubmitButton>
+							</Box>
+							<Box sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>
+								<Typography variant="caption">Cost: {fee} SPC</Typography>
+							</Box>
 						</div>
 					</Fade>
 				)}
