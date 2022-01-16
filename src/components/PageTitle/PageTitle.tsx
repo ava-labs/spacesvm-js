@@ -11,7 +11,7 @@ export const PageTitle = memo(({ children, sx = {}, ...rest }: any) => (
 			...sx,
 		}}
 	>
-		<Typography variant="h3" component="h2" sx={{ fontFamily: 'DM Serif Display' }} lineHeight={1} {...rest}>
+		<Typography variant="h3" component="h2" sx={{ fontFamily: 'DM Serif Display' }} lineHeight="inherit" {...rest}>
 			{children}
 		</Typography>
 	</Box>

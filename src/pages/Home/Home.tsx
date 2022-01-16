@@ -1,7 +1,7 @@
 import { isMobile } from 'react-device-detect'
 import { Twemoji } from 'react-emoji-render'
 import { IoCheckmarkCircle, IoClose, IoSearch } from 'react-icons/io5'
-import { createSearchParams, Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom'
 import {
 	Alert,
 	Box,
@@ -177,7 +177,9 @@ export const Home = memo(() => {
 				</Alert>
 			) : (
 				<form onSubmit={handleSubmit} autoComplete="off">
-					<PageTitle align="center">Claim your space</PageTitle>
+					<PageTitle align="center" lineHeight={1}>
+						Claim your space
+					</PageTitle>
 					<PageSubtitle align="center">Needs to be unique and lowercase.</PageSubtitle>
 
 					<Grid container spacing={4} flexDirection="column" alignItems="center">
@@ -271,13 +273,13 @@ export const Home = memo(() => {
 								) : (
 									<VerifyButton
 										type="submit"
-										onClick={onVerify}
+										onClick={() => (verified ? navigate(`/spaces/${username}/`) : onVerify())}
 										fullWidth
 										disabled={username.length === 0}
 										variant="contained"
 										size="large"
 									>
-										Check availability
+										{verified ? 'View space' : 'Check availability'}
 									</VerifyButton>
 								)}
 							</Grid>
@@ -349,7 +351,6 @@ export const Home = memo(() => {
 													style={{
 														zIndex: 3,
 														marginTop: 4,
-														lineHeight: 1,
 														fontSize: costEstimate ? '1.5rem' : 36,
 														position: 'relative',
 													}}
@@ -400,10 +401,7 @@ export const Home = memo(() => {
 							) : (
 								<Typography
 									align="center"
-									// @ts-ignore
-									component={Link}
 									sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860, display: 'block' }}
-									to={`/spaces/${username}/`}
 									gutterBottom
 									color="error"
 								>

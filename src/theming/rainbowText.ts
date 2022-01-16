@@ -1,7 +1,6 @@
 import { Theme } from '@mui/material'
 
 export const rainbowText: any = {
-	lineHeight: 1,
 	backgroundSize: '400% 100%',
 	backgroundClip: 'text',
 	wordBreak: 'break-word',
