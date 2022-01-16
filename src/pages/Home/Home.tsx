@@ -275,7 +275,7 @@ export const Home = memo(() => {
 										variant="contained"
 										size="large"
 									>
-										Verify
+										Check availability
 									</VerifyButton>
 								)}
 							</Grid>
