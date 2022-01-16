@@ -22,7 +22,7 @@ export const Footer = memo(() => (
 				<Typography component="footer" variant="body2" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="center">
 					{`© ${new Date().getFullYear()} ${APP_NAME} — `}
 					<Link color="inherit" href="https://www.avax.network/" rel="noopener noreferrer" target="_blank">
-						Built with Avalanche
+						Powered by Avalanche
 					</Link>
 				</Typography>
 			</Grid>
