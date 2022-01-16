@@ -21,6 +21,7 @@ import {
 import { throttle } from 'lodash'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
+import { rainbowText } from '@/theming/rainbowText'
 import { TxType } from '@/types'
 import { signWithMetaMaskV4 } from '@/utils/metamask'
 import { getSuggestedFee, issueTransaction } from '@/utils/spacesVM'
@@ -102,13 +103,7 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 						fontFamily="DM Serif Display"
 						component="span"
 						sx={{
-							backgroundSize: '400% 100%',
-							backgroundClip: 'text',
-							textFillColor: 'transparent',
-							backgroundColor: theme.palette.mode === 'dark' ? 'white' : 'unset',
-							animation: 'hue 5s infinite alternate',
-							backgroundImage:
-								'linear-gradient(60deg,rgba(239,0,143,.5),rgba(110,195,244,.5),rgba(112,56,255,.5),rgba(255,186,39,.5))',
+							...rainbowText,
 						}}
 					>
 						{spaceId}
@@ -210,13 +205,7 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 									align="right"
 									lineHeight={1}
 									sx={{
-										backgroundSize: '400% 100%',
-										backgroundClip: 'text',
-										textFillColor: 'transparent',
-										backgroundColor: theme.palette.mode === 'dark' ? 'white' : 'unset',
-										animation: 'hue 5s infinite alternate',
-										backgroundImage:
-											'linear-gradient(60deg,rgba(239,0,143,.5),rgba(110,195,244,.5),rgba(112,56,255,.5),rgba(255,186,39,.5))',
+										...rainbowText,
 									}}
 								>
 									Lifeline extended!
