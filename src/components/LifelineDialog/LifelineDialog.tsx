@@ -12,8 +12,10 @@ import {
 	Grid,
 	IconButton,
 	styled,
+	TextField,
 	Tooltip,
 	Typography,
+	useTheme,
 } from '@mui/material'
 import { debounce } from 'lodash'
 
@@ -64,6 +66,7 @@ export const LifelineDialog = ({
 	refreshSpaceDetails,
 }: LifelineDialogProps) => {
 	const { spaceId } = useParams()
+	const theme = useTheme()
 	const { issueTx, signWithMetaMask } = useMetaMask()
 	const [extendHours, setExtendHours] = useState(0)
 	const [fee, setFee] = useState(0)
@@ -139,13 +142,33 @@ export const LifelineDialog = ({
 
 					<Tooltip sx={{ cursor: 'help' }} placement="top" title={`Extend to ${extendToDateDisplay}`}>
 						<Box display="flex" alignItems="center" justifyContent="center">
-							<Typography sx={{ color: (theme) => theme.palette.secondary.light }} variant="h3">
-								{extendHours}
-							</Typography>
+							<TextField
+								color="secondary"
+								value={extendHours}
+								name="keyText"
+								onChange={(e) => {
+									const val = parseInt(e.target.value, 10)
+									setExtendHours(!isNaN(val) ? val : 0)
+								}}
+								placeholder="Address"
+								InputProps={{
+									sx: { fontSize: 18, fontWeight: 600, ...rainbowText },
+								}}
+								inputProps={{
+									spellCheck: 'false',
+									style: {
+										...theme.typography.h2,
+										textAlign: 'right',
+									},
+								}}
+								sx={{
+									width: 200,
+								}}
+							/>
 
-							<Divider flexItem orientation="vertical" sx={{ mx: 2 }} />
+							<Divider flexItem orientation="vertical" sx={{ mr: 2 }} />
 
-							<Typography variant="h4" component="span" color="textSecondary">
+							<Typography variant="h4" component="span" color="textSecondary" sx={{ width: 200 }}>
 								hours
 							</Typography>
 						</Box>
