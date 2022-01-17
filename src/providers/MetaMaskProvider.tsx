@@ -22,6 +22,22 @@ export const MetaMaskProvider = ({ children }: any) => {
 	const [isConnectingToMM, setIsConnectingToMM] = useState(false)
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 
+	/**
+	 * Update balance when changing accounts and on mount
+	 */
+	const [balance, setBalance] = useState<number | null>(null)
+	const updateBalance = useCallback(async () => {
+		if (!currentAddress) {
+			setBalance(null)
+			return
+		}
+		const response = await getAddressBalance(currentAddress)
+		response?.balance && setBalance(response.balance)
+	}, [currentAddress])
+	useEffect(() => {
+		updateBalance()
+	}, [updateBalance])
+
 	useEffect(() => {
 		if (!metaMaskExists) return
 		setCurrentAddress(ethereum.selectedAddress)
@@ -29,7 +45,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 		return ethereum.on('accountsChanged', (accounts: any) => {
 			setCurrentAddress(accounts[0])
 		})
-	}, [])
+	}, [updateBalance])
 
 	const connectToMetaMask = async () => {
 		if (!metaMaskExists) {
@@ -85,27 +101,6 @@ export const MetaMaskProvider = ({ children }: any) => {
 			),
 		})
 	}, [enqueueSnackbar])
-
-	/**
-	 * Checks balance for address on Spaces VM and updates context
-	 */
-	const updateBalance = useCallback(async () => {
-		if (!currentAddress) {
-			setBalance(null)
-			return
-		}
-		const response = await getAddressBalance(currentAddress)
-		response?.balance && setBalance(response.balance)
-	}, [currentAddress])
-
-	/**
-	 * Update balance when changing accounts and on mount
-	 */
-	const [balance, setBalance] = useState<number | null>(null)
-
-	useEffect(() => {
-		updateBalance()
-	}, [updateBalance])
 
 	/**
 	 * Issues a transaction to spacesVM and polls the VM until the transaction is confirmed.
