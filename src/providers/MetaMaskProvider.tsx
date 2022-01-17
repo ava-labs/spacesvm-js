@@ -21,7 +21,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 	const [currentAddress, setCurrentAddress] = useState<string | undefined>()
 	const [isConnectingToMM, setIsConnectingToMM] = useState(false)
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
-	const [metaMaskExists] = useState(ethereum !== undefined && ethereum?.isMetaMask)
+	const [metaMaskExists, setMetaMaskExists] = useState(ethereum !== undefined && ethereum?.isMetaMask)
 
 	/**
 	 * Update balance when changing accounts and on mount
@@ -50,6 +50,15 @@ export const MetaMaskProvider = ({ children }: any) => {
 			setCurrentAddress(accounts[0])
 		})
 	}, [updateBalance, metaMaskExists])
+
+	/**
+	 * Listen for ethereum initalization in browser
+	 */
+	useEffect(() => {
+		const handleEthereum = () => setMetaMaskExists(!!ethereum?.isMetaMask)
+		setTimeout(handleEthereum, 3000) // If ethereum isn't installed after 3 seconds then MM probably isn't installed.
+		return window.addEventListener('ethereum#initialized', handleEthereum, { once: true })
+	}, [])
 
 	/**
 	 * Connects to MM if not already connected, and returns the connected account
