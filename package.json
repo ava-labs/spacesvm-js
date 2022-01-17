@@ -11,7 +11,6 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@ashwamegh/react-link-preview": "^0.2.2",
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
     "@metamask/onboarding": "1.0.1",
@@ -19,6 +18,7 @@
     "@mui/styles": "5.2.3",
     "@react-hookz/web": "12.3.0",
     "date-fns": "2.28.0",
+    "lets-get-meta": "2.1.1",
     "lodash": "4.17.21",
     "notistack": "2.0.3",
     "react": "17.0.2",

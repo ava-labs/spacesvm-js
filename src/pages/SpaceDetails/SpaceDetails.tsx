@@ -2,8 +2,6 @@ import { Twemoji } from 'react-emoji-render'
 import { IoOpenOutline } from 'react-icons/io5'
 import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-// @ts-ignore
-import LinkPreview from '@ashwamegh/react-link-preview'
 import {
 	Avatar,
 	Box,
@@ -33,6 +31,7 @@ import { AddressChip } from '@/components/AddressChip/AddressChip'
 import { DeleteKeyValueDialog } from '@/components/DeleteKeyValueDialog'
 import { KeyValueInput } from '@/components/KeyValueInput'
 import { LifelineDialog } from '@/components/LifelineDialog'
+import { LinkPreview } from '@/components/LinkPreview'
 import { MoveSpaceDialog } from '@/components/MoveSpaceDialog'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
@@ -307,8 +306,8 @@ export const SpaceDetails = memo(() => {
 																	<MuiLink href={value} target="_blank" rel="noreferrer" title={preview.title || ''}>
 																		<img
 																			width="100%"
-																			src={preview.img || ''}
-																			alt={preview.description || ''}
+																			src={preview['og:image'] || ''}
+																			alt={preview['og:description'] || ''}
 																			style={{ borderRadius: 4 }}
 																		/>
 																	</MuiLink>
