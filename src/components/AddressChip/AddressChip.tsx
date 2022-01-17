@@ -2,6 +2,7 @@ import { Chip, SxProps, Tooltip, TooltipProps } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
 import { obfuscateAddress } from '@/utils/obfuscateAddress'
+import { setClipboard } from '@/utils/setClipboard'
 
 type AddressChipProps = {
 	address: string
@@ -21,26 +22,18 @@ export const AddressChip = ({
 }: AddressChipProps) => {
 	const { enqueueSnackbar } = useSnackbar()
 
-	const setClipboard = async () => {
-		const type = 'text/plain'
-		const blob = new Blob([address], { type })
-		const data = [new ClipboardItem({ [type]: blob })]
-		navigator.clipboard.write(data).then(
-			() => {
-				enqueueSnackbar(isMetaMaskAddress ? 'MetaMask address copied!' : 'Address copied!')
-			},
-			() => {
-				enqueueSnackbar("Can't copy!", { variant: 'error' })
-			},
-		)
-	}
-
 	return (
 		<Tooltip title="Copy Address" placement={tooltipPlacement}>
 			<Chip
 				sx={{ ...sx, cursor: 'pointer' }}
 				label={isObfuscated ? obfuscateAddress(address) : address}
-				onClick={setClipboard}
+				onClick={() => {
+					setClipboard({
+						value: address,
+						onSuccess: () => enqueueSnackbar(isMetaMaskAddress ? 'MetaMask address copied!' : 'Address copied!'),
+						onFailure: () => enqueueSnackbar("Can't copy!", { variant: 'error' }),
+					})
+				}}
 				{...rest}
 			/>
 		</Tooltip>

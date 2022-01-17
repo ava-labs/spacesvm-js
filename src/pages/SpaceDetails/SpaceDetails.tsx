@@ -1,9 +1,9 @@
 import { Twemoji } from 'react-emoji-render'
 import { GiCardboardBox } from 'react-icons/gi'
+import { IoLink } from 'react-icons/io5'
 import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import {
-	Avatar,
 	Box,
 	Button,
 	Card,
@@ -23,6 +23,7 @@ import {
 	useTheme,
 } from '@mui/material'
 import { formatDistanceToNow } from 'date-fns'
+import { useSnackbar } from 'notistack'
 
 import { ClaimButton } from '../Home/Home'
 
@@ -39,6 +40,7 @@ import { IMAGE_REGEX, URL_REGEX, USERNAME_REGEX_QUERY } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { rainbowText } from '@/theming/rainbowText'
 import { SpaceKeyValue } from '@/types'
+import { setClipboard } from '@/utils/setClipboard'
 import { querySpace } from '@/utils/spacesVM'
 
 const isImgLink = (url: string): boolean => {
@@ -60,6 +62,9 @@ export const SpaceDetails = memo(() => {
 	const [lifelineDialogOpen, setLifelineDialogOpen] = useState<boolean>(false)
 	const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false)
 	const [moveDialogOpen, setMoveDialogOpen] = useState<boolean>(false)
+	const { enqueueSnackbar } = useSnackbar()
+	const location = useLocation()
+	console.log(window)
 
 	const refreshSpaceDetails = useCallback(async () => {
 		const spaceData = await querySpace(spaceId || '')
@@ -331,6 +336,25 @@ export const SpaceDetails = memo(() => {
 											{isSpaceOwner && (
 												<Box className="actions" sx={{ position: 'absolute', right: 32, top: 32 }}>
 													<Grid container spacing={1} wrap="nowrap">
+														<Grid item>
+															<Tooltip placement="top" title="Copy direct link">
+																<div>
+																	<IconButton
+																		onClick={(e) => {
+																			e.preventDefault()
+																			e.stopPropagation()
+																			setClipboard({
+																				value: `${window.location.origin}/spaces/${spaceId}/${key}`,
+																				onSuccess: () => enqueueSnackbar('Copied!'),
+																				onFailure: () => enqueueSnackbar("Can't copy!", { variant: 'error' }),
+																			})
+																		}}
+																	>
+																		<IoLink />
+																	</IconButton>
+																</div>
+															</Tooltip>
+														</Grid>
 														<Grid item>
 															<Tooltip placement="top" title="Edit">
 																<div>
