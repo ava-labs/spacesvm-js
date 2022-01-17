@@ -229,7 +229,7 @@ export const SpaceDetails = memo(() => {
 								sx={{ mb: 4 }}
 							>
 								{spaceValues?.length === 0 ? (
-									"There's nothing in your space right now."
+									`There's nothing in ${isSpaceOwner ? 'your' : 'this'} space right now.`
 								) : (
 									<>
 										<Typography variant="body2" color="textSecondary">
@@ -237,7 +237,7 @@ export const SpaceDetails = memo(() => {
 											<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
 												more
 											</Typography>{' '}
-											items in your space, the{' '}
+											items in {isSpaceOwner ? 'your' : 'a'} space, the{' '}
 											<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
 												faster
 											</Typography>{' '}
