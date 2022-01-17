@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { Box, Button, Grid, keyframes, Tooltip, Typography, useTheme } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
+import { TransferFundsDialog } from '../TransferFundsDialog'
+
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { numberWithCommas } from '@/utils/numberUtils'
@@ -57,6 +59,7 @@ export const MetaMaskSelect = () => {
 	const theme = useTheme()
 	const { currentAddress, connectToMetaMask, balance } = useMetaMask()
 	const [displayBalance, setDisplayBalance] = useState(balance)
+	const [transferOpen, setTransferOpen] = useState(false)
 
 	useEffect(() => {
 		if (balance !== null) setDisplayBalance(balance)
@@ -88,57 +91,60 @@ export const MetaMaskSelect = () => {
 	const AnimatedGrid = balance ? GrowingGrid : ShrinkingGrid
 
 	return (
-		<Grid
-			container
-			sx={{
-				backgroundColor: (theme) => theme.palette.background.paper,
-				borderRadius: 99999,
-			}}
-		>
-			<Grid item>
-				<Tooltip title={currentAddress ? 'Copy address' : 'Connect to MetaMask'}>
-					<Button
-						startIcon={<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />}
-						variant="outlined"
-						color="secondary"
-						onClick={handleMetaMaskClick}
-						sx={{
-							background: theme.customPalette.customBackground,
-							'&:hover': { background: theme.customPalette.customBackground },
-						}}
-					>
-						{currentAddress ? obfuscateAddress(currentAddress) : 'Connect'}
-					</Button>
-				</Tooltip>
-			</Grid>
-			<AnimatedGrid item>
-				<Tooltip title="SPC balance">
-					<Box display="flex" alignItems="center" height="100%">
-						{displayBalance && (
-							<Typography
-								noWrap
-								variant="h6"
-								display="flex"
-								sx={{
-									mx: 2,
-									'&:hover': {
-										cursor: 'help',
-									},
-								}}
-							>
-								{numberWithCommas(displayBalance)}
+		<>
+			<Grid
+				container
+				sx={{
+					backgroundColor: (theme) => theme.palette.background.paper,
+					borderRadius: 99999,
+				}}
+			>
+				<Grid item>
+					<Tooltip title={currentAddress ? 'Copy address' : 'Connect to MetaMask'}>
+						<Button
+							startIcon={<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />}
+							variant="outlined"
+							color="secondary"
+							onClick={handleMetaMaskClick}
+							sx={{
+								background: theme.customPalette.customBackground,
+								'&:hover': { background: theme.customPalette.customBackground },
+							}}
+						>
+							{currentAddress ? obfuscateAddress(currentAddress) : 'Connect'}
+						</Button>
+					</Tooltip>
+				</Grid>
+				<AnimatedGrid item>
+					<Tooltip title="Send SPC">
+						<Box display="flex" alignItems="center" height="100%" onClick={() => setTransferOpen(true)}>
+							{displayBalance && (
 								<Typography
-									component="span"
-									color="textSecondary"
-									sx={{ ml: 1, display: 'flex', alignItems: 'center' }}
+									noWrap
+									variant="h6"
+									display="flex"
+									sx={{
+										mx: 2,
+										'&:hover': {
+											cursor: 'pointer',
+										},
+									}}
 								>
-									SPC
+									{numberWithCommas(displayBalance)}
+									<Typography
+										component="span"
+										color="textSecondary"
+										sx={{ ml: 1, display: 'flex', alignItems: 'center' }}
+									>
+										SPC
+									</Typography>
 								</Typography>
-							</Typography>
-						)}
-					</Box>
-				</Tooltip>
-			</AnimatedGrid>
-		</Grid>
+							)}
+						</Box>
+					</Tooltip>
+				</AnimatedGrid>
+			</Grid>
+			<TransferFundsDialog open={transferOpen} handleClose={() => setTransferOpen(false)} />
+		</>
 	)
 }
