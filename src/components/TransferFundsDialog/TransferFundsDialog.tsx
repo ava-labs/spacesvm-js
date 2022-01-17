@@ -128,7 +128,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 					</Typography>
 				</DialogTitle>
 				<DialogContent>
-					<Table sx={{ mt: 2 }}>
+					<Table>
 						<TableBody>
 							<TableRow>
 								<TableCell align="right">From:</TableCell>
@@ -292,7 +292,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 							</Button>
 						</Grid>
 					</Grid>
-					<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
+					<Box sx={{ mt: 6, display: 'flex', justifyContent: 'center' }}>
 						<Tooltip
 							placement="top"
 							title={addressInputError ? addressInputError : transferAmount <= 0 ? 'Add some SPC to send!' : ''}
