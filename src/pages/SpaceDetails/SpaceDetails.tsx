@@ -208,35 +208,37 @@ export const SpaceDetails = memo(() => {
 												</Typography>
 											</CardContent>
 										</Box>
-										<Box className="actions">
-											<Grid container spacing={1} wrap="nowrap">
-												<Grid item>
-													<Tooltip placement="top" title="Edit">
-														<div>
-															<IconButton disabled>
-																<IoConstructOutline />
-															</IconButton>
-														</div>
-													</Tooltip>
+										{isSpaceOwner && (
+											<Box className="actions">
+												<Grid container spacing={1} wrap="nowrap">
+													<Grid item>
+														<Tooltip placement="top" title="Edit">
+															<div>
+																<IconButton disabled>
+																	<IoConstructOutline />
+																</IconButton>
+															</div>
+														</Tooltip>
+													</Grid>
+													<Grid item>
+														<Tooltip placement="top" title="Delete">
+															<div>
+																<IconButton
+																	disabled={!isSpaceOwner}
+																	onClick={() => {
+																		setFocusedKeyIndex(i)
+																		setDeleteDialogOpen(true)
+																	}}
+																	color="primary"
+																>
+																	<IoTrashOutline />
+																</IconButton>
+															</div>
+														</Tooltip>
+													</Grid>
 												</Grid>
-												<Grid item>
-													<Tooltip placement="top" title="Delete">
-														<div>
-															<IconButton
-																disabled={!isSpaceOwner}
-																onClick={() => {
-																	setFocusedKeyIndex(i)
-																	setDeleteDialogOpen(true)
-																}}
-																color="primary"
-															>
-																<IoTrashOutline />
-															</IconButton>
-														</div>
-													</Tooltip>
-												</Grid>
-											</Grid>
-										</Box>
+											</Box>
+										)}
 									</Card>
 								))
 							) : (
