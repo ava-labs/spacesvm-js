@@ -26,9 +26,10 @@ const SetButton = styled(Button)(({ theme }) => ({
 type KeyValueInputProps = {
 	spaceId: string
 	refreshSpaceDetails: any
+	empty: boolean
 }
 
-export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails }: KeyValueInputProps) => {
+export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyValueInputProps) => {
 	const { signWithMetaMask, issueTx } = useMetaMask()
 	const [formValues, setFormValues] = useState<{ keyText?: string; valueText?: string; loading?: boolean }[]>([])
 
@@ -100,7 +101,7 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails }: KeyValueInp
 				color="secondary"
 				sx={{ margin: 'auto', display: 'flex', mb: 4 }}
 			>
-				Add more
+				{empty ? 'Start adding' : 'Add more'}
 			</Button>
 
 			{formValues.map(

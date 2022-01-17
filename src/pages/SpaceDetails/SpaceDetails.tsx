@@ -24,6 +24,7 @@ import { formatDistanceToNow } from 'date-fns'
 
 import { ClaimButton } from '../Home/Home'
 
+import NothingHere from '@/assets/nothing-here.png'
 import { AddressChip } from '@/components/AddressChip/AddressChip'
 import { DeleteKeyValueDialog } from '@/components/DeleteKeyValueDialog'
 import { KeyValueInput } from '@/components/KeyValueInput'
@@ -42,7 +43,6 @@ export const SpaceDetails = memo(() => {
 	const { spaceId } = useParams()
 	const { currentAddress } = useMetaMask()
 	const theme = useTheme()
-
 	const [details, setDetails] = useState<any>()
 	const [showDetailsTable, setShowDetailsTable] = useState<boolean>(false)
 	const [spaceValues, setSpaceValues] = useState<any>()
@@ -204,6 +204,9 @@ export const SpaceDetails = memo(() => {
 									md: 8,
 								},
 								background: (theme) => theme.palette.background.paper,
+								//backgroundImage: (theme) => (theme.palette.mode === 'dark' ? `url(${NothingHere})` : 'unset'),
+								backgroundSize: 'contain',
+								backgroundPosition: 'center',
 								borderTopLeftRadius: 24,
 								borderBottomLeftRadius: 24,
 								boxShadow: '-90px 0 200px 0 rgb(82 61 241 / 6%)',
@@ -211,7 +214,25 @@ export const SpaceDetails = memo(() => {
 								height: 'calc(100vh - 64px)',
 							}}
 						>
-							{spaceId && isSpaceOwner && <KeyValueInput spaceId={spaceId} refreshSpaceDetails={refreshSpaceDetails} />}
+							{spaceValues && (
+								<Typography variant="h3" fontFamily="DM Serif Display" align="center" gutterBottom>
+									Space contents
+								</Typography>
+							)}
+
+							{spaceValues?.length === 0 && (
+								<Typography variant="body1" color="textSecondary" align="center" gutterBottom sx={{ mb: 4 }}>
+									There's nothing in your space right now
+								</Typography>
+							)}
+
+							{spaceId && isSpaceOwner && (
+								<KeyValueInput
+									empty={spaceValues?.length === 0}
+									spaceId={spaceId}
+									refreshSpaceDetails={refreshSpaceDetails}
+								/>
+							)}
 
 							{spaceValues ? (
 								spaceValues.map(({ key, value }: SpaceKeyValue, i: number) => (
@@ -222,7 +243,7 @@ export const SpaceDetails = memo(() => {
 											display: 'flex',
 											mb: 4,
 											p: 4,
-											backgroundColor: 'transparent',
+											//backgroundColor: 'transparent',
 											border: '1px solid transparent',
 											'&:hover': {
 												border: (theme) => `1px solid ${theme.palette.divider}`,

@@ -93,6 +93,9 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 					<Typography gutterBottom variant="h3" component="p" fontFamily="DM Serif Display" align="center">
 						Move space
 					</Typography>
+					<Typography color="textSecondary" align="center" variant="body2" gutterBottom>
+						You can move this space to a different wallet.
+					</Typography>
 				</DialogTitle>
 				<DialogContent>
 					<Table>
@@ -120,7 +123,7 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 										placeholder="0x address"
 										fullWidth
 										InputProps={{
-											sx: { fontSize: 18, fontWeight: 600, paddingBottom: '2px' },
+											sx: { fontSize: 18, fontWeight: 600 },
 										}}
 										inputProps={{
 											spellCheck: 'false',
