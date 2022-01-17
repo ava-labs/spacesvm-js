@@ -39,7 +39,7 @@ export const AppBar = memo(() => (
 						</Grid>
 
 						<Grid item container alignItems="center" justifyContent="flex-end" wrap="nowrap" spacing={2}>
-							<Grid item>
+							<Grid item sx={{ display: { xs: 'none', md: 'inherit' } }}>
 								<ThemeToggle />
 							</Grid>
 

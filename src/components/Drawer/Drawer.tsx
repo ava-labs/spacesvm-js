@@ -3,6 +3,7 @@ import { IoMenu } from 'react-icons/io5'
 import { NavLink } from 'react-router-dom'
 import {
 	Drawer as MuiDrawer,
+	Grid,
 	IconButton,
 	List,
 	ListItem,
@@ -11,6 +12,8 @@ import {
 	Tooltip,
 	Typography,
 } from '@mui/material'
+
+import { ThemeToggle } from '../ThemeToggle'
 
 export const Drawer = memo(() => {
 	const [open, setOpen] = useState<boolean>(false)
@@ -36,9 +39,16 @@ export const Drawer = memo(() => {
 				open={open}
 				onClose={() => setOpen(false)}
 			>
-				<Typography variant="h4" sx={{ fontFamily: 'DM Serif Display' }}>
-					Menu
-				</Typography>
+				<Grid container justifyContent="space-between" alignItems="end">
+					<Grid item>
+						<Typography variant="h4" sx={{ fontFamily: 'DM Serif Display' }}>
+							Menu
+						</Typography>
+					</Grid>
+					<Grid item>
+						<ThemeToggle />
+					</Grid>
+				</Grid>
 				<List sx={{ mt: 4, ml: -2 }}>
 					{[
 						{ label: 'Home', emoji: <Twemoji svg text="🏠" />, url: '/' },
