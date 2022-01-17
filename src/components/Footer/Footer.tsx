@@ -28,7 +28,7 @@ export const Footer = memo(() => (
 					rel="noopener noreferrer"
 					target="_blank"
 					color="inherit"
-					sx={{ ml: 4 }}
+					sx={{ ml: 3 }}
 				>
 					<IoLogoGithub size={32} />
 				</Link>
