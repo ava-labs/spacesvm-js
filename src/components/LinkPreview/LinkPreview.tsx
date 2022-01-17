@@ -1,5 +1,4 @@
-// @ts-ignore
-import getMeta from 'lets-get-meta'
+import { getMeta } from '@/utils/getMeta'
 
 export const LinkPreview = memo(({ url, render }: any) => {
 	const [loading, setLoading] = useState<boolean>(true)

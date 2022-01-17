@@ -2,7 +2,7 @@ import { Twemoji } from 'react-emoji-render'
 import { GiCardboardBox } from 'react-icons/gi'
 import { IoLink } from 'react-icons/io5'
 import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
 	Box,
 	Button,
@@ -63,8 +63,6 @@ export const SpaceDetails = memo(() => {
 	const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false)
 	const [moveDialogOpen, setMoveDialogOpen] = useState<boolean>(false)
 	const { enqueueSnackbar } = useSnackbar()
-	const location = useLocation()
-	console.log(window)
 
 	const refreshSpaceDetails = useCallback(async () => {
 		const spaceData = await querySpace(spaceId || '')
