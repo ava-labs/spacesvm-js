@@ -31,6 +31,7 @@ import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { rainbowText } from '@/theming/rainbowText'
 import { TxType } from '@/types'
+import { TRANSFER_COST } from '@/utils/calculateCost'
 import { getSuggestedFee } from '@/utils/spacesVM'
 import { isValidWalletAddress } from '@/utils/verifyAddress'
 
@@ -55,8 +56,6 @@ const SubmitButton = styled(Button)(({ theme }: any) => ({
 		backgroundColor: theme.palette.mode === 'dark' ? 'hsla(0,0%,100%,0.1)' : 'hsla(0,0%,0%,0.1)',
 	},
 }))
-
-const MAX_TRANSFER_AMOUNT = 100000000
 
 export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) => {
 	const { currentAddress, balance, signWithMetaMask, issueTx } = useMetaMask()
@@ -114,6 +113,8 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 	}
 
 	if (!currentAddress) return null
+
+	const maxTransferAmount = Math.min(100000000, balance - TRANSFER_COST)
 
 	return (
 		<>
@@ -174,7 +175,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 							name="keyText"
 							onChange={(e) => {
 								const val = parseInt(e.target.value, 10)
-								setTransferAmount(Math.min(!isNaN(val) ? val : 0, MAX_TRANSFER_AMOUNT, balance))
+								setTransferAmount(Math.min(!isNaN(val) ? val : 0, maxTransferAmount))
 							}}
 							placeholder="Address"
 							InputProps={{
@@ -260,8 +261,8 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 								}}
 								size="large"
 								color="inherit"
-								disabled={transferAmount >= MAX_TRANSFER_AMOUNT || transferAmount >= balance}
-								onClick={() => setTransferAmount(Math.min(transferAmount + 1, MAX_TRANSFER_AMOUNT, balance))}
+								disabled={transferAmount >= maxTransferAmount}
+								onClick={() => setTransferAmount(Math.min(transferAmount + 1, maxTransferAmount))}
 							>
 								<IoAdd />
 							</IconButton>
@@ -272,8 +273,8 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 								size="small"
 								startIcon={<IoAdd />}
 								color="secondary"
-								disabled={transferAmount >= MAX_TRANSFER_AMOUNT || transferAmount >= balance}
-								onClick={() => setTransferAmount(Math.min(transferAmount + 100, MAX_TRANSFER_AMOUNT, balance))}
+								disabled={transferAmount >= maxTransferAmount}
+								onClick={() => setTransferAmount(Math.min(transferAmount + 100, maxTransferAmount))}
 							>
 								100
 							</Button>
@@ -284,8 +285,8 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 								size="small"
 								startIcon={<IoAdd />}
 								color="secondary"
-								disabled={transferAmount >= MAX_TRANSFER_AMOUNT || transferAmount >= balance}
-								onClick={() => setTransferAmount(Math.min(transferAmount + 1000, MAX_TRANSFER_AMOUNT, balance))}
+								disabled={transferAmount >= maxTransferAmount}
+								onClick={() => setTransferAmount(Math.min(transferAmount + 1000, maxTransferAmount))}
 							>
 								1K
 							</Button>
@@ -317,13 +318,13 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 					</Box>
 					<Box sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>
 						<Typography variant="caption" color="textSecondary">
-							Fee: 10 SPC
+							Fee: {TRANSFER_COST} SPC
 						</Typography>
 					</Box>
 				</DialogContent>
 			</Dialog>
 			<TransferFundsSuccessDialog open={open && isDone} onClose={handleClose} />
-			<NoFundsDialog open={open && !balance} onClose={handleClose} />
+			<NoFundsDialog open={open && !balance && !isDone} onClose={handleClose} />
 		</>
 	)
 }

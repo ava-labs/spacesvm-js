@@ -16,3 +16,5 @@ export const calculateClaimCost = (p: string): number => {
 
 	return desirability * ClaimTier1Multiplier
 }
+
+export const TRANSFER_COST = 1

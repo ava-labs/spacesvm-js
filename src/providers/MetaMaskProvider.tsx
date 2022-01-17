@@ -1,7 +1,6 @@
 import { isAndroid, isIOS } from 'react-device-detect'
 import { BiRedo } from 'react-icons/bi'
 import { IoDownloadOutline } from 'react-icons/io5'
-import { useNavigate } from 'react-router-dom'
 import MetaMaskOnboarding from '@metamask/onboarding'
 import { Button } from '@mui/material'
 import { useSnackbar } from 'notistack'
@@ -28,7 +27,6 @@ export const MetaMaskProvider = ({ children }: any) => {
 	const [isConnectingToMM, setIsConnectingToMM] = useState(false)
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 	const [metaMaskExists, setMetaMaskExists] = useState(ethereum !== undefined && ethereum?.isMetaMask)
-	const navigate = useNavigate()
 
 	/**
 	 * Update balance when changing accounts and on mount
@@ -40,7 +38,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 			return
 		}
 		const response = await getAddressBalance(currentAddress)
-		response?.balance && setBalance(response.balance)
+		response?.balance !== undefined && setBalance(response.balance)
 	}, [currentAddress])
 	useEffect(() => {
 		updateBalance()
