@@ -19,7 +19,7 @@ export const LifelineDoneDialog = ({ open, onClose }: LifelineDoneDialogProps) =
 						...rainbowText,
 					}}
 				>
-					Lifeline extended!
+					Lifeline extended!&nbsp;
 					<Twemoji svg text=":tada:" />
 				</Typography>
 			</Box>
