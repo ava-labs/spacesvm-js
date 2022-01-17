@@ -1,5 +1,7 @@
+import { isAndroid, isIOS } from 'react-device-detect'
 import { BiRedo } from 'react-icons/bi'
 import { IoDownloadOutline } from 'react-icons/io5'
+import { useNavigate } from 'react-router-dom'
 import MetaMaskOnboarding from '@metamask/onboarding'
 import { Button } from '@mui/material'
 import { useSnackbar } from 'notistack'
@@ -12,6 +14,9 @@ declare global {
 	}
 }
 
+const GOOGLE_PLAY_MM_LINK = 'https://play.google.com/store/apps/details?id=io.metamask'
+const APPLE_STORE_MM_LINK = 'https://apps.apple.com/us/app/metamask-blockchain-wallet/id1438144202'
+
 const ethereum = window.ethereum
 const onboarding = new MetaMaskOnboarding()
 
@@ -22,6 +27,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 	const [isConnectingToMM, setIsConnectingToMM] = useState(false)
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 	const [metaMaskExists, setMetaMaskExists] = useState(ethereum !== undefined && ethereum?.isMetaMask)
+	const navigate = useNavigate()
 
 	/**
 	 * Update balance when changing accounts and on mount
@@ -112,7 +118,11 @@ export const MetaMaskProvider = ({ children }: any) => {
 					startIcon={<IoDownloadOutline />}
 					variant="outlined"
 					color="inherit"
-					onClick={() => onboarding.startOnboarding()}
+					href={isIOS ? APPLE_STORE_MM_LINK : isAndroid ? GOOGLE_PLAY_MM_LINK : 'javascript:void(0)'}
+					onClick={() => {
+						if (isIOS || isAndroid) return
+						onboarding.startOnboarding()
+					}}
 					sx={{ ml: 1, mr: -1 }}
 				>
 					Download MetaMask
