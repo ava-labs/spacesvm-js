@@ -6,7 +6,7 @@ import { Drawer } from '../Drawer'
 import { MetaMaskSelect } from '../MetaMaskSelect'
 import { ThemeToggle } from '../ThemeToggle'
 
-import Logo from '@/assets/logo-spaces.svg'
+import Logo from '@/assets/logo-spaces2.png'
 import { APP_NAME } from '@/constants'
 
 export const AppBar = memo(() => (
