@@ -165,6 +165,7 @@ export const LifelineDialog = ({
 								sx={{
 									width: 300,
 								}}
+								autoComplete="off"
 							/>
 
 							<Divider flexItem orientation="vertical" sx={{ mr: 2 }} />
