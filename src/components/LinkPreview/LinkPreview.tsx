@@ -14,6 +14,7 @@ export const LinkPreview = memo(({ url, render }: any) => {
 					throw new Error('Network response was not ok.')
 				})
 				.then((data) => {
+					console.log(getMeta(data.contents))
 					setPreviewData(getMeta(data.contents))
 					setLoading(false)
 				})
