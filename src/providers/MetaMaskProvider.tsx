@@ -1,3 +1,4 @@
+import { BiRedo } from 'react-icons/bi'
 import { IoDownloadOutline } from 'react-icons/io5'
 import MetaMaskOnboarding from '@metamask/onboarding'
 import { Button } from '@mui/material'
@@ -70,7 +71,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 				persist: true,
 				action: (
 					<Button
-						startIcon={<IoDownloadOutline />}
+						startIcon={<BiRedo />}
 						variant="outlined"
 						color="inherit"
 						onClick={() => {

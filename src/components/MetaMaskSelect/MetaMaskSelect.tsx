@@ -66,44 +66,45 @@ export const MetaMaskSelect = () => {
 								{currentAddress ? obfuscateAddress(currentAddress) : 'Connect'}
 							</Button>
 						</Tooltip>
-
-						<Tooltip title={'Transfer SPC'}>
-							<Button
-								variant="outlined"
-								color="secondary"
-								onClick={() => setTransferOpen(true)}
-								sx={{
-									background: theme.customPalette.customBackground,
-									'&:hover': { background: theme.customPalette.customBackground },
-									animation: `800ms ${growWidth} ease`,
-									animationDirection: 'forwards',
-								}}
-							>
-								<Typography
-									noWrap
-									variant="h6"
-									display="flex"
-									lineHeight={1}
+						{metaMaskExists && (
+							<Tooltip title={'Transfer SPC'}>
+								<Button
+									variant="outlined"
+									color="secondary"
+									onClick={() => setTransferOpen(true)}
 									sx={{
-										mr: 1,
+										background: theme.customPalette.customBackground,
+										'&:hover': { background: theme.customPalette.customBackground },
+										animation: `800ms ${growWidth} ease`,
+										animationDirection: 'forwards',
 									}}
-									style={{ fontSize: '1.1rem' }}
 								>
-									{balance !== null ? numberWithCommas(balance) : 0}{' '}
 									<Typography
+										noWrap
 										variant="h6"
-										component="span"
+										display="flex"
 										lineHeight={1}
-										color="textSecondary"
-										sx={{ ml: 0.5 }}
+										sx={{
+											mr: 1,
+										}}
 										style={{ fontSize: '1.1rem' }}
 									>
-										SPC
+										{balance !== null ? numberWithCommas(balance) : 0}{' '}
+										<Typography
+											variant="h6"
+											component="span"
+											lineHeight={1}
+											color="textSecondary"
+											sx={{ ml: 0.5 }}
+											style={{ fontSize: '1.1rem' }}
+										>
+											SPC
+										</Typography>
 									</Typography>
-								</Typography>
-								<IoSwapVertical size="18" color={theme.palette.primary.dark} />
-							</Button>
-						</Tooltip>
+									<IoSwapVertical size="18" color={theme.palette.primary.dark} />
+								</Button>
+							</Tooltip>
+						)}
 					</ButtonGroup>
 				</Grid>
 			</Grid>
