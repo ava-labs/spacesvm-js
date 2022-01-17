@@ -1,4 +1,3 @@
-import { isBrowser } from 'react-device-detect'
 import { Link } from 'react-router-dom'
 import { AppBar as MuiAppBar, Box, Container, Grid, Toolbar, Typography } from '@mui/material'
 
@@ -40,7 +39,7 @@ export const AppBar = memo(() => (
 						</Grid>
 
 						<Grid item container alignItems="center" justifyContent="flex-end" wrap="nowrap" spacing={2}>
-							<Grid item>
+							<Grid item sx={{ display: { xs: 'none', md: 'inherit' } }}>
 								<ThemeToggle />
 							</Grid>
 
