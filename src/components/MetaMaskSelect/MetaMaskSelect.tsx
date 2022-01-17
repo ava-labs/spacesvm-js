@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { IoOpenOutline } from 'react-icons/io5'
+import { IoSwapVertical } from 'react-icons/io5'
 import { Button, ButtonGroup, Grid, keyframes, Tooltip, Typography, useTheme } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
@@ -106,7 +106,7 @@ export const MetaMaskSelect = () => {
 										SPC
 									</Typography>
 								</Typography>
-								<IoOpenOutline size="18" color={theme.palette.primary.dark} style={{ position: 'relative', top: -1 }} />
+								<IoSwapVertical size="18" color={theme.palette.primary.dark} />
 							</Button>
 						</Tooltip>
 					</ButtonGroup>
