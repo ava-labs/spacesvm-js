@@ -71,11 +71,16 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 	//0x08380a9cd3a5034036b44c18ab40fce3ad1c13ba
 	const onSubmit = async () => {
 		setIsSigning(true)
-		const { typedData } = await getSuggestedFee({
-			type: TxType.Transfer,
-			to: toAddress,
-			units: transferAmount,
-		})
+		try {
+			const { typedData } = await getSuggestedFee({
+				type: TxType.Transfer,
+				to: toAddress,
+				units: transferAmount,
+			})
+		} catch (error) {
+			console.error(error)
+			setIsSigning(false)
+		}
 		const signature = await signWithMetaMask(typedData)
 		setIsSigning(false)
 		if (!signature) return
