@@ -3,18 +3,24 @@ import MetaMaskOnboarding from '@metamask/onboarding'
 import { Button } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
-import { metaMaskExists, mmRequestAccounts } from '@/utils/metamask'
 import { getAddressBalance, issueAndConfirmTransaction } from '@/utils/spacesVM'
 
+declare global {
+	interface Window {
+		ethereum: any
+	}
+}
+
 const ethereum = window.ethereum
+const metaMaskExists = ethereum !== undefined && ethereum?.isMetaMask
+const onboarding = new MetaMaskOnboarding()
 
 const MetaMaskContext = createContext({} as any)
 
-const onboarding = new MetaMaskOnboarding()
-
 export const MetaMaskProvider = ({ children }: any) => {
 	const [currentAddress, setCurrentAddress] = useState<string | undefined>()
-	const { enqueueSnackbar } = useSnackbar()
+	const [isConnectingToMM, setIsConnectingToMM] = useState(false)
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 
 	useEffect(() => {
 		if (!metaMaskExists) return
@@ -25,8 +31,37 @@ export const MetaMaskProvider = ({ children }: any) => {
 		})
 	}, [])
 
-	const connectToMetaMask = () => {
-		mmRequestAccounts()
+	const connectToMetaMask = async () => {
+		if (!metaMaskExists) {
+			onboardToMetaMask()
+			return
+		}
+		setIsConnectingToMM(true)
+		try {
+			const res = await ethereum.request({ method: 'eth_requestAccounts' })
+			setIsConnectingToMM(false)
+			return res
+		} catch (err) {
+			setIsConnectingToMM(false)
+			enqueueSnackbar('Connect your wallet to use Spaces!', {
+				variant: 'warning',
+				persist: true,
+				action: (
+					<Button
+						startIcon={<IoDownloadOutline />}
+						variant="outlined"
+						color="inherit"
+						onClick={() => {
+							closeSnackbar()
+							connectToMetaMask()
+						}}
+						sx={{ ml: 1, mr: -1 }}
+					>
+						Try again
+					</Button>
+				),
+			})
+		}
 	}
 
 	/**
@@ -112,6 +147,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 				currentAddress,
 				balance,
 				connectToMetaMask,
+				isConnectingToMM,
 				signWithMetaMask,
 				onboardToMetaMask,
 				issueTx,

@@ -44,11 +44,9 @@ export const AppBar = memo(() => (
 								<ThemeToggle />
 							</Grid>
 
-							{isBrowser && (
-								<Grid item>
-									<MetaMaskSelect />
-								</Grid>
-							)}
+							<Grid item>
+								<MetaMaskSelect />
+							</Grid>
 
 							<Grid item>
 								<Drawer />
