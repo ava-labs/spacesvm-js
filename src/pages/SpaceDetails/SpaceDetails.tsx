@@ -64,9 +64,6 @@ export const SpaceDetails = memo(() => {
 	const refreshSpaceDetails = useCallback(async () => {
 		const spaceData = await querySpace(spaceId || '')
 		setDetails(spaceData?.info)
-
-		console.log('----')
-		console.log(spaceData?.values)
 		setSpaceValues(spaceData?.values)
 		setLoading(false)
 	}, [spaceId])
@@ -239,24 +236,22 @@ export const SpaceDetails = memo(() => {
 									color="textSecondary"
 									align="center"
 									gutterBottom
-									sx={{ mb: 4 }}
+									sx={{ mb: 3 }}
 								>
 									{spaceValues?.length === 0 ? (
 										`There's nothing in ${isSpaceOwner ? 'your' : 'this'} space right now.`
 									) : (
-										<>
-											<Typography variant="body2" color="textSecondary">
-												The{' '}
-												<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
-													more
-												</Typography>{' '}
-												items in {isSpaceOwner ? 'your' : 'a'} space, the{' '}
-												<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
-													faster
-												</Typography>{' '}
-												it will expire.
-											</Typography>
-										</>
+										<Typography variant="body2" color="textSecondary">
+											The{' '}
+											<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
+												more
+											</Typography>{' '}
+											items in {isSpaceOwner ? 'your' : 'a'} space, the{' '}
+											<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
+												faster
+											</Typography>{' '}
+											it will expire.
+										</Typography>
 									)}
 								</Typography>
 							)}
@@ -270,92 +265,105 @@ export const SpaceDetails = memo(() => {
 							)}
 
 							{spaceValues ? (
-								spaceValues.map(({ key, value }: SpaceKeyValue, i: number) => (
-									<Card
-										key={key}
-										elevation={0}
-										sx={{
-											position: 'relative',
-											display: 'flex',
-											mb: 1,
-											p: 4,
-											//backgroundColor: 'transparent',
-											border: '1px solid transparent',
-											'&:hover': {
-												border: (theme) => `1px solid ${theme.palette.divider}`,
-												'.actions': {
-													opacity: 1,
+								spaceValues.map(({ key, value }: SpaceKeyValue, i: number) => {
+									const valueIsUrl = URL_REGEX.test(value)
+
+									return (
+										<Card
+											key={key}
+											component={valueIsUrl ? MuiLink : 'div'}
+											href={value}
+											target="_blank"
+											rel="noreferrer"
+											elevation={0}
+											sx={{
+												textDecoration: 'none',
+												position: 'relative',
+												display: 'flex',
+												mb: 1,
+												px: 2,
+												py: 3,
+												//backgroundColor: 'transparent',
+												border: '1px solid transparent',
+												'&:hover': {
+													h4: {
+														textDecoration: valueIsUrl ? 'underline' : 'unset',
+													},
+													border: (theme) => `1px solid ${theme.palette.divider}`,
+													'.actions': {
+														opacity: 1,
+													},
 												},
-											},
-										}}
-									>
-										<Avatar sx={{ mr: 2 }}>{i + 1}</Avatar>
-										<Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-											<CardContent sx={{ pt: 0 }}>
-												<Typography variant="h4" gutterBottom>
-													{key}
-												</Typography>
-												{URL_REGEX.test(value) ? (
-													isImgLink(value) ? (
-														<img width="100%" src={value} alt="" style={{ borderRadius: 4 }} />
-													) : (
-														<LinkPreview
-															url={value || ''}
-															render={({ loading, preview }: any) => {
-																if (loading) {
-																	return <CircularProgress />
-																}
-																return (
-																	<MuiLink href={value} target="_blank" rel="noreferrer" title={preview.title || ''}>
+											}}
+										>
+											<Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+												<CardContent sx={{ pt: 0, pb: '8px!important' }}>
+													<Typography variant="h4" gutterBottom>
+														{key}
+													</Typography>
+													{valueIsUrl ? (
+														isImgLink(value) ? (
+															<img width="100%" src={value} alt="" style={{ borderRadius: 4 }} />
+														) : (
+															<LinkPreview
+																url={value || ''}
+																render={({ loading, preview }: any) => {
+																	if (loading) {
+																		return <CircularProgress />
+																	}
+																	return (
 																		<img
 																			width="100%"
 																			src={preview['og:image'] || ''}
 																			alt={preview['og:description'] || ''}
 																			style={{ borderRadius: 4 }}
 																		/>
-																	</MuiLink>
-																)
-															}}
-														/>
-													)
-												) : (
-													value
-												)}
-											</CardContent>
-										</Box>
-										{isSpaceOwner && (
-											<Box className="actions" sx={{ position: 'absolute', right: 32, top: 32 }}>
-												<Grid container spacing={1} wrap="nowrap">
-													<Grid item>
-														<Tooltip placement="top" title="Edit">
-															<div>
-																<IconButton disabled>
-																	<IoConstructOutline />
-																</IconButton>
-															</div>
-														</Tooltip>
-													</Grid>
-													<Grid item>
-														<Tooltip placement="top" title="Delete">
-															<div>
-																<IconButton
-																	disabled={!isSpaceOwner}
-																	onClick={() => {
-																		setFocusedKeyIndex(i)
-																		setDeleteDialogOpen(true)
-																	}}
-																	color="primary"
-																>
-																	<IoTrashOutline />
-																</IconButton>
-															</div>
-														</Tooltip>
-													</Grid>
-												</Grid>
+																	)
+																}}
+															/>
+														)
+													) : (
+														value
+													)}
+												</CardContent>
 											</Box>
-										)}
-									</Card>
-								))
+
+											{isSpaceOwner && (
+												<Box className="actions" sx={{ position: 'absolute', right: 32, top: 32 }}>
+													<Grid container spacing={1} wrap="nowrap">
+														<Grid item>
+															<Tooltip placement="top" title="Edit">
+																<div>
+																	<IconButton disabled>
+																		<IoConstructOutline />
+																	</IconButton>
+																</div>
+															</Tooltip>
+														</Grid>
+														<Grid item>
+															<Tooltip placement="top" title="Delete">
+																<div>
+																	<IconButton
+																		disabled={!isSpaceOwner}
+																		onClick={(e) => {
+																			e.preventDefault()
+																			e.stopPropagation()
+																			setFocusedKeyIndex(i)
+																			setDeleteDialogOpen(true)
+																		}}
+																		color="primary"
+																	>
+																		<IoTrashOutline />
+																	</IconButton>
+																</div>
+															</Tooltip>
+														</Grid>
+													</Grid>
+												</Box>
+											)}
+										</Card>
+									)
+								})
 							) : (
 								<Box display="flex" height="100%" flexDirection="column" justifyContent="center" alignItems="center">
 									<Typography sx={{ mb: 4 }} variant="h3" align="center" fontFamily="DM Serif Display">
