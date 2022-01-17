@@ -21,7 +21,7 @@ const growWidth = keyframes`
 export const MetaMaskSelect = () => {
 	const { enqueueSnackbar } = useSnackbar()
 	const theme = useTheme()
-	const { currentAddress, connectToMetaMask, balance, isConnectingToMM } = useMetaMask()
+	const { currentAddress, connectToMetaMask, balance, isConnectingToMM, metaMaskExists } = useMetaMask()
 	const [transferOpen, setTransferOpen] = useState(false)
 
 	const handleMetaMaskClick = () => {

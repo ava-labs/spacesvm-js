@@ -12,7 +12,6 @@ declare global {
 }
 
 const ethereum = window.ethereum
-const metaMaskExists = ethereum !== undefined && ethereum?.isMetaMask
 const onboarding = new MetaMaskOnboarding()
 
 const MetaMaskContext = createContext({} as any)
@@ -21,6 +20,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 	const [currentAddress, setCurrentAddress] = useState<string | undefined>()
 	const [isConnectingToMM, setIsConnectingToMM] = useState(false)
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
+	const metaMaskExists = useRef(ethereum !== undefined && ethereum?.isMetaMask)
 
 	/**
 	 * Update balance when changing accounts and on mount
@@ -124,7 +124,8 @@ export const MetaMaskProvider = ({ children }: any) => {
 	const signWithMetaMask = async (typedData: any) => {
 		onboardToMetaMask()
 		try {
-			const accounts = await mmRequestAccounts()
+			const accounts = await connectToMetaMask()
+			console.log(`accounts`, accounts)
 			const signature = await ethereum.request({
 				method: 'eth_signTypedData_v4',
 				params: [accounts[0], JSON.stringify(typedData)],
@@ -139,6 +140,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 	return (
 		<MetaMaskContext.Provider
 			value={{
+				metaMaskExists,
 				currentAddress,
 				balance,
 				connectToMetaMask,
