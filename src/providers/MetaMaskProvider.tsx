@@ -68,9 +68,11 @@ export const MetaMaskProvider = ({ children }: any) => {
 			onboardToMetaMask()
 			return []
 		}
+
 		setIsConnectingToMM(true)
 		try {
 			const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
+			setCurrentAddress(accounts[0])
 			setIsConnectingToMM(false)
 			return accounts
 		} catch (err) {
