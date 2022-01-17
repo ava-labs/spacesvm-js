@@ -55,8 +55,7 @@ export const SpaceDetails = memo(() => {
 	}, [spaceId])
 
 	useEffect(() => {
-		// Give the api a second to update
-		setTimeout(refreshSpaceDetails, 1000)
+		refreshSpaceDetails()
 	}, [refreshSpaceDetails])
 
 	useEffect(() => {
