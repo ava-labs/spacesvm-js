@@ -11,13 +11,13 @@ import {
 	Fade,
 	Grid,
 	IconButton,
-	Link,
-	Slide,
 	styled,
 	Tooltip,
 	Typography,
 } from '@mui/material'
 import { debounce } from 'lodash'
+
+import { LifelineDoneDialog } from './LifelineDoneDialog'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
@@ -113,129 +113,108 @@ export const LifelineDialog = ({
 	}
 
 	return (
-		<Dialog open={open} onClose={handleClose} maxWidth="xs">
-			<DialogTitle>
-				<Typography variant="h4" component="p" fontFamily="DM Serif Display" align="center">
-					Extend some life to{' '}
-					<Typography
-						variant="h4"
-						fontFamily="DM Serif Display"
-						component="span"
-						sx={{
-							...rainbowText,
-						}}
-					>
-						{spaceId}
-					</Typography>{' '}
-					before it expires!&nbsp;
-					<Twemoji svg text="⌛️" />
-				</Typography>
-			</DialogTitle>
-			<DialogContent sx={{ mt: 2, overflowY: 'hidden' }}>
-				<Typography variant="body2" align="center" color="textSecondary" sx={{ mb: 1 }}>
-					Extend by
-				</Typography>
-
-				<Tooltip sx={{ cursor: 'help' }} placement="top" title={`Extend to ${extendToDateDisplay}`}>
-					<Box display="flex" alignItems="center" justifyContent="center">
-						<Typography sx={{ color: (theme) => theme.palette.secondary.light }} variant="h3">
-							{extendHours}
-						</Typography>
-
-						<Divider flexItem orientation="vertical" sx={{ mx: 2 }} />
-
-						<Typography variant="h4" component="span" color="textSecondary">
-							hours
-						</Typography>
-					</Box>
-				</Tooltip>
-
-				<Grid container spacing={1} wrap="nowrap" justifyContent={'space-between'} alignItems="center" sx={{ mt: 1 }}>
-					<Grid item>
-						<Button
-							color="secondary"
-							size="small"
-							variant="outlined"
-							startIcon={<IoRemove />}
-							disabled={isDone || extendHours <= 0}
-							onClick={() => setExtendHours(Math.max(extendHours - 24, 0))}
-						>
-							24 hours
-						</Button>
-					</Grid>
-					<Grid item>
-						<IconButton
+		<>
+			<Dialog open={open && !isDone} onClose={handleClose} maxWidth="xs">
+				<DialogTitle>
+					<Typography variant="h4" component="p" fontFamily="DM Serif Display" align="center">
+						Extend some life to{' '}
+						<Typography
+							variant="h4"
+							fontFamily="DM Serif Display"
+							component="span"
 							sx={{
-								border: `1px solid rgba(82, 61, 241, 0.5)`,
-								'&:hover': {
-									border: (theme) => `1px solid ${theme.palette.secondary.main}`,
-								},
-								'&.Mui-disabled': {
-									border: (theme) => `1px solid ${theme.palette.action.disabled}`,
-								},
+								...rainbowText,
 							}}
-							color="inherit"
-							size="large"
-							disabled={isDone || extendHours <= 0}
-							onClick={() => setExtendHours(extendHours - 1)}
 						>
-							<IoRemove />
-						</IconButton>
-					</Grid>
-					<Grid item>
-						<IconButton
-							sx={{
-								border: `1px solid rgba(82, 61, 241, 0.5)`,
-								'&:hover': {
-									border: (theme) => `1px solid ${theme.palette.secondary.main}`,
-								},
-								'&.Mui-disabled': {
-									border: (theme) => `1px solid ${theme.palette.action.disabled}`,
-								},
-							}}
-							size="large"
-							color="inherit"
-							disabled={isDone}
-							onClick={() => setExtendHours(extendHours + 1)}
-						>
-							<IoAdd />
-						</IconButton>
-					</Grid>
-					<Grid item>
-						<Button
-							variant="outlined"
-							size="small"
-							startIcon={<IoAdd />}
-							color="secondary"
-							disabled={isDone}
-							onClick={() => setExtendHours(extendHours + 24)}
-						>
-							24 hours
-						</Button>
-					</Grid>
-				</Grid>
+							{spaceId}
+						</Typography>{' '}
+						before it expires!&nbsp;
+						<Twemoji svg text="⌛️" />
+					</Typography>
+				</DialogTitle>
+				<DialogContent sx={{ overflowY: 'hidden' }}>
+					<Typography variant="body2" align="center" color="textSecondary" sx={{ mt: 2, mb: 1 }}>
+						Extend by
+					</Typography>
 
-				{isDone ? (
-					<Slide direction="up" in={isDone}>
-						<div style={{ height: 78 }}>
-							<Box sx={{ mt: 4, pt: 1, display: 'flex', justifyContent: 'center' }}>
-								<Typography
-									variant="h5"
-									align="right"
-									sx={{
-										...rainbowText,
-									}}
-								>
-									Lifeline extended!
-									<Twemoji svg text=":tada:" />
-								</Typography>
-							</Box>
-							<Typography variant="body1" component="div" align="center" sx={{ mt: 2, cursor: 'pointer' }}>
-								<Link onClick={handleClose}>Close</Link>
+					<Tooltip sx={{ cursor: 'help' }} placement="top" title={`Extend to ${extendToDateDisplay}`}>
+						<Box display="flex" alignItems="center" justifyContent="center">
+							<Typography sx={{ color: (theme) => theme.palette.secondary.light }} variant="h3">
+								{extendHours}
 							</Typography>
-						</div>
-					</Slide>
-				) : (
+
+							<Divider flexItem orientation="vertical" sx={{ mx: 2 }} />
+
+							<Typography variant="h4" component="span" color="textSecondary">
+								hours
+							</Typography>
+						</Box>
+					</Tooltip>
+
+					<Grid container spacing={1} wrap="nowrap" justifyContent={'space-between'} alignItems="center" sx={{ mt: 1 }}>
+						<Grid item>
+							<Button
+								color="secondary"
+								size="small"
+								variant="outlined"
+								startIcon={<IoRemove />}
+								disabled={isDone || extendHours <= 0}
+								onClick={() => setExtendHours(Math.max(extendHours - 24, 0))}
+							>
+								24 hours
+							</Button>
+						</Grid>
+						<Grid item>
+							<IconButton
+								sx={{
+									border: `1px solid rgba(82, 61, 241, 0.5)`,
+									'&:hover': {
+										border: (theme) => `1px solid ${theme.palette.secondary.main}`,
+									},
+									'&.Mui-disabled': {
+										border: (theme) => `1px solid ${theme.palette.action.disabled}`,
+									},
+								}}
+								color="inherit"
+								size="large"
+								disabled={isDone || extendHours <= 0}
+								onClick={() => setExtendHours(extendHours - 1)}
+							>
+								<IoRemove />
+							</IconButton>
+						</Grid>
+						<Grid item>
+							<IconButton
+								sx={{
+									border: `1px solid rgba(82, 61, 241, 0.5)`,
+									'&:hover': {
+										border: (theme) => `1px solid ${theme.palette.secondary.main}`,
+									},
+									'&.Mui-disabled': {
+										border: (theme) => `1px solid ${theme.palette.action.disabled}`,
+									},
+								}}
+								size="large"
+								color="inherit"
+								disabled={isDone}
+								onClick={() => setExtendHours(extendHours + 1)}
+							>
+								<IoAdd />
+							</IconButton>
+						</Grid>
+						<Grid item>
+							<Button
+								variant="outlined"
+								size="small"
+								startIcon={<IoAdd />}
+								color="secondary"
+								disabled={isDone}
+								onClick={() => setExtendHours(extendHours + 24)}
+							>
+								24 hours
+							</Button>
+						</Grid>
+					</Grid>
 					<Fade in={!isDone}>
 						<div>
 							<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
@@ -258,8 +237,9 @@ export const LifelineDialog = ({
 							</Box>
 						</div>
 					</Fade>
-				)}
-			</DialogContent>
-		</Dialog>
+				</DialogContent>
+			</Dialog>
+			<LifelineDoneDialog open={open && isDone} onClose={handleClose} />
+		</>
 	)
 }
