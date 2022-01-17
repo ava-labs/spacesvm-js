@@ -121,12 +121,15 @@ export const MetaMaskProvider = ({ children }: any) => {
 	 */
 	const issueTx = useCallback(
 		async (typedData: any, signature: string) => {
-			await onboardToMetaMask()
+			if (!metaMaskExists) {
+				onboardToMetaMask()
+				return
+			}
 			const success = await issueAndConfirmTransaction(typedData, signature)
 			updateBalance()
 			return success
 		},
-		[updateBalance, onboardToMetaMask],
+		[updateBalance, onboardToMetaMask, metaMaskExists],
 	)
 
 	/**
@@ -136,7 +139,10 @@ export const MetaMaskProvider = ({ children }: any) => {
 	 * @returns signature
 	 */
 	const signWithMetaMask = async (typedData: any): Promise<string | undefined> => {
-		onboardToMetaMask()
+		if (!metaMaskExists) {
+			onboardToMetaMask()
+			return
+		}
 		try {
 			const accounts = await connectToMetaMask()
 			const signature = await ethereum.request({
@@ -159,7 +165,6 @@ export const MetaMaskProvider = ({ children }: any) => {
 				connectToMetaMask,
 				isConnectingToMM,
 				signWithMetaMask,
-				onboardToMetaMask,
 				issueTx,
 			}}
 		>
