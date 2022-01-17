@@ -1,15 +1,8 @@
+import { b64_to_utf8, utf8_to_b64 } from './encoding'
 import { tryNTimes } from './tryNTimes'
 
 import { API_DOMAIN } from '@/constants'
 import { SpaceKeyValue, TransactionInfo } from '@/types'
-
-export function utf8_to_b64(str: string) {
-	return btoa(unescape(encodeURIComponent(str)))
-}
-
-export function b64_to_utf8(str: string) {
-	return decodeURIComponent(escape(atob(str)))
-}
 
 export const fetchSpaces = async (method: string, params = {}) => {
 	const response = await fetch(`${API_DOMAIN}`, {
