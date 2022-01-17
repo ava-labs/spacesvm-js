@@ -102,73 +102,72 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails }: KeyValueInp
 			>
 				Add more
 			</Button>
-			<div>
-				{formValues.map(
-					({ keyText, valueText, loading }, i) =>
-						i < 5 && (
-							<Grow in={true} key={i}>
-								<Grid key={i} sx={{ my: 4 }} container spacing={2} flexDirection="row" alignItems="center">
-									<Grid item xs={12} sm={4}>
-										<TextField
-											color="secondary"
-											disabled={loading}
-											variant="filled"
-											value={keyText}
-											name="keyText"
-											onChange={(e) => handleChange(i, e)}
-											placeholder="Key"
-											fullWidth
-											InputProps={{
-												sx: { fontSize: 32, fontWeight: 900 },
-											}}
-											inputProps={{
-												spellCheck: 'false',
-											}}
-										/>
-									</Grid>
-									<Grid item xs={12} sm={6}>
-										<TextField
-											color="secondary"
-											disabled={loading}
-											variant="filled"
-											value={valueText}
-											name="valueText"
-											onChange={(e) => handleChange(i, e)}
-											placeholder="Value"
-											fullWidth
-											InputProps={{
-												sx: { fontSize: 32, fontWeight: 900 },
-											}}
-											inputProps={{
-												spellCheck: 'false',
-											}}
-										/>
-									</Grid>
-									<Grid item xs={2}>
-										<SetButton
-											fullWidth
-											onClick={() => {
-												handleChange(i, {
-													target: {
-														name: 'loading',
-														value: true,
-													},
-												})
 
-												submitKeyValue(i)
-											}}
-											disabled={loading || keyText?.length === 0 || valueText?.length === 0}
-											variant="contained"
-											size="large"
-										>
-											{loading ? <CircularProgress color="secondary" /> : 'Set'}
-										</SetButton>
-									</Grid>
+			{formValues.map(
+				({ keyText, valueText, loading }, i) =>
+					i < 5 && (
+						<Grow in={true} key={i}>
+							<Grid key={i} sx={{ my: 4 }} container spacing={2} flexDirection="row" alignItems="center">
+								<Grid item xs={12} sm={4}>
+									<TextField
+										color="secondary"
+										disabled={loading}
+										variant="filled"
+										value={keyText}
+										name="keyText"
+										onChange={(e) => handleChange(i, e)}
+										placeholder="Key"
+										fullWidth
+										InputProps={{
+											sx: { fontSize: 32, fontWeight: 900 },
+										}}
+										inputProps={{
+											spellCheck: 'false',
+										}}
+									/>
 								</Grid>
-							</Grow>
-						),
-				)}
-			</div>
+								<Grid item xs={12} sm={6}>
+									<TextField
+										color="secondary"
+										disabled={loading}
+										variant="filled"
+										value={valueText}
+										name="valueText"
+										onChange={(e) => handleChange(i, e)}
+										placeholder="Value"
+										fullWidth
+										InputProps={{
+											sx: { fontSize: 32, fontWeight: 900 },
+										}}
+										inputProps={{
+											spellCheck: 'false',
+										}}
+									/>
+								</Grid>
+								<Grid item xs={2}>
+									<SetButton
+										fullWidth
+										onClick={() => {
+											handleChange(i, {
+												target: {
+													name: 'loading',
+													value: true,
+												},
+											})
+
+											submitKeyValue(i)
+										}}
+										disabled={loading || keyText?.length === 0 || valueText?.length === 0}
+										variant="contained"
+										size="large"
+									>
+										{loading ? <CircularProgress color="secondary" /> : 'Set'}
+									</SetButton>
+								</Grid>
+							</Grid>
+						</Grow>
+					),
+			)}
 		</>
 	)
 })

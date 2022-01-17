@@ -1,4 +1,4 @@
-import { FiMoon, FiSun } from 'react-icons/fi'
+import { IoMoonOutline, IoSunnyOutline } from 'react-icons/io5'
 import { Grid, IconButton, Tooltip, Typography } from '@mui/material'
 
 import { THEME_LOCAL_STORAGE_KEY } from '@/constants'
@@ -17,7 +17,7 @@ export const ThemeToggle = () => {
 						size="small"
 						onClick={() => setThemeLocalStorage('dark')}
 					>
-						<FiMoon />
+						<IoMoonOutline size={16} />
 					</IconButton>
 				</Tooltip>
 			</Grid>
@@ -34,7 +34,7 @@ export const ThemeToggle = () => {
 						size="small"
 						onClick={() => setThemeLocalStorage('light')}
 					>
-						<FiSun />
+						<IoSunnyOutline size={21} />
 					</IconButton>
 				</Tooltip>
 			</Grid>

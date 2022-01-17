@@ -1,5 +1,5 @@
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary'
-import { FiAlertCircle } from 'react-icons/fi'
+import { IoAlertCircleOutline } from 'react-icons/io5'
 import { Alert, AlertTitle, Typography } from '@mui/material'
 
 type ErrorBoundaryFallbackProps = {
@@ -9,7 +9,7 @@ type ErrorBoundaryFallbackProps = {
 export const ErrorBoundaryFallback = memo(({ error /*resetErrorBoundary*/ }: ErrorBoundaryFallbackProps) => (
 	<Alert
 		severity="error"
-		icon={<FiAlertCircle />}
+		icon={<IoAlertCircleOutline />}
 		/*action={
 			<Button sx={{ whiteSpace: 'nowrap' }} color="error" onClick={() => resetErrorBoundary()}>
 				Try again

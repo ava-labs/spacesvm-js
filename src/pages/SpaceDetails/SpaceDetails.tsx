@@ -31,7 +31,6 @@ import { LifelineDialog } from '@/components/LifelineDialog'
 import { MoveSpaceDialog } from '@/components/MoveSpaceDialog'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
-import { TransferFundsSuccessDialog } from '@/components/TransferFundsDialog/TransferFundsSuccessDialog'
 import { USERNAME_REGEX_QUERY } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { rainbowText } from '@/theming/rainbowText'
@@ -124,6 +123,12 @@ export const SpaceDetails = memo(() => {
 											color="textSecondary"
 										>
 											<Grid container alignItems="center" spacing={1}>
+												{isSpaceOwner && (
+													<>
+														<Grid item>Owned by you</Grid>
+														<Grid item>—</Grid>
+													</>
+												)}
 												<Grid item>
 													Expires {formatDistanceToNow(new Date(details.expiry * 1000), { addSuffix: true })}
 												</Grid>
@@ -207,6 +212,7 @@ export const SpaceDetails = memo(() => {
 							}}
 						>
 							{spaceId && isSpaceOwner && <KeyValueInput spaceId={spaceId} refreshSpaceDetails={refreshSpaceDetails} />}
+
 							{spaceValues ? (
 								spaceValues.map(({ key, value }: SpaceKeyValue, i: number) => (
 									<Card
