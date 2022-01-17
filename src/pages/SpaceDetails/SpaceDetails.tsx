@@ -35,7 +35,7 @@ import { LinkPreview } from '@/components/LinkPreview'
 import { MoveSpaceDialog } from '@/components/MoveSpaceDialog'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
-import { URL_REGEX, USERNAME_REGEX_QUERY } from '@/constants'
+import { IMAGE_REGEX, URL_REGEX, USERNAME_REGEX_QUERY } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { rainbowText } from '@/theming/rainbowText'
 import { SpaceKeyValue } from '@/types'
@@ -43,7 +43,7 @@ import { querySpace } from '@/utils/spacesVM'
 
 const isImgLink = (url: string): boolean => {
 	if (typeof url !== 'string') return false
-	return url.match(/^http[^?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gim) != null
+	return url.match(IMAGE_REGEX) != null
 }
 
 export const SpaceDetails = memo(() => {
@@ -215,7 +215,8 @@ export const SpaceDetails = memo(() => {
 									md: 8,
 								},
 								background: (theme) => theme.palette.background.paper,
-								//backgroundImage: (theme) => (theme.palette.mode === 'dark' ? `url(${NothingHere})` : 'unset'),
+								backgroundImage: (theme) =>
+									theme.palette.mode === 'dark' && spaceValues?.length === 0 ? `url(${NothingHere})` : 'unset',
 								backgroundSize: 'contain',
 								backgroundPosition: 'center',
 								borderTopLeftRadius: 24,
@@ -231,32 +232,34 @@ export const SpaceDetails = memo(() => {
 								</Typography>
 							)}
 
-							<Typography
-								variant="body1"
-								component="div"
-								color="textSecondary"
-								align="center"
-								gutterBottom
-								sx={{ mb: 4 }}
-							>
-								{spaceValues?.length === 0 ? (
-									`There's nothing in ${isSpaceOwner ? 'your' : 'this'} space right now.`
-								) : (
-									<>
-										<Typography variant="body2" color="textSecondary">
-											The{' '}
-											<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
-												more
-											</Typography>{' '}
-											items in {isSpaceOwner ? 'your' : 'a'} space, the{' '}
-											<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
-												faster
-											</Typography>{' '}
-											it will expire.
-										</Typography>
-									</>
-								)}
-							</Typography>
+							{spaceValues && (
+								<Typography
+									variant="body1"
+									component="div"
+									color="textSecondary"
+									align="center"
+									gutterBottom
+									sx={{ mb: 4 }}
+								>
+									{spaceValues?.length === 0 ? (
+										`There's nothing in ${isSpaceOwner ? 'your' : 'this'} space right now.`
+									) : (
+										<>
+											<Typography variant="body2" color="textSecondary">
+												The{' '}
+												<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
+													more
+												</Typography>{' '}
+												items in {isSpaceOwner ? 'your' : 'a'} space, the{' '}
+												<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
+													faster
+												</Typography>{' '}
+												it will expire.
+											</Typography>
+										</>
+									)}
+								</Typography>
+							)}
 
 							{spaceId && isSpaceOwner && (
 								<KeyValueInput
