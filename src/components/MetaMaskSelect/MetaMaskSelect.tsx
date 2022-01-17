@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Box, Button, Grid, keyframes, Tooltip, Typography, useTheme } from '@mui/material'
+import { BsBoxArrowUpRight } from 'react-icons/bs'
+import { ImArrowUpRight } from 'react-icons/Im'
+import { Box, Button, ButtonGroup, Grid, IconButton, keyframes, Tooltip, Typography, useTheme } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
 import { TransferFundsDialog } from '../TransferFundsDialog'
@@ -18,40 +20,17 @@ const growWidth = keyframes`
 	}
 `
 
-const shrinkWidth = keyframes`
-	0% {
-		max-width: 300px;
-	}
-	100% {
-		max-width: 0;
-	}
-`
-
-const GrowingGrid = ({ sx, children, ...rest }: any) => (
-	<Grid
+const GrowingButton = ({ sx, children, ...rest }: any) => (
+	<Button
 		sx={{
 			...sx,
-			animation: `1s ${growWidth} ease`,
+			animation: `800ms ${growWidth} ease`,
 			animationDirection: 'forwards',
 		}}
 		{...rest}
 	>
 		{children}
-	</Grid>
-)
-
-const ShrinkingGrid = ({ sx, children, ...rest }: any) => (
-	<Grid
-		sx={{
-			...sx,
-			animation: `1s ${shrinkWidth} ease`,
-			animationDirection: 'backwards',
-			animationFillMode: 'forwards',
-		}}
-		{...rest}
-	>
-		{children}
-	</Grid>
+	</Button>
 )
 
 export const MetaMaskSelect = () => {
@@ -88,8 +67,6 @@ export const MetaMaskSelect = () => {
 		)
 	}
 
-	const AnimatedGrid = GrowingGrid
-
 	return (
 		<>
 			<Grid
@@ -100,47 +77,51 @@ export const MetaMaskSelect = () => {
 				}}
 			>
 				<Grid item>
-					<Tooltip title={currentAddress ? 'Copy address' : 'Connect to MetaMask'}>
-						<Button
-							startIcon={<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />}
-							variant="outlined"
-							color="secondary"
-							onClick={handleMetaMaskClick}
-							sx={{
-								background: theme.customPalette.customBackground,
-								'&:hover': { background: theme.customPalette.customBackground },
-							}}
-						>
-							{currentAddress ? obfuscateAddress(currentAddress) : 'Connect'}
-						</Button>
-					</Tooltip>
-				</Grid>
-				<AnimatedGrid item>
-					<Tooltip title="Send SPC">
-						<Box display="flex" alignItems="center" height="100%" onClick={() => setTransferOpen(true)}>
-							<Typography
-								noWrap
-								variant="h6"
-								display="flex"
+					<ButtonGroup>
+						<Tooltip title={currentAddress ? 'Copy address' : 'Connect to MetaMask'}>
+							<Button
+								startIcon={<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />}
+								variant="outlined"
+								color="secondary"
+								onClick={handleMetaMaskClick}
 								sx={{
-									mx: 2,
-									'&:hover': {
-										cursor: 'pointer',
-									},
+									background: theme.customPalette.customBackground,
+									'&:hover': { background: theme.customPalette.customBackground },
 								}}
 							>
-								{numberWithCommas(displayBalance)}
+								{currentAddress ? obfuscateAddress(currentAddress) : 'Connect'}
+							</Button>
+						</Tooltip>
+
+						<Tooltip title={'Transfer SPC'}>
+							<GrowingButton
+								variant="outlined"
+								color="secondary"
+								onClick={() => setTransferOpen(true)}
+								sx={{
+									background: theme.customPalette.customBackground,
+									'&:hover': { background: theme.customPalette.customBackground },
+								}}
+							>
 								<Typography
-									component="span"
-									color="textSecondary"
-									sx={{ ml: 1, display: 'flex', alignItems: 'center' }}
+									noWrap
+									variant="h6"
+									display="flex"
+									lineHeight={1}
+									sx={{
+										mr: 2,
+									}}
 								>
-									SPC
+									{numberWithCommas(displayBalance)}{' '}
+									<Typography variant="h6" component="span" lineHeight={1} color="textSecondary" sx={{ ml: 1 }}>
+										SPC
+									</Typography>
 								</Typography>
-							</Typography>
-						</Box>
-					</Tooltip>
-				</AnimatedGrid>
+								<BsBoxArrowUpRight size="18" color={theme.palette.primary.dark} />
+							</GrowingButton>
+						</Tooltip>
+					</ButtonGroup>
+				</Grid>
 			</Grid>
 			<TransferFundsDialog open={transferOpen} close={() => setTransferOpen(false)} />
 		</>

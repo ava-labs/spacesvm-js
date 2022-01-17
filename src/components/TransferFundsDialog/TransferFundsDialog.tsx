@@ -76,11 +76,13 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 				to: toAddress,
 				units: transferAmount,
 			})
-			setIsSigning(false)
 			const signature = await signWithMetaMask(typedData)
-			setIsSigning(false)
-			if (!signature) return
+			if (!signature) {
+				setIsSigning(false)
+				return
+			}
 			const success = await issueTx(typedData, signature)
+			setIsSigning(false)
 			if (!success) {
 				// show some sort of failure dialog
 				return
@@ -297,7 +299,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 						>
 							<Box sx={{ cursor: !!addressInputError || transferAmount <= 0 ? 'help' : 'inherit' }}>
 								<SubmitButton
-									disabled={!!addressInputError || transferAmount <= 0 || isSigning || isDone}
+									disabled={!!addressInputError || !toAddress?.length || transferAmount <= 0 || isSigning || isDone}
 									variant="contained"
 									type="submit"
 									onClick={onSubmit}
