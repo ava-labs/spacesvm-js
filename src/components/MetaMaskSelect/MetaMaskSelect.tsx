@@ -58,7 +58,7 @@ export const MetaMaskSelect = () => {
 	const { enqueueSnackbar } = useSnackbar()
 	const theme = useTheme()
 	const { currentAddress, connectToMetaMask, balance } = useMetaMask()
-	const [displayBalance, setDisplayBalance] = useState(balance)
+	const [displayBalance, setDisplayBalance] = useState(balance || 0)
 	const [transferOpen, setTransferOpen] = useState(false)
 
 	useEffect(() => {
@@ -88,7 +88,7 @@ export const MetaMaskSelect = () => {
 		)
 	}
 
-	const AnimatedGrid = balance ? GrowingGrid : ShrinkingGrid
+	const AnimatedGrid = GrowingGrid
 
 	return (
 		<>
@@ -118,28 +118,26 @@ export const MetaMaskSelect = () => {
 				<AnimatedGrid item>
 					<Tooltip title="Send SPC">
 						<Box display="flex" alignItems="center" height="100%" onClick={() => setTransferOpen(true)}>
-							{displayBalance && (
+							<Typography
+								noWrap
+								variant="h6"
+								display="flex"
+								sx={{
+									mx: 2,
+									'&:hover': {
+										cursor: 'pointer',
+									},
+								}}
+							>
+								{numberWithCommas(displayBalance)}
 								<Typography
-									noWrap
-									variant="h6"
-									display="flex"
-									sx={{
-										mx: 2,
-										'&:hover': {
-											cursor: 'pointer',
-										},
-									}}
+									component="span"
+									color="textSecondary"
+									sx={{ ml: 1, display: 'flex', alignItems: 'center' }}
 								>
-									{numberWithCommas(displayBalance)}
-									<Typography
-										component="span"
-										color="textSecondary"
-										sx={{ ml: 1, display: 'flex', alignItems: 'center' }}
-									>
-										SPC
-									</Typography>
+									SPC
 								</Typography>
-							)}
+							</Typography>
 						</Box>
 					</Tooltip>
 				</AnimatedGrid>

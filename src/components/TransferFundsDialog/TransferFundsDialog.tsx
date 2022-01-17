@@ -22,6 +22,7 @@ import {
 	useTheme,
 } from '@mui/material'
 
+import { NoFundsDialog } from './NoFundsDialog'
 import { TransferFundsSuccessDialog } from './TransferFundsSuccessDialog'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
@@ -94,7 +95,9 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 
 	useEffect(() => {
 		const isValidToAddress = isValidWalletAddress(toAddress)
-		setAddressInputError(!isValidToAddress ? 'Please enter a valid public wallet address.' : undefined)
+		setAddressInputError(
+			!isValidToAddress && toAddress?.length !== 0 ? 'Please enter a valid public wallet address.' : undefined,
+		)
 	}, [toAddress])
 
 	const handleClose = () => {
@@ -109,7 +112,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 
 	return (
 		<>
-			<Dialog maxWidth="sm" open={open && !isDone} onClose={handleClose}>
+			<Dialog maxWidth="sm" open={open && balance && !isDone} onClose={handleClose}>
 				<DialogTitle>
 					<Typography
 						gutterBottom
@@ -319,6 +322,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 				</DialogContent>
 			</Dialog>
 			<TransferFundsSuccessDialog open={open && isDone} onClose={handleClose} />
+			<NoFundsDialog open={open && !balance} onClose={handleClose} />
 		</>
 	)
 }
