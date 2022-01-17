@@ -129,7 +129,7 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 											spellCheck: 'false',
 											style: { paddingTop: 8 },
 										}}
-										autoComplete="new-password"
+										autoComplete="off"
 									/>
 								</TableCell>
 							</TableRow>

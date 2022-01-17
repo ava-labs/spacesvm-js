@@ -156,6 +156,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 											spellCheck: 'false',
 											style: { paddingTop: 8 },
 										}}
+										autoComplete="off"
 									/>
 								</TableCell>
 							</TableRow>
