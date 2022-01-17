@@ -220,7 +220,14 @@ export const SpaceDetails = memo(() => {
 								</Typography>
 							)}
 
-							<Typography variant="body1" color="textSecondary" align="center" gutterBottom sx={{ mb: 4 }}>
+							<Typography
+								variant="body1"
+								component="div"
+								color="textSecondary"
+								align="center"
+								gutterBottom
+								sx={{ mb: 4 }}
+							>
 								{spaceValues?.length === 0 ? (
 									"There's nothing in your space right now."
 								) : (

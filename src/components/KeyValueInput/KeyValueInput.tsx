@@ -1,6 +1,7 @@
 import { IoAdd } from 'react-icons/io5'
 import { Button, CircularProgress, Grid, Grow, TextField } from '@mui/material'
 import { styled } from '@mui/system'
+import { useSnackbar } from 'notistack'
 
 import { USERNAME_REGEX } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
@@ -32,6 +33,7 @@ type KeyValueInputProps = {
 export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyValueInputProps) => {
 	const { signWithMetaMask, issueTx } = useMetaMask()
 	const [formValues, setFormValues] = useState<{ keyText?: string; valueText?: string; loading?: boolean }[]>([])
+	const { enqueueSnackbar } = useSnackbar()
 
 	const handleChange = (i: any, e: any) => {
 		const newFormValues = [...formValues]
@@ -79,7 +81,13 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 			return
 		}
 		const success = await issueTx(typedData, signature)
-		if (!success) return
+
+		if (!success) {
+			enqueueSnackbar('Something went wrong...', { variant: 'error' })
+			return
+		}
+
+		enqueueSnackbar('Item added successfully!', { variant: 'success' })
 		// Give the blockchain a chance to update... yes I know this is bad code but its easy for now <3
 		setTimeout(refreshSpaceDetails, 1000)
 		handleChange(i, {
