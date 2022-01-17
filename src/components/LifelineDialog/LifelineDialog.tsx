@@ -11,19 +11,19 @@ import {
 	Fade,
 	Grid,
 	IconButton,
-	Link,
-	Slide,
 	styled,
 	Tooltip,
 	Typography,
 } from '@mui/material'
-import { throttle } from 'lodash'
+import { debounce } from 'lodash'
+
+import { LifelineDoneDialog } from './LifelineDoneDialog'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { rainbowText } from '@/theming/rainbowText'
 import { TxType } from '@/types'
-import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { getSuggestedFee, issueAndConfirmTransaction, issueTransaction } from '@/utils/spacesVM'
+import { getSuggestedFee } from '@/utils/spacesVM'
 
 const SubmitButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
@@ -47,183 +47,180 @@ type LifelineDialogProps = {
 	open: boolean
 	close(): void
 	existingExpiry: number
+	spaceUnits: number
 	refreshSpaceDetails(): void
 }
 
-const checkFee = throttle(async (space, units) => getSuggestedFee({ type: TxType.Lifeline, space, units }), 2000)
+const checkFee = debounce(async (space, units) => getSuggestedFee({ type: TxType.Lifeline, space, units }), 2000, {
+	leading: true,
+	trailing: true,
+})
 
-export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetails }: LifelineDialogProps) => {
+export const LifelineDialog = ({
+	open,
+	close,
+	existingExpiry,
+	spaceUnits,
+	refreshSpaceDetails,
+}: LifelineDialogProps) => {
 	const { spaceId } = useParams()
-	const [extendUnits, setExtendUnits] = useState(0)
+	const { issueTx, signWithMetaMask } = useMetaMask()
+	const [extendHours, setExtendHours] = useState(0)
 	const [fee, setFee] = useState(0)
 	const [isSigning, setIsSigning] = useState(false)
 	const [isDone, setIsDone] = useState(false)
+
+	// Spaces with more keys and more storage cost more units to extend per hour
+	const unitsNeededToExtend = extendHours * spaceUnits
 
 	const onSubmit = async () => {
 		setIsSigning(true)
 		const { typedData } = await getSuggestedFee({
 			type: TxType.Lifeline,
 			space: spaceId,
-			units: extendUnits,
+			units: unitsNeededToExtend,
 		})
-		const signature = await signWithMetaMaskV4(typedData)
+		const signature = await signWithMetaMask(typedData)
 		setIsSigning(false)
 		if (!signature) return
-		const result = await issueAndConfirmTransaction(typedData, signature)
-		if (result) setIsDone(true)
+		const success = await issueTx(typedData, signature)
+		if (!success) {
+			// show some sort of failure dialog
+			return
+		}
+		setIsDone(true)
 		refreshSpaceDetails()
 	}
 
 	const extendToDateDisplay = useMemo(() => {
 		const now = new Date(existingExpiry * 1000)
-		now.setHours(now.getHours() + extendUnits)
+		now.setHours(now.getHours() + extendHours)
 		return now.toLocaleString()
-	}, [extendUnits, existingExpiry])
+	}, [extendHours, existingExpiry])
 
 	useEffect(() => {
 		const _checkFee = async () => {
-			const { totalCost } = await checkFee(spaceId, extendUnits)
+			const { totalCost } = await checkFee(spaceId, unitsNeededToExtend)
 			setFee(totalCost)
 		}
 		_checkFee()
-	}, [extendUnits, spaceId, open])
+	}, [unitsNeededToExtend, spaceId, open])
 
 	const handleClose = () => {
 		setIsDone(false)
-		setExtendUnits(0)
+		setExtendHours(0)
 		close()
 	}
 
 	return (
-		<Dialog open={open} onClose={handleClose} maxWidth="xs">
-			<DialogTitle>
-				<Typography variant="h4" component="p" fontFamily="DM Serif Display" align="center">
-					Extend some life to{' '}
-					<Typography
-						variant="h4"
-						fontFamily="DM Serif Display"
-						component="span"
-						sx={{
-							...rainbowText,
-						}}
-					>
-						{spaceId}
-					</Typography>{' '}
-					before it expires!&nbsp;
-					<Twemoji svg text="⌛️" />
-				</Typography>
-			</DialogTitle>
-			<DialogContent sx={{ mt: 2, overflowY: 'hidden' }}>
-				<Typography variant="body2" align="center" color="textSecondary" sx={{ mb: 1 }}>
-					Extend by
-				</Typography>
-
-				<Tooltip sx={{ cursor: 'help' }} placement="top" title={`Extend to ${extendToDateDisplay}`}>
-					<Box display="flex" alignItems="center" justifyContent="center">
-						<Typography sx={{ color: (theme) => theme.palette.secondary.light }} variant="h3">
-							{extendUnits}
-						</Typography>
-
-						<Divider flexItem orientation="vertical" sx={{ mx: 2 }} />
-
-						<Typography variant="h4" component="span" color="textSecondary">
-							hours
-						</Typography>
-					</Box>
-				</Tooltip>
-
-				<Grid container spacing={1} wrap="nowrap" justifyContent={'space-between'} alignItems="center" sx={{ mt: 1 }}>
-					<Grid item>
-						<Button
-							color="secondary"
-							size="small"
-							variant="outlined"
-							startIcon={<IoRemove />}
-							disabled={isDone || extendUnits <= 0}
-							onClick={() => setExtendUnits(Math.max(extendUnits - 24, 0))}
-						>
-							24 hours
-						</Button>
-					</Grid>
-					<Grid item>
-						<IconButton
+		<>
+			<Dialog open={open && !isDone} onClose={handleClose} maxWidth="xs">
+				<DialogTitle>
+					<Typography variant="h4" component="p" fontFamily="DM Serif Display" align="center">
+						Extend some life to{' '}
+						<Typography
+							variant="h4"
+							fontFamily="DM Serif Display"
+							component="span"
 							sx={{
-								border: `1px solid rgba(82, 61, 241, 0.5)`,
-								'&:hover': {
-									border: (theme) => `1px solid ${theme.palette.secondary.main}`,
-								},
-								'&.Mui-disabled': {
-									border: (theme) => `1px solid ${theme.palette.action.disabled}`,
-								},
+								...rainbowText,
 							}}
-							color="inherit"
-							size="large"
-							disabled={isDone || extendUnits <= 0}
-							onClick={() => setExtendUnits(extendUnits - 1)}
 						>
-							<IoRemove />
-						</IconButton>
-					</Grid>
-					<Grid item>
-						<IconButton
-							sx={{
-								border: `1px solid rgba(82, 61, 241, 0.5)`,
-								'&:hover': {
-									border: (theme) => `1px solid ${theme.palette.secondary.main}`,
-								},
-								'&.Mui-disabled': {
-									border: (theme) => `1px solid ${theme.palette.action.disabled}`,
-								},
-							}}
-							size="large"
-							color="inherit"
-							disabled={isDone}
-							onClick={() => setExtendUnits(extendUnits + 1)}
-						>
-							<IoAdd />
-						</IconButton>
-					</Grid>
-					<Grid item>
-						<Button
-							variant="outlined"
-							size="small"
-							startIcon={<IoAdd />}
-							color="secondary"
-							disabled={isDone}
-							onClick={() => setExtendUnits(extendUnits + 24)}
-						>
-							24 hours
-						</Button>
-					</Grid>
-				</Grid>
+							{spaceId}
+						</Typography>{' '}
+						before it expires!&nbsp;
+						<Twemoji svg text="⌛️" />
+					</Typography>
+				</DialogTitle>
+				<DialogContent sx={{ overflowY: 'hidden' }}>
+					<Typography variant="body2" align="center" color="textSecondary" sx={{ mt: 2, mb: 1 }}>
+						Extend by
+					</Typography>
 
-				{isDone ? (
-					<Slide direction="up" in={isDone}>
-						<div style={{ height: 78 }}>
-							<Box sx={{ mt: 4, pt: 1, display: 'flex', justifyContent: 'center' }}>
-								<Typography
-									variant="h5"
-									align="right"
-									sx={{
-										...rainbowText,
-									}}
-								>
-									Lifeline extended!
-									<Twemoji svg text=":tada:" />
-								</Typography>
-							</Box>
-							<Typography variant="body1" component="div" align="center" sx={{ mt: 2, cursor: 'pointer' }}>
-								<Link onClick={handleClose}>Close</Link>
+					<Tooltip sx={{ cursor: 'help' }} placement="top" title={`Extend to ${extendToDateDisplay}`}>
+						<Box display="flex" alignItems="center" justifyContent="center">
+							<Typography sx={{ color: (theme) => theme.palette.secondary.light }} variant="h3">
+								{extendHours}
 							</Typography>
-						</div>
-					</Slide>
-				) : (
+
+							<Divider flexItem orientation="vertical" sx={{ mx: 2 }} />
+
+							<Typography variant="h4" component="span" color="textSecondary">
+								hours
+							</Typography>
+						</Box>
+					</Tooltip>
+
+					<Grid container spacing={1} wrap="nowrap" justifyContent={'space-between'} alignItems="center" sx={{ mt: 1 }}>
+						<Grid item>
+							<Button
+								color="secondary"
+								size="small"
+								variant="outlined"
+								startIcon={<IoRemove />}
+								disabled={isDone || extendHours <= 0}
+								onClick={() => setExtendHours(Math.max(extendHours - 24, 0))}
+							>
+								24 hours
+							</Button>
+						</Grid>
+						<Grid item>
+							<IconButton
+								sx={{
+									border: `1px solid rgba(82, 61, 241, 0.5)`,
+									'&:hover': {
+										border: (theme) => `1px solid ${theme.palette.secondary.main}`,
+									},
+									'&.Mui-disabled': {
+										border: (theme) => `1px solid ${theme.palette.action.disabled}`,
+									},
+								}}
+								color="inherit"
+								size="large"
+								disabled={isDone || extendHours <= 0}
+								onClick={() => setExtendHours(extendHours - 1)}
+							>
+								<IoRemove />
+							</IconButton>
+						</Grid>
+						<Grid item>
+							<IconButton
+								sx={{
+									border: `1px solid rgba(82, 61, 241, 0.5)`,
+									'&:hover': {
+										border: (theme) => `1px solid ${theme.palette.secondary.main}`,
+									},
+									'&.Mui-disabled': {
+										border: (theme) => `1px solid ${theme.palette.action.disabled}`,
+									},
+								}}
+								size="large"
+								color="inherit"
+								disabled={isDone}
+								onClick={() => setExtendHours(extendHours + 1)}
+							>
+								<IoAdd />
+							</IconButton>
+						</Grid>
+						<Grid item>
+							<Button
+								variant="outlined"
+								size="small"
+								startIcon={<IoAdd />}
+								color="secondary"
+								disabled={isDone}
+								onClick={() => setExtendHours(extendHours + 24)}
+							>
+								24 hours
+							</Button>
+						</Grid>
+					</Grid>
 					<Fade in={!isDone}>
 						<div>
 							<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-								<Tooltip placement="top" title={extendUnits <= 0 ? 'Add hours to extend!' : ''}>
-									<Box sx={{ cursor: extendUnits <= 0 ? 'help' : 'inherit' }}>
-										<SubmitButton disabled={extendUnits <= 0} variant="contained" type="submit" onClick={onSubmit}>
+								<Tooltip placement="top" title={extendHours <= 0 ? 'Add hours to extend!' : ''}>
+									<Box sx={{ cursor: extendHours <= 0 ? 'help' : 'inherit' }}>
+										<SubmitButton disabled={extendHours <= 0} variant="contained" type="submit" onClick={onSubmit}>
 											{isSigning ? (
 												<Fade in={isSigning}>
 													<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
@@ -240,8 +237,9 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 							</Box>
 						</div>
 					</Fade>
-				)}
-			</DialogContent>
-		</Dialog>
+				</DialogContent>
+			</Dialog>
+			<LifelineDoneDialog open={open && isDone} onClose={handleClose} />
+		</>
 	)
 }

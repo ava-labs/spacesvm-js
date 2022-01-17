@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom'
 import { Button, Dialog, DialogContent, DialogTitle, Fade, styled, Typography, useTheme } from '@mui/material'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { TxType } from '@/types'
-import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { getSuggestedFee, issueTransaction } from '@/utils/spacesVM'
+import { getSuggestedFee } from '@/utils/spacesVM'
 
 export const DeleteButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#e70256',
@@ -36,6 +36,7 @@ type DeleteKeyValueDialogProps = {
 
 export const DeleteKeyValueDialog = ({ open, close, spaceKey, refreshSpaceDetails }: DeleteKeyValueDialogProps) => {
 	const theme = useTheme()
+	const { signWithMetaMask, issueTx } = useMetaMask()
 	const { spaceId } = useParams()
 	const [isSigning, setIsSigning] = useState<boolean>(false)
 
@@ -48,12 +49,15 @@ export const DeleteKeyValueDialog = ({ open, close, spaceKey, refreshSpaceDetail
 		if (!spaceKey || !spaceId) return
 		const { typedData } = await getSuggestedFee({ type: TxType.Delete, space: spaceId, key: spaceKey })
 		setIsSigning(true)
-		const signature = await signWithMetaMaskV4(typedData)
+		const signature = await signWithMetaMask(typedData)
 		setIsSigning(false)
 		if (!signature) return
-		const result = await issueTransaction(typedData, signature)
-		if (!result?.txId) return
-		setTimeout(refreshSpaceDetails, 1000)
+		const success = await issueTx(typedData, signature)
+		if (!success) {
+			// show some sort of failure dialog
+			return
+		}
+		refreshSpaceDetails()
 		handleClose()
 	}
 

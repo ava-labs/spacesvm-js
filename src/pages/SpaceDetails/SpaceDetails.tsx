@@ -266,6 +266,7 @@ export const SpaceDetails = memo(() => {
 					open={lifelineDialogOpen}
 					close={() => setLifelineDialogOpen(false)}
 					existingExpiry={details.expiry}
+					spaceUnits={details.units}
 					refreshSpaceDetails={refreshSpaceDetails}
 				/>
 			)}

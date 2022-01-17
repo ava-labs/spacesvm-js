@@ -8,7 +8,7 @@ import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
-import { signWithMetaMaskV4 } from '@/utils/metamask'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { shuffleArray } from '@/utils/shuffleArray'
 import { fetchSpaces, getSuggestedFee } from '@/utils/spacesVM'
 
@@ -60,6 +60,8 @@ const DEV_NAMES = shuffleArray([
 ])
 
 export const CustomSignature = () => {
+	const { signWithMetaMask } = useMetaMask()
+
 	const [jsonInput, setJsonInput] = useState<string>('')
 	const [isSigning, setIsSigning] = useState<boolean>(false)
 	const [signature, setSignature] = useState<string | null>(null)
@@ -73,7 +75,7 @@ export const CustomSignature = () => {
 		if (!jsonInput?.length) return
 		try {
 			setIsSigning(true)
-			const signature = await signWithMetaMaskV4(typedData)
+			const signature = await signWithMetaMask(typedData)
 			setIsSigning(false)
 			if (!signature) {
 				setSignatureError('Must sign in metamask!')

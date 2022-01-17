@@ -1,3 +1,4 @@
+import { b64_to_utf8, utf8_to_b64 } from './encoding'
 import { tryNTimes } from './tryNTimes'
 
 import { API_DOMAIN } from '@/constants'
@@ -43,7 +44,7 @@ export const querySpace = async (space: string) => {
 		})
 		return {
 			...response,
-			values: response.values.map(({ key, value }: SpaceKeyValue) => ({ key, value: atob(value) })),
+			values: response.values.map(({ key, value }: SpaceKeyValue) => ({ key, value: b64_to_utf8(value) })),
 		}
 	} catch (err) {
 		return
@@ -53,7 +54,7 @@ export const querySpace = async (space: string) => {
 export const querySpaceKey = async (prefix: string, key: string) => {
 	const response = await fetchSpaces('resolve', { path: `${prefix}/${key}` })
 	if (!response?.exists) return
-	return atob(response?.value)
+	return b64_to_utf8(response?.value)
 }
 
 export const getLatestBlockID = async () => {
@@ -81,20 +82,23 @@ export const getAddressBalance = async (address: string) => fetchSpaces('balance
  * @param transactionInfo Object containing type, space, units, key, value, and to (some optional)
  * @returns Object wit
  */
-export const getSuggestedFee = async (transactionInfo: TransactionInfo) =>
-	await fetchSpaces('suggestedFee', { input: transactionInfo })
+export const getSuggestedFee = async (transactionInfo: TransactionInfo) => {
+	const input = { ...transactionInfo }
+	if (transactionInfo.value) {
+		input.value = utf8_to_b64(transactionInfo.value)
+	}
+	return await fetchSpaces('suggestedFee', { input })
+}
 
 /**
- * Issues a transaction to spacesVM.  Used for claim, lifeline, set, delete, move, and transfer
+ * Issues a transaction to spacesVM and polls the VM until the transaction is confirmed.
+ * Used for claim, lifeline, set, delete, move, and transfer
  * https://github.com/ava-labs/spacesvm#transaction-types
  *
  * @param typedData typedData from getSuggestedFee
  * @param signature signed typedData
  * @returns if successful, response has a txId
  */
-export const issueTransaction = async (typedData: any, signature: string) =>
-	await fetchSpaces('issueTx', { typedData, signature })
-
 export const issueAndConfirmTransaction = async (typedData: any, signature: string): Promise<boolean> => {
 	const txResponse = await fetchSpaces('issueTx', { typedData, signature })
 	if (!txResponse?.txId) return false
@@ -110,19 +114,10 @@ export const issueAndConfirmTransaction = async (typedData: any, signature: stri
 	}
 
 	try {
-		const response = await tryNTimes(checkIsAccepted, 10, 1000)
+		const response = await tryNTimes(checkIsAccepted, 20, 500)
 		if (response) return true
 	} catch {
 		return false
 	}
-}
-
-export const hasTransaction = async (txId: string) => {
-	try {
-		const { accepted } = await fetchSpaces('hasTx', { txId })
-		if (accepted) return true
-		throw 'Not yet accepted'
-	} catch (error) {
-		throw 'Not yet accepted'
-	}
+	return false
 }

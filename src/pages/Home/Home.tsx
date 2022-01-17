@@ -30,10 +30,10 @@ import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { USERNAME_REGEX, USERNAME_REGEX_QUERY, USERNAMES } from '@/constants'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { TxType } from '@/types'
 import { calculateClaimCost } from '@/utils/calculateCost'
-import { signWithMetaMaskV4 } from '@/utils/metamask'
-import { getSuggestedFee, isAlreadyClaimed, issueTransaction } from '@/utils/spacesVM'
+import { getSuggestedFee, isAlreadyClaimed } from '@/utils/spacesVM'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
@@ -89,6 +89,7 @@ export const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 
 export const Home = memo(() => {
 	const [searchParams] = useSearchParams()
+	const { issueTx, signWithMetaMask } = useMetaMask()
 	const navigate = useNavigate()
 	const [showClaimedDialog, setShowClaimedDialog] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
@@ -124,14 +125,18 @@ export const Home = memo(() => {
 	const onClaim = async () => {
 		setWaitingForMetaMask(true)
 		const { typedData } = await getSuggestedFee({ type: TxType.Claim, space: username })
-		const signature = await signWithMetaMaskV4(typedData)
+		const signature = await signWithMetaMask(typedData)
 		setWaitingForMetaMask(false)
 		if (!signature) return
-		const res = await issueTransaction(typedData, signature)
-		onSigned()
+		const claimSuccess = await issueTx(typedData, signature)
+		if (!claimSuccess) {
+			// Show something in the UI to display the claim failed
+			return
+		}
+		onClaimSuccess()
 	}
 
-	const onSigned = async () => {
+	const onClaimSuccess = async () => {
 		setShowClaimedDialog(true)
 	}
 
