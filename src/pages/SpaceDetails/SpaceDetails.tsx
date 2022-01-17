@@ -315,12 +315,24 @@ export const SpaceDetails = memo(() => {
 																		return <CircularProgress />
 																	}
 																	return (
-																		<img
-																			width="100%"
-																			src={preview['og:image'] || ''}
-																			alt={preview['og:description'] || ''}
-																			style={{ borderRadius: 4 }}
-																		/>
+																		<>
+																			{(preview['og:title'] || preview.title) && (
+																				<Typography variant="body2" gutterBottom>
+																					{preview['og:title'] || preview.title}
+																				</Typography>
+																			)}
+																			<img
+																				width="100%"
+																				src={preview['og:image'] || ''}
+																				alt={preview['og:description'] || ''}
+																				style={{ borderRadius: 4 }}
+																			/>
+																			{(preview['og:description'] || preview.description) && (
+																				<Typography color="textSecondary" variant="body2">
+																					{preview['og:description'] || preview.description}
+																				</Typography>
+																			)}
+																		</>
 																	)
 																}}
 															/>
