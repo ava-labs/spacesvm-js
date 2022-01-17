@@ -1,5 +1,5 @@
 import { Twemoji } from 'react-emoji-render'
-import { BsBoxArrowUpRight } from 'react-icons/bs'
+import { IoOpenOutline } from 'react-icons/io5'
 import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
@@ -170,16 +170,17 @@ export const SpaceDetails = memo(() => {
 											{isSpaceOwner && (
 												<Box sx={{ display: 'flex', justifyContent: 'end', mt: 2 }}>
 													<Button
-														endIcon={<BsBoxArrowUpRight />}
+														endIcon={<IoOpenOutline />}
 														variant="outlined"
 														color="secondary"
+														size="small"
 														sx={{
 															background: theme.customPalette.customBackground,
 															'&:hover': { background: theme.customPalette.customBackground },
 														}}
 														onClick={() => setMoveDialogOpen(true)}
 													>
-														Move Space
+														Move space
 													</Button>
 												</Box>
 											)}

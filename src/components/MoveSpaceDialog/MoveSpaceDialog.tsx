@@ -11,9 +11,10 @@ import {
 	TableCell,
 	TableRow,
 	TextField,
-	Tooltip,
 	Typography,
 } from '@mui/material'
+import capitalize from 'lodash/capitalize'
+import { useSnackbar } from 'notistack'
 
 import { AddressChip } from '../AddressChip/AddressChip'
 import { MoveSpaceSuccessDialog } from './MoveSpaceSuccessDialog'
@@ -36,9 +37,9 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 	const { currentAddress, signWithMetaMask, issueTx } = useMetaMask()
 	const [toAddress, setToAddress] = useState<string>('')
 	const [addressInputError, setAddressInputError] = useState<string | undefined>()
-
-	const [isSigning, setIsSigning] = useState(false)
-	const [isDone, setIsDone] = useState(false)
+	const { enqueueSnackbar } = useSnackbar()
+	const [isSigning, setIsSigning] = useState<boolean>(false)
+	const [isDone, setIsDone] = useState<boolean>(false)
 
 	const onSubmit = async () => {
 		setIsSigning(true)
@@ -60,9 +61,12 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 				return
 			}
 			setIsDone(true)
-		} catch (error) {
+		} catch (error: any) {
 			// eslint-disable-next-line no-console
 			console.error(error)
+			enqueueSnackbar(capitalize(error?.message), {
+				variant: 'error',
+			})
 			setIsSigning(false)
 		}
 		refreshSpaceDetails()
@@ -86,28 +90,23 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 		<>
 			<Dialog maxWidth="sm" open={open && !isDone} onClose={handleClose}>
 				<DialogTitle>
-					<Typography
-						gutterBottom
-						variant="h3"
-						component="p"
-						fontFamily="DM Serif Display"
-						align="center"
-						sx={{ position: 'relative' }}
-					>
-						Move Space
+					<Typography gutterBottom variant="h3" component="p" fontFamily="DM Serif Display" align="center">
+						Move space
 					</Typography>
 				</DialogTitle>
 				<DialogContent>
 					<Table>
 						<TableBody>
 							<TableRow>
-								<TableCell align="right">From:</TableCell>
+								<TableCell align="right" sx={{ width: 0 }}>
+									From:
+								</TableCell>
 								<TableCell>
-									<AddressChip sx={{ ml: -1 }} address={currentAddress} tooltipPlacement="top" />
+									<AddressChip address={currentAddress} isObfuscated={false} tooltipPlacement="top" />
 								</TableCell>
 							</TableRow>
 							<TableRow>
-								<TableCell align="right" sx={{ borderBottomWidth: 0 }}>
+								<TableCell align="right" sx={{ borderBottomWidth: 0, width: 0 }}>
 									To:
 								</TableCell>
 								<TableCell sx={{ borderBottomWidth: 0 }}>
@@ -118,13 +117,14 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 										name="keyText"
 										error={!!addressInputError}
 										onChange={(e) => setToAddress(e.target.value)}
-										placeholder="Address"
+										placeholder="0x address"
 										fullWidth
 										InputProps={{
-											sx: { fontSize: 18, fontWeight: 600 },
+											sx: { fontSize: 18, fontWeight: 600, paddingBottom: '2px' },
 										}}
 										inputProps={{
 											spellCheck: 'false',
+											style: { paddingTop: 8 },
 										}}
 										autoComplete="new-password"
 									/>
@@ -133,27 +133,21 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 						</TableBody>
 					</Table>
 					<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-						<Tooltip placement="top" title={'test'}>
-							<Box>
-								<SubmitButton
-									disabled={!!addressInputError || !toAddress?.length || isSigning || isDone}
-									variant="contained"
-									type="submit"
-									onClick={onSubmit}
-								>
-									{isSigning ? (
-										<Fade in={isSigning}>
-											<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
-										</Fade>
-									) : (
-										<span>
-											<Twemoji svg text="📦" />
-											Move&nbsp;
-										</span>
-									)}
-								</SubmitButton>
-							</Box>
-						</Tooltip>
+						<SubmitButton
+							endIcon={<Twemoji svg text="📦" />}
+							disabled={!!addressInputError || !toAddress?.length || isSigning || isDone}
+							variant="contained"
+							type="submit"
+							onClick={onSubmit}
+						>
+							{isSigning ? (
+								<Fade in={isSigning}>
+									<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
+								</Fade>
+							) : (
+								'Move'
+							)}
+						</SubmitButton>
 					</Box>
 				</DialogContent>
 			</Dialog>

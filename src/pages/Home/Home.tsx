@@ -89,6 +89,7 @@ export const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 
 export const Home = memo(() => {
 	const [searchParams] = useSearchParams()
+	const [claiming, setClaiming] = useState<boolean>(false)
 	const { issueTx, signWithMetaMask } = useMetaMask()
 	const navigate = useNavigate()
 	const [showClaimedDialog, setShowClaimedDialog] = useState<boolean>(false)
@@ -128,6 +129,7 @@ export const Home = memo(() => {
 		const signature = await signWithMetaMask(typedData)
 		setWaitingForMetaMask(false)
 		if (!signature) return
+		setClaiming(true)
 		const claimSuccess = await issueTx(typedData, signature)
 		if (!claimSuccess) {
 			// Show something in the UI to display the claim failed
@@ -137,6 +139,9 @@ export const Home = memo(() => {
 	}
 
 	const onClaimSuccess = async () => {
+		setClaiming(false)
+		setAvailable(false)
+		setVerified(false)
 		setShowClaimedDialog(true)
 	}
 
@@ -261,14 +266,17 @@ export const Home = memo(() => {
 									<ClaimButton
 										onClick={onClaim}
 										fullWidth
-										disabled={username.length === 0 || waitingForMetaMask}
+										disabled={claiming || username.length === 0 || waitingForMetaMask}
 										variant="contained"
 										size="large"
 									>
+										{claiming && <CircularProgress color="inherit" size={32} sx={{ mr: 2 }} />}
 										{waitingForMetaMask ? (
 											<Fade in={waitingForMetaMask}>
 												<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
 											</Fade>
+										) : claiming ? (
+											'Claiming...'
 										) : (
 											'Claim'
 										)}
