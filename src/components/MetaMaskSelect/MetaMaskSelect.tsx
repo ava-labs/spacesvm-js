@@ -21,7 +21,7 @@ const growWidth = keyframes`
 export const MetaMaskSelect = () => {
 	const { enqueueSnackbar } = useSnackbar()
 	const theme = useTheme()
-	const { currentAddress, connectToMetaMask, balance } = useMetaMask()
+	const { currentAddress, connectToMetaMask, balance, isConnectingToMM } = useMetaMask()
 	const [displayBalance, setDisplayBalance] = useState(balance || 0)
 	const [transferOpen, setTransferOpen] = useState(false)
 
@@ -62,6 +62,7 @@ export const MetaMaskSelect = () => {
 								variant="outlined"
 								color="secondary"
 								onClick={handleMetaMaskClick}
+								disabled={isConnectingToMM}
 								sx={{
 									background: theme.customPalette.customBackground,
 									'&:hover': { background: theme.customPalette.customBackground },

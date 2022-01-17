@@ -63,8 +63,6 @@ export const SpaceDetails = memo(() => {
 	const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false)
 	const [moveDialogOpen, setMoveDialogOpen] = useState<boolean>(false)
 	const { enqueueSnackbar } = useSnackbar()
-	const location = useLocation()
-	console.log(window)
 
 	const refreshSpaceDetails = useCallback(async () => {
 		const spaceData = await querySpace(spaceId || '')
