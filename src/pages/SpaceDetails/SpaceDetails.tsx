@@ -1,5 +1,5 @@
 import { Twemoji } from 'react-emoji-render'
-import { IoOpenOutline } from 'react-icons/io5'
+import { GiCardboardBox } from 'react-icons/gi'
 import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 // @ts-ignore
@@ -187,7 +187,7 @@ export const SpaceDetails = memo(() => {
 											{isSpaceOwner && (
 												<Box sx={{ display: 'flex', justifyContent: 'end', mt: 2 }}>
 													<Button
-														endIcon={<IoOpenOutline />}
+														startIcon={<GiCardboardBox />}
 														variant="outlined"
 														color="secondary"
 														size="small"
