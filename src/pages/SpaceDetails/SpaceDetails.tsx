@@ -42,6 +42,11 @@ import { rainbowText } from '@/theming/rainbowText'
 import { SpaceKeyValue } from '@/types'
 import { querySpace } from '@/utils/spacesVM'
 
+const isImgLink = (url: string): boolean => {
+	if (typeof url !== 'string') return false
+	return url.match(/^http[^?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gim) != null
+}
+
 export const SpaceDetails = memo(() => {
 	const navigate = useNavigate()
 	const { spaceId } = useParams()
@@ -289,24 +294,28 @@ export const SpaceDetails = memo(() => {
 													{key}
 												</Typography>
 												{URL_REGEX.test(value) ? (
-													<LinkPreview
-														url={value}
-														render={({ loading, preview }: any) => {
-															if (loading) {
-																return <CircularProgress />
-															}
-															return (
-																<MuiLink href={value} target="_blank" rel="noreferrer" title={preview.title}>
-																	<img
-																		width="100%"
-																		src={preview.img}
-																		alt={preview.description}
-																		style={{ borderRadius: 4 }}
-																	/>
-																</MuiLink>
-															)
-														}}
-													/>
+													isImgLink(value) ? (
+														<img width="100%" src={value} alt="" style={{ borderRadius: 4 }} />
+													) : (
+														<LinkPreview
+															url={value || ''}
+															render={({ loading, preview }: any) => {
+																if (loading) {
+																	return <CircularProgress />
+																}
+																return (
+																	<MuiLink href={value} target="_blank" rel="noreferrer" title={preview.title || ''}>
+																		<img
+																			width="100%"
+																			src={preview.img || ''}
+																			alt={preview.description || ''}
+																			style={{ borderRadius: 4 }}
+																		/>
+																	</MuiLink>
+																)
+															}}
+														/>
+													)
 												) : (
 													value
 												)}
