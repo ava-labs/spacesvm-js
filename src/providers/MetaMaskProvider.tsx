@@ -20,7 +20,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 	const [currentAddress, setCurrentAddress] = useState<string | undefined>()
 	const [isConnectingToMM, setIsConnectingToMM] = useState(false)
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
-	const metaMaskExists = useRef(ethereum !== undefined && ethereum?.isMetaMask)
+	const [metaMaskExists] = useState(ethereum !== undefined && ethereum?.isMetaMask)
 
 	/**
 	 * Update balance when changing accounts and on mount
