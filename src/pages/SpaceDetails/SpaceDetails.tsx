@@ -218,6 +218,7 @@ export const SpaceDetails = memo(() => {
 								backgroundImage: (theme) =>
 									theme.palette.mode === 'dark' && spaceValues?.length === 0 ? `url(${NothingHere})` : 'unset',
 								backgroundSize: 'contain',
+								backgroundRepeat: 'no-repeat',
 								backgroundPosition: 'center',
 								borderTopLeftRadius: 24,
 								borderBottomLeftRadius: 24,
