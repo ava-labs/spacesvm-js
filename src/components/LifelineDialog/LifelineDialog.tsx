@@ -47,25 +47,35 @@ type LifelineDialogProps = {
 	open: boolean
 	close(): void
 	existingExpiry: number
+	spaceUnits: number
 	refreshSpaceDetails(): void
 }
 
 const checkFee = throttle(async (space, units) => getSuggestedFee({ type: TxType.Lifeline, space, units }), 2000)
 
-export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetails }: LifelineDialogProps) => {
+export const LifelineDialog = ({
+	open,
+	close,
+	existingExpiry,
+	spaceUnits,
+	refreshSpaceDetails,
+}: LifelineDialogProps) => {
 	const { spaceId } = useParams()
 	const { issueTx, signWithMetaMask } = useMetaMask()
-	const [extendUnits, setExtendUnits] = useState(0)
+	const [extendHours, setExtendHours] = useState(0)
 	const [fee, setFee] = useState(0)
 	const [isSigning, setIsSigning] = useState(false)
 	const [isDone, setIsDone] = useState(false)
+
+	// Spaces with more keys and more storage cost more units to extend per hour
+	const unitsNeededToExtend = extendHours * spaceUnits
 
 	const onSubmit = async () => {
 		setIsSigning(true)
 		const { typedData } = await getSuggestedFee({
 			type: TxType.Lifeline,
 			space: spaceId,
-			units: extendUnits,
+			units: unitsNeededToExtend,
 		})
 		const signature = await signWithMetaMask(typedData)
 		setIsSigning(false)
@@ -81,21 +91,21 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 
 	const extendToDateDisplay = useMemo(() => {
 		const now = new Date(existingExpiry * 1000)
-		now.setHours(now.getHours() + extendUnits)
+		now.setHours(now.getHours() + extendHours)
 		return now.toLocaleString()
-	}, [extendUnits, existingExpiry])
+	}, [extendHours, existingExpiry])
 
 	useEffect(() => {
 		const _checkFee = async () => {
-			const { totalCost } = await checkFee(spaceId, extendUnits)
+			const { totalCost } = await checkFee(spaceId, unitsNeededToExtend)
 			setFee(totalCost)
 		}
 		_checkFee()
-	}, [extendUnits, spaceId, open])
+	}, [unitsNeededToExtend, spaceId, open])
 
 	const handleClose = () => {
 		setIsDone(false)
-		setExtendUnits(0)
+		setExtendHours(0)
 		close()
 	}
 
@@ -126,7 +136,7 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 				<Tooltip sx={{ cursor: 'help' }} placement="top" title={`Extend to ${extendToDateDisplay}`}>
 					<Box display="flex" alignItems="center" justifyContent="center">
 						<Typography sx={{ color: (theme) => theme.palette.secondary.light }} variant="h3">
-							{extendUnits}
+							{extendHours}
 						</Typography>
 
 						<Divider flexItem orientation="vertical" sx={{ mx: 2 }} />
@@ -144,8 +154,8 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 							size="small"
 							variant="outlined"
 							startIcon={<IoRemove />}
-							disabled={isDone || extendUnits <= 0}
-							onClick={() => setExtendUnits(Math.max(extendUnits - 24, 0))}
+							disabled={isDone || extendHours <= 0}
+							onClick={() => setExtendHours(Math.max(extendHours - 24, 0))}
 						>
 							24 hours
 						</Button>
@@ -163,8 +173,8 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 							}}
 							color="inherit"
 							size="large"
-							disabled={isDone || extendUnits <= 0}
-							onClick={() => setExtendUnits(extendUnits - 1)}
+							disabled={isDone || extendHours <= 0}
+							onClick={() => setExtendHours(extendHours - 1)}
 						>
 							<IoRemove />
 						</IconButton>
@@ -183,7 +193,7 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 							size="large"
 							color="inherit"
 							disabled={isDone}
-							onClick={() => setExtendUnits(extendUnits + 1)}
+							onClick={() => setExtendHours(extendHours + 1)}
 						>
 							<IoAdd />
 						</IconButton>
@@ -195,7 +205,7 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 							startIcon={<IoAdd />}
 							color="secondary"
 							disabled={isDone}
-							onClick={() => setExtendUnits(extendUnits + 24)}
+							onClick={() => setExtendHours(extendHours + 24)}
 						>
 							24 hours
 						</Button>
@@ -226,9 +236,9 @@ export const LifelineDialog = ({ open, close, existingExpiry, refreshSpaceDetail
 					<Fade in={!isDone}>
 						<div>
 							<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-								<Tooltip placement="top" title={extendUnits <= 0 ? 'Add hours to extend!' : ''}>
-									<Box sx={{ cursor: extendUnits <= 0 ? 'help' : 'inherit' }}>
-										<SubmitButton disabled={extendUnits <= 0} variant="contained" type="submit" onClick={onSubmit}>
+								<Tooltip placement="top" title={extendHours <= 0 ? 'Add hours to extend!' : ''}>
+									<Box sx={{ cursor: extendHours <= 0 ? 'help' : 'inherit' }}>
+										<SubmitButton disabled={extendHours <= 0} variant="contained" type="submit" onClick={onSubmit}>
 											{isSigning ? (
 												<Fade in={isSigning}>
 													<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
