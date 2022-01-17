@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { BsBoxArrowUpRight } from 'react-icons/bs'
-import { ImArrowUpRight } from 'react-icons/Im'
-import { Box, Button, ButtonGroup, Grid, IconButton, keyframes, Tooltip, Typography, useTheme } from '@mui/material'
+import { Button, ButtonGroup, Grid, keyframes, Tooltip, Typography, useTheme } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
 import { TransferFundsDialog } from '../TransferFundsDialog'
