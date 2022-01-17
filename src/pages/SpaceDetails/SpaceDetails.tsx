@@ -7,7 +7,6 @@ import {
 	Button,
 	Card,
 	CardContent,
-	Chip,
 	Grid,
 	Grow,
 	IconButton,
@@ -23,6 +22,7 @@ import { formatDistanceToNow } from 'date-fns'
 
 import { ClaimButton } from '../Home/Home'
 
+import { AddressChip } from '@/components/AddressChip/AddressChip'
 import { DeleteKeyValueDialog } from '@/components/DeleteKeyValueDialog'
 import { KeyValueInput } from '@/components/KeyValueInput'
 import { LifelineDialog } from '@/components/LifelineDialog'
@@ -38,6 +38,7 @@ export const SpaceDetails = memo(() => {
 	const navigate = useNavigate()
 	const { spaceId } = useParams()
 	const { currentAddress } = useMetaMask()
+
 	const [details, setDetails] = useState<any>()
 	const [showDetailsTable, setShowDetailsTable] = useState<boolean>(false)
 	const [spaceValues, setSpaceValues] = useState<any>()
@@ -146,7 +147,7 @@ export const SpaceDetails = memo(() => {
 												<TableRow>
 													<TableCell>Owner</TableCell>
 													<TableCell>
-														<Chip sx={{ ml: -1 }} label={details.owner} />
+														<AddressChip sx={{ ml: -1 }} address={details.owner} />
 													</TableCell>
 												</TableRow>
 												<TableRow>

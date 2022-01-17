@@ -3,7 +3,6 @@ import { IoAdd, IoRemove } from 'react-icons/io5'
 import {
 	Box,
 	Button,
-	Chip,
 	Dialog,
 	DialogContent,
 	DialogTitle,
@@ -22,6 +21,7 @@ import {
 	useTheme,
 } from '@mui/material'
 
+import { AddressChip } from '../AddressChip/AddressChip'
 import { NoFundsDialog } from './NoFundsDialog'
 import { TransferFundsSuccessDialog } from './TransferFundsSuccessDialog'
 
@@ -29,7 +29,6 @@ import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { rainbowText } from '@/theming/rainbowText'
 import { TxType } from '@/types'
-import { obfuscateAddress } from '@/utils/obfuscateAddress'
 import { getSuggestedFee } from '@/utils/spacesVM'
 import { isValidWalletAddress } from '@/utils/verifyAddress'
 
@@ -133,9 +132,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 							<TableRow>
 								<TableCell align="right">From:</TableCell>
 								<TableCell>
-									<Tooltip placement="top" title={currentAddress}>
-										<Chip sx={{ ml: -1, cursor: 'help' }} label={obfuscateAddress(currentAddress)} />
-									</Tooltip>
+									<AddressChip sx={{ ml: -1 }} address={currentAddress} tooltipPlacement="top" />
 								</TableCell>
 							</TableRow>
 							<TableRow>
