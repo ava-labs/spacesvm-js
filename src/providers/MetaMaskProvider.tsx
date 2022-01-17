@@ -38,25 +38,31 @@ export const MetaMaskProvider = ({ children }: any) => {
 		updateBalance()
 	}, [updateBalance])
 
+	/**
+	 * Set up ethereum account change listener
+	 */
 	useEffect(() => {
 		if (!metaMaskExists) return
 		setCurrentAddress(ethereum.selectedAddress)
 		// Listen for changes to the connected account selections
-		return ethereum.on('accountsChanged', (accounts: any) => {
+		return ethereum.on('accountsChanged', (accounts: string[]) => {
 			setCurrentAddress(accounts[0])
 		})
-	}, [updateBalance])
+	}, [updateBalance, metaMaskExists])
 
-	const connectToMetaMask = async () => {
+	/**
+	 * Connects to MM if not already connected, and returns the connected account
+	 */
+	const connectToMetaMask = async (): Promise<string[]> => {
 		if (!metaMaskExists) {
 			onboardToMetaMask()
-			return
+			return []
 		}
 		setIsConnectingToMM(true)
 		try {
-			const res = await ethereum.request({ method: 'eth_requestAccounts' })
+			const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
 			setIsConnectingToMM(false)
-			return res
+			return accounts
 		} catch (err) {
 			setIsConnectingToMM(false)
 			enqueueSnackbar('Connect your wallet to use Spaces!', {
@@ -77,6 +83,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 					</Button>
 				),
 			})
+			return []
 		}
 	}
 
@@ -100,7 +107,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 				</Button>
 			),
 		})
-	}, [enqueueSnackbar])
+	}, [enqueueSnackbar, metaMaskExists])
 
 	/**
 	 * Issues a transaction to spacesVM and polls the VM until the transaction is confirmed.
@@ -109,7 +116,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 	 *
 	 * @param typedData typedData from getSuggestedFee
 	 * @param signature signed typedData
-	 * @returns if successful, response has a txId
+	 * @returns boolean - whether transaction issuing was successful
 	 */
 	const issueTx = useCallback(
 		async (typedData: any, signature: string) => {
@@ -121,11 +128,16 @@ export const MetaMaskProvider = ({ children }: any) => {
 		[updateBalance, onboardToMetaMask],
 	)
 
-	const signWithMetaMask = async (typedData: any) => {
+	/**
+	 * Signs a typed data payload.  The signature is needed to issue transactions to SpacesVM
+	 *
+	 * @param typedData from getSuggestedFee
+	 * @returns signature
+	 */
+	const signWithMetaMask = async (typedData: any): Promise<string | undefined> => {
 		onboardToMetaMask()
 		try {
 			const accounts = await connectToMetaMask()
-			console.log(`accounts`, accounts)
 			const signature = await ethereum.request({
 				method: 'eth_signTypedData_v4',
 				params: [accounts[0], JSON.stringify(typedData)],
