@@ -4,6 +4,7 @@ import MetaMaskOnboarding from '@metamask/onboarding'
 import { Button } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
+import { APP_NAME } from '@/constants'
 import { getAddressBalance, issueAndConfirmTransaction } from '@/utils/spacesVM'
 
 declare global {
@@ -77,7 +78,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 			return accounts
 		} catch (err) {
 			setIsConnectingToMM(false)
-			enqueueSnackbar('Connect your wallet to use Spaces!', {
+			enqueueSnackbar(`Connect your wallet to use ${APP_NAME}!`, {
 				variant: 'warning',
 				persist: true,
 				action: (
