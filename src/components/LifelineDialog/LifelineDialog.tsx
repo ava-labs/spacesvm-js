@@ -17,7 +17,7 @@ import {
 	Tooltip,
 	Typography,
 } from '@mui/material'
-import { throttle } from 'lodash'
+import { debounce } from 'lodash'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
@@ -51,7 +51,10 @@ type LifelineDialogProps = {
 	refreshSpaceDetails(): void
 }
 
-const checkFee = throttle(async (space, units) => getSuggestedFee({ type: TxType.Lifeline, space, units }), 2000)
+const checkFee = debounce(async (space, units) => getSuggestedFee({ type: TxType.Lifeline, space, units }), 2000, {
+	leading: true,
+	trailing: true,
+})
 
 export const LifelineDialog = ({
 	open,
