@@ -65,7 +65,7 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails }: KeyValueInp
 			type: TxType.Set,
 			space: spaceId,
 			key: keyText,
-			value: btoa(valueText),
+			value: valueText,
 		})
 		const signature = await signWithMetaMask(typedData)
 		if (!signature) return

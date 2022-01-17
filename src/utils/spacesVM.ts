@@ -3,6 +3,14 @@ import { tryNTimes } from './tryNTimes'
 import { API_DOMAIN } from '@/constants'
 import { SpaceKeyValue, TransactionInfo } from '@/types'
 
+export function utf8_to_b64(str) {
+	return btoa(unescape(encodeURIComponent(str)))
+}
+
+export function b64_to_utf8(str) {
+	return decodeURIComponent(escape(atob(str)))
+}
+
 export const fetchSpaces = async (method: string, params = {}) => {
 	const response = await fetch(`${API_DOMAIN}`, {
 		headers: {
@@ -43,7 +51,7 @@ export const querySpace = async (space: string) => {
 		})
 		return {
 			...response,
-			values: response.values.map(({ key, value }: SpaceKeyValue) => ({ key, value: atob(value) })),
+			values: response.values.map(({ key, value }: SpaceKeyValue) => ({ key, value: b64_to_utf8(value) })),
 		}
 	} catch (err) {
 		return
@@ -53,7 +61,7 @@ export const querySpace = async (space: string) => {
 export const querySpaceKey = async (prefix: string, key: string) => {
 	const response = await fetchSpaces('resolve', { path: `${prefix}/${key}` })
 	if (!response?.exists) return
-	return atob(response?.value)
+	return b64_to_utf8(response?.value)
 }
 
 export const getLatestBlockID = async () => {
@@ -81,8 +89,13 @@ export const getAddressBalance = async (address: string) => fetchSpaces('balance
  * @param transactionInfo Object containing type, space, units, key, value, and to (some optional)
  * @returns Object wit
  */
-export const getSuggestedFee = async (transactionInfo: TransactionInfo) =>
-	await fetchSpaces('suggestedFee', { input: transactionInfo })
+export const getSuggestedFee = async (transactionInfo: TransactionInfo) => {
+	const input = { ...transactionInfo }
+	if (transactionInfo.value) {
+		input.value = utf8_to_b64(transactionInfo.value)
+	}
+	return await fetchSpaces('suggestedFee', { input })
+}
 
 /**
  * Issues a transaction to spacesVM and polls the VM until the transaction is confirmed.
