@@ -30,6 +30,7 @@ import { rainbowText } from '@/theming/rainbowText'
 import { TxType } from '@/types'
 import { obfuscateAddress } from '@/utils/obfuscateAddress'
 import { getSuggestedFee } from '@/utils/spacesVM'
+import { isValidWalletAddress } from '@/utils/verifyAddress'
 
 type TransferFundsDialogProps = {
 	open: boolean
@@ -40,7 +41,6 @@ const SubmitButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
 	padding: theme.spacing(1, 10),
 	height: 60,
-	minWidth: 320,
 	fontWeight: 900,
 	fontSize: 24,
 	position: 'relative',
@@ -57,16 +57,15 @@ const SubmitButton = styled(Button)(({ theme }: any) => ({
 const MAX_TRANSFER_AMOUNT = 100000000
 
 export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) => {
-	const { currentAddress, signWithMetaMask, issueTx } = useMetaMask()
+	const { currentAddress, balance, signWithMetaMask, issueTx } = useMetaMask()
 	const theme = useTheme()
 
 	const [toAddress, setToAddress] = useState('')
+	const [addressInputError, setAddressInputError] = useState<string | undefined>()
 	const [transferAmount, setTransferAmount] = useState(0)
 	const [isSigning, setIsSigning] = useState(false)
 	const [fee, setFee] = useState(0)
 	const [isDone, setIsDone] = useState(false)
-
-	if (!currentAddress) return null
 
 	//0x08380a9cd3a5034036b44c18ab40fce3ad1c13ba
 	const onSubmit = async () => {
@@ -77,29 +76,37 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 				to: toAddress,
 				units: transferAmount,
 			})
+			setIsSigning(false)
+			const signature = await signWithMetaMask(typedData)
+			setIsSigning(false)
+			if (!signature) return
+			const success = await issueTx(typedData, signature)
+			if (!success) {
+				// show some sort of failure dialog
+				return
+			}
+			setIsDone(true)
 		} catch (error) {
+			// eslint-disable-next-line no-console
 			console.error(error)
 			setIsSigning(false)
 		}
-		const signature = await signWithMetaMask(typedData)
-		setIsSigning(false)
-		if (!signature) return
-		const success = await issueTx(typedData, signature)
-		if (!success) {
-			// show some sort of failure dialog
-			return
-		}
-		setIsDone(true)
 	}
 
-	const isValidToAddress = toAddress?.length > 0
+	useEffect(() => {
+		const isValidToAddress = isValidWalletAddress(toAddress)
+		setAddressInputError(!isValidToAddress ? 'Please enter a valid public wallet address.' : undefined)
+	}, [toAddress])
 
 	const handleClose = () => {
 		setToAddress('')
+		setAddressInputError(undefined)
 		setTransferAmount(0)
 		setIsDone(false)
 		close()
 	}
+
+	if (!currentAddress) return null
 
 	return (
 		<>
@@ -150,6 +157,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 										variant="filled"
 										value={toAddress}
 										name="keyText"
+										error={!!addressInputError}
 										onChange={(e) => setToAddress(e.target.value)}
 										placeholder="Address"
 										fullWidth
@@ -167,7 +175,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 					</Table>
 
 					<Typography variant="body2" align="center" color="textSecondary" sx={{ mt: 2, mb: 1 }}>
-						How much do you to send?
+						How much to send?
 					</Typography>
 
 					<Box display="flex" alignItems="center" justifyContent="center">
@@ -177,7 +185,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 							name="keyText"
 							onChange={(e) => {
 								const val = parseInt(e.target.value, 10)
-								setTransferAmount(Math.min(!isNaN(val) ? val : 0, MAX_TRANSFER_AMOUNT))
+								setTransferAmount(Math.min(!isNaN(val) ? val : 0, MAX_TRANSFER_AMOUNT, balance))
 							}}
 							placeholder="Address"
 							InputProps={{
@@ -198,7 +206,14 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 						</Typography>
 					</Box>
 
-					<Grid container wrap="nowrap" justifyContent={'center'} alignItems="center" sx={{ my: 2 }} columnSpacing={3}>
+					<Grid
+						container
+						wrap="nowrap"
+						justifyContent={'center'}
+						alignItems="center"
+						sx={{ my: 2 }}
+						columnSpacing={{ sm: 3, xs: 1 }}
+					>
 						<Grid item>
 							<Button
 								color="secondary"
@@ -208,7 +223,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 								disabled={transferAmount <= 0}
 								onClick={() => setTransferAmount(Math.max(transferAmount - 1000, 0))}
 							>
-								1000
+								1K
 							</Button>
 						</Grid>
 						<Grid item>
@@ -255,8 +270,8 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 								}}
 								size="large"
 								color="inherit"
-								disabled={transferAmount >= MAX_TRANSFER_AMOUNT}
-								onClick={() => setTransferAmount(Math.min(transferAmount + 1, MAX_TRANSFER_AMOUNT))}
+								disabled={transferAmount >= MAX_TRANSFER_AMOUNT || transferAmount >= balance}
+								onClick={() => setTransferAmount(Math.min(transferAmount + 1, MAX_TRANSFER_AMOUNT, balance))}
 							>
 								<IoAdd />
 							</IconButton>
@@ -267,8 +282,8 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 								size="small"
 								startIcon={<IoAdd />}
 								color="secondary"
-								disabled={transferAmount >= MAX_TRANSFER_AMOUNT}
-								onClick={() => setTransferAmount(Math.min(transferAmount + 100, MAX_TRANSFER_AMOUNT))}
+								disabled={transferAmount >= MAX_TRANSFER_AMOUNT || transferAmount >= balance}
+								onClick={() => setTransferAmount(Math.min(transferAmount + 100, MAX_TRANSFER_AMOUNT, balance))}
 							>
 								100
 							</Button>
@@ -279,21 +294,21 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 								size="small"
 								startIcon={<IoAdd />}
 								color="secondary"
-								disabled={transferAmount >= MAX_TRANSFER_AMOUNT}
-								onClick={() => setTransferAmount(Math.min(transferAmount + 1000, MAX_TRANSFER_AMOUNT))}
+								disabled={transferAmount >= MAX_TRANSFER_AMOUNT || transferAmount >= balance}
+								onClick={() => setTransferAmount(Math.min(transferAmount + 1000, MAX_TRANSFER_AMOUNT, balance))}
 							>
-								1000
+								1K
 							</Button>
 						</Grid>
 					</Grid>
 					<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
 						<Tooltip
 							placement="top"
-							title={!isValidToAddress ? 'Enter a valid address!' : transferAmount <= 0 ? 'Add some SPC to send!' : ''}
+							title={addressInputError ? addressInputError : transferAmount <= 0 ? 'Add some SPC to send!' : ''}
 						>
-							<Box sx={{ cursor: !isValidToAddress || transferAmount <= 0 ? 'help' : 'inherit' }}>
+							<Box sx={{ cursor: !!addressInputError || transferAmount <= 0 ? 'help' : 'inherit' }}>
 								<SubmitButton
-									disabled={!isValidToAddress || transferAmount <= 0 || isSigning || isDone}
+									disabled={!!addressInputError || transferAmount <= 0 || isSigning || isDone}
 									variant="contained"
 									type="submit"
 									onClick={onSubmit}
