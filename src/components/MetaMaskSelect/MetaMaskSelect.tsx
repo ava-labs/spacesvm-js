@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { IoSwapVertical } from 'react-icons/io5'
 import { Button, ButtonGroup, Grid, keyframes, Tooltip, Typography, useTheme } from '@mui/material'
 import { useSnackbar } from 'notistack'
