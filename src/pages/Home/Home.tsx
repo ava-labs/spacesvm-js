@@ -1,4 +1,3 @@
-import { isMobile } from 'react-device-detect'
 import { Twemoji } from 'react-emoji-render'
 import { IoCheckmarkCircle, IoClose, IoSearch } from 'react-icons/io5'
 import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom'
