@@ -58,6 +58,8 @@ const checkFee = debounce(async (space, units) => getSuggestedFee({ type: TxType
 	trailing: true,
 })
 
+const MAX_HOURS_EXTEND = 99999
+
 export const LifelineDialog = ({
 	open,
 	close,
@@ -117,7 +119,7 @@ export const LifelineDialog = ({
 
 	return (
 		<>
-			<Dialog open={open && !isDone} onClose={handleClose} maxWidth="xs">
+			<Dialog open={open && !isDone} onClose={handleClose} maxWidth="sm">
 				<DialogTitle>
 					<Typography variant="h4" component="p" fontFamily="DM Serif Display" align="center">
 						Extend some life to{' '}
@@ -135,7 +137,7 @@ export const LifelineDialog = ({
 						<Twemoji svg text="⌛️" />
 					</Typography>
 				</DialogTitle>
-				<DialogContent sx={{ overflowY: 'hidden' }}>
+				<DialogContent sx={{ overflowY: 'hidden', px: 0 }}>
 					<Typography variant="body2" align="center" color="textSecondary" sx={{ mt: 2, mb: 1 }}>
 						Extend by
 					</Typography>
@@ -148,33 +150,32 @@ export const LifelineDialog = ({
 								name="keyText"
 								onChange={(e) => {
 									const val = parseInt(e.target.value, 10)
-									setExtendHours(!isNaN(val) ? val : 0)
+									setExtendHours(Math.min(!isNaN(val) ? val : 0, MAX_HOURS_EXTEND))
 								}}
 								placeholder="Address"
 								InputProps={{
-									sx: { fontSize: 18, fontWeight: 600, ...rainbowText },
+									sx: { ...theme.typography.h2, ...rainbowText },
 								}}
 								inputProps={{
 									spellCheck: 'false',
 									style: {
-										...theme.typography.h2,
 										textAlign: 'right',
 									},
 								}}
 								sx={{
-									width: 200,
+									width: 300,
 								}}
 							/>
 
 							<Divider flexItem orientation="vertical" sx={{ mr: 2 }} />
 
-							<Typography variant="h4" component="span" color="textSecondary" sx={{ width: 200 }}>
+							<Typography variant="h4" component="span" color="textSecondary" sx={{ width: 300 }}>
 								hours
 							</Typography>
 						</Box>
 					</Tooltip>
 
-					<Grid container spacing={1} wrap="nowrap" justifyContent={'space-between'} alignItems="center" sx={{ mt: 1 }}>
+					<Grid container wrap="nowrap" justifyContent={'center'} alignItems="center" sx={{ my: 2 }} columnSpacing={3}>
 						<Grid item>
 							<Button
 								color="secondary"
@@ -201,7 +202,7 @@ export const LifelineDialog = ({
 								color="inherit"
 								size="large"
 								disabled={isDone || extendHours <= 0}
-								onClick={() => setExtendHours(extendHours - 1)}
+								onClick={() => setExtendHours(Math.max(extendHours - 1, 0))}
 							>
 								<IoRemove />
 							</IconButton>
@@ -219,8 +220,8 @@ export const LifelineDialog = ({
 								}}
 								size="large"
 								color="inherit"
-								disabled={isDone}
-								onClick={() => setExtendHours(extendHours + 1)}
+								disabled={isDone || extendHours >= MAX_HOURS_EXTEND}
+								onClick={() => setExtendHours(Math.min(extendHours + 1, MAX_HOURS_EXTEND))}
 							>
 								<IoAdd />
 							</IconButton>
@@ -231,8 +232,8 @@ export const LifelineDialog = ({
 								size="small"
 								startIcon={<IoAdd />}
 								color="secondary"
-								disabled={isDone}
-								onClick={() => setExtendHours(extendHours + 24)}
+								disabled={isDone || extendHours >= MAX_HOURS_EXTEND}
+								onClick={() => setExtendHours(Math.min(extendHours + 24, MAX_HOURS_EXTEND))}
 							>
 								24 hours
 							</Button>
