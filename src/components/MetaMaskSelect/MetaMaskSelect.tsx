@@ -19,19 +19,6 @@ const growWidth = keyframes`
 	}
 `
 
-const GrowingButton = ({ sx, children, ...rest }: any) => (
-	<Button
-		sx={{
-			...sx,
-			animation: `800ms ${growWidth} ease`,
-			animationDirection: 'forwards',
-		}}
-		{...rest}
-	>
-		{children}
-	</Button>
-)
-
 export const MetaMaskSelect = () => {
 	const { enqueueSnackbar } = useSnackbar()
 	const theme = useTheme()
@@ -68,13 +55,7 @@ export const MetaMaskSelect = () => {
 
 	return (
 		<>
-			<Grid
-				container
-				sx={{
-					backgroundColor: (theme) => theme.palette.background.paper,
-					borderRadius: 99999,
-				}}
-			>
+			<Grid container sx={{ borderRadius: 99999 }}>
 				<Grid item>
 					<ButtonGroup>
 						<Tooltip title={currentAddress ? 'Copy address' : 'Connect to MetaMask'}>
@@ -93,13 +74,15 @@ export const MetaMaskSelect = () => {
 						</Tooltip>
 
 						<Tooltip title={'Transfer SPC'}>
-							<GrowingButton
+							<Button
 								variant="outlined"
 								color="secondary"
 								onClick={() => setTransferOpen(true)}
 								sx={{
 									background: theme.customPalette.customBackground,
 									'&:hover': { background: theme.customPalette.customBackground },
+									animation: `800ms ${growWidth} ease`,
+									animationDirection: 'forwards',
 								}}
 							>
 								<Typography
@@ -117,7 +100,7 @@ export const MetaMaskSelect = () => {
 									</Typography>
 								</Typography>
 								<BsBoxArrowUpRight size="18" color={theme.palette.primary.dark} />
-							</GrowingButton>
+							</Button>
 						</Tooltip>
 					</ButtonGroup>
 				</Grid>
