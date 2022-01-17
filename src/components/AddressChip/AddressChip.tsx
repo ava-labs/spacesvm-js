@@ -8,12 +8,14 @@ type AddressChipProps = {
 	tooltipPlacement?: TooltipProps['placement']
 	isMetaMaskAddress?: boolean
 	sx?: SxProps
+	isObfuscated?: boolean
 }
 
 export const AddressChip = ({
 	address,
 	tooltipPlacement = 'bottom',
 	sx = {},
+	isObfuscated = true,
 	isMetaMaskAddress = false,
 	...rest
 }: AddressChipProps) => {
@@ -35,7 +37,12 @@ export const AddressChip = ({
 
 	return (
 		<Tooltip title="Copy Address" placement={tooltipPlacement}>
-			<Chip sx={{ ...sx, cursor: 'pointer' }} label={obfuscateAddress(address)} onClick={setClipboard} {...rest} />
+			<Chip
+				sx={{ ...sx, cursor: 'pointer' }}
+				label={isObfuscated ? obfuscateAddress(address) : address}
+				onClick={setClipboard}
+				{...rest}
+			/>
 		</Tooltip>
 	)
 }

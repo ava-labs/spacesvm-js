@@ -90,7 +90,7 @@ export const MetaMaskSelect = () => {
 									display="flex"
 									lineHeight={1}
 									sx={{
-										mr: 2,
+										mr: 1,
 									}}
 									style={{ fontSize: '1.1rem' }}
 								>
@@ -106,7 +106,11 @@ export const MetaMaskSelect = () => {
 										SPC
 									</Typography>
 								</Typography>
-								<BsBoxArrowUpRight size="18" color={theme.palette.primary.dark} />
+								<BsBoxArrowUpRight
+									size="14"
+									color={theme.palette.primary.dark}
+									style={{ position: 'relative', top: -1 }}
+								/>
 							</Button>
 						</Tooltip>
 					</ButtonGroup>

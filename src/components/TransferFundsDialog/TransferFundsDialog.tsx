@@ -20,6 +20,8 @@ import {
 	Typography,
 	useTheme,
 } from '@mui/material'
+import capitalize from 'lodash/capitalize'
+import { useSnackbar } from 'notistack'
 
 import { AddressChip } from '../AddressChip/AddressChip'
 import { NoFundsDialog } from './NoFundsDialog'
@@ -59,12 +61,12 @@ const MAX_TRANSFER_AMOUNT = 100000000
 export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) => {
 	const { currentAddress, balance, signWithMetaMask, issueTx } = useMetaMask()
 	const theme = useTheme()
-
-	const [toAddress, setToAddress] = useState('')
+	const [toAddress, setToAddress] = useState<string>('')
 	const [addressInputError, setAddressInputError] = useState<string | undefined>()
-	const [transferAmount, setTransferAmount] = useState(0)
-	const [isSigning, setIsSigning] = useState(false)
-	const [isDone, setIsDone] = useState(false)
+	const [transferAmount, setTransferAmount] = useState<number>(0)
+	const [isSigning, setIsSigning] = useState<boolean>(false)
+	const [isDone, setIsDone] = useState<boolean>(false)
+	const { enqueueSnackbar } = useSnackbar()
 
 	const onSubmit = async () => {
 		setIsSigning(true)
@@ -86,9 +88,12 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 				return
 			}
 			setIsDone(true)
-		} catch (error) {
+		} catch (error: any) {
 			// eslint-disable-next-line no-console
 			console.error(error)
+			enqueueSnackbar(capitalize(error?.message), {
+				variant: 'error',
+			})
 			setIsSigning(false)
 		}
 	}
@@ -114,28 +119,23 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 		<>
 			<Dialog maxWidth="sm" open={open && balance && !isDone} onClose={handleClose}>
 				<DialogTitle>
-					<Typography
-						gutterBottom
-						variant="h3"
-						component="p"
-						fontFamily="DM Serif Display"
-						align="center"
-						sx={{ position: 'relative' }}
-					>
-						Transfer
+					<Typography gutterBottom variant="h3" component="p" fontFamily="DM Serif Display" align="center">
+						Transfer SPC
 					</Typography>
 				</DialogTitle>
 				<DialogContent>
 					<Table>
 						<TableBody>
 							<TableRow>
-								<TableCell align="right">From:</TableCell>
+								<TableCell align="right" sx={{ pr: 0, width: 0 }}>
+									From:
+								</TableCell>
 								<TableCell>
-									<AddressChip sx={{ ml: -1 }} address={currentAddress} tooltipPlacement="top" />
+									<AddressChip isObfuscated={false} address={currentAddress} tooltipPlacement="top" />
 								</TableCell>
 							</TableRow>
 							<TableRow>
-								<TableCell align="right" sx={{ borderBottomWidth: 0 }}>
+								<TableCell align="right" sx={{ borderBottomWidth: 0, pr: 0, width: 0 }}>
 									To:
 								</TableCell>
 								<TableCell sx={{ borderBottomWidth: 0 }}>
@@ -144,15 +144,17 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 										variant="filled"
 										value={toAddress}
 										name="keyText"
+										size="small"
 										error={!!addressInputError}
 										onChange={(e) => setToAddress(e.target.value)}
-										placeholder="Address"
+										placeholder="0x address"
 										fullWidth
 										InputProps={{
-											sx: { fontSize: 18, fontWeight: 600 },
+											sx: { fontSize: 18, fontWeight: 600, paddingBottom: '2px' },
 										}}
 										inputProps={{
 											spellCheck: 'false',
+											style: { paddingTop: 8 },
 										}}
 										autoComplete="new-password"
 									/>
@@ -161,7 +163,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 						</TableBody>
 					</Table>
 
-					<Typography variant="body2" align="center" color="textSecondary" sx={{ mt: 2, mb: 1 }}>
+					<Typography variant="body2" align="center" color="textSecondary" sx={{ mt: 2 }}>
 						How much to send?
 					</Typography>
 
@@ -299,23 +301,23 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 									variant="contained"
 									type="submit"
 									onClick={onSubmit}
+									endIcon={<Twemoji svg text="✈️" />}
 								>
 									{isSigning ? (
 										<Fade in={isSigning}>
 											<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
 										</Fade>
 									) : (
-										<span>
-											Send&nbsp;
-											<Twemoji svg text="✈️" />
-										</span>
+										'Send'
 									)}
 								</SubmitButton>
 							</Box>
 						</Tooltip>
 					</Box>
 					<Box sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>
-						<Typography variant="caption">Fee: 10 SPC</Typography>
+						<Typography variant="caption" color="textSecondary">
+							Fee: 10 SPC
+						</Typography>
 					</Box>
 				</DialogContent>
 			</Dialog>
