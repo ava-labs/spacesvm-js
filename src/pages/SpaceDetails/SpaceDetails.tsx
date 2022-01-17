@@ -60,6 +60,9 @@ export const SpaceDetails = memo(() => {
 	const refreshSpaceDetails = useCallback(async () => {
 		const spaceData = await querySpace(spaceId || '')
 		setDetails(spaceData?.info)
+
+		console.log('----')
+		console.log(spaceData?.values)
 		setSpaceValues(spaceData?.values)
 		setLoading(false)
 	}, [spaceId])
