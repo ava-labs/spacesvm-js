@@ -1,7 +1,12 @@
 # Spaces ⚛️
 
-This is the frontend codebase for QuarkVM:
+This is the frontend codebase for QuarkVM.
+
+DEV:
 https://spaces.pages.dev
+
+PROD:
+https://tryspaces.xyz
 
 ## Getting started 🏃
 
