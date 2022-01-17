@@ -67,6 +67,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 	 * Update balance when changing accounts and on mount
 	 */
 	const [balance, setBalance] = useState<number | null>(null)
+
 	useEffect(() => {
 		updateBalance()
 	}, [updateBalance])

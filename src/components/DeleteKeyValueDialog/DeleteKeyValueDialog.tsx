@@ -67,7 +67,7 @@ export const DeleteKeyValueDialog = ({ open, close, spaceKey, refreshSpaceDetail
 		<Dialog open={open} onClose={handleClose} maxWidth="xs">
 			<DialogTitle>
 				<Typography variant="h4" component="p" fontFamily="DM Serif Display" align="center">
-					Are you SURE you want to delete? <Twemoji svg text="🧨" />
+					Are you <strong>SURE</strong> you want to delete this item? <Twemoji svg text="🧨" />
 				</Typography>
 			</DialogTitle>
 			<DialogContent sx={{ mt: 3, overflowY: 'hidden' }}>

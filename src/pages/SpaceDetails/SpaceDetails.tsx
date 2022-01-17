@@ -220,11 +220,25 @@ export const SpaceDetails = memo(() => {
 								</Typography>
 							)}
 
-							{spaceValues?.length === 0 && (
-								<Typography variant="body1" color="textSecondary" align="center" gutterBottom sx={{ mb: 4 }}>
-									There's nothing in your space right now
-								</Typography>
-							)}
+							<Typography variant="body1" color="textSecondary" align="center" gutterBottom sx={{ mb: 4 }}>
+								{spaceValues?.length === 0 ? (
+									"There's nothing in your space right now."
+								) : (
+									<>
+										<Typography variant="body2" color="textSecondary">
+											The{' '}
+											<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
+												more
+											</Typography>{' '}
+											items in your space, the{' '}
+											<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
+												faster
+											</Typography>{' '}
+											it will expire.
+										</Typography>
+									</>
+								)}
+							</Typography>
 
 							{spaceId && isSpaceOwner && (
 								<KeyValueInput
@@ -240,8 +254,9 @@ export const SpaceDetails = memo(() => {
 										key={key}
 										elevation={0}
 										sx={{
+											position: 'relative',
 											display: 'flex',
-											mb: 4,
+											mb: 1,
 											p: 4,
 											//backgroundColor: 'transparent',
 											border: '1px solid transparent',
@@ -256,13 +271,14 @@ export const SpaceDetails = memo(() => {
 										<Avatar sx={{ mr: 2 }}>{i + 1}</Avatar>
 										<Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
 											<CardContent sx={{ pt: 0 }}>
-												<Typography variant="h4">
-													{key} - {value}
+												<Typography variant="h4" gutterBottom>
+													{key}
 												</Typography>
+												<Typography variant="h4">{value}</Typography>
 											</CardContent>
 										</Box>
 										{isSpaceOwner && (
-											<Box className="actions">
+											<Box className="actions" sx={{ position: 'absolute', right: 32, top: 32 }}>
 												<Grid container spacing={1} wrap="nowrap">
 													<Grid item>
 														<Tooltip placement="top" title="Edit">
