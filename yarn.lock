@@ -9,6 +9,11 @@
   dependencies:
     "@types/throttle-debounce" "^2.1.0"
 
+"@ashwamegh/react-link-preview@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@ashwamegh/react-link-preview/-/react-link-preview-0.2.2.tgz#95c324d3acbc52801784f1973f02d3aa5170d201"
+  integrity sha512-LF2KL8ZPkn4o4OTDQT8rxWdIzXnLScZzobr0ho3Bo9RkftVWHLhnxxIiUE3PmroQD9r2AAxI7x5oCJAeMOcCAw==
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.16.0":
   version "7.16.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.16.0.tgz#0dfc80309beec8411e65e706461c408b0bb9b431"

@@ -20,6 +20,7 @@ export const PRICE_PER_SPC = 0.05 // $0.05 per SPC, bogus for now
 // regexes
 export const USERNAME_REGEX = /^[\w\s.]{1,256}$/
 export const USERNAME_REGEX_QUERY = /[^\w\s.]/gi
+export const URL_REGEX = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
 
 // variables
 export const USERNAMES = shuffleArray(FIRST_NAMES)

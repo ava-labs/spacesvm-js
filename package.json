@@ -11,6 +11,7 @@
   },
   "sideEffects": false,
   "dependencies": {
+    "@ashwamegh/react-link-preview": "^0.2.2",
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
     "@metamask/onboarding": "1.0.1",
