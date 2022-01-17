@@ -144,7 +144,7 @@ export const MetaMaskSelect = () => {
 					</Tooltip>
 				</AnimatedGrid>
 			</Grid>
-			<TransferFundsDialog open={transferOpen} handleClose={() => setTransferOpen(false)} />
+			<TransferFundsDialog open={transferOpen} close={() => setTransferOpen(false)} />
 		</>
 	)
 }
