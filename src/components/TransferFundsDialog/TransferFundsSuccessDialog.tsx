@@ -2,13 +2,15 @@ import { Twemoji } from 'react-emoji-render'
 import { Box, Button, Dialog, DialogContent, DialogTitle, Grow, Typography } from '@mui/material'
 
 import { rainbowText } from '@/theming/rainbowText'
+import { numberWithCommas } from '@/utils/numberUtils'
 
 type TransferFundsSuccessDialogProps = {
 	open: boolean
 	onClose(): void
+	transferAmount: number
 }
 
-export const TransferFundsSuccessDialog = ({ open, onClose }: TransferFundsSuccessDialogProps) => (
+export const TransferFundsSuccessDialog = ({ open, onClose, transferAmount }: TransferFundsSuccessDialogProps) => (
 	<Dialog open={open} maxWidth="xs" onClose={onClose} TransitionComponent={Grow}>
 		<DialogTitle>
 			<Box sx={{ pt: 1, display: 'flex', justifyContent: 'center' }}>
@@ -19,7 +21,7 @@ export const TransferFundsSuccessDialog = ({ open, onClose }: TransferFundsSucce
 						...rainbowText,
 					}}
 				>
-					Funds sent!&nbsp;
+					{numberWithCommas(transferAmount)} SPC sent!&nbsp;
 					<Twemoji svg text=":tada:" />
 				</Typography>
 			</Box>

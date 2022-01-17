@@ -323,7 +323,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 					</Box>
 				</DialogContent>
 			</Dialog>
-			<TransferFundsSuccessDialog open={open && isDone} onClose={handleClose} />
+			<TransferFundsSuccessDialog open={open && isDone} onClose={handleClose} transferAmount={transferAmount} />
 			<NoFundsDialog open={open && !balance && !isDone} onClose={handleClose} />
 		</>
 	)
