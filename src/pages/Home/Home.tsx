@@ -22,6 +22,7 @@ import {
 } from '@mui/material'
 import { styled } from '@mui/system'
 
+//import Bg from '@/assets/activity.jpeg'
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { ClaimedDialog } from '@/components/ClaimedDialog'
 import { Page } from '@/components/Page'
@@ -416,6 +417,28 @@ export const Home = memo(() => {
 					</div>
 				</Grow>
 			</form>
+
+			{/* 
+			// recent activity
+			<Divider sx={{ my: 8 }} />
+			<Grid container spacing={2} sx={{ minHeight: '60vh', mt: 4 }}>
+				<Grid item xs={8}>
+					<Typography variant="h4" align="center" component="p" fontFamily="DM Serif Display">
+						Recent activity
+					</Typography>
+				</Grid>
+				<Grid
+					item
+					xs={4}
+					sx={{
+						borderRadius: 4,
+						backgroundImage: `url(${Bg})`,
+						backgroundSize: 'cover',
+						backgroundRepeat: 'no-repeat',
+						backgroundPosition: 'center',
+					}}
+				></Grid>
+				</Grid>*/}
 		</Page>
 	)
 })
