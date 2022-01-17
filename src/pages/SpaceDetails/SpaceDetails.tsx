@@ -331,58 +331,60 @@ export const SpaceDetails = memo(() => {
 												</CardContent>
 											</Box>
 
-											{isSpaceOwner && (
-												<Box className="actions" sx={{ position: 'absolute', right: 32, top: 32 }}>
-													<Grid container spacing={1} wrap="nowrap">
-														<Grid item>
-															<Tooltip placement="top" title="Copy direct link">
-																<div>
-																	<IconButton
-																		onClick={(e) => {
-																			e.preventDefault()
-																			e.stopPropagation()
-																			setClipboard({
-																				value: `${window.location.origin}/spaces/${spaceId}/${key}`,
-																				onSuccess: () => enqueueSnackbar('Copied!'),
-																				onFailure: () => enqueueSnackbar("Can't copy!", { variant: 'error' }),
-																			})
-																		}}
-																	>
-																		<IoLink />
-																	</IconButton>
-																</div>
-															</Tooltip>
-														</Grid>
-														<Grid item>
-															<Tooltip placement="top" title="Edit">
-																<div>
-																	<IconButton disabled>
-																		<IoConstructOutline />
-																	</IconButton>
-																</div>
-															</Tooltip>
-														</Grid>
-														<Grid item>
-															<Tooltip placement="top" title="Delete">
-																<div>
-																	<IconButton
-																		disabled={!isSpaceOwner}
-																		onClick={(e) => {
-																			e.preventDefault()
-																			e.stopPropagation()
-																			setFocusedKeyIndex(i)
-																			setDeleteDialogOpen(true)
-																		}}
-																		color="primary"
-																	>
-																		<IoTrashOutline />
-																	</IconButton>
-																</div>
-															</Tooltip>
-														</Grid>
+											<Box className="actions" sx={{ position: 'absolute', right: 32, top: 32 }}>
+												<Grid container spacing={1} wrap="nowrap">
+													<Grid item>
+														<Tooltip placement="top" title="Copy direct link">
+															<div>
+																<IconButton
+																	onClick={(e) => {
+																		e.preventDefault()
+																		e.stopPropagation()
+																		setClipboard({
+																			value: `${window.location.origin}/spaces/${spaceId}/${key}`,
+																			onSuccess: () => enqueueSnackbar('Copied!'),
+																			onFailure: () => enqueueSnackbar("Can't copy!", { variant: 'error' }),
+																		})
+																	}}
+																>
+																	<IoLink />
+																</IconButton>
+															</div>
+														</Tooltip>
 													</Grid>
-												</Box>
-											)}
+													{isSpaceOwner && (
+														<>
+															<Grid item>
+																<Tooltip placement="top" title="Edit">
+																	<div>
+																		<IconButton disabled>
+																			<IoConstructOutline />
+																		</IconButton>
+																	</div>
+																</Tooltip>
+															</Grid>
+															<Grid item>
+																<Tooltip placement="top" title="Delete">
+																	<div>
+																		<IconButton
+																			disabled={!isSpaceOwner}
+																			onClick={(e) => {
+																				e.preventDefault()
+																				e.stopPropagation()
+																				setFocusedKeyIndex(i)
+																				setDeleteDialogOpen(true)
+																			}}
+																			color="primary"
+																		>
+																			<IoTrashOutline />
+																		</IconButton>
+																	</div>
+																</Tooltip>
+															</Grid>
+														</>
+													)}
+												</Grid>
+											</Box>
 										</Card>
 									)
 								})
