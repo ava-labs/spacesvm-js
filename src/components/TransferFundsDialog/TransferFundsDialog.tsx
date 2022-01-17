@@ -156,7 +156,6 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 											spellCheck: 'false',
 											style: { paddingTop: 8 },
 										}}
-										autoComplete="new-password"
 									/>
 								</TableCell>
 							</TableRow>
@@ -186,6 +185,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 									textAlign: 'right',
 								},
 							}}
+							autoComplete="off"
 						/>
 
 						<Divider flexItem orientation="vertical" sx={{ mr: 2 }} />

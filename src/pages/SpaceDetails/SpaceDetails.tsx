@@ -1,5 +1,5 @@
 import { Twemoji } from 'react-emoji-render'
-import { IoOpenOutline } from 'react-icons/io5'
+import { GiCardboardBox } from 'react-icons/gi'
 import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
@@ -186,7 +186,7 @@ export const SpaceDetails = memo(() => {
 											{isSpaceOwner && (
 												<Box sx={{ display: 'flex', justifyContent: 'end', mt: 2 }}>
 													<Button
-														endIcon={<IoOpenOutline />}
+														startIcon={<GiCardboardBox />}
 														variant="outlined"
 														color="secondary"
 														size="small"
@@ -240,7 +240,7 @@ export const SpaceDetails = memo(() => {
 								sx={{ mb: 4 }}
 							>
 								{spaceValues?.length === 0 ? (
-									"There's nothing in your space right now."
+									`There's nothing in ${isSpaceOwner ? 'your' : 'this'} space right now.`
 								) : (
 									<>
 										<Typography variant="body2" color="textSecondary">
@@ -248,7 +248,7 @@ export const SpaceDetails = memo(() => {
 											<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
 												more
 											</Typography>{' '}
-											items in your space, the{' '}
+											items in {isSpaceOwner ? 'your' : 'a'} space, the{' '}
 											<Typography component="b" fontWeight={900} variant="body2" color="textPrimary">
 												faster
 											</Typography>{' '}
