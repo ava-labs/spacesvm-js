@@ -64,7 +64,6 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 	const [addressInputError, setAddressInputError] = useState<string | undefined>()
 	const [transferAmount, setTransferAmount] = useState(0)
 	const [isSigning, setIsSigning] = useState(false)
-	const [fee, setFee] = useState(0)
 	const [isDone, setIsDone] = useState(false)
 
 	//0x08380a9cd3a5034036b44c18ab40fce3ad1c13ba
@@ -114,26 +113,13 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 				<DialogTitle>
 					<Typography
 						gutterBottom
-						variant="h5"
+						variant="h3"
 						component="p"
 						fontFamily="DM Serif Display"
 						align="center"
 						sx={{ position: 'relative' }}
 					>
-						Share the love!
-					</Typography>
-					<Typography
-						gutterBottom
-						variant="h5"
-						component="p"
-						fontFamily="DM Serif Display"
-						align="center"
-						sx={{ position: 'relative' }}
-					>
-						Send SPC to a friend&nbsp;
-						<span style={{ fontSize: 36 }}>
-							<Twemoji svg text="🙂" />
-						</span>
+						Transfer
 					</Typography>
 				</DialogTitle>
 				<DialogContent>
@@ -328,7 +314,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 						</Tooltip>
 					</Box>
 					<Box sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>
-						<Typography variant="caption">Cost: {fee} SPC</Typography>
+						<Typography variant="caption">Fee: 10 SPC</Typography>
 					</Box>
 				</DialogContent>
 			</Dialog>
