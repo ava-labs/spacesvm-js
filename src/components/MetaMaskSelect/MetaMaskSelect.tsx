@@ -92,9 +92,17 @@ export const MetaMaskSelect = () => {
 									sx={{
 										mr: 2,
 									}}
+									style={{ fontSize: '1.1rem' }}
 								>
 									{numberWithCommas(displayBalance)}{' '}
-									<Typography variant="h6" component="span" lineHeight={1} color="textSecondary" sx={{ ml: 1 }}>
+									<Typography
+										variant="h6"
+										component="span"
+										lineHeight={1}
+										color="textSecondary"
+										sx={{ ml: 0.5 }}
+										style={{ fontSize: '1.1rem' }}
+									>
 										SPC
 									</Typography>
 								</Typography>
