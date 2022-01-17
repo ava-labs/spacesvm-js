@@ -2,16 +2,20 @@ import { Twemoji } from 'react-emoji-render'
 import { IoOpenOutline } from 'react-icons/io5'
 import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+// @ts-ignore
+import LinkPreview from '@ashwamegh/react-link-preview'
 import {
 	Avatar,
 	Box,
 	Button,
 	Card,
 	CardContent,
+	CircularProgress,
 	Grid,
 	Grow,
 	IconButton,
 	LinearProgress,
+	Link as MuiLink,
 	Table,
 	TableBody,
 	TableCell,
@@ -32,7 +36,7 @@ import { LifelineDialog } from '@/components/LifelineDialog'
 import { MoveSpaceDialog } from '@/components/MoveSpaceDialog'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
-import { USERNAME_REGEX_QUERY } from '@/constants'
+import { URL_REGEX, USERNAME_REGEX_QUERY } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { rainbowText } from '@/theming/rainbowText'
 import { SpaceKeyValue } from '@/types'
@@ -281,7 +285,28 @@ export const SpaceDetails = memo(() => {
 												<Typography variant="h4" gutterBottom>
 													{key}
 												</Typography>
-												<Typography variant="h4">{value}</Typography>
+												{URL_REGEX.test(value) ? (
+													<LinkPreview
+														url={value}
+														render={({ loading, preview }: any) => {
+															if (loading) {
+																return <CircularProgress />
+															}
+															return (
+																<MuiLink href={value} target="_blank" rel="noreferrer" title={preview.title}>
+																	<img
+																		width="100%"
+																		src={preview.img}
+																		alt={preview.description}
+																		style={{ borderRadius: 4 }}
+																	/>
+																</MuiLink>
+															)
+														}}
+													/>
+												) : (
+													value
+												)}
 											</CardContent>
 										</Box>
 										{isSpaceOwner && (
