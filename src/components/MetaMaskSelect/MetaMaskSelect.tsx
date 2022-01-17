@@ -22,12 +22,7 @@ export const MetaMaskSelect = () => {
 	const { enqueueSnackbar } = useSnackbar()
 	const theme = useTheme()
 	const { currentAddress, connectToMetaMask, balance, isConnectingToMM } = useMetaMask()
-	const [displayBalance, setDisplayBalance] = useState(balance || 0)
 	const [transferOpen, setTransferOpen] = useState(false)
-
-	useEffect(() => {
-		if (balance !== null) setDisplayBalance(balance)
-	}, [balance, setDisplayBalance])
 
 	const handleMetaMaskClick = () => {
 		if (!currentAddress) {
@@ -94,7 +89,7 @@ export const MetaMaskSelect = () => {
 									}}
 									style={{ fontSize: '1.1rem' }}
 								>
-									{numberWithCommas(displayBalance)}{' '}
+									{balance !== null ? numberWithCommas(balance) : 0}{' '}
 									<Typography
 										variant="h6"
 										component="span"
