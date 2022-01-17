@@ -118,7 +118,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 
 	return (
 		<>
-			<Dialog maxWidth="sm" open={open && balance && !isDone} onClose={handleClose}>
+			<Dialog maxWidth="sm" open={open && !!balance && !isDone} onClose={handleClose}>
 				<DialogTitle>
 					<Typography gutterBottom variant="h3" component="p" fontFamily="DM Serif Display" align="center">
 						Transfer SPC
