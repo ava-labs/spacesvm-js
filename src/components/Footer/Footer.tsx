@@ -22,7 +22,7 @@ export const Footer = memo(() => (
 				<Typography component="footer" variant="body2" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="center">
 					{`© ${new Date().getFullYear()} ${APP_NAME} — `}
 					<Link color="inherit" href="https://spacesvm.xyz/" rel="noopener noreferrer" target="_blank">
-						Powered by an Avalanche subnet
+						Powered by the SpacesVM Avalanche Subnet
 					</Link>
 				</Typography>
 			</Grid>
