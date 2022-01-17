@@ -261,7 +261,7 @@ export const SpaceDetails = memo(() => {
 
 							{spaceId && isSpaceOwner && (
 								<KeyValueInput
-									empty={spaceValues?.length === 0}
+									empty={spaceValues?.length === 0 || !spaceValues}
 									spaceId={spaceId}
 									refreshSpaceDetails={refreshSpaceDetails}
 								/>
