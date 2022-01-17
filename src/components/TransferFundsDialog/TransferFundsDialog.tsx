@@ -66,7 +66,6 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 	const [isSigning, setIsSigning] = useState(false)
 	const [isDone, setIsDone] = useState(false)
 
-	//0x08380a9cd3a5034036b44c18ab40fce3ad1c13ba
 	const onSubmit = async () => {
 		setIsSigning(true)
 		try {

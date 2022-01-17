@@ -1,4 +1,5 @@
 import { Twemoji } from 'react-emoji-render'
+import { BsBoxArrowUpRight } from 'react-icons/bs'
 import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
@@ -17,6 +18,7 @@ import {
 	TableRow,
 	Tooltip,
 	Typography,
+	useTheme,
 } from '@mui/material'
 import { formatDistanceToNow } from 'date-fns'
 
@@ -26,8 +28,10 @@ import { AddressChip } from '@/components/AddressChip/AddressChip'
 import { DeleteKeyValueDialog } from '@/components/DeleteKeyValueDialog'
 import { KeyValueInput } from '@/components/KeyValueInput'
 import { LifelineDialog } from '@/components/LifelineDialog'
+import { MoveSpaceDialog } from '@/components/MoveSpaceDialog'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
+import { TransferFundsSuccessDialog } from '@/components/TransferFundsDialog/TransferFundsSuccessDialog'
 import { USERNAME_REGEX_QUERY } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { rainbowText } from '@/theming/rainbowText'
@@ -38,15 +42,17 @@ export const SpaceDetails = memo(() => {
 	const navigate = useNavigate()
 	const { spaceId } = useParams()
 	const { currentAddress } = useMetaMask()
+	const theme = useTheme()
 
 	const [details, setDetails] = useState<any>()
 	const [showDetailsTable, setShowDetailsTable] = useState<boolean>(false)
 	const [spaceValues, setSpaceValues] = useState<any>()
+	const [focusedKeyIndex, setFocusedKeyIndex] = useState<number>()
 	const [loading, setLoading] = useState<boolean>(true)
 	const spaceIdTrimmed = spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')
 	const [lifelineDialogOpen, setLifelineDialogOpen] = useState<boolean>(false)
 	const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false)
-	const [focusedKeyIndex, setFocusedKeyIndex] = useState<number>()
+	const [moveDialogOpen, setMoveDialogOpen] = useState<boolean>(false)
 
 	const refreshSpaceDetails = useCallback(async () => {
 		const spaceData = await querySpace(spaceId || '')
@@ -142,24 +148,42 @@ export const SpaceDetails = memo(() => {
 									</Grid>
 
 									<Grow in={showDetailsTable} mountOnEnter unmountOnExit>
-										<Table sx={{ mt: 2 }}>
-											<TableBody>
-												<TableRow>
-													<TableCell>Owner</TableCell>
-													<TableCell>
-														<AddressChip sx={{ ml: -1 }} address={details.owner} />
-													</TableCell>
-												</TableRow>
-												<TableRow>
-													<TableCell sx={{ whiteSpace: 'nowrap' }}>Created on</TableCell>
-													<TableCell>{new Date(details.created * 1000).toLocaleString()}</TableCell>
-												</TableRow>
-												<TableRow>
-													<TableCell sx={{ whiteSpace: 'nowrap' }}>Last updated on</TableCell>
-													<TableCell>{new Date(details.lastUpdated * 1000).toLocaleString()}</TableCell>
-												</TableRow>
-											</TableBody>
-										</Table>
+										<div>
+											<Table sx={{ mt: 2 }}>
+												<TableBody>
+													<TableRow>
+														<TableCell>Owner</TableCell>
+														<TableCell>
+															<AddressChip sx={{ ml: -1 }} address={details.owner} />
+														</TableCell>
+													</TableRow>
+													<TableRow>
+														<TableCell sx={{ whiteSpace: 'nowrap' }}>Created on</TableCell>
+														<TableCell>{new Date(details.created * 1000).toLocaleString()}</TableCell>
+													</TableRow>
+													<TableRow>
+														<TableCell sx={{ whiteSpace: 'nowrap' }}>Last updated on</TableCell>
+														<TableCell>{new Date(details.lastUpdated * 1000).toLocaleString()}</TableCell>
+													</TableRow>
+												</TableBody>
+											</Table>
+											{isSpaceOwner && (
+												<Box sx={{ display: 'flex', justifyContent: 'end', mt: 2 }}>
+													<Button
+														endIcon={<BsBoxArrowUpRight />}
+														variant="outlined"
+														color="secondary"
+														sx={{
+															background: theme.customPalette.customBackground,
+															'&:hover': { background: theme.customPalette.customBackground },
+														}}
+														onClick={() => setMoveDialogOpen(true)}
+													>
+														Move Space
+													</Button>
+												</Box>
+											)}
+										</div>
 									</Grow>
 								</>
 							)}
@@ -279,6 +303,13 @@ export const SpaceDetails = memo(() => {
 					close={() => setDeleteDialogOpen(false)}
 					refreshSpaceDetails={refreshSpaceDetails}
 					spaceKey={spaceValues[focusedKeyIndex]?.key}
+				/>
+			)}
+			{isSpaceOwner && (
+				<MoveSpaceDialog
+					open={moveDialogOpen}
+					onClose={() => setMoveDialogOpen(false)}
+					refreshSpaceDetails={refreshSpaceDetails}
 				/>
 			)}
 		</Page>
