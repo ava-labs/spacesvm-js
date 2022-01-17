@@ -6,7 +6,7 @@ import { Button } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
 import { APP_NAME } from '@/constants'
-import { getAddressBalance, issueAndConfirmTransaction } from '@/utils/spacesVM'
+import { getAddressBalance, isConnectedToSpacesVM, issueAndConfirmTransaction } from '@/utils/spacesVM'
 
 declare global {
 	interface Window {
@@ -176,6 +176,15 @@ export const MetaMaskProvider = ({ children }: any) => {
 		}
 	}
 
+	const [isConnectedToSpaces, setIsConnectedToSpaces] = useState(true)
+	const checkSpacesConnection = async () => {
+		const isConnected = await isConnectedToSpacesVM()
+		setIsConnectedToSpaces(isConnected)
+	}
+	useEffect(() => {
+		checkSpacesConnection()
+	}, [])
+
 	return (
 		<MetaMaskContext.Provider
 			value={{
@@ -186,6 +195,8 @@ export const MetaMaskProvider = ({ children }: any) => {
 				isConnectingToMM,
 				signWithMetaMask,
 				issueTx,
+				checkSpacesConnection,
+				isConnectedToSpaces,
 			}}
 		>
 			{children}

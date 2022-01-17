@@ -1,20 +1,12 @@
-export const calculateClaimCost = (p: string): number => {
-	const ClaimTier1Size = 12
-	const ClaimTier2Size = 36
-	const ClaimTier1Multiplier = 25
-	const ClaimTier2Multiplier = 5
-	const ClaimTier3Multiplier = 1
-	const desirability = 256 - p.length
+export const TRANSFER_COST = 1
 
-	if (p.length > ClaimTier2Size) {
-		return desirability * ClaimTier3Multiplier
-	}
-
-	if (p.length > ClaimTier1Size) {
-		return desirability * ClaimTier2Multiplier
-	}
-
-	return desirability * ClaimTier1Multiplier
+const SPACE_DESIRABILITY_MULTIPLIER = 5
+const MIN_CLAIM_FEE = 100
+const MAX_IDENTIFIER_SIZE = 256
+export const getSpaceNameUnits = (spaceName: string): number => {
+	const desirability = (MAX_IDENTIFIER_SIZE - spaceName.length) * SPACE_DESIRABILITY_MULTIPLIER
+	return Math.max(desirability, MIN_CLAIM_FEE)
 }
 
-export const TRANSFER_COST = 1
+export const calculateClaimCost = (spaceName: string): number => 5 + getSpaceNameUnits(spaceName)
+// export const calculateLifelineCost = (spaceName: string): number => 5 + getSpaceNameUnits(spaceName) / 10

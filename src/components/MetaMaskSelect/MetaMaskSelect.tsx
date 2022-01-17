@@ -1,3 +1,4 @@
+import { AiOutlineRedo } from 'react-icons/ai'
 import { IoSwapVertical } from 'react-icons/io5'
 import { Button, ButtonGroup, Grid, keyframes, Tooltip, Typography, useTheme } from '@mui/material'
 import { useSnackbar } from 'notistack'
@@ -21,7 +22,15 @@ const growWidth = keyframes`
 export const MetaMaskSelect = () => {
 	const { enqueueSnackbar } = useSnackbar()
 	const theme = useTheme()
-	const { currentAddress, connectToMetaMask, balance, isConnectingToMM, metaMaskExists } = useMetaMask()
+	const {
+		currentAddress,
+		connectToMetaMask,
+		balance,
+		isConnectingToMM,
+		metaMaskExists,
+		isConnectedToSpaces,
+		checkSpacesConnection,
+	} = useMetaMask()
 	const [transferOpen, setTransferOpen] = useState(false)
 
 	const handleMetaMaskClick = () => {
@@ -66,7 +75,7 @@ export const MetaMaskSelect = () => {
 								{currentAddress ? obfuscateAddress(currentAddress) : 'Connect'}
 							</Button>
 						</Tooltip>
-						{metaMaskExists && (
+						{metaMaskExists && isConnectedToSpaces && (
 							<Tooltip title={'Transfer SPC'}>
 								<Button
 									variant="outlined"
@@ -102,6 +111,23 @@ export const MetaMaskSelect = () => {
 										</Typography>
 									</Typography>
 									<IoSwapVertical size="18" color={theme.palette.primary.dark} />
+								</Button>
+							</Tooltip>
+						)}
+						{!isConnectedToSpaces && (
+							<Tooltip title={'Retry connection to Spaces VM'}>
+								<Button
+									startIcon={<AiOutlineRedo />}
+									variant="outlined"
+									color="secondary"
+									onClick={checkSpacesConnection}
+									sx={{
+										color: theme.palette.primary.main,
+										background: theme.customPalette.customBackground,
+										'&:hover': { background: theme.customPalette.customBackground },
+									}}
+								>
+									Connection Failed
 								</Button>
 							</Tooltip>
 						)}
