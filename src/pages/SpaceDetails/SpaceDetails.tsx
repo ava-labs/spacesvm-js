@@ -47,12 +47,17 @@ export const SpaceDetails = memo(() => {
 	const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false)
 	const [focusedKeyIndex, setFocusedKeyIndex] = useState<number>()
 
-	const refreshSpaceDetails = async () => {
+	const refreshSpaceDetails = useCallback(async () => {
 		const spaceData = await querySpace(spaceId || '')
 		setDetails(spaceData?.info)
 		setSpaceValues(spaceData?.values)
 		setLoading(false)
-	}
+	}, [spaceId])
+
+	useEffect(() => {
+		// Give the api a second to update
+		setTimeout(refreshSpaceDetails, 1000)
+	}, [refreshSpaceDetails])
 
 	useEffect(() => {
 		!spaceId?.length && navigate('/')
