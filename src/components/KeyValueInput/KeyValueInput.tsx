@@ -68,7 +68,15 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails }: KeyValueInp
 			value: valueText,
 		})
 		const signature = await signWithMetaMask(typedData)
-		if (!signature) return
+		if (!signature) {
+			handleChange(i, {
+				target: {
+					name: 'loading',
+					value: false,
+				},
+			})
+			return
+		}
 		const success = await issueTx(typedData, signature)
 		if (!success) return
 		// Give the blockchain a chance to update... yes I know this is bad code but its easy for now <3
