@@ -1,6 +1,4 @@
-import { Twemoji } from 'react-emoji-render'
-import { GoArrowRight } from 'react-icons/go'
-import { Box, Button, Dialog, DialogContent, Grow, Typography } from '@mui/material'
+import { Box, Dialog, DialogContent, Grow, Typography } from '@mui/material'
 
 import { AddressChip } from '../AddressChip/AddressChip'
 import { DialogTitle } from '../DialogTitle'

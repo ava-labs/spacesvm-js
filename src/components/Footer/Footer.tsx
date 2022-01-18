@@ -1,7 +1,7 @@
 import { IoLogoGithub } from 'react-icons/io5'
 import { Box, Divider, Grid, Link, styled, Theme, Typography } from '@mui/material'
 
-import AvalancheLogo from '@/assets/AVAXLogoOfficial.svg'
+import AvalancheLogo from '@/assets/avax-logo-official.svg'
 import { APP_NAME } from '@/constants'
 
 const StyledImg = styled('img')(({ theme }: { theme: Theme }) => ({

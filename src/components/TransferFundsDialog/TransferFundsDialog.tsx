@@ -1,5 +1,4 @@
 import { Twemoji } from 'react-emoji-render'
-import { GoArrowRight } from 'react-icons/go'
 import { IoAdd, IoRemove } from 'react-icons/io5'
 import {
 	Box,
