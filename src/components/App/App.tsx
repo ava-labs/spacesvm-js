@@ -11,6 +11,7 @@ import { darkTheme, lightTheme } from '@/theming/theme'
 export const App = memo(() => {
 	const themeLocalStorage = useThemeLocalStorage()
 
+	console.log(darkTheme)
 	return (
 		<BrowserRouter>
 			<ThemeProvider theme={themeLocalStorage === 'light' ? lightTheme : darkTheme}>

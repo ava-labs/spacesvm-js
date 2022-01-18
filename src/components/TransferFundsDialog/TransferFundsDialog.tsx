@@ -212,7 +212,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 
 					<Grid
 						container
-						wrap="nowrap"
+						wrap={isMobile ? 'wrap' : 'nowrap'}
 						justifyContent={'center'}
 						alignItems="center"
 						sx={{ my: 2 }}
