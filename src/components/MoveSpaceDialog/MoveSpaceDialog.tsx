@@ -117,13 +117,15 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 										color="secondary"
 										variant="filled"
 										value={toAddress}
+										autoFocus
+										size="small"
 										name="keyText"
 										error={!!addressInputError}
 										onChange={(e) => setToAddress(e.target.value)}
 										placeholder="0x address"
 										fullWidth
 										InputProps={{
-											sx: { fontSize: 18, fontWeight: 600 },
+											sx: { fontSize: 18, fontWeight: 600, paddingBottom: '2px' },
 										}}
 										inputProps={{
 											spellCheck: 'false',

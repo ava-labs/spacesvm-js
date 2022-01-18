@@ -145,6 +145,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 										variant="filled"
 										value={toAddress}
 										name="keyText"
+										autoFocus
 										size="small"
 										error={!!addressInputError}
 										onChange={(e) => setToAddress(e.target.value)}
