@@ -5,7 +5,6 @@ import {
 	Button,
 	Dialog,
 	DialogContent,
-	DialogTitle,
 	Divider,
 	Fade,
 	Grid,
@@ -18,12 +17,14 @@ import {
 	TextField,
 	Tooltip,
 	Typography,
+	useMediaQuery,
 	useTheme,
 } from '@mui/material'
 import capitalize from 'lodash/capitalize'
 import { useSnackbar } from 'notistack'
 
 import { AddressChip } from '../AddressChip/AddressChip'
+import { DialogTitle } from '../DialogTitle'
 import { NoFundsDialog } from './NoFundsDialog'
 import { TransferFundsSuccessDialog } from './TransferFundsSuccessDialog'
 
@@ -66,6 +67,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 	const [isSigning, setIsSigning] = useState<boolean>(false)
 	const [isDone, setIsDone] = useState<boolean>(false)
 	const { enqueueSnackbar } = useSnackbar()
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
 	const onSubmit = async () => {
 		setIsSigning(true)
@@ -118,8 +120,8 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 
 	return (
 		<>
-			<Dialog maxWidth="sm" open={open && !!balance && !isDone} onClose={handleClose}>
-				<DialogTitle>
+			<Dialog fullScreen={isMobile} maxWidth="sm" open={open && !!balance && !isDone} onClose={handleClose}>
+				<DialogTitle onClose={handleClose}>
 					<Typography gutterBottom variant="h3" component="p" fontFamily="DM Serif Display" align="center">
 						Transfer SPC
 					</Typography>

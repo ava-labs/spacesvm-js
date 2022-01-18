@@ -6,7 +6,6 @@ import {
 	Button,
 	Dialog,
 	DialogContent,
-	DialogTitle,
 	Divider,
 	Fade,
 	Grid,
@@ -15,10 +14,12 @@ import {
 	TextField,
 	Tooltip,
 	Typography,
+	useMediaQuery,
 	useTheme,
 } from '@mui/material'
 import { debounce } from 'lodash'
 
+import { DialogTitle } from '../DialogTitle'
 import { LifelineDoneDialog } from './LifelineDoneDialog'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
@@ -70,10 +71,11 @@ export const LifelineDialog = ({
 	const { spaceId } = useParams()
 	const theme = useTheme()
 	const { issueTx, signWithMetaMask } = useMetaMask()
-	const [extendHours, setExtendHours] = useState(0)
-	const [fee, setFee] = useState(0)
-	const [isSigning, setIsSigning] = useState(false)
-	const [isDone, setIsDone] = useState(false)
+	const [extendHours, setExtendHours] = useState<number>(0)
+	const [fee, setFee] = useState<number>(0)
+	const [isSigning, setIsSigning] = useState<boolean>(false)
+	const [isDone, setIsDone] = useState<boolean>(false)
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
 	// Spaces with more keys and more storage cost more units to extend per hour
 	const unitsNeededToExtend = extendHours * spaceUnits
@@ -119,8 +121,8 @@ export const LifelineDialog = ({
 
 	return (
 		<>
-			<Dialog open={open && !isDone} onClose={handleClose} maxWidth="sm">
-				<DialogTitle>
+			<Dialog fullScreen={isMobile} open={open && !isDone} onClose={handleClose} maxWidth="sm">
+				<DialogTitle onClose={handleClose}>
 					<Typography variant="h4" component="p" fontFamily="DM Serif Display" align="center">
 						Extend some life to{' '}
 						<Typography

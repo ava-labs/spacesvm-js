@@ -48,7 +48,15 @@ export const Drawer = memo(() => {
 							Menu
 						</Typography>
 					</Grid>
-					<Grid item>
+					<Grid
+						item
+						sx={{
+							display: {
+								sm: 'flex',
+								md: 'none',
+							},
+						}}
+					>
 						<ThemeToggle />
 					</Grid>
 				</Grid>

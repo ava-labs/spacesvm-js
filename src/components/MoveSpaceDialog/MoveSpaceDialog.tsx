@@ -4,7 +4,6 @@ import {
 	Box,
 	Dialog,
 	DialogContent,
-	DialogTitle,
 	Fade,
 	Table,
 	TableBody,
@@ -12,11 +11,14 @@ import {
 	TableRow,
 	TextField,
 	Typography,
+	useMediaQuery,
+	useTheme,
 } from '@mui/material'
 import capitalize from 'lodash/capitalize'
 import { useSnackbar } from 'notistack'
 
 import { AddressChip } from '../AddressChip/AddressChip'
+import { DialogTitle } from '../DialogTitle'
 import { MoveSpaceSuccessDialog } from './MoveSpaceSuccessDialog'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
@@ -40,6 +42,8 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 	const { enqueueSnackbar } = useSnackbar()
 	const [isSigning, setIsSigning] = useState<boolean>(false)
 	const [isDone, setIsDone] = useState<boolean>(false)
+	const theme = useTheme()
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
 	const onSubmit = async () => {
 		setIsSigning(true)
@@ -88,8 +92,8 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 
 	return (
 		<>
-			<Dialog maxWidth="sm" open={open && !isDone} onClose={handleClose}>
-				<DialogTitle>
+			<Dialog fullScreen={isMobile} maxWidth="sm" open={open && !isDone} onClose={handleClose}>
+				<DialogTitle onClose={handleClose}>
 					<Typography gutterBottom variant="h3" component="p" fontFamily="DM Serif Display" align="center">
 						Move space
 					</Typography>

@@ -1,6 +1,8 @@
 import { Twemoji } from 'react-emoji-render'
 import { useParams } from 'react-router-dom'
-import { Button, Dialog, DialogContent, DialogTitle, Fade, styled, Typography, useTheme } from '@mui/material'
+import { Button, Dialog, DialogContent, Fade, styled, Typography, useTheme } from '@mui/material'
+
+import { DialogTitle } from '../DialogTitle'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
@@ -65,7 +67,7 @@ export const DeleteKeyValueDialog = ({ open, close, spaceKey, refreshSpaceDetail
 
 	return (
 		<Dialog open={open} onClose={handleClose} maxWidth="xs">
-			<DialogTitle>
+			<DialogTitle onClose={onClose}>
 				<Typography variant="h4" component="p" fontFamily="DM Serif Display" align="center">
 					Are you <strong>SURE</strong> you want to delete this item? <Twemoji svg text="🧨" />
 				</Typography>
