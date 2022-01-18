@@ -14,6 +14,7 @@ export const ActivityTable = memo(() => {
 			type?: string
 			sender?: string
 			space?: string
+			key?: string
 			units?: number
 		}[]
 	>()
@@ -68,7 +69,7 @@ export const ActivityTable = memo(() => {
 					</TableCell>
 					<TableCell>
 						<Typography fontFamily="DM Serif Display" variant="h6">
-							Cost{' '}
+							Amount{' '}
 							<Typography sx={{ ml: 1 }} variant="body2" component="span" color="textSecondary">
 								(SPC)
 							</Typography>
