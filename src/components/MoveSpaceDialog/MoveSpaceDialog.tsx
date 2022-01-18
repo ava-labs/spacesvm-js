@@ -109,7 +109,7 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 									From:
 								</TableCell>
 								<TableCell>
-									<AddressChip address={currentAddress} isObfuscated={false} tooltipPlacement="top" />
+									<AddressChip address={currentAddress} isObfuscated={isMobile} tooltipPlacement="top" />
 								</TableCell>
 							</TableRow>
 							<TableRow>
