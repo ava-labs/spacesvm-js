@@ -98,6 +98,7 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 				onClick={() => addFormFields()}
 				startIcon={<IoAdd />}
 				variant="outlined"
+				autoFocus
 				color="secondary"
 				sx={{ margin: 'auto', display: 'flex', mb: 4 }}
 			>
