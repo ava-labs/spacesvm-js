@@ -1,6 +1,6 @@
 import { Twemoji } from 'react-emoji-render'
 import { useParams } from 'react-router-dom'
-import { Button, Dialog, DialogContent, Fade, styled, Theme, Typography, useTheme } from '@mui/material'
+import { Button, Dialog, DialogContent, Fade, styled, Typography, useTheme } from '@mui/material'
 
 import { DialogTitle } from '../DialogTitle'
 
@@ -10,7 +10,7 @@ import { rainbowButton } from '@/theming/rainbowButton'
 import { TxType } from '@/types'
 import { getSuggestedFee } from '@/utils/spacesVM'
 
-export const DeleteButton: any = styled(Button)((theme: Theme) => ({
+export const DeleteButton: any = styled(Button)(({ theme }: any) => ({
 	...rainbowButton(theme),
 }))
 
