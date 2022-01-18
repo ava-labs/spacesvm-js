@@ -441,13 +441,11 @@ export const SpaceDetails = memo(() => {
 					spaceKey={spaceValues[focusedKeyIndex]?.key}
 				/>
 			)}
-			{isSpaceOwner && (
-				<MoveSpaceDialog
-					open={moveDialogOpen}
-					onClose={() => setMoveDialogOpen(false)}
-					refreshSpaceDetails={refreshSpaceDetails}
-				/>
-			)}
+			<MoveSpaceDialog
+				open={moveDialogOpen}
+				onClose={() => setMoveDialogOpen(false)}
+				refreshSpaceDetails={refreshSpaceDetails}
+			/>
 		</Page>
 	)
 })
