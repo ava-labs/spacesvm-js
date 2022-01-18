@@ -7,7 +7,7 @@ export interface DialogTitleProps {
 }
 
 export const DialogTitle = ({ children, onClose, ...other }: DialogTitleProps) => (
-	<MuiDialogTitle {...other}>
+	<MuiDialogTitle style={{ paddingRight: 32 }} {...other}>
 		{children}
 		{onClose ? (
 			<Tooltip title="Close" placement="top">
