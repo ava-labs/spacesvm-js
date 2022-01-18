@@ -38,37 +38,37 @@ export const ActivityTable = memo(() => {
 			<TableHead>
 				<TableRow>
 					<TableCell>
-						<Typography fontFamily="DM Serif Display" variant="h6">
+						<Typography fontFamily="DM Serif Display" variant="h6" noWrap>
 							Type
 						</Typography>
 					</TableCell>
 					<TableCell>
-						<Typography fontFamily="DM Serif Display" variant="h6">
+						<Typography fontFamily="DM Serif Display" variant="h6" noWrap>
 							Key
 						</Typography>
 					</TableCell>
 					<TableCell>
-						<Typography fontFamily="DM Serif Display" variant="h6">
+						<Typography fontFamily="DM Serif Display" variant="h6" noWrap>
 							Space
 						</Typography>
 					</TableCell>
 					<TableCell>
-						<Typography fontFamily="DM Serif Display" variant="h6">
+						<Typography fontFamily="DM Serif Display" variant="h6" noWrap>
 							Sender
 						</Typography>
 					</TableCell>
 					<TableCell>
-						<Typography fontFamily="DM Serif Display" variant="h6">
+						<Typography fontFamily="DM Serif Display" variant="h6" noWrap>
 							To
 						</Typography>
 					</TableCell>
 					<TableCell>
-						<Typography fontFamily="DM Serif Display" variant="h6">
+						<Typography fontFamily="DM Serif Display" variant="h6" noWrap>
 							Transaction ID
 						</Typography>
 					</TableCell>
 					<TableCell>
-						<Typography fontFamily="DM Serif Display" variant="h6">
+						<Typography fontFamily="DM Serif Display" variant="h6" noWrap>
 							Amount{' '}
 							<Typography sx={{ ml: 1 }} variant="body2" component="span" color="textSecondary">
 								(SPC)
@@ -76,7 +76,7 @@ export const ActivityTable = memo(() => {
 						</Typography>
 					</TableCell>
 					<TableCell>
-						<Typography fontFamily="DM Serif Display" variant="h6">
+						<Typography fontFamily="DM Serif Display" variant="h6" noWrap>
 							Time
 						</Typography>
 					</TableCell>
