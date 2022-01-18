@@ -15,12 +15,6 @@ import {
 	Grow,
 	IconButton,
 	InputAdornment,
-	Link as MuiLink,
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableRow,
 	TextField,
 	Tooltip,
 	Typography,
@@ -29,9 +23,9 @@ import {
 import { styled } from '@mui/system'
 import { useSnackbar } from 'notistack'
 
-import ActivityBg from '@/assets/activity2.jpg'
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
-import { AddressChip } from '@/components/AddressChip/AddressChip'
+import { ActivityTable } from '@/components/ActivityTable'
+import { ClaimBanner } from '@/components/ClaimBanner'
 import { ClaimedDialog } from '@/components/ClaimedDialog'
 import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
@@ -43,7 +37,7 @@ import { purpleButton } from '@/theming/purpleButton'
 import { rainbowButton } from '@/theming/rainbowButton'
 import { TxType } from '@/types'
 import { calculateClaimCost } from '@/utils/calculateCost'
-import { getLatestActivity, getSuggestedFee, isAlreadyClaimed } from '@/utils/spacesVM'
+import { getSuggestedFee, isAlreadyClaimed } from '@/utils/spacesVM'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
 	...purpleButton(theme),
@@ -56,16 +50,6 @@ export const ClaimButton = styled(Button)(({ theme }: any) => ({
 export const Home = memo(() => {
 	const [searchParams] = useSearchParams()
 	const { enqueueSnackbar } = useSnackbar()
-	const [recentActivity, setRecentActivity] = useState<
-		{
-			timestamp?: number
-			to?: string
-			txId?: string
-			type?: string
-			sender?: string
-			space?: string
-		}[]
-	>([])
 	const [claiming, setClaiming] = useState<boolean>(false)
 	const { issueTx, signWithMetaMask, balance } = useMetaMask()
 	const navigate = useNavigate()
@@ -99,15 +83,6 @@ export const Home = memo(() => {
 		}
 		setCostEstimate(calculateClaimCost(username))
 	}, [username])
-
-	useEffect(() => {
-		const fetchRecentActivity = async () => {
-			const activity = await getLatestActivity()
-			console.log(activity)
-			setRecentActivity(activity.activity)
-		}
-		fetchRecentActivity()
-	}, [])
 
 	const onClaim = async () => {
 		if (balance < calculateClaimCost(username)) {
@@ -424,116 +399,9 @@ export const Home = memo(() => {
 				Recent activity
 			</Typography>
 
-			<Table>
-				<TableHead>
-					<TableRow>
-						<TableCell>
-							<Typography fontFamily="DM Serif Display" variant="h6">
-								Type
-							</Typography>
-						</TableCell>
-						<TableCell>
-							<Typography fontFamily="DM Serif Display" variant="h6">
-								Space
-							</Typography>
-						</TableCell>
-						<TableCell>
-							<Typography fontFamily="DM Serif Display" variant="h6">
-								Sender
-							</Typography>
-						</TableCell>
-						<TableCell>
-							<Typography fontFamily="DM Serif Display" variant="h6">
-								To
-							</Typography>
-						</TableCell>
-						<TableCell>
-							<Typography fontFamily="DM Serif Display" variant="h6">
-								Transaction ID
-							</Typography>
-						</TableCell>
-						<TableCell>
-							<Typography fontFamily="DM Serif Display" variant="h6">
-								Time
-							</Typography>
-						</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{recentActivity?.map(
-						({ timestamp, to, txId, sender, space, type }, i) =>
-							i <= 10 && (
-								<TableRow key={`${txId}-${i}`}>
-									<TableCell>
-										<Typography noWrap variant="body2">
-											{type || '-'}
-										</Typography>
-									</TableCell>
-									<TableCell>
-										<Typography noWrap variant="body2">
-											{space ? (
-												<MuiLink component={Link} to={`/spaces/${space}/`}>
-													{space}
-												</MuiLink>
-											) : (
-												'-'
-											)}
-										</Typography>
-									</TableCell>
-									<TableCell>
-										{sender ? <AddressChip address={sender} isObfuscated tooltipPlacement="top" /> : '-'}
-									</TableCell>
-									<TableCell>{to ? <AddressChip address={to} isObfuscated tooltipPlacement="top" /> : '-'}</TableCell>
-									<TableCell>
-										{txId ? (
-											<AddressChip
-												copyText="Copy TxID"
-												copySuccessText="TxID copied!"
-												address={txId}
-												isObfuscated
-												tooltipPlacement="top"
-											/>
-										) : (
-											'-'
-										)}
-									</TableCell>
-									<TableCell>
-										<Typography noWrap variant="body2">
-											{new Date(Number(timestamp) * 1000).toLocaleString() || '-'}
-										</Typography>
-									</TableCell>
-								</TableRow>
-							),
-					)}
-				</TableBody>
-			</Table>
+			<ActivityTable />
 
-			<Box
-				sx={{
-					height: '30vh',
-					minHeight: 220,
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					mt: 8,
-					borderRadius: 4,
-					backgroundImage: `url(${ActivityBg})`,
-					backgroundSize: 'cover',
-					backgroundRepeat: 'no-repeat',
-					backgroundPosition: 'center',
-				}}
-			>
-				<ClaimButton
-					onClick={() => {
-						// @ts-ignore
-						document.querySelector('#layout').scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-					}}
-					variant="contained"
-					size="large"
-				>
-					Claim your space
-				</ClaimButton>
-			</Box>
+			<ClaimBanner />
 		</Page>
 	)
 })
