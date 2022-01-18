@@ -1,7 +1,5 @@
-import { Button, Card, Container, Fade, Grid, Slide, styled, TextareaAutosize, Typography } from '@mui/material'
-import { Box } from '@mui/system'
+import { Box, Button, Card, Container, Fade, Grid, Slide, styled, TextareaAutosize, Typography } from '@mui/material'
 
-import { SignButton } from './SignButton'
 import { SubmitButton } from './SubmitButton'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
@@ -9,8 +7,13 @@ import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
+import { rainbowButton } from '@/theming/rainbowButton'
 import { shuffleArray } from '@/utils/shuffleArray'
 import { fetchSpaces, getSuggestedFee } from '@/utils/spacesVM'
+
+export const SignButton: any = styled(Button)(({ theme }: any) => ({
+	...rainbowButton(theme),
+}))
 
 const JsonTextArea = styled(TextareaAutosize)`
 	width: 100%;
