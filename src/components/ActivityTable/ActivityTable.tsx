@@ -69,7 +69,7 @@ export const ActivityTable = memo(() => {
 			<TableBody>
 				{recentActivity?.map(
 					({ timestamp, to, txId, sender, space, type }, i) =>
-						i <= 10 && (
+						i <= 20 && (
 							<TableRow key={`${txId}-${i}`}>
 								<TableCell>
 									<Typography noWrap variant="body2" sx={{ display: 'flex', alignItems: 'center' }}>
