@@ -72,7 +72,6 @@ export const ActivityTable = memo(() => {
 						i <= 20 && (
 							<TableRow key={`${txId}-${i}`}>
 								<TableCell>
-									{console.log(type)}
 									<Typography noWrap variant="body2" sx={{ display: 'flex', alignItems: 'center' }}>
 										{type ? (
 											<>
