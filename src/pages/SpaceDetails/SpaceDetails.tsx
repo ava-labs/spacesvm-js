@@ -293,8 +293,6 @@ export const SpaceDetails = memo(() => {
 												refreshSpaceDetails={refreshSpaceDetails}
 												lastTouchTxId={valueMeta.txId}
 												onEdit={(spaceKey, spaceValue) => {
-													console.log(spaceKey)
-													console.log(spaceValue)
 													setKeyBeingEdited(spaceKey)
 													setValueBeingEdited(spaceValue)
 												}}
