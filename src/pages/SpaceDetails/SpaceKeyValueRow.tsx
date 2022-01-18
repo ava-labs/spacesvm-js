@@ -31,6 +31,7 @@ type SpaceKeyValueRowProps = {
 	spaceKey: string
 	lastTouchTxId: string
 	isSpaceOwner: boolean
+	onEdit: (key: string, key: string) => void
 	refreshSpaceDetails(): void
 }
 
@@ -39,6 +40,7 @@ export const SpaceKeyValueRow = ({
 	spaceKey,
 	lastTouchTxId,
 	isSpaceOwner,
+	onEdit,
 	refreshSpaceDetails,
 }: SpaceKeyValueRowProps) => {
 	const { enqueueSnackbar } = useSnackbar()
@@ -174,7 +176,13 @@ export const SpaceKeyValueRow = ({
 								<Grid item>
 									<Tooltip placement="top" title="Edit">
 										<div>
-											<IconButton>
+											<IconButton
+												onClick={(e) => {
+													e.preventDefault()
+													e.stopPropagation()
+													onEdit(spaceKey, valueForKey)
+												}}
+											>
 												<IoConstructOutline />
 											</IconButton>
 										</div>

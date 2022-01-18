@@ -610,6 +610,7 @@ export const FIRST_NAMES = [
 	'Colten',
 	'Colton',
 	'Columbus',
+	'Cohan',
 	'Concepcion',
 	'Conner',
 	'Connie',

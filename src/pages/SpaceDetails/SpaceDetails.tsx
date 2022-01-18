@@ -24,7 +24,7 @@ import { SpaceKeyValueRow } from './SpaceKeyValueRow'
 
 import NothingHere from '@/assets/nothing-here.jpg'
 import { AddressChip } from '@/components/AddressChip/AddressChip'
-import { KeyValueInput } from '@/components/KeyValueInput'
+import { KeyValueInput, KeyValueInputEdit } from '@/components/KeyValueInput'
 import { LifelineDialog } from '@/components/LifelineDialog'
 import { MoveSpaceDialog } from '@/components/MoveSpaceDialog'
 import { Page } from '@/components/Page'
@@ -40,6 +40,8 @@ export const SpaceDetails = memo(() => {
 	const { currentAddress } = useMetaMask()
 	const theme = useTheme()
 	const [details, setDetails] = useState<any>()
+	const [keyBeingEdited, setKeyBeingEdited] = useState<string>()
+	const [valueBeingEdited, setValueBeingEdited] = useState<string>()
 	const [showDetailsTable, setShowDetailsTable] = useState<boolean>(false)
 	const [spaceKeys, setSpaceKeys] = useState<any>()
 	const [loading, setLoading] = useState<boolean>(true)
@@ -266,6 +268,22 @@ export const SpaceDetails = memo(() => {
 								{spaceKeys ? (
 									spaceKeys.map(({ key, valueMeta }: any) => {
 										if (!spaceId) return
+
+										if (key === keyBeingEdited) {
+											return (
+												<KeyValueInputEdit
+													keyBeingEdited={keyBeingEdited || ''}
+													valueBeingEdited={valueBeingEdited || ''}
+													spaceId={spaceId}
+													onComplete={() => {
+														setKeyBeingEdited(undefined)
+														setValueBeingEdited(undefined)
+													}}
+													refreshSpaceDetails={refreshSpaceDetails}
+												/>
+											)
+										}
+
 										return (
 											<SpaceKeyValueRow
 												key={key}
@@ -274,6 +292,12 @@ export const SpaceDetails = memo(() => {
 												isSpaceOwner={isSpaceOwner}
 												refreshSpaceDetails={refreshSpaceDetails}
 												lastTouchTxId={valueMeta.txId}
+												onEdit={(spaceKey, spaceValue) => {
+													console.log(spaceKey)
+													console.log(spaceValue)
+													setKeyBeingEdited(spaceKey)
+													setValueBeingEdited(spaceValue)
+												}}
 											/>
 										)
 									})

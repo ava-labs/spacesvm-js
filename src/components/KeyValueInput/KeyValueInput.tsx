@@ -5,23 +5,12 @@ import { useSnackbar } from 'notistack'
 
 import { VALID_KEY_REGEX } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
+import { purpleButton } from '@/theming/purpleButton'
 import { TxType } from '@/types'
 import { getSuggestedFee } from '@/utils/spacesVM'
 
 const SetButton = styled(Button)(({ theme }) => ({
-	backgroundColor: '#523df1',
-	padding: theme.spacing(1),
-	height: 66,
-	fontWeight: 900,
-	fontSize: 24,
-	boxShadow: '0 0 40px rgb(82 61 241 / 60%)',
-	'&:hover': {
-		backgroundColor: '#7a68ff',
-		boxShadow: '0 0 40px rgb(82 61 241 / 80%)',
-	},
-	'&.Mui-disabled': {
-		backgroundColor: 'hsla(0,0%,100%,.1)',
-	},
+	...purpleButton(theme),
 }))
 
 type KeyValueInputProps = {
@@ -69,7 +58,7 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 			value: valueText,
 		})
 		const signature = await signWithMetaMask(typedData)
-		console.log(1)
+
 		if (!signature) {
 			handleChange(i, {
 				target: {
@@ -79,17 +68,13 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 			})
 			return
 		}
-		console.log(2)
 
 		const success = await issueTx(typedData, signature)
-		console.log(3)
 
 		if (!success) {
-			console.log(4)
 			enqueueSnackbar('Something went wrong...', { variant: 'error' })
 			return
 		}
-		console.log(5)
 
 		enqueueSnackbar('Item added successfully!', { variant: 'success' })
 		// Give the blockchain a chance to update... yes I know this is bad code but its easy for now <3

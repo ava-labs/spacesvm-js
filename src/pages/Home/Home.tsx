@@ -32,31 +32,18 @@ import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
 import { USERNAME_REGEX_QUERY, USERNAMES, VALID_KEY_REGEX } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
+import { purpleButton } from '@/theming/purpleButton'
 import { rainbowButton } from '@/theming/rainbowButton'
 import { TxType } from '@/types'
 import { calculateClaimCost } from '@/utils/calculateCost'
 import { getSuggestedFee, isAlreadyClaimed } from '@/utils/spacesVM'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
-	backgroundColor: '#523df1',
-	padding: theme.spacing(1, 10),
-	height: 80,
-	minWidth: 280,
-	fontWeight: 900,
-	fontSize: 24,
-	position: 'relative',
-	boxShadow: '0 0 40px rgb(82 61 241 / 60%)',
-	'&:hover': {
-		backgroundColor: '#7a68ff',
-		boxShadow: '0 0 40px rgb(82 61 241 / 80%)',
-	},
-	'&.Mui-disabled': {
-		backgroundColor: theme.palette.mode === 'dark' ? 'hsla(0,0%,100%,0.1)' : 'hsla(0,0%,0%,0.1)',
-	},
+	...purpleButton(theme),
 }))
 
 export const ClaimButton = styled(Button)(({ theme }: any) => ({
-	...rainbowButton,
+	...rainbowButton(theme),
 }))
 
 export const Home = memo(() => {

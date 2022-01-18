@@ -1,9 +1,9 @@
 import { Theme } from '@mui/material'
 
-export const rainbowButton: any = {
+export const rainbowButton: any = (theme: Theme) => ({
 	backgroundColor: '#e70256',
 	backgroundImage: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
-	padding: (theme: Theme) => theme.spacing(1, 10),
+	padding: theme.spacing(1, 10),
 	height: 80,
 	minWidth: 280,
 	fontWeight: 900,
@@ -37,4 +37,4 @@ export const rainbowButton: any = {
 			opacity: 1,
 		},
 	},
-}
+})

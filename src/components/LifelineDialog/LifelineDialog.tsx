@@ -21,27 +21,14 @@ import { LifelineDoneDialog } from './LifelineDoneDialog'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
+import { purpleButton } from '@/theming/purpleButton'
 import { rainbowText } from '@/theming/rainbowText'
 import { TxType } from '@/types'
 import { calculateLifelineCost, getDisplayLifelineTime, getExtendToTime } from '@/utils/calculateCost'
 import { getSuggestedFee } from '@/utils/spacesVM'
 
 const SubmitButton = styled(Button)(({ theme }: any) => ({
-	backgroundColor: '#523df1',
-	padding: theme.spacing(1, 10),
-	height: 60,
-	minWidth: 320,
-	fontWeight: 900,
-	fontSize: 24,
-	position: 'relative',
-	boxShadow: '0 0 40px rgb(82 61 241 / 60%)',
-	'&:hover': {
-		backgroundColor: '#7a68ff',
-		boxShadow: '0 0 40px rgb(82 61 241 / 80%)',
-	},
-	'&.Mui-disabled': {
-		backgroundColor: theme.palette.mode === 'dark' ? 'hsla(0,0%,100%,0.1)' : 'hsla(0,0%,0%,0.1)',
-	},
+	...purpleButton(theme),
 }))
 
 type LifelineDialogProps = {

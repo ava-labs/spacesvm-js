@@ -2,24 +2,11 @@ import { Twemoji } from 'react-emoji-render'
 import { Link } from 'react-router-dom'
 import { Box, Button, Dialog, DialogContent, DialogTitle, styled, Typography } from '@mui/material'
 
+import { purpleButton } from '@/theming/purpleButton'
 import { rainbowText } from '@/theming/rainbowText'
 
 const SeeItLiveButton = styled(Button)(({ theme }: any) => ({
-	backgroundColor: '#523df1',
-	padding: theme.spacing(1, 10),
-	height: 80,
-	minWidth: 320,
-	fontWeight: 900,
-	fontSize: 24,
-	position: 'relative',
-	boxShadow: '0 0 40px rgb(82 61 241 / 60%)',
-	'&:hover': {
-		backgroundColor: '#7a68ff',
-		boxShadow: '0 0 40px rgb(82 61 241 / 80%)',
-	},
-	'&.Mui-disabled': {
-		backgroundColor: theme.palette.mode === 'dark' ? 'hsla(0,0%,100%,0.1)' : 'hsla(0,0%,0%,0.1)',
-	},
+	...purpleButton(theme),
 }))
 
 export const ClaimedDialog = memo(({ spaceId, ...rest }: any) => (
