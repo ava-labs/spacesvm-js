@@ -3,7 +3,7 @@ import { PaletteOptions } from '@mui/material'
 export const darkPalette: PaletteOptions = {
 	mode: 'dark',
 	primary: {
-		main: '#e70256',
+		main: 'rgb(235, 52, 119)',
 	},
 	secondary: {
 		main: '#7362f4',
@@ -16,7 +16,7 @@ export const darkPalette: PaletteOptions = {
 export const lightPalette: PaletteOptions = {
 	mode: 'light',
 	primary: {
-		main: '#e70256',
+		main: 'rgb(235, 52, 119)',
 	},
 	secondary: {
 		main: '#523df1',

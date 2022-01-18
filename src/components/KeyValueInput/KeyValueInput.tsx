@@ -11,6 +11,9 @@ import { getSuggestedFee } from '@/utils/spacesVM'
 
 const SetButton = styled(Button)(({ theme }) => ({
 	...purpleButton(theme),
+	padding: 0,
+	minWidth: 0,
+	height: 66,
 }))
 
 type KeyValueInputProps = {

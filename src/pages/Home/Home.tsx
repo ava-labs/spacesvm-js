@@ -1,6 +1,6 @@
 import { Twemoji } from 'react-emoji-render'
 import { IoCheckmarkCircle, IoClose, IoSearch } from 'react-icons/io5'
-import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom'
+import { createSearchParams, Link, useNavigate, useSearchParams } from 'react-router-dom'
 import {
 	Alert,
 	Box,
@@ -15,6 +15,12 @@ import {
 	Grow,
 	IconButton,
 	InputAdornment,
+	Link as MuiLink,
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableRow,
 	TextField,
 	Tooltip,
 	Typography,
@@ -23,8 +29,9 @@ import {
 import { styled } from '@mui/system'
 import { useSnackbar } from 'notistack'
 
-//import Bg from '@/assets/activity.jpeg'
+import Bg from '@/assets/activity.jpeg'
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
+import { AddressChip } from '@/components/AddressChip/AddressChip'
 import { ClaimedDialog } from '@/components/ClaimedDialog'
 import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
@@ -36,7 +43,8 @@ import { purpleButton } from '@/theming/purpleButton'
 import { rainbowButton } from '@/theming/rainbowButton'
 import { TxType } from '@/types'
 import { calculateClaimCost } from '@/utils/calculateCost'
-import { getSuggestedFee, isAlreadyClaimed } from '@/utils/spacesVM'
+import { obfuscateAddress } from '@/utils/obfuscateAddress'
+import { getLatestActivity, getSuggestedFee, isAlreadyClaimed } from '@/utils/spacesVM'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
 	...purpleButton(theme),
@@ -49,6 +57,16 @@ export const ClaimButton = styled(Button)(({ theme }: any) => ({
 export const Home = memo(() => {
 	const [searchParams] = useSearchParams()
 	const { enqueueSnackbar } = useSnackbar()
+	const [recentActivity, setRecentActivity] = useState<
+		{
+			timestamp?: number
+			to?: string
+			txId?: string
+			type?: string
+			sender?: string
+			space?: string
+		}[]
+	>([])
 	const [claiming, setClaiming] = useState<boolean>(false)
 	const { issueTx, signWithMetaMask, balance } = useMetaMask()
 	const navigate = useNavigate()
@@ -82,6 +100,15 @@ export const Home = memo(() => {
 		}
 		setCostEstimate(calculateClaimCost(username))
 	}, [username])
+
+	useEffect(() => {
+		const fetchRecentActivity = async () => {
+			const activity = await getLatestActivity()
+			console.log(activity)
+			setRecentActivity(activity.activity)
+		}
+		fetchRecentActivity()
+	}, [])
 
 	const onClaim = async () => {
 		if (balance < calculateClaimCost(username)) {
@@ -392,27 +419,95 @@ export const Home = memo(() => {
 				</Grow>
 			</form>
 
-			{/* 
-			// recent activity
 			<Divider sx={{ my: 8 }} />
-			<Grid container spacing={2} sx={{ minHeight: '60vh', mt: 4 }}>
-				<Grid item xs={8}>
-					<Typography variant="h4" align="center" component="p" fontFamily="DM Serif Display">
-						Recent activity
-					</Typography>
-				</Grid>
-				<Grid
-					item
-					xs={4}
-					sx={{
-						borderRadius: 4,
-						backgroundImage: `url(${Bg})`,
-						backgroundSize: 'cover',
-						backgroundRepeat: 'no-repeat',
-						backgroundPosition: 'center',
-					}}
-				></Grid>
-				</Grid>*/}
+
+			<Typography variant="h4" gutterBottom align="center" component="p" fontFamily="DM Serif Display">
+				Recent activity
+			</Typography>
+
+			<Table>
+				<TableHead>
+					<TableRow>
+						<TableCell>
+							<Typography fontFamily="DM Serif Display" variant="h6">
+								Type
+							</Typography>
+						</TableCell>
+						<TableCell>
+							<Typography fontFamily="DM Serif Display" variant="h6">
+								Space
+							</Typography>
+						</TableCell>
+						<TableCell>
+							<Typography fontFamily="DM Serif Display" variant="h6">
+								Sender
+							</Typography>
+						</TableCell>
+						<TableCell>
+							<Typography fontFamily="DM Serif Display" variant="h6">
+								To
+							</Typography>
+						</TableCell>
+						<TableCell>
+							<Typography fontFamily="DM Serif Display" variant="h6">
+								Transaction ID
+							</Typography>
+						</TableCell>
+						<TableCell>
+							<Typography fontFamily="DM Serif Display" variant="h6">
+								Time
+							</Typography>
+						</TableCell>
+					</TableRow>
+				</TableHead>
+				<TableBody>
+					{recentActivity?.map(
+						({ timestamp, to, txId, sender, space, type }, i) =>
+							i <= 10 && (
+								<TableRow key={`${txId}-${i}`}>
+									<TableCell>
+										<Typography noWrap variant="body2">
+											{type || '-'}
+										</Typography>
+									</TableCell>
+									<TableCell>
+										<Typography noWrap variant="body2">
+											{space ? (
+												<MuiLink component={Link} to={`/spaces/${space}/`}>
+													{space}
+												</MuiLink>
+											) : (
+												'-'
+											)}
+										</Typography>
+									</TableCell>
+									<TableCell>
+										{sender ? <AddressChip address={sender} isObfuscated tooltipPlacement="top" /> : '-'}
+									</TableCell>
+									<TableCell>{to ? <AddressChip address={to} isObfuscated tooltipPlacement="top" /> : '-'}</TableCell>
+									<TableCell>
+										{txId ? (
+											<AddressChip
+												copyText="Copy TxID"
+												copySuccessText="TxID copied!"
+												address={txId}
+												isObfuscated
+												tooltipPlacement="top"
+											/>
+										) : (
+											'-'
+										)}
+									</TableCell>
+									<TableCell>
+										<Typography noWrap variant="body2">
+											{new Date(Number(timestamp) * 1000).toLocaleString() || '-'}
+										</Typography>
+									</TableCell>
+								</TableRow>
+							),
+					)}
+				</TableBody>
+			</Table>
 		</Page>
 	)
 })

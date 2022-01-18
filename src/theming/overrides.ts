@@ -97,7 +97,7 @@ export const darkOverrides: ThemeOptions['components'] = {
 	MuiChip: {
 		styleOverrides: {
 			root: {
-				color: '#7362f4',
+				color: '#aba0f8',
 				backgroundColor: 'rgba(115, 98, 244, 0.08)',
 			},
 		},

@@ -9,11 +9,15 @@ type AddressChipProps = {
 	tooltipPlacement?: TooltipProps['placement']
 	isMetaMaskAddress?: boolean
 	sx?: SxProps
+	copyText?: string
+	copySuccessText?: string
 	isObfuscated?: boolean
 }
 
 export const AddressChip = ({
 	address,
+	copyText = 'Copy address',
+	copySuccessText = 'Address copied!',
 	tooltipPlacement = 'bottom',
 	sx = {},
 	isObfuscated = true,
@@ -23,14 +27,14 @@ export const AddressChip = ({
 	const { enqueueSnackbar } = useSnackbar()
 
 	return (
-		<Tooltip title="Copy address" placement={tooltipPlacement}>
+		<Tooltip title={copyText} placement={tooltipPlacement}>
 			<Chip
 				sx={{ ...sx, cursor: 'pointer' }}
 				label={isObfuscated ? obfuscateAddress(address) : address}
 				onClick={() => {
 					setClipboard({
 						value: address,
-						onSuccess: () => enqueueSnackbar(isMetaMaskAddress ? 'MetaMask address copied!' : 'Address copied!'),
+						onSuccess: () => enqueueSnackbar(isMetaMaskAddress ? 'MetaMask address copied!' : copySuccessText),
 						onFailure: () => enqueueSnackbar("Can't copy!", { variant: 'error' }),
 					})
 				}}
