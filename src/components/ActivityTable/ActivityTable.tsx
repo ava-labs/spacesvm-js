@@ -72,6 +72,7 @@ export const ActivityTable = memo(() => {
 						i <= 20 && (
 							<TableRow key={`${txId}-${i}`}>
 								<TableCell>
+									{console.log(type)}
 									<Typography noWrap variant="body2" sx={{ display: 'flex', alignItems: 'center' }}>
 										{type ? (
 											<>
@@ -81,6 +82,24 @@ export const ActivityTable = memo(() => {
 															<Twemoji svg text="📜" />
 														</Box>
 														Claim
+													</>
+												)}
+
+												{type === 'lifeline' && (
+													<>
+														<Box display="inline-flex" mr={1} fontSize={24}>
+															<Twemoji svg text="⌛️" />
+														</Box>
+														Lifeline
+													</>
+												)}
+
+												{type === 'delete' && (
+													<>
+														<Box display="inline-flex" mr={1} fontSize={24}>
+															<Twemoji svg text="🚮" />
+														</Box>
+														Delete
 													</>
 												)}
 
