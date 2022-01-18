@@ -9,7 +9,7 @@ const StyledImg = styled('img')(({ theme }: { theme: Theme }) => ({
 }))
 
 export const Footer = memo(() => (
-	<Box mb={2}>
+	<Box pb={2}>
 		<Divider sx={{ my: 4 }} />
 		<Grid container spacing={1} flexDirection="column" alignItems="center">
 			<Grid item container alignItems="center" justifyContent="center">

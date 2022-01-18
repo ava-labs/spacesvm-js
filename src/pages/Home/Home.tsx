@@ -29,7 +29,7 @@ import {
 import { styled } from '@mui/system'
 import { useSnackbar } from 'notistack'
 
-import Bg from '@/assets/activity.jpeg'
+import ActivityBg from '@/assets/activity2.jpg'
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { AddressChip } from '@/components/AddressChip/AddressChip'
 import { ClaimedDialog } from '@/components/ClaimedDialog'
@@ -43,7 +43,6 @@ import { purpleButton } from '@/theming/purpleButton'
 import { rainbowButton } from '@/theming/rainbowButton'
 import { TxType } from '@/types'
 import { calculateClaimCost } from '@/utils/calculateCost'
-import { obfuscateAddress } from '@/utils/obfuscateAddress'
 import { getLatestActivity, getSuggestedFee, isAlreadyClaimed } from '@/utils/spacesVM'
 
 const VerifyButton = styled(Button)(({ theme }: any) => ({
@@ -508,6 +507,33 @@ export const Home = memo(() => {
 					)}
 				</TableBody>
 			</Table>
+
+			<Box
+				sx={{
+					height: '30vh',
+					minHeight: 220,
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					mt: 8,
+					borderRadius: 4,
+					backgroundImage: `url(${ActivityBg})`,
+					backgroundSize: 'cover',
+					backgroundRepeat: 'no-repeat',
+					backgroundPosition: 'center',
+				}}
+			>
+				<ClaimButton
+					onClick={() => {
+						// @ts-ignore
+						document.querySelector('#layout').scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+					}}
+					variant="contained"
+					size="large"
+				>
+					Claim your space
+				</ClaimButton>
+			</Box>
 		</Page>
 	)
 })
