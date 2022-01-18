@@ -124,6 +124,7 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 										variant="filled"
 										value={keyText}
 										name="keyText"
+										autoFocus
 										onChange={(e) => handleChange(i, e)}
 										placeholder="Key"
 										fullWidth
