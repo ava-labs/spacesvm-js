@@ -21,6 +21,7 @@ export const ActivityTable = memo(() => {
 	useEffect(() => {
 		const fetchRecentActivity = async () => {
 			const activity = await getLatestActivity()
+			console.log(activity)
 			setRecentActivity(activity.activity)
 		}
 
@@ -36,8 +37,13 @@ export const ActivityTable = memo(() => {
 			<TableHead>
 				<TableRow>
 					<TableCell>
-						<Typography fontFamily="DM Serif Display" variant="h6" component="p">
+						<Typography fontFamily="DM Serif Display" variant="h6">
 							Type
+						</Typography>
+					</TableCell>
+					<TableCell>
+						<Typography fontFamily="DM Serif Display" variant="h6">
+							Key
 						</Typography>
 					</TableCell>
 					<TableCell>
@@ -77,11 +83,11 @@ export const ActivityTable = memo(() => {
 			</TableHead>
 			<TableBody>
 				{recentActivity?.map(
-					({ timestamp, to, txId, sender, space, units, type }, i) =>
+					({ timestamp, to, txId, key, sender, space, units, type }, i) =>
 						i <= 20 && (
 							<TableRow key={`${txId}-${i}`}>
 								<TableCell>
-									<Typography noWrap variant="body2" sx={{ display: 'flex', alignItems: 'center' }}>
+									<Typography noWrap variant="body2" component="div" sx={{ display: 'flex', alignItems: 'center' }}>
 										{type ? (
 											<>
 												{type === 'claim' && (
@@ -147,6 +153,17 @@ export const ActivityTable = memo(() => {
 													</>
 												)}
 											</>
+										) : (
+											'-'
+										)}
+									</Typography>
+								</TableCell>
+								<TableCell>
+									<Typography noWrap variant="body2">
+										{key && space ? (
+											<MuiLink component={Link} to={`/s/${space}/${key}/`}>
+												{key}
+											</MuiLink>
 										) : (
 											'-'
 										)}
