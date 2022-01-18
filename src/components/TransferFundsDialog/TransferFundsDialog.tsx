@@ -56,10 +56,12 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 	const [isDone, setIsDone] = useState<boolean>(false)
 	const { enqueueSnackbar } = useSnackbar()
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+	const [finalTxAmount, setFinalTxAmount] = useState<number>(0)
 
 	// Transfer the funds!
 	const onSubmit = async () => {
 		setIsSigning(true)
+		setFinalTxAmount(transferAmount)
 		try {
 			const { typedData } = await getSuggestedFee({
 				type: TxType.Transfer,
@@ -325,7 +327,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 					</Box>
 				</DialogContent>
 			</Dialog>
-			<TransferFundsSuccessDialog open={open && isDone} onClose={handleClose} transferAmount={transferAmount} />
+			<TransferFundsSuccessDialog open={open && isDone} onClose={handleClose} transferAmount={finalTxAmount} />
 			<NoFundsDialog open={open && !balance && !isDone} onClose={handleClose} />
 		</>
 	)
