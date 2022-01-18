@@ -62,7 +62,6 @@ export const LifelineDialog = ({
 	const { spaceId } = useParams()
 	const theme = useTheme()
 	const { issueTx, signWithMetaMask, balance } = useMetaMask()
-	const [extendHours, setExtendHours] = useState<number>(0)
 	const [extendUnits, setExtendUnits] = useState<number>(0)
 	const [fee, setFee] = useState<number>(0)
 	const [isSigning, setIsSigning] = useState<boolean>(false)
@@ -131,7 +130,7 @@ export const LifelineDialog = ({
 							{spaceId}
 						</Typography>{' '}
 						before it expires!&nbsp;
-						<Twemoji svg text="⌛️" />
+						<Twemoji svg text=":hourglass:" />
 					</Typography>
 				</DialogTitle>
 				<DialogContent sx={{ overflowY: 'hidden', px: 0 }}>
