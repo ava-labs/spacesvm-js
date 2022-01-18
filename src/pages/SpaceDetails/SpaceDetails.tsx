@@ -19,7 +19,7 @@ import {
 import { formatDistanceToNow } from 'date-fns'
 
 import { ClaimButton } from '../Home/Home'
-import { SpaceKeyValueRow } from './SpaceKeyValue'
+import { SpaceKeyValueRow } from './SpaceKeyValueRow'
 
 import NothingHere from '@/assets/nothing-here.jpg'
 import { AddressChip } from '@/components/AddressChip/AddressChip'

@@ -46,6 +46,7 @@ export const SpaceKeyValueRow = ({
 	// const [valueMeta, setValueMeta] = useState()
 	// const [valueExists, setValueExists] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(true)
+	const [loadingImageError, setLoadingImageError] = useState<boolean>(false)
 
 	const getSpaceValue = useCallback(async () => {
 		setIsLoading(true)
@@ -62,6 +63,8 @@ export const SpaceKeyValueRow = ({
 	}, [lastTouchTxId, getSpaceValue])
 
 	const valueIsUrl = URL_REGEX.test(valueForKey)
+
+	console.log(`isImgLink(valueForKey)`, isImgLink(valueForKey))
 
 	return (
 		<Grow in={true}>
@@ -98,9 +101,15 @@ export const SpaceKeyValueRow = ({
 							{spaceKey}
 						</Typography>
 						{isLoading && <LinearProgress color="secondary" />}
-						{valueIsUrl ? (
+						{valueIsUrl && !loadingImageError ? (
 							isImgLink(valueForKey) ? (
-								<img width="100%" src={valueForKey} alt="" style={{ borderRadius: 4 }} />
+								<img
+									width="100%"
+									src={valueForKey}
+									alt=""
+									style={{ borderRadius: 4 }}
+									onError={() => setLoadingImageError(true)}
+								/>
 							) : (
 								<LinkPreview
 									url={valueForKey || ''}
@@ -120,6 +129,7 @@ export const SpaceKeyValueRow = ({
 													src={preview['og:image'] || ''}
 													alt={preview['og:description'] || ''}
 													style={{ borderRadius: 4 }}
+													onError={() => setLoadingImageError(true)}
 												/>
 												{(preview['og:description'] || preview.description) && (
 													<Typography color="textSecondary" variant="body2">

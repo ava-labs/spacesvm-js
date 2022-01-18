@@ -1,5 +1,5 @@
 import { Navigate, useParams } from 'react-router-dom'
-import { Box, Typography } from '@mui/material'
+import { Box, LinearProgress, Typography } from '@mui/material'
 
 import { Page } from '@/components/Page'
 import { URL_REGEX } from '@/constants'
@@ -11,28 +11,33 @@ export const KeyDetails = () => {
 	const [redirecting, setRedirecting] = useState<boolean>(false)
 	const [value, setValue] = useState<string | null>(null)
 	const [isInvalidPage, setIsInvalidPage] = useState<boolean>(false)
+	const [isLoading, setIsLoading] = useState<boolean>(false)
+
+	const getSpaceValue = useCallback(async () => {
+		if (!spaceId || !key) {
+			setIsInvalidPage(true)
+			return
+		}
+		setIsLoading(true)
+		const { value, exists } = await querySpaceKey(spaceId, key)
+		if (!exists || value === undefined) {
+			setIsInvalidPage(true)
+			return
+		}
+		// redirect if it's a url
+		const valueIsUrl = URL_REGEX.test(value)
+		if (valueIsUrl) {
+			setRedirecting(true)
+			window.location.replace(value)
+			return
+		}
+		setValue(value)
+		setIsLoading(false)
+	}, [spaceId, key])
 
 	useEffect(() => {
-		const getValue = async () => {
-			if (!spaceId || !key) return
-			const value = await querySpaceKey(spaceId, key)
-			if (value === undefined) {
-				setIsInvalidPage(true)
-				return
-			}
-
-			const valueIsUrl = URL_REGEX.test(value)
-
-			if (valueIsUrl) {
-				setRedirecting(true)
-				// redirect
-				window.location.replace(value)
-			}
-
-			setValue(value)
-		}
-		getValue()
-	}, [spaceId, key])
+		getSpaceValue()
+	}, [spaceId, key, getSpaceValue])
 
 	if (isInvalidPage) return <Navigate replace to="/404" />
 
@@ -66,6 +71,7 @@ export const KeyDetails = () => {
 
 	return (
 		<Page>
+			{isLoading && <LinearProgress color="secondary" />}
 			{value && (
 				<Typography
 					variant="h1"
