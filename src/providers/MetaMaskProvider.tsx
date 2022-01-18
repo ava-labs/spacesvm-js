@@ -3,6 +3,7 @@ import { BiRedo } from 'react-icons/bi'
 import { IoDownloadOutline } from 'react-icons/io5'
 import MetaMaskOnboarding from '@metamask/onboarding'
 import { Button } from '@mui/material'
+import { throttle } from 'lodash'
 import { useSnackbar } from 'notistack'
 
 import { APP_NAME } from '@/constants'
@@ -22,16 +23,19 @@ const onboarding = new MetaMaskOnboarding()
 
 const MetaMaskContext = createContext({} as any)
 
+const throttledCheckSpacesConnection = throttle(isConnectedToSpacesVM, 1000)
+
 export const MetaMaskProvider = ({ children }: any) => {
 	const [currentAddress, setCurrentAddress] = useState<string | undefined>()
 	const [isConnectingToMM, setIsConnectingToMM] = useState(false)
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 	const [metaMaskExists, setMetaMaskExists] = useState(ethereum !== undefined && ethereum?.isMetaMask)
+	const [isConnectedToSpaces, setIsConnectedToSpaces] = useState(true)
+	const [balance, setBalance] = useState<number | null>(null)
 
 	/**
 	 * Update balance when changing accounts and on mount
 	 */
-	const [balance, setBalance] = useState<number | null>(null)
 	const updateBalance = useCallback(async () => {
 		if (!currentAddress) {
 			setBalance(null)
@@ -41,8 +45,8 @@ export const MetaMaskProvider = ({ children }: any) => {
 		response?.balance !== undefined && setBalance(response.balance)
 	}, [currentAddress])
 	useEffect(() => {
-		updateBalance()
-	}, [updateBalance])
+		isConnectedToSpaces && updateBalance()
+	}, [updateBalance, isConnectedToSpaces])
 
 	/**
 	 * Set up ethereum account change listener
@@ -176,9 +180,9 @@ export const MetaMaskProvider = ({ children }: any) => {
 		}
 	}
 
-	const [isConnectedToSpaces, setIsConnectedToSpaces] = useState(true)
 	const checkSpacesConnection = async () => {
-		const isConnected = await isConnectedToSpacesVM()
+		const isConnected = await throttledCheckSpacesConnection()
+		if (isConnected === undefined) return // check was throttled
 		setIsConnectedToSpaces(isConnected)
 	}
 	useEffect(() => {
