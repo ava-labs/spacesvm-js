@@ -1,4 +1,5 @@
 import { Twemoji } from 'react-emoji-render'
+import { GoArrowRight } from 'react-icons/go'
 import { IoAdd, IoRemove } from 'react-icons/io5'
 import {
 	Box,
@@ -57,11 +58,13 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 	const { enqueueSnackbar } = useSnackbar()
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 	const [finalTxAmount, setFinalTxAmount] = useState<number>(0)
+	const [finalToAddress, setFinalToAddress] = useState<string>('')
 
 	// Transfer the funds!
 	const onSubmit = async () => {
 		setIsSigning(true)
 		setFinalTxAmount(transferAmount)
+		setFinalToAddress(toAddress)
 		try {
 			const { typedData } = await getSuggestedFee({
 				type: TxType.Transfer,
@@ -327,7 +330,12 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 					</Box>
 				</DialogContent>
 			</Dialog>
-			<TransferFundsSuccessDialog open={open && isDone} onClose={handleClose} transferAmount={finalTxAmount} />
+			<TransferFundsSuccessDialog
+				open={open && isDone}
+				onClose={handleClose}
+				transferAmount={finalTxAmount}
+				toAddress={finalToAddress}
+			/>
 			<NoFundsDialog open={open && !balance && !isDone} onClose={handleClose} />
 		</>
 	)

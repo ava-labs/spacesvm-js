@@ -1,6 +1,8 @@
 import { Twemoji } from 'react-emoji-render'
+import { GoArrowRight } from 'react-icons/go'
 import { Box, Button, Dialog, DialogContent, Grow, Typography } from '@mui/material'
 
+import { AddressChip } from '../AddressChip/AddressChip'
 import { DialogTitle } from '../DialogTitle'
 
 import { rainbowText } from '@/theming/rainbowText'
@@ -10,9 +12,15 @@ type TransferFundsSuccessDialogProps = {
 	open: boolean
 	onClose(): void
 	transferAmount: number
+	toAddress: string
 }
 
-export const TransferFundsSuccessDialog = ({ open, onClose, transferAmount }: TransferFundsSuccessDialogProps) => (
+export const TransferFundsSuccessDialog = ({
+	open,
+	onClose,
+	transferAmount,
+	toAddress,
+}: TransferFundsSuccessDialogProps) => (
 	<Dialog open={open} maxWidth="xs" onClose={onClose} TransitionComponent={Grow}>
 		<DialogTitle onClose={onClose}>
 			<Box sx={{ pt: 1, display: 'flex', justifyContent: 'center' }}>
@@ -24,15 +32,13 @@ export const TransferFundsSuccessDialog = ({ open, onClose, transferAmount }: Tr
 					}}
 				>
 					{numberWithCommas(transferAmount)} SPC sent!&nbsp;
-					<Twemoji svg text=":tada:" />
 				</Typography>
 			</Box>
 		</DialogTitle>
 		<DialogContent>
-			<Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-				<Button color="secondary" size="small" variant="outlined" onClick={onClose} sx={{ display: 'flex' }}>
-					Close
-				</Button>
+			<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+				<Typography variant="body1">&nbsp; To: &nbsp;</Typography>
+				<AddressChip address={toAddress} />
 			</Box>
 		</DialogContent>
 	</Dialog>
