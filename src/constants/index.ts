@@ -18,8 +18,7 @@ export const TEN_MINUTES_IN_MS = 600000
 export const PRICE_PER_SPC = 0.05 // $0.05 per SPC, bogus for now
 
 // regexes
-export const USERNAME_REGEX = /^[\w\S.]{1,256}$/
-
+export const VALID_KEY_REGEX = /^[a-z0-9.]{1,256}$/
 export const USERNAME_REGEX_QUERY = /[^\w\s.]/gi
 export const URL_REGEX = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
 export const IMAGE_REGEX = /^http[^?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gim

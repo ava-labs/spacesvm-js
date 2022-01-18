@@ -3,7 +3,7 @@ import { Button, CircularProgress, Grid, Grow, TextField } from '@mui/material'
 import { styled } from '@mui/system'
 import { useSnackbar } from 'notistack'
 
-import { USERNAME_REGEX } from '@/constants'
+import { VALID_KEY_REGEX } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { TxType } from '@/types'
 import { getSuggestedFee } from '@/utils/spacesVM'
@@ -39,10 +39,8 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 		const newFormValues = [...formValues]
 
 		if (e.target.name === 'keyText') {
-			if (e.target.value === '' || USERNAME_REGEX.test(e.target.value)) {
-				// @ts-ignore
-				newFormValues[i][e.target.name] = e.target.value.toLowerCase()
-			}
+			// @ts-ignore
+			newFormValues[i][e.target.name] = e.target.value.toLowerCase()
 		} else {
 			// @ts-ignore
 			newFormValues[i][e.target.name] = e.target.value
@@ -71,6 +69,7 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 			value: valueText,
 		})
 		const signature = await signWithMetaMask(typedData)
+		console.log(1)
 		if (!signature) {
 			handleChange(i, {
 				target: {
@@ -80,12 +79,17 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 			})
 			return
 		}
+		console.log(2)
+
 		const success = await issueTx(typedData, signature)
+		console.log(3)
 
 		if (!success) {
+			console.log(4)
 			enqueueSnackbar('Something went wrong...', { variant: 'error' })
 			return
 		}
+		console.log(5)
 
 		enqueueSnackbar('Item added successfully!', { variant: 'success' })
 		// Give the blockchain a chance to update... yes I know this is bad code but its easy for now <3
@@ -125,7 +129,11 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 										value={keyText}
 										name="keyText"
 										autoFocus
-										onChange={(e) => handleChange(i, e)}
+										onChange={(e) => {
+											if (e.target.value === '' || VALID_KEY_REGEX.test(e.target.value)) {
+												handleChange(i, e)
+											}
+										}}
 										placeholder="Key"
 										fullWidth
 										InputProps={{

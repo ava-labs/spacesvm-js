@@ -66,7 +66,7 @@ export const SpaceKeyValueRow = ({
 	const valueIsUrl = URL_REGEX.test(valueForKey)
 
 	return (
-		<Grow in={true}>
+		<Grow in>
 			<Card
 				key={spaceKey}
 				component={valueIsUrl ? MuiLink : 'div'}
@@ -158,7 +158,7 @@ export const SpaceKeyValueRow = ({
 											e.preventDefault()
 											e.stopPropagation()
 											setClipboard({
-												value: `${window.location.origin}/spaces/${spaceId}/${spaceKey}`,
+												value: `${window.location.origin}/spaces/${spaceId}/${spaceKey}/`,
 												onSuccess: () => enqueueSnackbar('Copied!'),
 												onFailure: () => enqueueSnackbar("Can't copy!", { variant: 'error' }),
 											})

@@ -23,7 +23,7 @@ export const AddressChip = ({
 	const { enqueueSnackbar } = useSnackbar()
 
 	return (
-		<Tooltip title="Copy Address" placement={tooltipPlacement}>
+		<Tooltip title="Copy address" placement={tooltipPlacement}>
 			<Chip
 				sx={{ ...sx, cursor: 'pointer' }}
 				label={isObfuscated ? obfuscateAddress(address) : address}

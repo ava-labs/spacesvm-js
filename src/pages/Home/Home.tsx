@@ -30,7 +30,7 @@ import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
-import { USERNAME_REGEX, USERNAME_REGEX_QUERY, USERNAMES } from '@/constants'
+import { USERNAME_REGEX_QUERY, USERNAMES, VALID_KEY_REGEX } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { TxType } from '@/types'
 import { calculateClaimCost } from '@/utils/calculateCost'
@@ -201,7 +201,7 @@ export const Home = memo(() => {
 									disabled={available && verified}
 									value={username}
 									onChange={(e) => {
-										if (e.target.value === '' || USERNAME_REGEX.test(e.target.value)) {
+										if (e.target.value === '' || VALID_KEY_REGEX.test(e.target.value)) {
 											setVerified(false)
 											setUsername(e.target.value.toLowerCase())
 										}
