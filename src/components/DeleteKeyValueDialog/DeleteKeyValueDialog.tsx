@@ -67,7 +67,7 @@ export const DeleteKeyValueDialog = ({ open, close, spaceKey, refreshSpaceDetail
 
 	return (
 		<Dialog open={open} onClose={handleClose} maxWidth="xs">
-			<DialogTitle onClose={onClose}>
+			<DialogTitle onClose={handleClose}>
 				<Typography variant="h4" component="p" fontFamily="DM Serif Display" align="center">
 					Are you <strong>SURE</strong> you want to delete this item? <Twemoji svg text="🧨" />
 				</Typography>
