@@ -154,7 +154,7 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 										}}
 									/>
 								</Grid>
-								<Grid item xs={2}>
+								<Grid item sm={2} xs={12}>
 									<SetButton
 										fullWidth
 										onClick={() => {
