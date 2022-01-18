@@ -147,6 +147,7 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 							disabled={!!addressInputError || !toAddress?.length || isSigning || isDone}
 							variant="contained"
 							type="submit"
+							size="large"
 							onClick={onSubmit}
 						>
 							{isSigning ? (

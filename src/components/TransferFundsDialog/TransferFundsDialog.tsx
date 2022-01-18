@@ -304,6 +304,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 									variant="contained"
 									type="submit"
 									onClick={onSubmit}
+									size="large"
 									endIcon={<Twemoji svg text="✈️" />}
 								>
 									{isSigning ? (
