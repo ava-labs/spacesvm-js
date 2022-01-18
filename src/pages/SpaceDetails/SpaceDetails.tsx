@@ -27,7 +27,7 @@ import { useSnackbar } from 'notistack'
 
 import { ClaimButton } from '../Home/Home'
 
-import NothingHere from '@/assets/nothing-here.png'
+import NothingHere from '@/assets/nothing-here.jpg'
 import { AddressChip } from '@/components/AddressChip/AddressChip'
 import { DeleteKeyValueDialog } from '@/components/DeleteKeyValueDialog'
 import { KeyValueInput } from '@/components/KeyValueInput'

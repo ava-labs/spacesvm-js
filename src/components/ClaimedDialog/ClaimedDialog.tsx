@@ -22,7 +22,7 @@ const SeeItLiveButton = styled(Button)(({ theme }: any) => ({
 	},
 }))
 
-export const ClaimedDialog = memo(({ spaceId, onClose, ...rest }: any) => (
+export const ClaimedDialog = memo(({ spaceId, ...rest }: any) => (
 	<Dialog maxWidth="xs" {...rest}>
 		<DialogTitle>
 			<Typography

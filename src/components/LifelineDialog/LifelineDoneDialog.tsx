@@ -1,5 +1,5 @@
 import { Twemoji } from 'react-emoji-render'
-import { Box, Button, Dialog, DialogContent, Grow, Typography } from '@mui/material'
+import { Dialog, Grow, Typography } from '@mui/material'
 
 import { DialogTitle } from '../DialogTitle'
 
@@ -13,25 +13,16 @@ type LifelineDoneDialogProps = {
 export const LifelineDoneDialog = ({ open, onClose }: LifelineDoneDialogProps) => (
 	<Dialog open={open} maxWidth="xs" onClose={onClose} TransitionComponent={Grow}>
 		<DialogTitle onClose={onClose}>
-			<Box sx={{ pt: 1, display: 'flex', justifyContent: 'center' }}>
-				<Typography
-					variant="h3"
-					align="center"
-					sx={{
-						...rainbowText,
-					}}
-				>
-					Lifeline extended!&nbsp;
-					<Twemoji svg text=":tada:" />
-				</Typography>
-			</Box>
+			<Typography
+				variant="h3"
+				align="center"
+				sx={{
+					...rainbowText,
+				}}
+			>
+				Lifeline extended!&nbsp;
+				<Twemoji svg text=":tada:" />
+			</Typography>
 		</DialogTitle>
-		<DialogContent>
-			<Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-				<Button color="secondary" size="small" variant="outlined" onClick={onClose} sx={{ display: 'flex' }}>
-					Close
-				</Button>
-			</Box>
-		</DialogContent>
 	</Dialog>
 )

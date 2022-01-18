@@ -9,6 +9,7 @@ import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { numberWithCommas } from '@/utils/numberUtils'
 import { obfuscateAddress } from '@/utils/obfuscateAddress'
+import { setClipboard } from '@/utils/setClipboard'
 
 const growWidth = keyframes`
 	0% {
@@ -38,21 +39,15 @@ export const MetaMaskSelect = () => {
 			connectToMetaMask()
 			return
 		}
-		setClipboard()
+		onCopy()
 	}
 
-	const setClipboard = async () => {
-		const type = 'text/plain'
-		const blob = new Blob([currentAddress], { type })
-		const data = [new ClipboardItem({ [type]: blob })]
-		navigator.clipboard.write(data).then(
-			() => {
-				enqueueSnackbar('MetaMask address copied!')
-			},
-			() => {
-				enqueueSnackbar("Can't copy!", { variant: 'error' })
-			},
-		)
+	const onCopy = async () => {
+		await setClipboard({
+			value: currentAddress,
+			onSuccess: () => enqueueSnackbar('MetaMask address copied!'),
+			onFailure: () => enqueueSnackbar("Can't copy!", { variant: 'error' }),
+		})
 	}
 
 	return (

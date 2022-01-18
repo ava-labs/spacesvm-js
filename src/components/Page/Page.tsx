@@ -4,7 +4,6 @@ import { useDocumentTitle } from '@react-hookz/web'
 
 import { Footer } from '../Footer'
 
-import Bg from '@/assets/bg.jpg'
 import { APP_NAME, APP_SLOGAN } from '@/constants'
 
 type PageProps = {
@@ -30,7 +29,7 @@ export const Page = memo(
 							height: '100%',
 							flexDirection: 'column',
 							...(showBgImage && {
-								backgroundImage: `url(${Bg})`,
+								//backgroundImage: `url(${Bg})`,
 								backgroundSize: 'cover',
 								backgroundPosition: '0px 64px',
 							}),
