@@ -43,7 +43,15 @@ export const AppBar = memo(() => (
 								<ThemeToggle />
 							</Grid>
 
-							<Grid item>
+							<Grid
+								item
+								sx={{
+									display: {
+										xs: 'none',
+										sm: 'flex',
+									},
+								}}
+							>
 								<MetaMaskSelect />
 							</Grid>
 

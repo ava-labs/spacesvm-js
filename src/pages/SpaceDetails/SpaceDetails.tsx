@@ -95,9 +95,10 @@ export const SpaceDetails = memo(() => {
 							sx={{
 								height: {
 									xs: 'unset',
-									md: 'calc(100vh - 128px)',
+									md: 'calc(100vh - 64px)',
 								},
 								p: 2,
+								pb: 4,
 								display: 'flex',
 								flexDirection: 'column',
 								justifyContent: 'center',

@@ -32,7 +32,10 @@ export const Drawer = memo(() => {
 						borderLeft: '2px solid hsla(0, 0%, 100%, 0.2)',
 						width: '40vw',
 						minWidth: 280,
-						p: 6,
+						p: {
+							xs: 3,
+							sm: 6,
+						},
 					},
 				}}
 				anchor={'right'}
@@ -49,6 +52,7 @@ export const Drawer = memo(() => {
 						<ThemeToggle />
 					</Grid>
 				</Grid>
+
 				<List sx={{ mt: 4, ml: -2 }}>
 					{[
 						{ label: 'Home', emoji: <Twemoji svg text="🏠" />, url: '/' },
