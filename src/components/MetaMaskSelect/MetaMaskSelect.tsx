@@ -91,7 +91,7 @@ export const MetaMaskSelect = () => {
 							<Tooltip title={'Transfer SPC'}>
 								{isMobile ? (
 									<IconButton onClick={() => setTransferOpen(true)}>
-										<IoSwapVertical color={theme.palette.primary.dark} />
+										<IoSwapVertical color={theme.palette.primary.light} />
 									</IconButton>
 								) : (
 									<Button
@@ -127,7 +127,7 @@ export const MetaMaskSelect = () => {
 												SPC
 											</Typography>
 										</Typography>
-										<IoSwapVertical size="18" color={theme.palette.primary.dark} />
+										<IoSwapVertical size="18" color={theme.palette.primary.light} />
 									</Button>
 								)}
 							</Tooltip>

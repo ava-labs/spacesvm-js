@@ -144,7 +144,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 									From:
 								</TableCell>
 								<TableCell>
-									<AddressChip isObfuscated={false} address={currentAddress} tooltipPlacement="top" />
+									<AddressChip isObfuscated={isMobile} address={currentAddress} tooltipPlacement="top" />
 								</TableCell>
 							</TableRow>
 							<TableRow>
