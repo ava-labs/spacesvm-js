@@ -110,7 +110,7 @@ export const SpaceKeyValueRow = ({
 									width="100%"
 									src={valueForKey}
 									alt=""
-									style={{ borderRadius: 4 }}
+									style={{ borderRadius: 4, objectFit: 'contain', maxHeight: 320 }}
 									onError={() => setLoadingImageError(true)}
 								/>
 							) : (
@@ -131,7 +131,7 @@ export const SpaceKeyValueRow = ({
 													width="100%"
 													src={preview['og:image'] || ''}
 													alt={preview['og:description'] || ''}
-													style={{ borderRadius: 4 }}
+													style={{ borderRadius: 4, objectFit: 'contain', maxHeight: 120 }}
 													onError={() => setLoadingImageError(true)}
 												/>
 												{(preview['og:description'] || preview.description) && (

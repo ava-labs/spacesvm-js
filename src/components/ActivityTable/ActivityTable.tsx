@@ -22,10 +22,12 @@ export const ActivityTable = memo(() => {
 			const activity = await getLatestActivity()
 			setRecentActivity(activity.activity)
 		}
+
 		fetchRecentActivity()
+
 		setInterval(() => {
 			fetchRecentActivity()
-		}, 10000)
+		}, 10000) // refresh every 10s
 	}, [])
 
 	return recentActivity ? (
