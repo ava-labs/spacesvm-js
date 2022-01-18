@@ -69,6 +69,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 	const { enqueueSnackbar } = useSnackbar()
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
+	// Transfer the funds!
 	const onSubmit = async () => {
 		setIsSigning(true)
 		try {
@@ -99,6 +100,14 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 		}
 	}
 
+	// When changing wallet addresses, make sure they can't transfer more than in the new account's balance
+	useEffect(() => {
+		if (balance === null || balance - TRANSFER_COST > transferAmount) return
+		setTransferAmount(balance - TRANSFER_COST)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [balance])
+
+	// Do some regex magic to check that it's a valid 0x wallet address
 	useEffect(() => {
 		const isValidToAddress = isValidWalletAddress(toAddress)
 		setAddressInputError(
@@ -106,6 +115,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 		)
 	}, [toAddress])
 
+	// Reset the modal state for the next time its opened before closing
 	const handleClose = () => {
 		setToAddress('')
 		setAddressInputError(undefined)
