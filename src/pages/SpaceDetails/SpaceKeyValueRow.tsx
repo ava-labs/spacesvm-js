@@ -8,6 +8,7 @@ import {
 	Grow,
 	IconButton,
 	LinearProgress,
+	Link,
 	Link as MuiLink,
 	Tooltip,
 	Typography,
@@ -64,8 +65,6 @@ export const SpaceKeyValueRow = ({
 
 	const valueIsUrl = URL_REGEX.test(valueForKey)
 
-	console.log(`isImgLink(valueForKey)`, isImgLink(valueForKey))
-
 	return (
 		<Grow in={true}>
 			<Card
@@ -101,8 +100,10 @@ export const SpaceKeyValueRow = ({
 							{spaceKey}
 						</Typography>
 						{isLoading && <LinearProgress color="secondary" />}
-						{valueIsUrl && !loadingImageError ? (
-							isImgLink(valueForKey) ? (
+						{valueIsUrl ? (
+							loadingImageError ? (
+								<Link>{valueForKey}</Link>
+							) : isImgLink(valueForKey) ? (
 								<img
 									width="100%"
 									src={valueForKey}

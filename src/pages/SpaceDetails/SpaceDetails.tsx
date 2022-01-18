@@ -50,7 +50,10 @@ export const SpaceDetails = memo(() => {
 		if (!spaceId) return
 		const spaceData = await querySpace(spaceId || '')
 		setDetails(spaceData?.info)
-		setSpaceValues(spaceData?.values)
+		const sortedValues = spaceData?.values.sort(
+			(first: any, second: any) => second.valueMeta.created - first.valueMeta.created,
+		)
+		setSpaceValues(sortedValues)
 		setLoading(false)
 	}, [spaceId])
 
