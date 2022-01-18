@@ -17,10 +17,19 @@ export const fetchSpaces = async (method: string, params = {}) => {
 			id: 1,
 		}),
 	})
+
+	// Recursively read file chunks until done
 	const reader = response.body?.getReader()
-	const encodedData = await reader?.read()
-	if (encodedData?.value === undefined) return
-	const data = JSON.parse(new TextDecoder().decode(encodedData?.value))
+	const decoder = new TextDecoder()
+	let decodedResult = ''
+	const processChunk = async ({ done, value }: any) => {
+		if (done) return
+		decodedResult += decoder.decode(value)
+		await reader?.read().then(processChunk)
+	}
+	await reader?.read().then(processChunk)
+
+	const data = JSON.parse(decodedResult)
 	if (data.error) throw data.error
 	return data?.result
 }

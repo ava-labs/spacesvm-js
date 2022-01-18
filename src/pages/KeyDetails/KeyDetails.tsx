@@ -41,7 +41,7 @@ export const KeyDetails = () => {
 
 	if (isInvalidPage) return <Navigate replace to="/404" />
 
-	if (redirecting)
+	if (redirecting) {
 		return (
 			<Box
 				sx={{
@@ -68,6 +68,7 @@ export const KeyDetails = () => {
 				)}
 			</Box>
 		)
+	}
 
 	return (
 		<Page>
