@@ -1,7 +1,7 @@
 import { Box, Button } from '@mui/material'
 import { styled } from '@mui/system'
 
-import ActivityBg from '@/assets/activity2.jpg'
+import ActivityBg from '@/assets/activity.jpg'
 import { rainbowButton } from '@/theming/rainbowButton'
 
 const ClaimButton = styled(Button)(({ theme }: any) => ({
