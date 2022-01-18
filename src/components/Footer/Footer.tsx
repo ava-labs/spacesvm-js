@@ -20,7 +20,7 @@ export const Footer = memo(() => (
 					target="_blank"
 					color="inherit"
 				>
-					<StyledImg src={AvalancheLogo} alt="avalanche-logo" width={28} />
+					<StyledImg src={AvalancheLogo} alt="Avalanche logo" width={28} height={28} />
 				</Link>
 				<Link
 					title="Github"

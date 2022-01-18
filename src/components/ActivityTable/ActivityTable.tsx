@@ -35,7 +35,7 @@ export const ActivityTable = memo(() => {
 			<TableHead>
 				<TableRow>
 					<TableCell>
-						<Typography fontFamily="DM Serif Display" variant="h6">
+						<Typography fontFamily="DM Serif Display" variant="h6" component="p">
 							Type
 						</Typography>
 					</TableCell>
