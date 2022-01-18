@@ -11,8 +11,6 @@ import {
 	ListItemText,
 	Tooltip,
 	Typography,
-	useMediaQuery,
-	useTheme,
 } from '@mui/material'
 
 import { ThemeToggle } from '../ThemeToggle'
@@ -22,14 +20,12 @@ import Logo from '@/assets/spaces-logo.png'
 import Terminal from '@/assets/terminal.png'
 
 export const Drawer = memo(() => {
-	const theme = useTheme()
 	const [open, setOpen] = useState<boolean>(false)
-	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
 	return (
 		<>
 			<Tooltip title="Menu">
-				<IconButton onClick={() => setOpen(true)} edge={isMobile ? undefined : 'end'}>
+				<IconButton onClick={() => setOpen(true)}>
 					<IoMenu />
 				</IconButton>
 			</Tooltip>
