@@ -10,7 +10,7 @@ import { rainbowButton } from '@/theming/rainbowButton'
 import { TxType } from '@/types'
 import { getSuggestedFee } from '@/utils/spacesVM'
 
-export const DeleteButton = styled(Button)((theme: Theme) => ({
+export const DeleteButton: any = styled(Button)((theme: Theme) => ({
 	...rainbowButton(theme),
 }))
 

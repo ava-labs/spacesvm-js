@@ -31,7 +31,7 @@ type SpaceKeyValueRowProps = {
 	spaceKey: string
 	lastTouchTxId: string
 	isSpaceOwner: boolean
-	onEdit: (key: string, key: string) => void
+	onEdit: (key: string, value: string) => void
 	refreshSpaceDetails(): void
 }
 
