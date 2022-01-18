@@ -21,6 +21,7 @@ import {
 	useTheme,
 } from '@mui/material'
 import { styled } from '@mui/system'
+import { useSnackbar } from 'notistack'
 
 //import Bg from '@/assets/activity.jpeg'
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
@@ -89,8 +90,9 @@ export const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 
 export const Home = memo(() => {
 	const [searchParams] = useSearchParams()
+	const { enqueueSnackbar } = useSnackbar()
 	const [claiming, setClaiming] = useState<boolean>(false)
-	const { issueTx, signWithMetaMask } = useMetaMask()
+	const { issueTx, signWithMetaMask, balance } = useMetaMask()
 	const navigate = useNavigate()
 	const [showClaimedDialog, setShowClaimedDialog] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
@@ -124,6 +126,13 @@ export const Home = memo(() => {
 	}, [username])
 
 	const onClaim = async () => {
+		if (balance < calculateClaimCost(username)) {
+			enqueueSnackbar("You don't have enough SPC to claim this space!  Tip: Longer names are cheaper. 😉", {
+				variant: 'error',
+			})
+			return
+		}
+
 		setWaitingForMetaMask(true)
 		const { typedData } = await getSuggestedFee({ type: TxType.Claim, space: username })
 		const signature = await signWithMetaMask(typedData)
