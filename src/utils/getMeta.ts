@@ -1,14 +1,16 @@
-// @ts-nocheck
-import cheerio from 'cheerio'
+export const getMeta = (input: string) => {
+	const meta: { [key: string]: string } = {}
 
-export const getMeta = (input) => {
-	const $ = cheerio.load(input)
-	const meta = {}
-	$('meta').each(function () {
-		const k = $(this).attr('name') || $(this).attr('property')
-		const v = $(this).attr('content')
+	const el = document.createElement('html')
+	el.innerHTML = input
+
+	Array.from(el.getElementsByTagName('meta')).forEach((item) => {
+		const k = item.getAttribute('name') || item.getAttribute('property')
+		const v = item.getAttribute('content')
 		if (k && v) meta[k] = v
 	})
 
-	return meta
+	return {
+		...meta,
+	}
 }
