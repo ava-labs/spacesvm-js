@@ -1,5 +1,5 @@
 import { Twemoji } from 'react-emoji-render'
-import { IoMenu } from 'react-icons/io5'
+import { IoLogoGithub, IoMenu } from 'react-icons/io5'
 import { NavLink } from 'react-router-dom'
 import {
 	Drawer as MuiDrawer,
@@ -14,6 +14,8 @@ import {
 } from '@mui/material'
 
 import { ThemeToggle } from '../ThemeToggle'
+
+import Logo from '@/assets/spaces-logo.png'
 
 export const Drawer = memo(() => {
 	const [open, setOpen] = useState<boolean>(false)
@@ -63,11 +65,30 @@ export const Drawer = memo(() => {
 
 				<List sx={{ mt: 4, ml: -2 }}>
 					{[
-						{ label: 'Home', emoji: <Twemoji svg text="🏠" />, url: '/' },
+						{ label: 'Home', emoji: <Twemoji svg text="🏠" className="emoji" />, url: '/' },
 						{
 							label: 'GitHub',
-							emoji: <Twemoji svg text="👨‍💻" />,
+							emoji: <IoLogoGithub />,
 							url: 'https://github.com/ava-labs/spacesvm-js',
+							isExternal: true,
+						},
+						{
+							label: 'Spaces CLI',
+							emoji: <img src={Logo} width={32} height={32} alt="Spaces logo" />,
+							url: 'https://spaces-cli.xyz/',
+							isExternal: true,
+						},
+						{
+							label: 'SubnetVM',
+							emoji: <Twemoji svg text="👨‍💻" className="emoji" />,
+							url: 'https://subnetvm.xyz/',
+							isExternal: true,
+						},
+
+						{
+							label: 'Subnet CLI',
+							emoji: <Twemoji svg text="👩‍💻" className="emoji" />,
+							url: 'https://subnet-cli.xyz/',
 							isExternal: true,
 						},
 					].map(({ label, emoji, url, isExternal }) => (
@@ -79,7 +100,7 @@ export const Drawer = memo(() => {
 							key={label}
 							href={isExternal && url}
 							target={isExternal && '_blank'}
-							sx={{ mb: 4, borderRadius: 4 }}
+							sx={{ mb: 2, borderRadius: 4 }}
 							onClick={() => setOpen(false)}
 						>
 							<ListItemIcon sx={{ fontSize: 32 }}>{emoji}</ListItemIcon>
