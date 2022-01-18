@@ -1,10 +1,10 @@
 import { IoLogoGithub } from 'react-icons/io5'
-import { Box, Divider, Grid, Link, styled, Typography } from '@mui/material'
+import { Box, Divider, Grid, Link, styled, Theme, Typography } from '@mui/material'
 
 import AvalancheLogo from '@/assets/AVAXLogoOfficial.svg'
 import { APP_NAME } from '@/constants'
 
-const StyledImg = styled('img')(({ theme }: any) => ({
+const StyledImg = styled('img')(({ theme }: { theme: Theme }) => ({
 	filter: theme.palette.mode === 'dark' ? 'invert(0)' : 'invert(1)',
 }))
 

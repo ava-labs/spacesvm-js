@@ -1,5 +1,7 @@
 import { Twemoji } from 'react-emoji-render'
-import { Box, Button, Dialog, DialogContent, DialogTitle, Grow, Typography } from '@mui/material'
+import { Box, Button, Dialog, DialogContent, Grow, Typography } from '@mui/material'
+
+import { DialogTitle } from '../DialogTitle'
 
 import { rainbowText } from '@/theming/rainbowText'
 
@@ -10,7 +12,7 @@ type MoveSpaceSuccessDialogProps = {
 
 export const MoveSpaceSuccessDialog = ({ open, onClose }: MoveSpaceSuccessDialogProps) => (
 	<Dialog open={open} maxWidth="xs" onClose={onClose} TransitionComponent={Grow}>
-		<DialogTitle>
+		<DialogTitle onClose={onClose}>
 			<Box sx={{ pt: 1, display: 'flex', justifyContent: 'center' }}>
 				<Typography
 					variant="h3"
