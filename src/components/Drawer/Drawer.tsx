@@ -34,6 +34,7 @@ export const Drawer = memo(() => {
 						borderLeft: '2px solid hsla(0, 0%, 100%, 0.2)',
 						width: '40vw',
 						minWidth: 280,
+						maxWidth: 540,
 						p: {
 							xs: 3,
 							sm: 6,

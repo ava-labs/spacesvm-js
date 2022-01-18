@@ -174,7 +174,7 @@ export const SpaceKeyValueRow = ({
 								<Grid item>
 									<Tooltip placement="top" title="Edit">
 										<div>
-											<IconButton disabled>
+											<IconButton>
 												<IoConstructOutline />
 											</IconButton>
 										</div>
