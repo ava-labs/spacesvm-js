@@ -20,9 +20,16 @@ export const Routes = () => (
 	<Suspense fallback={<></>}>
 		<Switch>
 			<Route path="/" element={<Home />} />
+
+			<Route path="/s/:spaceId/:key" element={<KeyDetails />} />
+			<Route path="/s/:spaceId" element={<SpaceDetails />} />
+			<Route path="/s/" element={<SpaceDetails />} />
+
+			{/* Keeping `/spaces/` for retrocompatibility, but we now prefer `/s` */}
 			<Route path="/spaces/:spaceId/:key" element={<KeyDetails />} />
 			<Route path="/spaces/:spaceId" element={<SpaceDetails />} />
 			<Route path="/spaces/" element={<SpaceDetails />} />
+
 			<Route path="/custom-transaction" element={<CustomSignature />} />
 			<Route path="/ping" element={<PingSpaces />} />
 			<Route path="/404" element={<Page404 />} />

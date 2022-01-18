@@ -128,7 +128,7 @@ export const ActivityTable = memo(() => {
 								<TableCell>
 									<Typography noWrap variant="body2">
 										{space ? (
-											<MuiLink component={Link} to={`/spaces/${space}/`}>
+											<MuiLink component={Link} to={`/s/${space}/`}>
 												{space}
 											</MuiLink>
 										) : (
