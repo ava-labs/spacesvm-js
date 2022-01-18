@@ -11,13 +11,12 @@ import {
 	Grid,
 	IconButton,
 	styled,
-	TextField,
 	Tooltip,
 	Typography,
 	useMediaQuery,
 	useTheme,
 } from '@mui/material'
-import { debounce } from 'lodash'
+import { addSeconds, formatDistance, formatDuration } from 'date-fns'
 
 import { DialogTitle } from '../DialogTitle'
 import { LifelineDoneDialog } from './LifelineDoneDialog'
@@ -26,6 +25,12 @@ import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { rainbowText } from '@/theming/rainbowText'
 import { TxType } from '@/types'
+import {
+	calculateLifelineCost,
+	getDisplayLifelineTime,
+	getLifelineExtendedSeconds,
+	HOURS_PER_LIFELINE_UNIT,
+} from '@/utils/calculateCost'
 import { getSuggestedFee } from '@/utils/spacesVM'
 
 const SubmitButton = styled(Button)(({ theme }: any) => ({
@@ -54,11 +59,6 @@ type LifelineDialogProps = {
 	refreshSpaceDetails(): void
 }
 
-const checkFee = debounce(async (space, units) => getSuggestedFee({ type: TxType.Lifeline, space, units }), 2000, {
-	leading: true,
-	trailing: true,
-})
-
 const MAX_HOURS_EXTEND = 99999
 
 export const LifelineDialog = ({
@@ -70,15 +70,16 @@ export const LifelineDialog = ({
 }: LifelineDialogProps) => {
 	const { spaceId } = useParams()
 	const theme = useTheme()
-	const { issueTx, signWithMetaMask } = useMetaMask()
+	const { issueTx, signWithMetaMask, balance } = useMetaMask()
 	const [extendHours, setExtendHours] = useState<number>(0)
+	const [extendUnits, setExtendUnits] = useState<number>(0)
 	const [fee, setFee] = useState<number>(0)
 	const [isSigning, setIsSigning] = useState<boolean>(false)
 	const [isDone, setIsDone] = useState<boolean>(false)
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
-	// Spaces with more keys and more storage cost more units to extend per hour
-	const unitsNeededToExtend = extendHours * spaceUnits
+	// spaceUnits is from the API.  More stuff stored = more spaceUnits
+	const unitsNeededToExtend = extendHours / HOURS_PER_LIFELINE_UNIT
 
 	const onSubmit = async () => {
 		setIsSigning(true)
@@ -106,18 +107,21 @@ export const LifelineDialog = ({
 	}, [extendHours, existingExpiry])
 
 	useEffect(() => {
-		const _checkFee = async () => {
-			const { totalCost } = await checkFee(spaceId, unitsNeededToExtend)
-			setFee(totalCost)
-		}
-		_checkFee()
-	}, [unitsNeededToExtend, spaceId, open])
+		if (!spaceId) return
+		const newFee = calculateLifelineCost(spaceId, extendUnits)
+		setFee(newFee)
+	}, [extendUnits, spaceId, open])
 
 	const handleClose = () => {
 		setIsDone(false)
 		setExtendHours(0)
 		close()
 	}
+
+	const displayExtendTime = useMemo(() => {
+		if (extendUnits === 0) return '0'
+		return getDisplayLifelineTime(extendUnits, spaceUnits)
+	}, [extendUnits, spaceUnits])
 
 	return (
 		<>
@@ -146,51 +150,11 @@ export const LifelineDialog = ({
 
 					<Tooltip sx={{ cursor: 'help' }} placement="top" title={`Extend to ${extendToDateDisplay}`}>
 						<Box display="flex" alignItems="center" justifyContent="center">
-							<TextField
-								color="secondary"
-								value={extendHours}
-								name="keyText"
-								onChange={(e) => {
-									const val = parseInt(e.target.value, 10)
-									setExtendHours(Math.min(!isNaN(val) ? val : 0, MAX_HOURS_EXTEND))
-								}}
-								placeholder="Address"
-								InputProps={{
-									sx: { ...theme.typography.h2, ...rainbowText },
-								}}
-								inputProps={{
-									spellCheck: 'false',
-									style: {
-										textAlign: 'right',
-									},
-								}}
-								sx={{
-									width: 300,
-								}}
-								autoComplete="off"
-							/>
-
-							<Divider flexItem orientation="vertical" sx={{ mr: 2 }} />
-
-							<Typography variant="h4" component="span" color="textSecondary" sx={{ width: 300 }}>
-								hours
-							</Typography>
+							<Typography variant="h2">{displayExtendTime}</Typography>
 						</Box>
 					</Tooltip>
 
 					<Grid container wrap="nowrap" justifyContent={'center'} alignItems="center" sx={{ my: 2 }} columnSpacing={3}>
-						<Grid item>
-							<Button
-								color="secondary"
-								size="small"
-								variant="outlined"
-								startIcon={<IoRemove />}
-								disabled={isDone || extendHours <= 0}
-								onClick={() => setExtendHours(Math.max(extendHours - 24, 0))}
-							>
-								24 hours
-							</Button>
-						</Grid>
 						<Grid item>
 							<IconButton
 								sx={{
@@ -204,8 +168,8 @@ export const LifelineDialog = ({
 								}}
 								color="inherit"
 								size="large"
-								disabled={isDone || extendHours <= 0}
-								onClick={() => setExtendHours(Math.max(extendHours - 1, 0))}
+								disabled={extendUnits <= 0}
+								onClick={() => setExtendUnits(extendUnits - 1)}
 							>
 								<IoRemove />
 							</IconButton>
@@ -223,29 +187,17 @@ export const LifelineDialog = ({
 								}}
 								size="large"
 								color="inherit"
-								disabled={isDone || extendHours >= MAX_HOURS_EXTEND}
-								onClick={() => setExtendHours(Math.min(extendHours + 1, MAX_HOURS_EXTEND))}
+								disabled={!spaceId || calculateLifelineCost(spaceId, extendUnits + 1) >= balance}
+								onClick={() => setExtendUnits(extendUnits + 1)}
 							>
 								<IoAdd />
 							</IconButton>
-						</Grid>
-						<Grid item>
-							<Button
-								variant="outlined"
-								size="small"
-								startIcon={<IoAdd />}
-								color="secondary"
-								disabled={isDone || extendHours >= MAX_HOURS_EXTEND}
-								onClick={() => setExtendHours(Math.min(extendHours + 24, MAX_HOURS_EXTEND))}
-							>
-								24 hours
-							</Button>
 						</Grid>
 					</Grid>
 					<Fade in={!isDone}>
 						<div>
 							<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-								<Tooltip placement="top" title={extendHours <= 0 ? 'Add hours to extend!' : ''}>
+								<Tooltip placement="top" title={extendHours <= 0 ? 'Add time to extend!' : ''}>
 									<Box sx={{ cursor: extendHours <= 0 ? 'help' : 'inherit' }}>
 										<SubmitButton disabled={extendHours <= 0} variant="contained" type="submit" onClick={onSubmit}>
 											{isSigning ? (
