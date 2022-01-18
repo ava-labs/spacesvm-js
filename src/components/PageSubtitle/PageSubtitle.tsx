@@ -7,7 +7,6 @@ export const PageSubtitle = memo(({ children, ...rest }: any) => (
 				xs: 1,
 				sm: 0,
 			},
-			mb: 4,
 		}}
 	>
 		<Typography color="textSecondary" variant="h6" component="h2" sx={{ fontFamily: 'DM Serif Display' }} {...rest}>

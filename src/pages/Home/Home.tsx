@@ -1,6 +1,6 @@
 import { Twemoji } from 'react-emoji-render'
 import { IoCheckmarkCircle, IoClose, IoSearch } from 'react-icons/io5'
-import { createSearchParams, Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom'
 import {
 	Alert,
 	Box,
@@ -31,6 +31,7 @@ import { Page } from '@/components/Page'
 import { PageSubtitle } from '@/components/PageSubtitle'
 import { PageTitle } from '@/components/PageTitle'
 import { TypewrittingInput } from '@/components/TypewrittingInput'
+import { WhatIsASpace } from '@/components/WhatIsASpace'
 import { USERNAME_REGEX_QUERY, USERNAMES, VALID_KEY_REGEX } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { purpleButton } from '@/theming/purpleButton'
@@ -162,7 +163,9 @@ export const Home = memo(() => {
 						space
 					</Typography>
 				</PageTitle>
-				<PageSubtitle align="center">Needs to be unique and lowercase.</PageSubtitle>
+				<PageSubtitle gutterBottom align="center">
+					Needs to be unique and lowercase.
+				</PageSubtitle>
 
 				<Grid container spacing={4} flexDirection="column" alignItems="center">
 					<Grid item>
@@ -257,23 +260,26 @@ export const Home = memo(() => {
 									)}
 								</ClaimButton>
 							) : (
-								<VerifyButton
-									type="submit"
-									onClick={() => (verified ? navigate(`/s/${username}/`) : onVerify())}
-									fullWidth
-									disabled={username.length === 0}
-									variant="contained"
-									endIcon={verified ? <Twemoji svg text="🔭👀" /> : <></>}
-									size="large"
-									sx={{
-										fontSize: {
-											xs: 18,
-											sm: 24,
-										},
-									}}
-								>
-									{verified ? 'View space' : 'Check availability'}
-								</VerifyButton>
+								<>
+									<VerifyButton
+										type="submit"
+										onClick={() => (verified ? navigate(`/s/${username}/`) : onVerify())}
+										fullWidth
+										disabled={username.length === 0}
+										variant="contained"
+										endIcon={verified ? <Twemoji svg text="🔭👀" /> : <></>}
+										size="large"
+										sx={{
+											fontSize: {
+												xs: 18,
+												sm: 24,
+											},
+										}}
+									>
+										{verified ? 'View space' : 'Check availability'}
+									</VerifyButton>
+									{!verified && <WhatIsASpace />}
+								</>
 							)}
 						</Grid>
 
@@ -394,7 +400,7 @@ export const Home = memo(() => {
 						) : (
 							<Typography
 								align="center"
-								sx={{ m: 'auto', mt: 4, mb: 0, maxWidth: 860, display: 'block' }}
+								sx={{ m: 'auto', mt: 3, mb: 0, maxWidth: 860, display: 'block' }}
 								gutterBottom
 								color="error"
 							>
