@@ -37,16 +37,18 @@ export const MetaMaskProvider = ({ children }: any) => {
 	 * Update balance when changing accounts and on mount
 	 */
 	const updateBalance = useCallback(async () => {
-		if (!currentAddress) {
+		if (!currentAddress || !isConnectedToSpaces) {
 			setBalance(null)
 			return
 		}
 		const response = await getAddressBalance(currentAddress)
 		response?.balance !== undefined && setBalance(response.balance)
-	}, [currentAddress])
+	}, [currentAddress, isConnectedToSpaces])
 	useEffect(() => {
-		isConnectedToSpaces && updateBalance()
-	}, [updateBalance, isConnectedToSpaces])
+		updateBalance()
+		const balanceUpdateInterval = setInterval(updateBalance, 10000) // Poll for latest balance every 10s
+		return () => clearInterval(balanceUpdateInterval)
+	}, [updateBalance])
 
 	/**
 	 * Set up ethereum account change listener
