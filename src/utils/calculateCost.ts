@@ -1,4 +1,4 @@
-import { addSeconds, formatDistance } from 'date-fns'
+import { addSeconds, format, formatDistance } from 'date-fns'
 
 export const TRANSFER_COST = 1
 
@@ -24,5 +24,10 @@ export const HOURS_PER_LIFELINE_UNIT = DEFAULT_FREE_CLAIM_DURATION * DEFAULT_FRE
 export const getLifelineExtendedSeconds = (extendUnits: number, spaceUnits: number) =>
 	extendUnits * (HOURS_PER_LIFELINE_UNIT / spaceUnits)
 
+// Pretty date that represents the amount of time that will be extended
 export const getDisplayLifelineTime = (extendUnits: number, spaceUnits: number) =>
 	formatDistance(new Date(), addSeconds(new Date(), getLifelineExtendedSeconds(extendUnits, spaceUnits)))
+
+// Pretty date that represents the exact date it will be extended to
+export const getExtendToTime = (extendUnits: number, spaceUnits: number, existingExpiry: number) =>
+	format(addSeconds(new Date(existingExpiry * 1000), getLifelineExtendedSeconds(extendUnits, spaceUnits)), 'MM/dd/yyyy')

@@ -6,7 +6,6 @@ import {
 	Button,
 	Dialog,
 	DialogContent,
-	Divider,
 	Fade,
 	Grid,
 	IconButton,
@@ -16,7 +15,6 @@ import {
 	useMediaQuery,
 	useTheme,
 } from '@mui/material'
-import { addSeconds, formatDistance, formatDuration } from 'date-fns'
 
 import { DialogTitle } from '../DialogTitle'
 import { LifelineDoneDialog } from './LifelineDoneDialog'
@@ -25,12 +23,7 @@ import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { rainbowText } from '@/theming/rainbowText'
 import { TxType } from '@/types'
-import {
-	calculateLifelineCost,
-	getDisplayLifelineTime,
-	getLifelineExtendedSeconds,
-	HOURS_PER_LIFELINE_UNIT,
-} from '@/utils/calculateCost'
+import { calculateLifelineCost, getDisplayLifelineTime, getExtendToTime } from '@/utils/calculateCost'
 import { getSuggestedFee } from '@/utils/spacesVM'
 
 const SubmitButton = styled(Button)(({ theme }: any) => ({
@@ -59,8 +52,6 @@ type LifelineDialogProps = {
 	refreshSpaceDetails(): void
 }
 
-const MAX_HOURS_EXTEND = 99999
-
 export const LifelineDialog = ({
 	open,
 	close,
@@ -79,14 +70,13 @@ export const LifelineDialog = ({
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
 	// spaceUnits is from the API.  More stuff stored = more spaceUnits
-	const unitsNeededToExtend = extendHours / HOURS_PER_LIFELINE_UNIT
 
 	const onSubmit = async () => {
 		setIsSigning(true)
 		const { typedData } = await getSuggestedFee({
 			type: TxType.Lifeline,
 			space: spaceId,
-			units: unitsNeededToExtend,
+			units: extendUnits,
 		})
 		const signature = await signWithMetaMask(typedData)
 		setIsSigning(false)
@@ -100,16 +90,10 @@ export const LifelineDialog = ({
 		refreshSpaceDetails()
 	}
 
-	const extendToDateDisplay = useMemo(() => {
-		const now = new Date(existingExpiry * 1000)
-		now.setHours(now.getHours() + extendHours)
-		return now.toLocaleString()
-	}, [extendHours, existingExpiry])
-
 	useEffect(() => {
 		if (!spaceId) return
 		const newFee = calculateLifelineCost(spaceId, extendUnits)
-		setFee(newFee)
+		setFee(Math.floor(newFee))
 	}, [extendUnits, spaceId, open])
 
 	const handleClose = () => {
@@ -118,10 +102,17 @@ export const LifelineDialog = ({
 		close()
 	}
 
-	const displayExtendTime = useMemo(() => {
+	// Amount of time that will be extended
+	const extendDurationDisplay = useMemo(() => {
 		if (extendUnits === 0) return '0'
 		return getDisplayLifelineTime(extendUnits, spaceUnits)
 	}, [extendUnits, spaceUnits])
+
+	// Explicit date that will be extended to
+	const extendToDateDisplay = useMemo(
+		() => getExtendToTime(extendUnits, spaceUnits, existingExpiry),
+		[extendUnits, spaceUnits, existingExpiry],
+	)
 
 	return (
 		<>
@@ -150,48 +141,59 @@ export const LifelineDialog = ({
 
 					<Tooltip sx={{ cursor: 'help' }} placement="top" title={`Extend to ${extendToDateDisplay}`}>
 						<Box display="flex" alignItems="center" justifyContent="center">
-							<Typography variant="h2">{displayExtendTime}</Typography>
+							<Typography variant="h2">{extendDurationDisplay}</Typography>
 						</Box>
 					</Tooltip>
 
 					<Grid container wrap="nowrap" justifyContent={'center'} alignItems="center" sx={{ my: 2 }} columnSpacing={3}>
 						<Grid item>
-							<IconButton
-								sx={{
-									border: `1px solid rgba(82, 61, 241, 0.5)`,
-									'&:hover': {
-										border: (theme) => `1px solid ${theme.palette.secondary.main}`,
-									},
-									'&.Mui-disabled': {
-										border: (theme) => `1px solid ${theme.palette.action.disabled}`,
-									},
-								}}
-								color="inherit"
-								size="large"
-								disabled={extendUnits <= 0}
-								onClick={() => setExtendUnits(extendUnits - 1)}
-							>
-								<IoRemove />
-							</IconButton>
+							<Tooltip placement="left" title={extendUnits <= 0 ? 'Add time!' : ''}>
+								<span style={{ paddingTop: 20, paddingBottom: 20 }}>
+									<IconButton
+										sx={{
+											border: `1px solid rgba(82, 61, 241, 0.5)`,
+											'&:hover': {
+												border: (theme) => `1px solid ${theme.palette.secondary.main}`,
+											},
+											'&.Mui-disabled': {
+												border: (theme) => `1px solid ${theme.palette.action.disabled}`,
+											},
+										}}
+										color="inherit"
+										size="large"
+										disabled={extendUnits <= 0}
+										onClick={() => setExtendUnits(extendUnits - 1)}
+									>
+										<IoRemove />
+									</IconButton>
+								</span>
+							</Tooltip>
 						</Grid>
 						<Grid item>
-							<IconButton
-								sx={{
-									border: `1px solid rgba(82, 61, 241, 0.5)`,
-									'&:hover': {
-										border: (theme) => `1px solid ${theme.palette.secondary.main}`,
-									},
-									'&.Mui-disabled': {
-										border: (theme) => `1px solid ${theme.palette.action.disabled}`,
-									},
-								}}
-								size="large"
-								color="inherit"
-								disabled={!spaceId || calculateLifelineCost(spaceId, extendUnits + 1) >= balance}
-								onClick={() => setExtendUnits(extendUnits + 1)}
+							<Tooltip
+								placement="right"
+								title={!spaceId || calculateLifelineCost(spaceId, extendUnits + 1) >= balance ? 'Not enough SPC!' : ''}
 							>
-								<IoAdd />
-							</IconButton>
+								<span style={{ paddingTop: 20, paddingBottom: 20 }}>
+									<IconButton
+										sx={{
+											border: `1px solid rgba(82, 61, 241, 0.5)`,
+											'&:hover': {
+												border: (theme) => `1px solid ${theme.palette.secondary.main}`,
+											},
+											'&.Mui-disabled': {
+												border: (theme) => `1px solid ${theme.palette.action.disabled}`,
+											},
+										}}
+										size="large"
+										color="inherit"
+										disabled={!spaceId || calculateLifelineCost(spaceId, extendUnits + 1) >= balance}
+										onClick={() => setExtendUnits(extendUnits + 1)}
+									>
+										<IoAdd />
+									</IconButton>
+								</span>
+							</Tooltip>
 						</Grid>
 					</Grid>
 					<Fade in={!isDone}>
@@ -199,7 +201,7 @@ export const LifelineDialog = ({
 							<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
 								<Tooltip placement="top" title={extendHours <= 0 ? 'Add time to extend!' : ''}>
 									<Box sx={{ cursor: extendHours <= 0 ? 'help' : 'inherit' }}>
-										<SubmitButton disabled={extendHours <= 0} variant="contained" type="submit" onClick={onSubmit}>
+										<SubmitButton disabled={extendUnits <= 0} variant="contained" type="submit" onClick={onSubmit}>
 											{isSigning ? (
 												<Fade in={isSigning}>
 													<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
