@@ -25,7 +25,7 @@ export const KeyDetails = () => {
 
 			if (valueIsUrl) {
 				setRedirecting(true)
-				// redirect
+				// redirect
 				window.location.replace(value)
 			}
 

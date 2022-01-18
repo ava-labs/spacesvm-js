@@ -2,7 +2,7 @@ import { b64_to_utf8, utf8_to_b64 } from './encoding'
 import { tryNTimes } from './tryNTimes'
 
 import { API_DOMAIN } from '@/constants'
-import { SpaceKeyValue, TransactionInfo } from '@/types'
+import { TransactionInfo } from '@/types'
 
 export const fetchSpaces = async (method: string, params = {}) => {
 	const response = await fetch(`${API_DOMAIN}`, {
@@ -43,6 +43,7 @@ export const querySpace = async (space: string) => {
 			space,
 		})
 	} catch (err) {
+		// eslint-disable-next-line no-console
 		console.log(`err`, err)
 		return
 	}
