@@ -39,7 +39,7 @@ const VerifyButton = styled(Button)(({ theme }: any) => ({
 	backgroundColor: '#523df1',
 	padding: theme.spacing(1, 10),
 	height: 80,
-	minWidth: 320,
+	minWidth: 280,
 	fontWeight: 900,
 	fontSize: 24,
 	position: 'relative',
@@ -58,7 +58,7 @@ export const ClaimButton = styled(Button)(({ theme, progress = 0 }: any) => ({
 	backgroundImage: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
 	padding: theme.spacing(1, 10),
 	height: 80,
-	minWidth: 320,
+	minWidth: 280,
 	fontWeight: 900,
 	fontSize: 24,
 	position: 'relative',
@@ -179,7 +179,7 @@ export const Home = memo(() => {
 			</Dialog>
 
 			<form onSubmit={handleSubmit} autoComplete="off">
-				<PageTitle align="center" lineHeight={1}>
+				<PageTitle align="center" lineHeight={1} mt={2}>
 					Claim your space
 				</PageTitle>
 				<PageSubtitle align="center">Needs to be unique and lowercase.</PageSubtitle>
@@ -284,6 +284,12 @@ export const Home = memo(() => {
 									disabled={username.length === 0}
 									variant="contained"
 									size="large"
+									sx={{
+										fontSize: {
+											xs: 18,
+											sm: 24,
+										},
+									}}
 								>
 									{verified ? 'View space' : 'Check availability'}
 								</VerifyButton>

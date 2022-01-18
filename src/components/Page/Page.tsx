@@ -24,7 +24,6 @@ export const Page = memo(
 					<Container
 						component="main"
 						maxWidth="xl"
-						disableGutters
 						sx={{
 							display: 'flex',
 							flex: 1,
