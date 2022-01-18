@@ -7,6 +7,7 @@ import {
 	Grid,
 	Grow,
 	IconButton,
+	LinearProgress,
 	Link as MuiLink,
 	Tooltip,
 	Typography,
@@ -44,15 +45,15 @@ export const SpaceKeyValueRow = ({
 	const [valueForKey, setValueForKey] = useState<any>()
 	// const [valueMeta, setValueMeta] = useState()
 	// const [valueExists, setValueExists] = useState<boolean>(false)
-	// const [loadingValue, setLoadingValue] = useState<boolean>(true)
+	const [isLoading, setIsLoading] = useState<boolean>(true)
 
 	const getSpaceValue = useCallback(async () => {
-		setLoadingValue(true)
-		const { value, exists, valueMeta } = await querySpaceKey(spaceId, spaceKey)
+		setIsLoading(true)
+		const { value } = await querySpaceKey(spaceId, spaceKey)
 		setValueForKey(value)
 		// setValueMeta(valueMeta)
 		// setValueExists(exists)
-		// setLoadingValue(false)
+		setIsLoading(false)
 	}, [spaceId, spaceKey])
 
 	// Load space value whenever the value changes, or when there was an update to that key
@@ -96,6 +97,7 @@ export const SpaceKeyValueRow = ({
 						<Typography variant="h4" gutterBottom>
 							{spaceKey}
 						</Typography>
+						{isLoading && <LinearProgress color="secondary" />}
 						{valueIsUrl ? (
 							isImgLink(valueForKey) ? (
 								<img width="100%" src={valueForKey} alt="" style={{ borderRadius: 4 }} />
