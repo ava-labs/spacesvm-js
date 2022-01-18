@@ -1,5 +1,5 @@
 import { Twemoji } from 'react-emoji-render'
-import { IoLogoGithub, IoMenu } from 'react-icons/io5'
+import { IoMenu } from 'react-icons/io5'
 import { NavLink } from 'react-router-dom'
 import {
 	Drawer as MuiDrawer,
@@ -17,7 +17,9 @@ import {
 
 import { ThemeToggle } from '../ThemeToggle'
 
+import Javascript from '@/assets/javascript.png'
 import Logo from '@/assets/spaces-logo.png'
+import Terminal from '@/assets/terminal.png'
 
 export const Drawer = memo(() => {
 	const theme = useTheme()
@@ -72,15 +74,15 @@ export const Drawer = memo(() => {
 					{[
 						{ label: 'Home', emoji: <Twemoji svg text="🏠" className="emoji" />, url: '/' },
 						{
-							label: 'GitHub',
-							emoji: <IoLogoGithub />,
-							url: 'https://github.com/ava-labs/spacesvm-js',
-							isExternal: true,
-						},
-						{
 							label: 'Spaces CLI',
 							emoji: <img src={Logo} width={32} height={32} alt="Spaces logo" />,
 							url: 'https://spaces-cli.xyz/',
+							isExternal: true,
+						},
+						{
+							label: 'Subnet CLI',
+							emoji: <img src={Terminal} width={32} height={32} alt="Terminal icon" />,
+							url: 'https://subnet-cli.xyz/',
 							isExternal: true,
 						},
 						{
@@ -89,11 +91,10 @@ export const Drawer = memo(() => {
 							url: 'https://subnetvm.xyz/',
 							isExternal: true,
 						},
-
 						{
-							label: 'Subnet CLI',
-							emoji: <Twemoji svg text="👩‍💻" className="emoji" />,
-							url: 'https://subnet-cli.xyz/',
+							label: 'SubnetVM JS',
+							emoji: <img src={Javascript} width={32} height={32} alt="Javascript logo" style={{ borderRadius: 4 }} />,
+							url: 'https://github.com/ava-labs/spacesvm-js',
 							isExternal: true,
 						},
 					].map(({ label, emoji, url, isExternal }) => (
