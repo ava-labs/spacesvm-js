@@ -5,7 +5,7 @@ export const rainbowText: any = {
 	backgroundClip: 'text',
 	wordBreak: 'break-word',
 	textFillColor: 'transparent',
-	backgroundColor: (theme: Theme) => (theme.palette.mode === 'dark' ? '#fff' : '#ccc'),
+	backgroundColor: (theme: Theme) => (theme.palette.mode === 'dark' ? '#fff' : '#aaa'),
 	animation: 'hue 5s infinite alternate',
 	caretColor: '#523df1',
 	backgroundImage:

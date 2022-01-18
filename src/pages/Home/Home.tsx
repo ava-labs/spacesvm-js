@@ -35,6 +35,7 @@ import { USERNAME_REGEX_QUERY, USERNAMES, VALID_KEY_REGEX } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { purpleButton } from '@/theming/purpleButton'
 import { rainbowButton } from '@/theming/rainbowButton'
+import { rainbowText } from '@/theming/rainbowText'
 import { TxType } from '@/types'
 import { calculateClaimCost } from '@/utils/calculateCost'
 import { getSuggestedFee, isAlreadyClaimed } from '@/utils/spacesVM'
@@ -148,7 +149,18 @@ export const Home = memo(() => {
 
 			<form onSubmit={handleSubmit} autoComplete="off">
 				<PageTitle align="center" lineHeight={1} mt={2}>
-					Claim your space
+					Claim your{' '}
+					<Typography
+						variant="h3"
+						lineHeight="inherit"
+						component="span"
+						sx={{
+							fontFamily: 'DM Serif Display',
+							...rainbowText,
+						}}
+					>
+						space
+					</Typography>
 				</PageTitle>
 				<PageSubtitle align="center">Needs to be unique and lowercase.</PageSubtitle>
 

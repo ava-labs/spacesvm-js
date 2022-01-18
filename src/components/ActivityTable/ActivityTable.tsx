@@ -14,6 +14,7 @@ export const ActivityTable = memo(() => {
 			type?: string
 			sender?: string
 			space?: string
+			units?: number
 		}[]
 	>()
 
@@ -61,6 +62,14 @@ export const ActivityTable = memo(() => {
 					</TableCell>
 					<TableCell>
 						<Typography fontFamily="DM Serif Display" variant="h6">
+							Cost{' '}
+							<Typography sx={{ ml: 1 }} variant="body2" component="span" color="textSecondary">
+								(SPC)
+							</Typography>
+						</Typography>
+					</TableCell>
+					<TableCell>
+						<Typography fontFamily="DM Serif Display" variant="h6">
 							Time
 						</Typography>
 					</TableCell>
@@ -68,7 +77,7 @@ export const ActivityTable = memo(() => {
 			</TableHead>
 			<TableBody>
 				{recentActivity?.map(
-					({ timestamp, to, txId, sender, space, type }, i) =>
+					({ timestamp, to, txId, sender, space, units, type }, i) =>
 						i <= 20 && (
 							<TableRow key={`${txId}-${i}`}>
 								<TableCell>
@@ -170,6 +179,11 @@ export const ActivityTable = memo(() => {
 									) : (
 										'-'
 									)}
+								</TableCell>
+								<TableCell>
+									<Typography noWrap variant="body2">
+										{units ? new Intl.NumberFormat('en-US').format(units) : '-'}
+									</Typography>
 								</TableCell>
 								<TableCell>
 									<Typography noWrap variant="body2">
