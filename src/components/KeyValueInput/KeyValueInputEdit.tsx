@@ -1,4 +1,5 @@
-import { Button, CircularProgress, Grid, TextField } from '@mui/material'
+import { IoCloseCircleOutline } from 'react-icons/io5'
+import { Button, CircularProgress, Grid, IconButton, TextField, Tooltip, useTheme } from '@mui/material'
 import { styled } from '@mui/system'
 import { useSnackbar } from 'notistack'
 
@@ -26,6 +27,7 @@ type KeyValueInputProps = {
 export const KeyValueInputEdit = memo(
 	({ spaceId, refreshSpaceDetails, keyBeingEdited, valueBeingEdited, onComplete }: KeyValueInputProps) => {
 		const { signWithMetaMask, issueTx } = useMetaMask()
+		const theme = useTheme()
 		const [formValues, setFormValues] = useState<{ keyText?: string; valueText?: string; loading?: boolean }[]>([
 			{
 				keyText: keyBeingEdited,
@@ -98,7 +100,19 @@ export const KeyValueInputEdit = memo(
 		return (
 			<>
 				{formValues.map(({ keyText, valueText, loading }, i) => (
-					<Grid key={i} sx={{ my: 4 }} container spacing={2} flexDirection="row" alignItems="center">
+					<Grid
+						key={i}
+						sx={{ my: 4, position: 'relative' }}
+						container
+						spacing={2}
+						flexDirection="row"
+						alignItems="center"
+					>
+						<Tooltip title="Cancel" placement="top">
+							<IconButton onClick={onComplete} sx={{ position: 'absolute', left: -32, top: 32 }}>
+								<IoCloseCircleOutline color={theme.palette.secondary.main} />
+							</IconButton>
+						</Tooltip>
 						<Grid item xs={12} sm={4}>
 							<TextField
 								color="secondary"
