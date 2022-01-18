@@ -39,22 +39,21 @@ export const isConnectedToSpacesVM = async (): Promise<boolean> => {
 
 export const querySpace = async (space: string) => {
 	try {
-		const response = await fetchSpaces('info', {
+		return await fetchSpaces('info', {
 			space,
 		})
-		return {
-			...response,
-			values: response.values.map(({ key, value }: SpaceKeyValue) => ({ key, value: b64_to_utf8(value) })),
-		}
 	} catch (err) {
+		console.log(`err`, err)
 		return
 	}
 }
 
-export const querySpaceKey = async (prefix: string, key: string) => {
-	const response = await fetchSpaces('resolve', { path: `${prefix}/${key}` })
-	if (!response?.exists) return
-	return b64_to_utf8(response?.value)
+export const querySpaceKey = async (space: string, key: string) => {
+	const keyData = await fetchSpaces('resolve', { path: `${space}/${key}` })
+	return {
+		...keyData,
+		value: b64_to_utf8(keyData?.value),
+	}
 }
 
 export const getLatestBlockID = async () => {

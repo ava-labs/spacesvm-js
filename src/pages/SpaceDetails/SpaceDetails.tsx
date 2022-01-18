@@ -1,19 +1,13 @@
 import { Twemoji } from 'react-emoji-render'
 import { GiCardboardBox } from 'react-icons/gi'
-import { IoLink } from 'react-icons/io5'
-import { IoConstructOutline, IoInformationCircleOutline, IoTrashOutline } from 'react-icons/io5'
+import { IoInformationCircleOutline } from 'react-icons/io5'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
 	Box,
 	Button,
-	Card,
-	CardContent,
-	CircularProgress,
 	Grid,
 	Grow,
-	IconButton,
 	LinearProgress,
-	Link as MuiLink,
 	Table,
 	TableBody,
 	TableCell,
@@ -23,30 +17,21 @@ import {
 	useTheme,
 } from '@mui/material'
 import { formatDistanceToNow } from 'date-fns'
-import { useSnackbar } from 'notistack'
 
 import { ClaimButton } from '../Home/Home'
+import { SpaceKeyValueRow } from './SpaceKeyValue'
 
 import NothingHere from '@/assets/nothing-here.jpg'
 import { AddressChip } from '@/components/AddressChip/AddressChip'
-import { DeleteKeyValueDialog } from '@/components/DeleteKeyValueDialog'
 import { KeyValueInput } from '@/components/KeyValueInput'
 import { LifelineDialog } from '@/components/LifelineDialog'
-import { LinkPreview } from '@/components/LinkPreview'
 import { MoveSpaceDialog } from '@/components/MoveSpaceDialog'
 import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
-import { IMAGE_REGEX, URL_REGEX, USERNAME_REGEX_QUERY } from '@/constants'
+import { USERNAME_REGEX_QUERY } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { rainbowText } from '@/theming/rainbowText'
-import { SpaceKeyValue } from '@/types'
-import { setClipboard } from '@/utils/setClipboard'
 import { querySpace } from '@/utils/spacesVM'
-
-const isImgLink = (url: string): boolean => {
-	if (typeof url !== 'string') return false
-	return url.match(IMAGE_REGEX) != null
-}
 
 export const SpaceDetails = memo(() => {
 	const navigate = useNavigate()
@@ -56,15 +41,13 @@ export const SpaceDetails = memo(() => {
 	const [details, setDetails] = useState<any>()
 	const [showDetailsTable, setShowDetailsTable] = useState<boolean>(false)
 	const [spaceValues, setSpaceValues] = useState<any>()
-	const [focusedKeyIndex, setFocusedKeyIndex] = useState<number>()
 	const [loading, setLoading] = useState<boolean>(true)
 	const spaceIdTrimmed = spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')
 	const [lifelineDialogOpen, setLifelineDialogOpen] = useState<boolean>(false)
-	const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false)
 	const [moveDialogOpen, setMoveDialogOpen] = useState<boolean>(false)
-	const { enqueueSnackbar } = useSnackbar()
 
 	const refreshSpaceDetails = useCallback(async () => {
+		if (!spaceId) return
 		const spaceData = await querySpace(spaceId || '')
 		setDetails(spaceData?.info)
 		setSpaceValues(spaceData?.values)
@@ -270,136 +253,17 @@ export const SpaceDetails = memo(() => {
 							)}
 
 							{spaceValues ? (
-								spaceValues.map(({ key, value }: SpaceKeyValue, i: number) => {
-									const valueIsUrl = URL_REGEX.test(value)
-
+								spaceValues.map(({ key, valueMeta }: any) => {
+									if (!spaceId) return
 									return (
-										<Card
+										<SpaceKeyValueRow
 											key={key}
-											component={valueIsUrl ? MuiLink : 'div'}
-											href={value}
-											target="_blank"
-											rel="noreferrer"
-											elevation={0}
-											sx={{
-												textDecoration: 'none',
-												position: 'relative',
-												display: 'flex',
-												mb: 1,
-												px: 2,
-												py: 3,
-												//backgroundColor: 'transparent',
-												border: '1px solid transparent',
-												'&:hover': {
-													h4: {
-														textDecoration: valueIsUrl ? 'underline' : 'unset',
-													},
-													border: (theme) => `1px solid ${theme.palette.divider}`,
-													'.actions': {
-														opacity: 1,
-													},
-												},
-											}}
-										>
-											<Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-												<CardContent sx={{ pt: 0, pb: '8px!important' }}>
-													<Typography variant="h4" gutterBottom>
-														{key}
-													</Typography>
-													{valueIsUrl ? (
-														isImgLink(value) ? (
-															<img width="100%" src={value} alt="" style={{ borderRadius: 4 }} />
-														) : (
-															<LinkPreview
-																url={value || ''}
-																render={({ loading, preview }: any) => {
-																	if (loading) {
-																		return <CircularProgress />
-																	}
-																	return (
-																		<>
-																			{(preview['og:title'] || preview.title) && (
-																				<Typography variant="body2" gutterBottom>
-																					{preview['og:title'] || preview.title}
-																				</Typography>
-																			)}
-																			<img
-																				width="100%"
-																				src={preview['og:image'] || ''}
-																				alt={preview['og:description'] || ''}
-																				style={{ borderRadius: 4 }}
-																			/>
-																			{(preview['og:description'] || preview.description) && (
-																				<Typography color="textSecondary" variant="body2">
-																					{preview['og:description'] || preview.description}
-																				</Typography>
-																			)}
-																		</>
-																	)
-																}}
-															/>
-														)
-													) : (
-														value
-													)}
-												</CardContent>
-											</Box>
-
-											<Box className="actions" sx={{ position: 'absolute', right: 32, top: 32 }}>
-												<Grid container spacing={1} wrap="nowrap">
-													<Grid item>
-														<Tooltip placement="top" title="Copy direct link">
-															<div>
-																<IconButton
-																	onClick={(e) => {
-																		e.preventDefault()
-																		e.stopPropagation()
-																		setClipboard({
-																			value: `${window.location.origin}/spaces/${spaceId}/${key}`,
-																			onSuccess: () => enqueueSnackbar('Copied!'),
-																			onFailure: () => enqueueSnackbar("Can't copy!", { variant: 'error' }),
-																		})
-																	}}
-																>
-																	<IoLink />
-																</IconButton>
-															</div>
-														</Tooltip>
-													</Grid>
-													{isSpaceOwner && (
-														<>
-															<Grid item>
-																<Tooltip placement="top" title="Edit">
-																	<div>
-																		<IconButton disabled>
-																			<IoConstructOutline />
-																		</IconButton>
-																	</div>
-																</Tooltip>
-															</Grid>
-															<Grid item>
-																<Tooltip placement="top" title="Delete">
-																	<div>
-																		<IconButton
-																			disabled={!isSpaceOwner}
-																			onClick={(e) => {
-																				e.preventDefault()
-																				e.stopPropagation()
-																				setFocusedKeyIndex(i)
-																				setDeleteDialogOpen(true)
-																			}}
-																			color="primary"
-																		>
-																			<IoTrashOutline />
-																		</IconButton>
-																	</div>
-																</Tooltip>
-															</Grid>
-														</>
-													)}
-												</Grid>
-											</Box>
-										</Card>
+											spaceId={spaceId}
+											spaceKey={key}
+											isSpaceOwner={isSpaceOwner}
+											refreshSpaceDetails={refreshSpaceDetails}
+											lastTouchTxId={valueMeta.txId}
+										/>
 									)
 								})
 							) : (
@@ -423,6 +287,7 @@ export const SpaceDetails = memo(() => {
 					</Grid>
 				)}
 			</Box>
+
 			{details?.expiry && (
 				<LifelineDialog
 					open={lifelineDialogOpen}
@@ -433,14 +298,6 @@ export const SpaceDetails = memo(() => {
 				/>
 			)}
 
-			{focusedKeyIndex !== undefined && spaceValues[focusedKeyIndex] && (
-				<DeleteKeyValueDialog
-					open={deleteDialogOpen}
-					close={() => setDeleteDialogOpen(false)}
-					refreshSpaceDetails={refreshSpaceDetails}
-					spaceKey={spaceValues[focusedKeyIndex]?.key}
-				/>
-			)}
 			<MoveSpaceDialog
 				open={moveDialogOpen}
 				onClose={() => setMoveDialogOpen(false)}

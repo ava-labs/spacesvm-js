@@ -98,7 +98,7 @@ export const LifelineDialog = ({
 
 	const handleClose = () => {
 		setIsDone(false)
-		setExtendHours(0)
+		setExtendUnits(0)
 		close()
 	}
 
@@ -199,8 +199,8 @@ export const LifelineDialog = ({
 					<Fade in={!isDone}>
 						<div>
 							<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-								<Tooltip placement="top" title={extendHours <= 0 ? 'Add time to extend!' : ''}>
-									<Box sx={{ cursor: extendHours <= 0 ? 'help' : 'inherit' }}>
+								<Tooltip placement="top" title={extendUnits <= 0 ? 'Add time to extend!' : ''}>
+									<Box sx={{ cursor: extendUnits <= 0 ? 'help' : 'inherit' }}>
 										<SubmitButton disabled={extendUnits <= 0} variant="contained" type="submit" onClick={onSubmit}>
 											{isSigning ? (
 												<Fade in={isSigning}>
