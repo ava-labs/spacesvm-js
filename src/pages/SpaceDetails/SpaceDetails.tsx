@@ -40,7 +40,7 @@ export const SpaceDetails = memo(() => {
 	const theme = useTheme()
 	const [details, setDetails] = useState<any>()
 	const [showDetailsTable, setShowDetailsTable] = useState<boolean>(false)
-	const [spaceValues, setSpaceValues] = useState<any>()
+	const [spaceKeys, setSpaceKeys] = useState<any>()
 	const [loading, setLoading] = useState<boolean>(true)
 	const spaceIdTrimmed = spaceId?.toLowerCase().replace(USERNAME_REGEX_QUERY, '')
 	const [lifelineDialogOpen, setLifelineDialogOpen] = useState<boolean>(false)
@@ -53,7 +53,7 @@ export const SpaceDetails = memo(() => {
 		const sortedValues = spaceData?.values.sort(
 			(first: any, second: any) => second.valueMeta.created - first.valueMeta.created,
 		)
-		setSpaceValues(sortedValues)
+		setSpaceKeys(sortedValues)
 		setLoading(false)
 	}, [spaceId])
 
@@ -203,7 +203,7 @@ export const SpaceDetails = memo(() => {
 								},
 								background: (theme) => theme.palette.background.paper,
 								backgroundImage: (theme) =>
-									theme.palette.mode === 'dark' && spaceValues?.length === 0 ? `url(${NothingHere})` : 'unset',
+									theme.palette.mode === 'dark' && spaceKeys?.length === 0 ? `url(${NothingHere})` : 'unset',
 								backgroundSize: 'cover',
 								backgroundRepeat: 'no-repeat',
 								backgroundPosition: 'center',
@@ -214,13 +214,13 @@ export const SpaceDetails = memo(() => {
 								height: 'calc(100vh - 64px)',
 							}}
 						>
-							{spaceValues && (
+							{spaceKeys && (
 								<Typography variant="h3" fontFamily="DM Serif Display" align="center" gutterBottom>
 									Space contents
 								</Typography>
 							)}
 
-							{spaceValues && (
+							{spaceKeys && (
 								<Typography
 									variant="body1"
 									component="div"
@@ -229,7 +229,7 @@ export const SpaceDetails = memo(() => {
 									gutterBottom
 									sx={{ mb: 3 }}
 								>
-									{spaceValues?.length === 0 ? (
+									{spaceKeys?.length === 0 ? (
 										`There's nothing in ${isSpaceOwner ? 'your' : 'this'} space right now.`
 									) : (
 										<Typography variant="body2" color="textSecondary">
@@ -249,14 +249,14 @@ export const SpaceDetails = memo(() => {
 
 							{spaceId && isSpaceOwner && (
 								<KeyValueInput
-									empty={spaceValues?.length === 0 || !spaceValues}
+									empty={spaceKeys?.length === 0 || !spaceKeys}
 									spaceId={spaceId}
 									refreshSpaceDetails={refreshSpaceDetails}
 								/>
 							)}
 
-							{spaceValues ? (
-								spaceValues.map(({ key, valueMeta }: any) => {
+							{spaceKeys ? (
+								spaceKeys.map(({ key, valueMeta }: any) => {
 									if (!spaceId) return
 									return (
 										<SpaceKeyValueRow
