@@ -55,6 +55,7 @@ export const ClaimedDialog = memo(({ spaceId, ...rest }: any) => (
 				<SeeItLiveButton
 					variant="contained"
 					size="large"
+					endIcon={<Twemoji svg text="🔭👀" />}
 					fullWidth
 					// @ts-ignore
 					component={Link}

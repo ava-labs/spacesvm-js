@@ -6,27 +6,12 @@ import { DialogTitle } from '../DialogTitle'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
+import { rainbowButton } from '@/theming/rainbowButton'
 import { TxType } from '@/types'
 import { getSuggestedFee } from '@/utils/spacesVM'
 
-export const DeleteButton = styled(Button)(({ theme }: any) => ({
-	backgroundColor: '#e70256',
-	backgroundImage: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
-	padding: theme.spacing(1, 10),
-	height: 80,
-	minWidth: 320,
-	fontWeight: 900,
-	fontSize: 24,
-	position: 'relative',
-	boxShadow: '0 0 40px rgb(231 2 86 / 60%)',
-	'&:hover': {
-		backgroundImage: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
-		boxShadow: '0 0 40px rgb(231 2 86 / 80%)',
-	},
-	'&.Mui-disabled': {
-		backgroundColor: 'hsla(0,0%,100%,0.1)',
-		backgroundImage: 'unset',
-	},
+export const DeleteButton = styled(Button)(() => ({
+	...rainbowButton,
 }))
 
 type DeleteKeyValueDialogProps = {
