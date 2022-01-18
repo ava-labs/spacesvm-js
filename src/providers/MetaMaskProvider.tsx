@@ -1,5 +1,5 @@
 import { isAndroid, isIOS } from 'react-device-detect'
-import { BiRedo } from 'react-icons/bi'
+import { IoArrowRedo } from 'react-icons/io5'
 import { IoDownloadOutline } from 'react-icons/io5'
 import MetaMaskOnboarding from '@metamask/onboarding'
 import { Button } from '@mui/material'
@@ -91,7 +91,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 				persist: true,
 				action: (
 					<Button
-						startIcon={<BiRedo />}
+						startIcon={<IoArrowRedo />}
 						variant="outlined"
 						color="inherit"
 						onClick={() => {

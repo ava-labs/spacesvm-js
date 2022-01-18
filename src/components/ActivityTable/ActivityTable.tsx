@@ -1,3 +1,4 @@
+import { Twemoji } from 'react-emoji-render'
 import { Link } from 'react-router-dom'
 import { Box, Link as MuiLink, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 
@@ -66,8 +67,57 @@ export const ActivityTable = memo(() => {
 						i <= 10 && (
 							<TableRow key={`${txId}-${i}`}>
 								<TableCell>
-									<Typography noWrap variant="body2">
-										{type || '-'}
+									<Typography noWrap variant="body2" sx={{ display: 'flex', alignItems: 'center' }}>
+										{type ? (
+											<>
+												{type === 'claim' && (
+													<>
+														<Box display="inline-flex" mr={1} fontSize={24}>
+															<Twemoji svg text="📜" />
+														</Box>
+														Claim
+													</>
+												)}
+
+												{type === 'reward' && (
+													<>
+														<Box display="inline-flex" mr={1} fontSize={24} position="relative" top={1}>
+															<Twemoji svg text="🤑" />
+														</Box>
+														Reward
+													</>
+												)}
+
+												{type === 'move' && (
+													<>
+														<Box display="inline-flex" mr={1} fontSize={24} position="relative" top={2}>
+															<Twemoji svg text="📦" />
+														</Box>
+														Move
+													</>
+												)}
+
+												{type === 'set' && (
+													<>
+														<Box display="inline-flex" mr={1} fontSize={24}>
+															<Twemoji svg text="✍️" />
+														</Box>
+														Set
+													</>
+												)}
+
+												{type === 'transfer' && (
+													<>
+														<Box display="inline-flex" mr={1} fontSize={24}>
+															<Twemoji svg text="📃" />
+														</Box>
+														Transfer
+													</>
+												)}
+											</>
+										) : (
+											'-'
+										)}
 									</Typography>
 								</TableCell>
 								<TableCell>
