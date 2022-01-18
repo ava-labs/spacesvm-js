@@ -102,7 +102,7 @@ export const SpaceKeyValueRow = ({
 						{isLoading && <LinearProgress color="secondary" />}
 						{valueIsUrl ? (
 							loadingImageError ? (
-								<Link>{valueForKey}</Link>
+								<Link component="p">{valueForKey}</Link>
 							) : isImgLink(valueForKey) ? (
 								<img
 									width="100%"

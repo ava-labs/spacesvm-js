@@ -209,11 +209,17 @@ export const SpaceDetails = memo(() => {
 									backgroundSize: 'cover',
 									backgroundRepeat: 'no-repeat',
 									backgroundPosition: 'center',
-									borderTopLeftRadius: 24,
-									borderBottomLeftRadius: 24,
+									borderRadius: 6,
 									boxShadow: '-90px 0 200px 0 rgb(82 61 241 / 6%)',
 									overflow: 'auto',
-									height: 'calc(100vh - 64px)',
+									height: {
+										xs: 'unset',
+										md: 'calc(100vh - 64px)',
+									},
+									mb: {
+										xs: 2,
+										md: 0,
+									},
 								}}
 							>
 								{spaceKeys && (
