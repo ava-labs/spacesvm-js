@@ -127,13 +127,19 @@ export const SpaceKeyValueRow = ({
 														{preview['og:title'] || preview.title}
 													</Typography>
 												)}
-												<img
-													width="100%"
-													src={preview['og:image'] || ''}
-													alt={preview['og:description'] || ''}
-													style={{ borderRadius: 4, objectFit: 'cover', maxHeight: 120 }}
-													onError={() => setLoadingImageError(true)}
-												/>
+												{preview['og:image'] && (
+													<Box
+														width="100%"
+														sx={{
+															borderRadius: 4,
+															height: 200,
+															backgroundImage: `url(${preview['og:image'] || ''})`,
+															backgroundPosition: 'left',
+															backgroundRepeat: 'no-repeat',
+															backgroundSize: 'cover',
+														}}
+													/>
+												)}
 												{(preview['og:description'] || preview.description) && (
 													<Typography color="textSecondary" variant="body2">
 														{preview['og:description'] || preview.description}

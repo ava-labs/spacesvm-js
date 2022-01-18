@@ -74,7 +74,14 @@ export const DeleteKeyValueDialog = ({ open, close, spaceKey, refreshSpaceDetail
 				>
 					{spaceKey}
 				</Typography>
-				<DeleteButton onClick={deleteKeyValue} fullWidth variant="contained" size="large" sx={{ mt: 6 }}>
+				<DeleteButton
+					onClick={deleteKeyValue}
+					fullWidth
+					variant="contained"
+					size="large"
+					sx={{ mt: 6 }}
+					disabled={isSigning}
+				>
 					{isSigning ? (
 						<Fade in={isSigning}>
 							<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />

@@ -187,7 +187,12 @@ export const LifelineDialog = ({
 							<Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
 								<Tooltip placement="top" title={extendUnits <= 0 ? 'Add time to extend!' : ''}>
 									<Box sx={{ cursor: extendUnits <= 0 ? 'help' : 'inherit' }}>
-										<SubmitButton disabled={extendUnits <= 0} variant="contained" type="submit" onClick={onSubmit}>
+										<SubmitButton
+											disabled={isSigning || extendUnits <= 0}
+											variant="contained"
+											type="submit"
+											onClick={onSubmit}
+										>
 											{isSigning ? (
 												<Fade in={isSigning}>
 													<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: '100%' }} />
