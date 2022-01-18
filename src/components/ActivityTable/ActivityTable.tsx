@@ -23,6 +23,9 @@ export const ActivityTable = memo(() => {
 			setRecentActivity(activity.activity)
 		}
 		fetchRecentActivity()
+		setInterval(() => {
+			fetchRecentActivity()
+		}, 10000)
 	}, [])
 
 	return recentActivity ? (
