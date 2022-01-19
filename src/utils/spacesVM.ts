@@ -62,7 +62,7 @@ export const querySpaceKey = async (space: string, key: string) => {
 	const keyData = await fetchSpaces('resolve', { path: `${space}/${key}` })
 	return {
 		...keyData,
-		value: b64_to_utf8(keyData?.value),
+		value: keyData?.value && b64_to_utf8(keyData.value),
 	}
 }
 
