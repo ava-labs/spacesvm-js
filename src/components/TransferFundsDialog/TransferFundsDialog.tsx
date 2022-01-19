@@ -193,6 +193,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 								},
 							}}
 							autoComplete="off"
+							type="tel"
 						/>
 
 						<Divider flexItem orientation="vertical" sx={{ mr: 2 }} />
