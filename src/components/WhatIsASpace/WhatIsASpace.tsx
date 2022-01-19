@@ -37,7 +37,7 @@ export const WhatIsASpace = memo(() => {
 				}}
 				anchor={'right'}
 				open={open}
-				onOpen={() => undefined}
+				onOpen={() => setOpen(true)}
 				onClose={() => setOpen(false)}
 			>
 				<Box

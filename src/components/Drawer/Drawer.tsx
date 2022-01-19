@@ -30,7 +30,7 @@ export const Drawer = memo(() => {
 				</IconButton>
 			</Tooltip>
 			<SwipeableDrawer
-				onOpen={() => undefined}
+				onOpen={() => setOpen(true)}
 				PaperProps={{
 					sx: {
 						backgroundColor: (theme) => theme.customPalette.customBackground,
