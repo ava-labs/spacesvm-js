@@ -53,7 +53,7 @@ export const Home = memo(() => {
 	const [searchParams] = useSearchParams()
 	const { enqueueSnackbar } = useSnackbar()
 	const [claiming, setClaiming] = useState<boolean>(false)
-	const { issueTx, signWithMetaMask, balance } = useMetaMask()
+	const { issueTx, signWithMetaMask, connectToMetaMask, balance, metaMaskExists } = useMetaMask()
 	const navigate = useNavigate()
 	const [showClaimedDialog, setShowClaimedDialog] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
@@ -87,6 +87,11 @@ export const Home = memo(() => {
 	}, [username])
 
 	const onClaim = async () => {
+		if (!metaMaskExists) {
+			connectToMetaMask()
+			return
+		}
+
 		if (balance < calculateClaimCost(username)) {
 			enqueueSnackbar(
 				<>
