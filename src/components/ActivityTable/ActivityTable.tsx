@@ -240,7 +240,7 @@ export const ActivityTable = memo(() => {
 																Space
 															</Typography>
 														</TableCell>
-														<TableCell>
+														<TableCell sx={{ maxWidth: 280 }}>
 															<MuiLink component={Link} to={`/${space}/`}>
 																{space}
 															</MuiLink>
@@ -254,7 +254,7 @@ export const ActivityTable = memo(() => {
 																Key
 															</Typography>
 														</TableCell>
-														<TableCell>
+														<TableCell sx={{ maxWidth: 280 }}>
 															{type === 'delete' ? (
 																<Typography noWrap variant="body2">
 																	{key}
