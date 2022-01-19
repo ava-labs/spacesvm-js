@@ -101,11 +101,11 @@ export const ActivityTable = memo(() => {
 			>
 				<Tab label="All" value="all" />
 				<Tab icon={<Twemoji svg text="📜" />} label="Claim" value="claim" />
-				<Tab icon={<Twemoji svg text="⌛️" />} label="Lifeline" value="lifeline" />
+				<Tab icon={<Twemoji svg text="⌛" />} label="Lifeline" value="lifeline" />
 				<Tab icon={<Twemoji svg text="🚮" />} label="Delete" value="delete" />
 				<Tab icon={<Twemoji svg text="🤑" />} label="Reward" value="reward" />
 				<Tab icon={<Twemoji svg text="📦" />} label="Move" value="move" />
-				<Tab icon={<Twemoji svg text="✍️" />} label="Set" value="set" />
+				<Tab icon={<Twemoji svg text="✍" />} label="Set" value="set" />
 				<Tab icon={<Twemoji svg text="📃" />} label="Transfer" value="transfer" />
 			</Tabs>
 
