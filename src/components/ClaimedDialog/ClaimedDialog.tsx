@@ -46,7 +46,7 @@ export const ClaimedDialog = memo(({ spaceId, ...rest }: any) => (
 					fullWidth
 					// @ts-ignore
 					component={Link}
-					to={`/s/${spaceId}/`}
+					to={`/${spaceId}/`}
 				>
 					See it live
 				</SeeItLiveButton>

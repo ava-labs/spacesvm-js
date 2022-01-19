@@ -8,6 +8,8 @@ export const ACTIVITY_TABLE_TAB_STORAGE_KEY = 'spaces-activity-table-tab'
 
 // api
 export const API_DOMAIN = 'https://api.tryspaces.xyz/public'
+export const SUBNET_ID_URL = 'https://testnet.avascan.info/blockchains?subnet='
+export const CHAIN_ID_URL = 'https://testnet.avascan.info/blockchain/'
 
 // Overview
 export const APP_NAME = 'Spaces'

@@ -166,7 +166,7 @@ export const SpaceKeyValueRow = ({
 											e.preventDefault()
 											e.stopPropagation()
 											setClipboard({
-												value: `${window.location.origin}/s/${spaceId}/${spaceKey}/`,
+												value: `${window.location.origin}/${spaceId}/${spaceKey}/`,
 												onSuccess: () => enqueueSnackbar('Copied!'),
 												onFailure: () => enqueueSnackbar("Can't copy!", { variant: 'error' }),
 											})

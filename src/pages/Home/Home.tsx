@@ -300,7 +300,7 @@ export const Home = memo(() => {
 								<>
 									<VerifyButton
 										type="submit"
-										onClick={() => (verified ? navigate(`/s/${username}/`) : onVerify())}
+										onClick={() => (verified ? navigate(`/${username}/`) : onVerify())}
 										fullWidth
 										disabled={username.length === 0}
 										variant="contained"
