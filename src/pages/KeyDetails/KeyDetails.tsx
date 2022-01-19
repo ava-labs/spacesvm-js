@@ -40,7 +40,7 @@ export const KeyDetails = () => {
 		getSpaceValue()
 	}, [spaceId, key, getSpaceValue])
 
-	if (isInvalidPage) return <Navigate replace to="/404" />
+	if (isInvalidPage) return <Navigate replace to="/page.404/" />
 
 	if (redirecting) {
 		return (

@@ -21,19 +21,14 @@ export const Routes = () => (
 		<Switch>
 			<Route path="/" element={<Home />} />
 
-			<Route path="/s/:spaceId/:key" element={<KeyDetails />} />
-			<Route path="/s/:spaceId" element={<SpaceDetails />} />
-			<Route path="/s/" element={<SpaceDetails />} />
+			<Route path="/:spaceId/:key" element={<KeyDetails />} />
+			<Route path="/:spaceId" element={<SpaceDetails />} />
 
-			{/* Keeping `/spaces/` for retrocompatibility, but we now prefer `/s` */}
-			<Route path="/spaces/:spaceId/:key" element={<KeyDetails />} />
-			<Route path="/spaces/:spaceId" element={<SpaceDetails />} />
-			<Route path="/spaces/" element={<SpaceDetails />} />
+			<Route path={`/custom.transaction/`} element={<CustomSignature />} />
+			<Route path={`/ping.spaces/`} element={<PingSpaces />} />
+			<Route path={`/page.404/`} element={<Page404 />} />
 
-			<Route path="/custom-transaction" element={<CustomSignature />} />
-			<Route path="/ping" element={<PingSpaces />} />
-			<Route path="/404" element={<Page404 />} />
-			<Route path="*" element={<Navigate replace to="/404" />} />
+			<Route path="*" element={<Navigate replace to={`/page.404/`} />} />
 		</Switch>
 	</Suspense>
 )
