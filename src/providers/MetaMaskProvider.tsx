@@ -91,17 +91,24 @@ export const MetaMaskProvider = ({ children }: any) => {
 				variant: 'warning',
 				persist: true,
 				action: (
-					<Button
-						startIcon={<IoArrowRedo />}
-						variant="outlined"
-						color="inherit"
-						onClick={() => {
-							closeSnackbar()
-							connectToMetaMask()
-						}}
-					>
-						Try again
-					</Button>
+					<>
+						<Button
+							startIcon={<IoArrowRedo />}
+							variant="outlined"
+							color="inherit"
+							onClick={() => {
+								closeSnackbar()
+								connectToMetaMask()
+							}}
+						>
+							Try again
+						</Button>
+						<Tooltip title="Dismiss">
+							<IconButton onClick={() => closeSnackbar()}>
+								<IoCloseCircleOutline />
+							</IconButton>
+						</Tooltip>
+					</>
 				),
 			})
 			return []

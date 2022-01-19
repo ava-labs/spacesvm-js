@@ -93,8 +93,9 @@ export const Home = memo(() => {
 		}
 
 		if (!currentAddress) {
-			enqueueSnackbar(<>Please connect to MetaMask to claim a space.</>, {
+			enqueueSnackbar('Please connect to MetaMask to claim a space.', {
 				variant: 'warning',
+				persist: true,
 				action: (
 					<>
 						<Button
