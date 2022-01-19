@@ -184,7 +184,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 							}}
 							placeholder="Address"
 							InputProps={{
-								sx: { ...theme.typography.h2, ...rainbowText },
+								sx: { ...theme.typography.h2, [theme.breakpoints.up('sm')]: { ...rainbowText } },
 							}}
 							inputProps={{
 								spellCheck: 'false',
@@ -210,7 +210,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 						sx={{ my: 2 }}
 						columnSpacing={{ sm: 3, xs: 1 }}
 					>
-						<Grid item>
+						<Grid item sx={{ display: { xs: 'none', sm: 'inherit' } }}>
 							<Button
 								color="secondary"
 								size="small"
@@ -284,7 +284,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 								100
 							</Button>
 						</Grid>
-						<Grid item>
+						<Grid item sx={{ display: { xs: 'none', sm: 'inherit' } }}>
 							<Button
 								variant="outlined"
 								size="small"
