@@ -74,7 +74,7 @@ export const SpaceDetails = memo(() => {
 		<Page title={spaceIdTrimmed} showFooter={false} noPadding>
 			<Box style={{ paddingTop: 64 }}>
 				{loading ? (
-					<LinearProgress color="secondary" />
+					<LinearProgress color="secondary" sx={{ position: 'absolute', left: 0, right: 0 }} />
 				) : (
 					<Fade in>
 						<Grid container>

@@ -72,7 +72,7 @@ export const KeyDetails = () => {
 
 	return (
 		<Page>
-			{isLoading && <LinearProgress color="secondary" />}
+			{isLoading && <LinearProgress color="secondary" sx={{ position: 'absolute', left: 0, right: 0 }} />}
 			{value && (
 				<Typography
 					variant="h1"
