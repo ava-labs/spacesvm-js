@@ -1,6 +1,6 @@
 import { SyntheticEvent } from 'react'
 import { Twemoji } from 'react-emoji-render'
-import { Link } from 'react-router-dom'
+import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import {
 	Box,
 	Card,
@@ -17,10 +17,13 @@ import {
 } from '@mui/material'
 
 import { AddressChip } from '@/components/AddressChip/AddressChip'
+import { ACTIVITY_TABLE_TAB_STORAGE_KEY } from '@/constants'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { getLatestActivity } from '@/utils/spacesVM'
 
 export const ActivityTable = memo(() => {
-	const [selectedTab, setSelectedTab] = useState<string>('all')
+	const [selectedTabStorage, setSelectedTabStorage] = useLocalStorage(ACTIVITY_TABLE_TAB_STORAGE_KEY, 'all') // track theme in localStorage
+	const [selectedTab, setSelectedTab] = useState<string>(selectedTabStorage)
 	const [recentActivity, setRecentActivity] = useState<
 		{
 			timestamp?: number
@@ -79,6 +82,8 @@ export const ActivityTable = memo(() => {
 	const handleChange = (event: SyntheticEvent, newValue: string) => {
 		setSelectedTab(newValue)
 		onActivityFiltered(newValue)
+		// setting `?tab=TAB` in URL to persist refresh
+		setSelectedTabStorage(newValue)
 	}
 
 	return recentActivity ? (

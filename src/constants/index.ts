@@ -4,6 +4,7 @@ import { shuffleArray } from '@/utils/shuffleArray'
 
 // localStorage keys
 export const THEME_LOCAL_STORAGE_KEY = 'spaces-theme'
+export const ACTIVITY_TABLE_TAB_STORAGE_KEY = 'spaces-activity-table-tab'
 
 // api
 export const API_DOMAIN = 'https://api.tryspaces.xyz/public'
