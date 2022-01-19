@@ -39,6 +39,10 @@ export const Footer = memo(() => (
 					<Link color="inherit" href="https://spacesvm.xyz/" rel="noopener noreferrer" target="_blank">
 						Powered by the SpacesVM Avalanche Subnet
 					</Link>
+					{` — `}
+					<Link color="inherit" href="https://dribbble.com/dmitrymoi/" rel="noopener noreferrer" target="_blank">
+						Illustrations by Dmitry Moiseenko
+					</Link>
 				</Typography>
 			</Grid>
 		</Grid>
