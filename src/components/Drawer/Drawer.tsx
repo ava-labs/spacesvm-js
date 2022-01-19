@@ -25,7 +25,7 @@ export const Drawer = memo(() => {
 	return (
 		<>
 			<Tooltip title="Menu">
-				<IconButton onClick={() => setOpen(true)}>
+				<IconButton onClick={() => setOpen(true)} edge="end">
 					<IoMenu />
 				</IconButton>
 			</Tooltip>

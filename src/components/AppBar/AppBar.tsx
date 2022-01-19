@@ -20,8 +20,8 @@ export const AppBar = memo(() => {
 				color="transparent"
 				sx={{
 					// for scrollbar not to be blurry
-					mx: '10px',
-					width: 'calc(100% - 20px)',
+					mr: '10px',
+					width: 'calc(100% - 10px)',
 					backdropFilter: 'blur(5px)',
 				}}
 			>

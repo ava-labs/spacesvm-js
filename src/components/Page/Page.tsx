@@ -40,11 +40,6 @@ export const Page = memo(
 								display: 'flex',
 								flexDirection: 'column',
 								flexGrow: 1,
-								px: {
-									xs: 0,
-									sm: noPadding ? 0 : 2,
-									md: noPadding ? 0 : 5,
-								},
 								py: noPadding ? 0 : 8,
 							}}
 						>
