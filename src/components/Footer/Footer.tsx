@@ -1,8 +1,21 @@
-import { IoLogoGithub } from 'react-icons/io5'
-import { Box, Divider, Grid, Link, styled, Theme, Typography } from '@mui/material'
+import { IoLogoGithub, IoOpenOutline } from 'react-icons/io5'
+import {
+	Box,
+	Button,
+	ButtonGroup,
+	Divider,
+	Grid,
+	Link,
+	styled,
+	Theme,
+	Typography,
+	useMediaQuery,
+	useTheme,
+} from '@mui/material'
 
 import AvalancheLogo from '@/assets/avax-logo-official.svg'
 import { APP_NAME, CHAIN_ID_URL, SUBNET_ID_URL } from '@/constants'
+import { obfuscateAddress } from '@/utils/obfuscateAddress'
 import { getNetworks } from '@/utils/spacesVM'
 
 const StyledImg = styled('img')(({ theme }: { theme: Theme }) => ({
@@ -10,6 +23,9 @@ const StyledImg = styled('img')(({ theme }: { theme: Theme }) => ({
 }))
 
 export const Footer = memo(() => {
+	const theme = useTheme()
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+
 	const [quarkNetworks, setQuarkNetworks] = useState<{
 		chainId: string
 		subnetId: string
@@ -50,6 +66,72 @@ export const Footer = memo(() => {
 						<IoLogoGithub size={32} />
 					</Link>
 				</Grid>
+				{quarkNetworks && (
+					<>
+						<Grid item container sx={{ borderRadius: 99999 }} alignItems="center" justifyContent="center">
+							<Grid item>
+								<ButtonGroup>
+									<Button
+										variant="outlined"
+										color="secondary"
+										disabled
+										sx={{
+											color: (theme) => `${theme.palette.text.primary}!important`,
+											background: (theme) => theme.customPalette.customBackground,
+											'&:hover': { background: (theme) => theme.customPalette.customBackground },
+										}}
+									>
+										Subnet ID
+									</Button>
+
+									<Button
+										variant="outlined"
+										color="secondary"
+										endIcon={<IoOpenOutline size={14} />}
+										onClick={() => window.open(`${SUBNET_ID_URL}${quarkNetworks.subnetId}`)}
+										sx={{
+											background: (theme) => theme.customPalette.customBackground,
+											'&:hover': { background: (theme) => theme.customPalette.customBackground },
+										}}
+									>
+										{isMobile ? obfuscateAddress(quarkNetworks.subnetId) : quarkNetworks.subnetId}
+									</Button>
+								</ButtonGroup>
+							</Grid>
+						</Grid>
+						<Grid item container sx={{ borderRadius: 99999 }} alignItems="center" justifyContent="center">
+							<Grid item>
+								<ButtonGroup>
+									<Button
+										variant="outlined"
+										color="secondary"
+										disabled
+										sx={{
+											color: (theme) => `${theme.palette.text.primary}!important`,
+											background: (theme) => theme.customPalette.customBackground,
+											'&:hover': { background: (theme) => theme.customPalette.customBackground },
+										}}
+									>
+										Chain ID
+									</Button>
+
+									<Button
+										variant="outlined"
+										color="secondary"
+										endIcon={<IoOpenOutline size={14} />}
+										onClick={() => window.open(`${CHAIN_ID_URL}${quarkNetworks.chainId}`)}
+										sx={{
+											background: (theme) => theme.customPalette.customBackground,
+											'&:hover': { background: (theme) => theme.customPalette.customBackground },
+										}}
+									>
+										{isMobile ? obfuscateAddress(quarkNetworks.chainId) : quarkNetworks.chainId}
+									</Button>
+								</ButtonGroup>
+							</Grid>
+						</Grid>
+					</>
+				)}
 				<Grid item>
 					<Typography component="footer" variant="body2" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="center">
 						{`© ${new Date().getFullYear()} ${APP_NAME} — `}
@@ -62,30 +144,6 @@ export const Footer = memo(() => {
 						</Link>
 					</Typography>
 				</Grid>
-				{quarkNetworks && (
-					<Grid item container spacing={2} alignItems="center" justifyContent="center">
-						<Grid item>
-							<Link
-								sx={{ fontSize: 14 }}
-								href={`${SUBNET_ID_URL}${quarkNetworks.subnetId}`}
-								rel="noopener noreferrer"
-								target="_blank"
-							>
-								Subnet ID
-							</Link>
-						</Grid>
-						<Grid item>
-							<Link
-								sx={{ fontSize: 14 }}
-								href={`${CHAIN_ID_URL}${quarkNetworks.chainId}`}
-								rel="noopener noreferrer"
-								target="_blank"
-							>
-								Chain ID
-							</Link>
-						</Grid>
-					</Grid>
-				)}
 			</Grid>
 		</Box>
 	)
