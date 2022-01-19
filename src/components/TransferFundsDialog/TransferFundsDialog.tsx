@@ -184,7 +184,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 							}}
 							placeholder="Address"
 							InputProps={{
-								sx: { ...theme.typography.h2, [theme.breakpoints.up('sm')]: { ...rainbowText } },
+								sx: { ...theme.typography.h2, ...rainbowText },
 							}}
 							inputProps={{
 								spellCheck: 'false',
