@@ -10,7 +10,6 @@ export const setClipboard = async ({ value, onSuccess, onFailure }: any) => {
 			onSuccess()
 		}
 	} catch (err) {
-		console.error(err)
 		if (onFailure) {
 			onFailure()
 		}

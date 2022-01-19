@@ -31,7 +31,6 @@ import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { USERNAME_REGEX_QUERY } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
-import { rainbowText } from '@/theming/rainbowText'
 import { querySpace } from '@/utils/spacesVM'
 
 export const SpaceDetails = memo(() => {
