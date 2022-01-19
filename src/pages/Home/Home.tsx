@@ -413,7 +413,7 @@ export const Home = memo(() => {
 
 			<Divider sx={{ my: 8 }} />
 
-			<Typography variant="h4" align="center" component="p" mb={4} fontFamily="DM Serif Display">
+			<Typography id="recent-activity" variant="h4" align="center" component="p" mb={4} fontFamily="DM Serif Display">
 				Recent activity
 			</Typography>
 
