@@ -162,7 +162,7 @@ export const ActivityTable = memo(() => {
 													</TableCell>
 												</TableRow>
 											)}
-											{key && space && (
+											{key && space && type !== 'delete' && (
 												<TableRow>
 													<TableCell>
 														<Typography variant="body2" fontWeight={900} noWrap>
