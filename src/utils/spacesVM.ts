@@ -77,6 +77,12 @@ export const getLatestActivity = async () => {
 	return activity
 }
 
+export const getNetworks = async () => {
+	const networks = await fetchSpaces('network')
+
+	return networks
+}
+
 export const isAlreadyClaimed = async (space: string) => {
 	const response = await fetchSpaces('claimed', {
 		space,
