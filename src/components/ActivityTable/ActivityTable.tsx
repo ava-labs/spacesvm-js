@@ -162,7 +162,7 @@ export const ActivityTable = memo(() => {
 													</TableCell>
 												</TableRow>
 											)}
-											{key && space && type !== 'delete' && (
+											{key && space && (
 												<TableRow>
 													<TableCell>
 														<Typography variant="body2" fontWeight={900} noWrap>
@@ -170,9 +170,15 @@ export const ActivityTable = memo(() => {
 														</Typography>
 													</TableCell>
 													<TableCell>
-														<MuiLink component={Link} to={`/s/${space}/${key}/`}>
-															{key}
-														</MuiLink>
+														{type === 'delete' ? (
+															<Typography noWrap variant="body2">
+																{key}
+															</Typography>
+														) : (
+															<MuiLink component={Link} to={`/s/${space}/${key}/`}>
+																{key}
+															</MuiLink>
+														)}
 													</TableCell>
 												</TableRow>
 											)}
