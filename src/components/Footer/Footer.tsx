@@ -42,7 +42,7 @@ export const Footer = memo(() => {
 	}, [])
 
 	return (
-		<Box pb={2}>
+		<Box pb={isMobile ? 6 : 4}>
 			<Divider sx={{ my: 4 }} />
 			<Grid container spacing={1} flexDirection="column" alignItems="center">
 				<Grid item container alignItems="center" justifyContent="center">
