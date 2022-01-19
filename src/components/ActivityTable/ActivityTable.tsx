@@ -1,3 +1,4 @@
+import { SyntheticEvent } from 'react'
 import { Twemoji } from 'react-emoji-render'
 import { Link } from 'react-router-dom'
 import {
@@ -6,12 +7,12 @@ import {
 	CardContent,
 	Grid,
 	Link as MuiLink,
+	Tab,
 	Table,
 	TableBody,
-	//TableBody,
 	TableCell,
-	//	TableHead,
 	TableRow,
+	Tabs,
 	Typography,
 } from '@mui/material'
 
@@ -19,6 +20,7 @@ import { AddressChip } from '@/components/AddressChip/AddressChip'
 import { getLatestActivity } from '@/utils/spacesVM'
 
 export const ActivityTable = memo(() => {
+	const [selectedTab, setSelectedTab] = useState<string>('all')
 	const [recentActivity, setRecentActivity] = useState<
 		{
 			timestamp?: number
@@ -31,6 +33,30 @@ export const ActivityTable = memo(() => {
 			units?: number
 		}[]
 	>()
+	const [recentActivityFiltered, setRecentActivityFiltered] = useState<
+		{
+			timestamp?: number
+			to?: string
+			txId?: string
+			type?: string
+			sender?: string
+			space?: string
+			key?: string
+			units?: number
+		}[]
+	>()
+
+	const onActivityFiltered = (val: string) => {
+		if (!recentActivity) return
+
+		if (val === 'all') {
+			setRecentActivityFiltered(recentActivity)
+			return
+		}
+
+		const activityFiltered = [...recentActivity].filter(({ type }) => type === val)
+		setRecentActivityFiltered(activityFiltered)
+	}
 
 	useEffect(() => {
 		const fetchRecentActivity = async () => {
@@ -45,12 +71,64 @@ export const ActivityTable = memo(() => {
 		}, 10000) // refresh every 10s
 	}, [])
 
+	useEffect(() => {
+		onActivityFiltered(selectedTab)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [recentActivity])
+
+	const handleChange = (event: SyntheticEvent, newValue: string) => {
+		setSelectedTab(newValue)
+		onActivityFiltered(newValue)
+	}
+
 	return recentActivity ? (
 		<>
+			<Tabs
+				value={selectedTab}
+				onChange={handleChange}
+				variant="scrollable"
+				centered
+				scrollButtons
+				indicatorColor="secondary"
+				textColor="inherit"
+				allowScrollButtonsMobile
+				sx={{ mx: -2, mb: 2 }}
+			>
+				<Tab label="All" value="all" />
+				<Tab icon={<Twemoji svg text="📜" />} label="Claim" value="claim" />
+				<Tab icon={<Twemoji svg text="⌛️" />} label="Lifeline" value="lifeline" />
+				<Tab icon={<Twemoji svg text="🚮" />} label="Delete" value="delete" />
+				<Tab icon={<Twemoji svg text="🤑" />} label="Reward" value="reward" />
+				<Tab icon={<Twemoji svg text="📦" />} label="Move" value="move" />
+				<Tab icon={<Twemoji svg text="✍️" />} label="Set" value="set" />
+				<Tab icon={<Twemoji svg text="📃" />} label="Transfer" value="transfer" />
+			</Tabs>
+
+			{recentActivityFiltered?.length === 0 && (
+				<Box mb={8} display="flex" flexDirection="column">
+					<Typography
+						sx={{ mt: 2, mb: 2 }}
+						align="center"
+						fontFamily="DM Serif Display"
+						variant="h5"
+						color="textSecondary"
+					>
+						{`No recent ${selectedTab} activity`}
+					</Typography>
+					<img
+						width={180}
+						height={180}
+						src="https://media4.giphy.com/media/Wpy9lrAfHCLp4mIT9L/giphy.gif?cid=790b76113442389ba39c4e237e25d83b899276c8cae66345&rid=giphy.gif&ct=g"
+						alt="empty gif"
+						style={{ borderRadius: 8, margin: 'auto' }}
+					/>
+				</Box>
+			)}
+
 			<Grid container spacing={2}>
-				{recentActivity?.map(
+				{recentActivityFiltered?.map(
 					({ timestamp, to, txId, key, sender, space, units, type }, i) =>
-						i <= 20 && (
+						i <= 11 && (
 							<Grid key={`${txId}-${i}`} item sm={12} md={6} lg={4} xl={3} sx={{ width: '100%' }}>
 								<Card variant="outlined" sx={{ mb: 1, height: '100%', width: '100%' }}>
 									{type && (

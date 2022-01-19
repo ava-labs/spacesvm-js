@@ -1,5 +1,5 @@
 import { IoInformationCircleOutline } from 'react-icons/io5'
-import { Box, Button, SwipeableDrawer, Typography } from '@mui/material'
+import { Box, Button, Drawer, Typography } from '@mui/material'
 
 import WhatsASpaceBg from '@/assets/whats-a-space.jpg'
 
@@ -22,7 +22,7 @@ export const WhatIsASpace = memo(() => {
 					What's a space?
 				</Button>
 			</Box>
-			<SwipeableDrawer
+			<Drawer
 				PaperProps={{
 					sx: {
 						borderLeft: (theme) => (theme.palette.mode === 'dark' ? '2px solid hsla(0, 0%, 100%, 0.2)' : 'unset'),
@@ -37,7 +37,6 @@ export const WhatIsASpace = memo(() => {
 				}}
 				anchor={'right'}
 				open={open}
-				onOpen={() => setOpen(true)}
 				onClose={() => setOpen(false)}
 			>
 				<Box
@@ -97,7 +96,7 @@ export const WhatIsASpace = memo(() => {
 						colon de Jésus Marie Joseph de crisse de cul de crucifix de batince de p'tit Jésus.
 					</Typography>
 				</Box>
-			</SwipeableDrawer>
+			</Drawer>
 		</>
 	)
 })

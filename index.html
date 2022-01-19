@@ -5,7 +5,8 @@
 	<meta charset="UTF-8" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;900&display=swap">
+	<link rel="preload" as="style"
+		href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;900&display=swap">
 	<link rel="icon" type="image/png" href="/src/assets/spaces-logo.png" />
 	<meta name="viewport" content="initial-scale=1, width=device-width" />
 	<meta content="Claim your space on the Avalanche blockchain" name="description">
@@ -17,76 +18,96 @@
 	<meta property="og:type" content="article">
 	<meta property="og:image" content="https://spaces.pages.dev/spaces_og2.png">
 	<meta name="theme-color" content="#121212" />
-	<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;900&display=swap">
+	<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');"
+		href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;900&display=swap">
 </head>
 
 <body>
-	<style>		
+	<style>
 		.SnackbarContent-root {
-			border-radius: 9999px!important;
-			padding-left: 24px!important;
-			padding-right: 24px!important;
+			border-radius: 9999px !important;
+			padding-left: 24px !important;
+			padding-right: 24px !important;
 			display: flex;
 			justify-content: center;
 		}
 
-		.emoji > img {
-			margin: 0!important;
+		.emoji>img {
+			margin: 0 !important;
 		}
 
 		.SnackbarItem-variantWarning {
-			background-color: #f67916!important;
+			background-color: #f67916 !important;
 		}
 
 		@media (max-width: 599px) {
 			.MuiDialogContent-root {
-    		padding:0;
-  		}
+				padding: 0;
+			}
+
+			.MuiTabs-scrollButtons.Mui-disabled {
+				opacity: 0.3;
+			}
 		}
 
 		.actions {
 			opacity: 0;
 		}
 
-		@keyframes hue{0%{-webkit-filter:hue-rotate(0deg)}to{-webkit-filter:hue-rotate(-1turn)}}
+		@keyframes hue {
+			0% {
+				-webkit-filter: hue-rotate(0deg)
+			}
+
+			to {
+				-webkit-filter: hue-rotate(-1turn)
+			}
+		}
 
 		::-webkit-scrollbar {
 			width: 10px;
 			height: 10px;
 		}
-		
+
 		::-webkit-scrollbar-thumb {
 			border-radius: 5px;
 		}
-		
+
 		::-webkit-scrollbar-track {
 			border-radius: 5px;
 		}
 
 		.light ::-webkit-scrollbar-thumb {
-			background: rgba(0,0,0,0.3);
+			background: rgba(0, 0, 0, 0.3);
 		}
 
 		.light ::-webkit-scrollbar-track {
-			background: rgba(0,0,0,0.1);
+			background: rgba(0, 0, 0, 0.1);
 		}
 
 		.MuiTableRow-root:last-child td {
 			border-bottom: none;
 		}
 
+		.MuiTab-iconWrapper {
+			margin-bottom: 0 !important;
+			margin-right: 6px;
+		}
+
 		.dark ::-webkit-scrollbar-thumb {
-			background: rgba(255,255,255,0.3);
+			background: rgba(255, 255, 255, 0.3);
 		}
 
 		.dark ::-webkit-scrollbar-track {
-			background: rgba(255,255,255,0.1);
+			background: rgba(255, 255, 255, 0.1);
 		}
-		</style>
+
+	</style>
 	<script>
 		if (global === undefined) {
 			var global = window;
 		}
+
 	</script>
 	<div id="root"></div>
 	<script type="module" src="/src/main.tsx"></script>

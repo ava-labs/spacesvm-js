@@ -49,6 +49,29 @@ export const commonOverrides: ThemeOptions['components'] = {
 			},
 		},
 	},
+	MuiTabs: {
+		styleOverrides: {
+			root: {
+				justifyContent: 'center',
+			},
+			scroller: {
+				flexGrow: '0',
+			},
+		},
+	},
+	MuiTab: {
+		styleOverrides: {
+			root: {
+				minHeight: 'unset',
+				flexDirection: 'row',
+				alignItems: 'center',
+				fontFamily: 'DM Serif Display',
+				textTransform: 'unset',
+				fontWeight: 900,
+				fontSize: 16,
+			},
+		},
+	},
 	MuiButton: {
 		styleOverrides: {
 			root: {
