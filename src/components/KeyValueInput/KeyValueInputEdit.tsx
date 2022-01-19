@@ -115,11 +115,10 @@ export const KeyValueInputEdit = memo(
 						<Grid item xs={12} sm={4}>
 							<TextField
 								color="secondary"
-								disabled={loading}
+								disabled
 								variant="filled"
 								value={keyText}
 								name="keyText"
-								autoFocus
 								onChange={(e) => {
 									if (e.target.value === '' || VALID_KEY_REGEX.test(e.target.value)) {
 										handleChange(i, e)
@@ -142,6 +141,7 @@ export const KeyValueInputEdit = memo(
 								variant="filled"
 								value={valueText}
 								name="valueText"
+								autoFocus
 								onChange={(e) => handleChange(i, e)}
 								placeholder="Value"
 								fullWidth
