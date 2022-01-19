@@ -145,7 +145,7 @@ export const MetaMaskSelect = () => {
 										'&:hover': { background: theme.customPalette.customBackground },
 									}}
 								>
-									Connection Failed
+									Connection failed
 								</Button>
 							</Tooltip>
 						)}

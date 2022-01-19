@@ -1,5 +1,5 @@
 import { Twemoji } from 'react-emoji-render'
-import { IoCheckmarkCircle, IoClose, IoSearch } from 'react-icons/io5'
+import { IoCheckmarkCircle, IoClose, IoCloseCircleOutline, IoSearch } from 'react-icons/io5'
 import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom'
 import {
 	Alert,
@@ -51,9 +51,9 @@ export const ClaimButton = styled(Button)(({ theme }: any) => ({
 
 export const Home = memo(() => {
 	const [searchParams] = useSearchParams()
-	const { enqueueSnackbar } = useSnackbar()
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 	const [claiming, setClaiming] = useState<boolean>(false)
-	const { issueTx, signWithMetaMask, connectToMetaMask, balance, metaMaskExists } = useMetaMask()
+	const { issueTx, signWithMetaMask, currentAddress, connectToMetaMask, balance, metaMaskExists } = useMetaMask()
 	const navigate = useNavigate()
 	const [showClaimedDialog, setShowClaimedDialog] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
@@ -89,6 +89,30 @@ export const Home = memo(() => {
 	const onClaim = async () => {
 		if (!metaMaskExists) {
 			connectToMetaMask()
+			return
+		}
+
+		if (!currentAddress) {
+			enqueueSnackbar(<>Please connect to MetaMask to claim a space.</>, {
+				variant: 'warning',
+				action: (
+					<>
+						<Button
+							startIcon={<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: 24 }} />}
+							variant="outlined"
+							color="inherit"
+							onClick={() => connectToMetaMask()}
+						>
+							Connect
+						</Button>
+						<Tooltip title="Dismiss">
+							<IconButton onClick={() => closeSnackbar()}>
+								<IoCloseCircleOutline />
+							</IconButton>
+						</Tooltip>
+					</>
+				),
+			})
 			return
 		}
 

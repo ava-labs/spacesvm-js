@@ -1,9 +1,8 @@
 import { isAndroid, isIOS } from 'react-device-detect'
-import { IoArrowRedo } from 'react-icons/io5'
-import { IoDownloadOutline } from 'react-icons/io5'
+import { IoArrowRedo, IoCloseCircleOutline, IoDownloadOutline } from 'react-icons/io5'
 import MetaMaskOnboarding from '@metamask/onboarding'
-import { Button } from '@mui/material'
-import { throttle } from 'lodash'
+import { Button, IconButton, Tooltip } from '@mui/material'
+import throttle from 'lodash/throttle'
 import { useSnackbar } from 'notistack'
 
 import { APP_NAME } from '@/constants'
@@ -118,21 +117,28 @@ export const MetaMaskProvider = ({ children }: any) => {
 			variant: 'warning',
 			persist: true,
 			action: (
-				<Button
-					startIcon={<IoDownloadOutline />}
-					variant="outlined"
-					color="inherit"
-					href={isIOS ? APPLE_STORE_MM_LINK : isAndroid ? GOOGLE_PLAY_MM_LINK : 'javascript:void(0)'}
-					onClick={() => {
-						if (isIOS || isAndroid) return
-						onboarding.startOnboarding()
-					}}
-				>
-					Download MetaMask
-				</Button>
+				<>
+					<Button
+						startIcon={<IoDownloadOutline />}
+						variant="outlined"
+						color="inherit"
+						href={isIOS ? APPLE_STORE_MM_LINK : isAndroid ? GOOGLE_PLAY_MM_LINK : 'javascript:void(0)'}
+						onClick={() => {
+							if (isIOS || isAndroid) return
+							onboarding.startOnboarding()
+						}}
+					>
+						Download MetaMask
+					</Button>
+					<Tooltip title="Dismiss">
+						<IconButton onClick={() => closeSnackbar()}>
+							<IoCloseCircleOutline />
+						</IconButton>
+					</Tooltip>
+				</>
 			),
 		})
-	}, [enqueueSnackbar, metaMaskExists])
+	}, [enqueueSnackbar, metaMaskExists, closeSnackbar])
 
 	/**
 	 * Issues a transaction to spacesVM and polls the VM until the transaction is confirmed.

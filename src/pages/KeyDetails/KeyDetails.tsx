@@ -20,7 +20,7 @@ export const KeyDetails = () => {
 		}
 		setIsLoading(true)
 		const { value, exists } = await querySpaceKey(spaceId, key)
-		console.log(exists)
+
 		if (!exists || value === undefined) {
 			setIsInvalidPage(true)
 			return
