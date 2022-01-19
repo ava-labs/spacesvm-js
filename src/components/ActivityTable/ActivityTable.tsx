@@ -128,7 +128,7 @@ export const ActivityTable = memo(() => {
 			<Grid container spacing={2}>
 				{recentActivityFiltered?.map(
 					({ timestamp, to, txId, key, sender, space, units, type }, i) =>
-						i <= 11 && (
+						i <= 25 && (
 							<Grid key={`${txId}-${i}`} item sm={12} md={6} lg={4} xl={3} sx={{ width: '100%' }}>
 								<Card variant="outlined" sx={{ mb: 1, height: '100%', width: '100%' }}>
 									{type && (
