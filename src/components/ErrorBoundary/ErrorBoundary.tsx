@@ -7,15 +7,7 @@ type ErrorBoundaryFallbackProps = {
 	resetErrorBoundary: () => void
 }
 export const ErrorBoundaryFallback = memo(({ error /*resetErrorBoundary*/ }: ErrorBoundaryFallbackProps) => (
-	<Alert
-		severity="error"
-		icon={<IoAlertCircleOutline />}
-		/*action={
-			<Button sx={{ whiteSpace: 'nowrap' }} color="error" onClick={() => resetErrorBoundary()}>
-				Try again
-			</Button>
-		}*/
-	>
+	<Alert severity="error" icon={<IoAlertCircleOutline />}>
 		<AlertTitle>Error</AlertTitle>
 		<Typography variant="subtitle2" gutterBottom>
 			Something bad happened —{' '}

@@ -100,7 +100,6 @@ export const MetaMaskProvider = ({ children }: any) => {
 							closeSnackbar()
 							connectToMetaMask()
 						}}
-						sx={{ ml: 1, mr: -1 }}
 					>
 						Try again
 					</Button>
@@ -128,7 +127,6 @@ export const MetaMaskProvider = ({ children }: any) => {
 						if (isIOS || isAndroid) return
 						onboarding.startOnboarding()
 					}}
-					sx={{ ml: 1, mr: -1 }}
 				>
 					Download MetaMask
 				</Button>
