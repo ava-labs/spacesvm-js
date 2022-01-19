@@ -1,6 +1,8 @@
 import { Box, Typography } from '@mui/material'
 
-export const PageTitle = memo(({ children, sx = {}, ...rest }: any) => (
+import { rainbowText } from '@/theming/rainbowText'
+
+export const PageTitle = memo(({ isRainbow = false, children, sx = {}, ...rest }: any) => (
 	<Box
 		sx={{
 			px: {
@@ -11,7 +13,12 @@ export const PageTitle = memo(({ children, sx = {}, ...rest }: any) => (
 			...sx,
 		}}
 	>
-		<Typography variant="h3" component="h2" sx={{ fontFamily: 'DM Serif Display' }} lineHeight="inherit" {...rest}>
+		<Typography
+			variant="h3"
+			component="h2"
+			sx={{ fontFamily: 'DM Serif Display', ...(isRainbow && { ...rainbowText }) }}
+			{...rest}
+		>
 			{children}
 		</Typography>
 	</Box>

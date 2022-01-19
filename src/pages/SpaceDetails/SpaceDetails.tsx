@@ -101,8 +101,8 @@ export const SpaceDetails = memo(() => {
 								<PageTitle
 									align="center"
 									variant="h1"
+									isRainbow
 									sx={{
-										...rainbowText,
 										mb: 0,
 									}}
 								>
