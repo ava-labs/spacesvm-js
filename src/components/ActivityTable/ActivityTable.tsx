@@ -130,7 +130,7 @@ export const ActivityTable = memo(() => {
 				</Box>
 			)}
 
-			<Grid container spacing={2}>
+			<Grid container spacing={2} justifyContent="center" sx={{ mb: 4 }}>
 				{recentActivityFiltered?.map(
 					({ timestamp, to, txId, key, sender, space, units, type }, i) =>
 						i <= 25 && (
