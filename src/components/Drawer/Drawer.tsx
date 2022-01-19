@@ -2,13 +2,13 @@ import { Twemoji } from 'react-emoji-render'
 import { IoMenu } from 'react-icons/io5'
 import { NavLink } from 'react-router-dom'
 import {
-	Drawer as MuiDrawer,
 	Grid,
 	IconButton,
 	List,
 	ListItem,
 	ListItemIcon,
 	ListItemText,
+	SwipeableDrawer,
 	Tooltip,
 	Typography,
 } from '@mui/material'
@@ -29,13 +29,14 @@ export const Drawer = memo(() => {
 					<IoMenu />
 				</IconButton>
 			</Tooltip>
-			<MuiDrawer
+			<SwipeableDrawer
+				onOpen={() => undefined}
 				PaperProps={{
 					sx: {
 						backgroundColor: (theme) => theme.customPalette.customBackground,
 						borderLeft: '2px solid hsla(0, 0%, 100%, 0.2)',
 						width: '40vw',
-						minWidth: 280,
+						minWidth: 300,
 						maxWidth: 540,
 						p: {
 							xs: 3,
@@ -110,7 +111,7 @@ export const Drawer = memo(() => {
 						</ListItem>
 					))}
 				</List>
-			</MuiDrawer>
+			</SwipeableDrawer>
 		</>
 	)
 })

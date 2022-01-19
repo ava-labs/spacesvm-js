@@ -37,7 +37,7 @@ export const AppBar = memo(() => {
 										alignItems: 'center',
 									}}
 								>
-									<img src={Logo} width={32} height={32} alt={`${APP_NAME} Logo`} />
+									<img src={Logo} width={isMobile ? 24 : 32} height={isMobile ? 24 : 32} alt={`${APP_NAME} Logo`} />
 									<Typography
 										variant="h4"
 										component="div"
