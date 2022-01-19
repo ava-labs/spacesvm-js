@@ -9,7 +9,7 @@ export const rainbowButton: any = (theme: Theme) => ({
 	fontWeight: 900,
 	fontSize: 24,
 	position: 'relative',
-	boxShadow: '0 0 40px rgb(231 2 86 / 60%)',
+	boxShadow: '0 0 24px rgb(231 2 86 / 60%)',
 	'&.Mui-disabled': {
 		backgroundColor: 'hsla(0,0%,100%,0.1)',
 		backgroundImage: 'unset',
@@ -32,7 +32,7 @@ export const rainbowButton: any = (theme: Theme) => ({
 	},
 	'&:hover': {
 		backgroundImage: 'linear-gradient(100deg,#aa039f,#ed014d,#f67916)',
-		boxShadow: '0 0 40px rgb(231 2 86 / 80%)',
+		boxShadow: '0 0 24px rgb(231 2 86 / 80%)',
 		'&:after': {
 			opacity: 1,
 		},
