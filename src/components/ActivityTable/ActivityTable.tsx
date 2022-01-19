@@ -7,6 +7,7 @@ import {
 	Grid,
 	Link as MuiLink,
 	Table,
+	TableBody,
 	//TableBody,
 	TableCell,
 	//	TableHead,
@@ -134,109 +135,111 @@ export const ActivityTable = memo(() => {
 									)}
 									<CardContent sx={{ pt: 0, pb: '0!important' }}>
 										<Table>
-											{timestamp && (
-												<TableRow>
-													<TableCell>
-														<Typography variant="body2" fontWeight={900} noWrap>
-															Timestamp
-														</Typography>
-													</TableCell>
-													<TableCell>
-														<Typography noWrap variant="caption">
-															{new Date(Number(timestamp) * 1000).toLocaleString() || '-'}
-														</Typography>
-													</TableCell>
-												</TableRow>
-											)}
-											{space && (
-												<TableRow>
-													<TableCell>
-														<Typography variant="body2" fontWeight={900} noWrap>
-															Space
-														</Typography>
-													</TableCell>
-													<TableCell>
-														<MuiLink component={Link} to={`/s/${space}/`}>
-															{space}
-														</MuiLink>
-													</TableCell>
-												</TableRow>
-											)}
-											{key && space && type !== 'delete' && (
-												<TableRow>
-													<TableCell>
-														<Typography variant="body2" fontWeight={900} noWrap>
-															Key
-														</Typography>
-													</TableCell>
-													<TableCell>
-														<MuiLink component={Link} to={`/s/${space}/${key}/`}>
-															{key}
-														</MuiLink>
-													</TableCell>
-												</TableRow>
-											)}
-											{units && (
-												<TableRow>
-													<TableCell>
-														<Typography variant="body2" fontWeight={900} noWrap>
-															Amount{' '}
-															<Typography sx={{ ml: 1 }} variant="body2" component="span" color="textSecondary">
-																(SPC)
+											<TableBody>
+												{timestamp && (
+													<TableRow>
+														<TableCell>
+															<Typography variant="body2" fontWeight={900} noWrap>
+																Timestamp
 															</Typography>
-														</Typography>
-													</TableCell>
-													<TableCell>
-														<Typography noWrap variant="body2">
-															{units ? new Intl.NumberFormat('en-US').format(units) : '-'}
-														</Typography>
-													</TableCell>
-												</TableRow>
-											)}
-											{txId && (
-												<TableRow>
-													<TableCell sx={{ width: 0 }}>
-														<Typography variant="body2" fontWeight={900} noWrap>
-															Transaction ID
-														</Typography>
-													</TableCell>
-													<TableCell>
-														<AddressChip
-															sx={{ ml: -1 }}
-															copyText="Copy TxID"
-															copySuccessText="TxID copied!"
-															address={txId}
-															isObfuscated
-															tooltipPlacement="top"
-														/>
-													</TableCell>
-												</TableRow>
-											)}
+														</TableCell>
+														<TableCell>
+															<Typography noWrap variant="caption">
+																{new Date(Number(timestamp) * 1000).toLocaleString() || '-'}
+															</Typography>
+														</TableCell>
+													</TableRow>
+												)}
+												{space && (
+													<TableRow>
+														<TableCell>
+															<Typography variant="body2" fontWeight={900} noWrap>
+																Space
+															</Typography>
+														</TableCell>
+														<TableCell>
+															<MuiLink component={Link} to={`/s/${space}/`}>
+																{space}
+															</MuiLink>
+														</TableCell>
+													</TableRow>
+												)}
+												{key && space && type !== 'delete' && (
+													<TableRow>
+														<TableCell>
+															<Typography variant="body2" fontWeight={900} noWrap>
+																Key
+															</Typography>
+														</TableCell>
+														<TableCell>
+															<MuiLink component={Link} to={`/s/${space}/${key}/`}>
+																{key}
+															</MuiLink>
+														</TableCell>
+													</TableRow>
+												)}
+												{units && (
+													<TableRow>
+														<TableCell>
+															<Typography variant="body2" fontWeight={900} noWrap>
+																Amount{' '}
+																<Typography sx={{ ml: 1 }} variant="body2" component="span" color="textSecondary">
+																	(SPC)
+																</Typography>
+															</Typography>
+														</TableCell>
+														<TableCell>
+															<Typography noWrap variant="body2">
+																{units ? new Intl.NumberFormat('en-US').format(units) : '-'}
+															</Typography>
+														</TableCell>
+													</TableRow>
+												)}
+												{txId && (
+													<TableRow>
+														<TableCell sx={{ width: 0 }}>
+															<Typography variant="body2" fontWeight={900} noWrap>
+																Transaction ID
+															</Typography>
+														</TableCell>
+														<TableCell>
+															<AddressChip
+																sx={{ ml: -1 }}
+																copyText="Copy TxID"
+																copySuccessText="TxID copied!"
+																address={txId}
+																isObfuscated
+																tooltipPlacement="top"
+															/>
+														</TableCell>
+													</TableRow>
+												)}
 
-											{sender && (
-												<TableRow>
-													<TableCell>
-														<Typography variant="body2" fontWeight={900} noWrap>
-															Sender
-														</Typography>
-													</TableCell>
-													<TableCell>
-														<AddressChip sx={{ ml: -1 }} address={sender} isObfuscated tooltipPlacement="top" />
-													</TableCell>
-												</TableRow>
-											)}
-											{to && (
-												<TableRow>
-													<TableCell>
-														<Typography variant="body2" fontWeight={900} noWrap>
-															To
-														</Typography>
-													</TableCell>
-													<TableCell>
-														<AddressChip sx={{ ml: -1 }} address={to} isObfuscated tooltipPlacement="top" />
-													</TableCell>
-												</TableRow>
-											)}
+												{sender && (
+													<TableRow>
+														<TableCell>
+															<Typography variant="body2" fontWeight={900} noWrap>
+																Sender
+															</Typography>
+														</TableCell>
+														<TableCell>
+															<AddressChip sx={{ ml: -1 }} address={sender} isObfuscated tooltipPlacement="top" />
+														</TableCell>
+													</TableRow>
+												)}
+												{to && (
+													<TableRow>
+														<TableCell>
+															<Typography variant="body2" fontWeight={900} noWrap>
+																To
+															</Typography>
+														</TableCell>
+														<TableCell>
+															<AddressChip sx={{ ml: -1 }} address={to} isObfuscated tooltipPlacement="top" />
+														</TableCell>
+													</TableRow>
+												)}
+											</TableBody>
 										</Table>
 									</CardContent>
 								</Card>

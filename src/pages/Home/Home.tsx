@@ -15,12 +15,12 @@ import {
 	Grow,
 	IconButton,
 	InputAdornment,
+	styled,
 	TextField,
 	Tooltip,
 	Typography,
 	useTheme,
 } from '@mui/material'
-import { styled } from '@mui/system'
 import { useSnackbar } from 'notistack'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
@@ -88,9 +88,16 @@ export const Home = memo(() => {
 
 	const onClaim = async () => {
 		if (balance < calculateClaimCost(username)) {
-			enqueueSnackbar("You don't have enough SPC to claim this space!  Tip: Longer names are cheaper. 😉", {
-				variant: 'error',
-			})
+			enqueueSnackbar(
+				<>
+					You don't have enough SPC to claim this space!
+					<br />
+					Tip: Longer names are cheaper. 😉
+				</>,
+				{
+					variant: 'error',
+				},
+			)
 			return
 		}
 
