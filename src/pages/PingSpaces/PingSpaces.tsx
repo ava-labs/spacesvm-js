@@ -17,7 +17,7 @@ export const PingSpaces = () => {
 	return (
 		<Page>
 			<Typography align="center" variant="h2" color={pingSuccess ? 'green' : 'red'} sx={{ mt: 4 }}>
-				{pingSuccess === null ? 'Checking connection to Spaces VM...' : pingSuccess ? 'PING SUCCESSFUL' : 'PING FAILED'}
+				{pingSuccess === null ? 'Checking connection to SpacesVM...' : pingSuccess ? 'PING SUCCESSFUL' : 'PING FAILED'}
 			</Typography>
 			{pingSuccess === undefined && <CircularProgress sx={{ margin: '0 auto', mt: 1 }} />}
 		</Page>

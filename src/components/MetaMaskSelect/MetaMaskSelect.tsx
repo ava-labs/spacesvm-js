@@ -137,7 +137,7 @@ export const MetaMaskSelect = () => {
 							</Tooltip>
 						)}
 						{!isConnectedToSpaces && (
-							<Tooltip title={'Retry connection to Spaces VM'}>
+							<Tooltip title={'Retry connection to SpacesVM'}>
 								<Button
 									startIcon={<AiOutlineRedo />}
 									variant="outlined"
