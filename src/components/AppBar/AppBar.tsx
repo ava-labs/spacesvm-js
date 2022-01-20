@@ -19,10 +19,17 @@ export const AppBar = memo(() => {
 				color="transparent"
 				sx={{
 					// for scrollbar not to be blurry
-					mr: '10px',
-					width: 'calc(100% - 10px)',
-					mt: '1px',
-					backdropFilter: 'blur(5px)',
+					mr: '12px',
+					width: 'calc(100% - 12px)',
+					pt: '1px',
+					backgroundColor: (theme) =>
+						theme.palette.mode === 'dark' ? 'rgba(9, 7, 25, 0.9)' : 'rgba(247, 247, 247, 0.9)',
+
+					/* if backdrop support: very transparent and blurred */
+					'@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none))': {
+						backdropFilter: 'blur(5px)',
+						backgroundColor: 'unset',
+					},
 				}}
 			>
 				<Toolbar disableGutters>
