@@ -19,13 +19,12 @@ import {
 import findIndex from 'lodash/findIndex'
 
 import { AddressChip } from '@/components/AddressChip/AddressChip'
-import { ACTIVITY_TABLE_TAB_STORAGE_KEY } from '@/constants'
+import { ACTIVITY_TABLE_TAB_STORAGE_KEY, ONE_SECOND_IN_MS } from '@/constants'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { getLatestActivity } from '@/utils/spacesVM'
 
 export const ActivityTable = memo(() => {
 	const [tps, setTps] = useState<number>(0)
-	const [mostRecentTxId, setMostRecentTxId] = useState<string>()
 	const [selectedTabStorage, setSelectedTabStorage] = useLocalStorage(ACTIVITY_TABLE_TAB_STORAGE_KEY, 'all') // track theme in localStorage
 	const [selectedTab, setSelectedTab] = useState<string>(selectedTabStorage)
 	const [recentActivity, setRecentActivity] = useState<
@@ -66,13 +65,10 @@ export const ActivityTable = memo(() => {
 	}
 
 	useEffect(() => {
-		const latestTxId = recentActivity?.[0].txId
-		const index = findIndex(recentActivity, (o) => o.txId == mostRecentTxId)
-		const tpsValue = Number(index) / 10
-
-		setTps(tpsValue)
-		setMostRecentTxId(latestTxId)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		if (!recentActivity?.length) return
+		const timestampTenSecAgo = (Date.now() - 10 * ONE_SECOND_IN_MS) / 1000
+		const howManyIn10s = findIndex(recentActivity, (tx: any) => tx.timestamp < timestampTenSecAgo)
+		setTps(howManyIn10s / 10)
 	}, [recentActivity])
 
 	useEffect(() => {
