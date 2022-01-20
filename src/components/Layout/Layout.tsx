@@ -22,7 +22,7 @@ export const Layout: FC = memo(({ children }) => {
 			>
 				{children}
 			</Box>
-			{isMobile && <MetaMaskSelect onlyBalance />}
+			{isMobile && <MetaMaskSelect />}
 		</Box>
 	)
 })

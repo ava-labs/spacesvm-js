@@ -61,9 +61,11 @@ export const AppBar = memo(() => {
 									<ThemeToggle />
 								</Grid>
 
-								<Grid item>
-									<MetaMaskSelect />
-								</Grid>
+								{!isMobile && (
+									<Grid item>
+										<MetaMaskSelect />
+									</Grid>
+								)}
 
 								<Grid item>
 									<Drawer />

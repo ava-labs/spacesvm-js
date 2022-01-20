@@ -30,7 +30,7 @@ const growWidth = keyframes`
 	}
 `
 
-export const MetaMaskSelect = ({ onlyBalance }: any) => {
+export const MetaMaskSelect = () => {
 	const { enqueueSnackbar } = useSnackbar()
 	const theme = useTheme()
 	const {
@@ -61,7 +61,7 @@ export const MetaMaskSelect = ({ onlyBalance }: any) => {
 		})
 	}
 
-	const onlyBalanceStyles = {
+	const mobileStyles = {
 		position: 'fixed',
 		bottom: 0,
 		paddingTop: 1,
@@ -74,75 +74,67 @@ export const MetaMaskSelect = ({ onlyBalance }: any) => {
 
 	return (
 		<>
-			<Grid container sx={{ ...(onlyBalance && { ...onlyBalanceStyles }) }} justifyContent={'center'}>
+			<Grid
+				container
+				// @ts-ignore
+				sx={{ ...(isMobile && { ...mobileStyles }) }}
+				justifyContent={'center'}
+			>
 				<Grid item>
 					<ButtonGroup>
-						{!onlyBalance && (
-							<Tooltip title={currentAddress ? 'Copy address' : 'Connect to MetaMask'}>
-								{isMobile ? (
-									<IconButton onClick={handleMetaMaskClick} disabled={isConnectingToMM}>
-										<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />
-									</IconButton>
-								) : (
-									<Button
-										startIcon={<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />}
-										variant="outlined"
-										color="secondary"
-										onClick={handleMetaMaskClick}
-										disabled={isConnectingToMM}
-										sx={{
-											background: theme.customPalette.customBackground,
-											'&:hover': { background: theme.customPalette.customBackground },
-										}}
-									>
-										{currentAddress ? obfuscateAddress(currentAddress) : 'Connect'}
-									</Button>
-								)}
-							</Tooltip>
-						)}
+						<Tooltip title={currentAddress ? 'Copy address' : 'Connect to MetaMask'}>
+							<Button
+								startIcon={<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />}
+								variant="outlined"
+								color="secondary"
+								onClick={handleMetaMaskClick}
+								disabled={isConnectingToMM}
+								sx={{
+									background: theme.customPalette.customBackground,
+									'&:hover': { background: theme.customPalette.customBackground },
+								}}
+							>
+								{currentAddress ? obfuscateAddress(currentAddress) : 'Connect'}
+							</Button>
+						</Tooltip>
+
 						{metaMaskExists && isConnectedToSpaces && (
 							<Tooltip title={'Transfer SPC'}>
-								{isMobile && !onlyBalance ? (
-									<IconButton onClick={() => setTransferOpen(true)}>
-										<IoSwapVertical color={theme.palette.primary.light} />
-									</IconButton>
-								) : (
-									<Button
-										variant="outlined"
-										color="secondary"
-										onClick={() => setTransferOpen(true)}
+								<Button
+									variant="outlined"
+									color="secondary"
+									onClick={() => setTransferOpen(true)}
+									sx={{
+										background: theme.customPalette.customBackground,
+										'&:hover': { background: theme.customPalette.customBackground },
+										animation: `800ms ${growWidth} ease`,
+										animationDirection: 'forwards',
+									}}
+								>
+									<Typography
+										noWrap
+										variant="h6"
+										display="flex"
+										lineHeight={1}
 										sx={{
-											background: theme.customPalette.customBackground,
-											'&:hover': { background: theme.customPalette.customBackground },
-											animation: `800ms ${growWidth} ease`,
-											animationDirection: 'forwards',
+											mr: 1,
 										}}
+										style={{ fontSize: '1.1rem' }}
 									>
+										{balance !== null ? numberWithCommas(balance) : 0}{' '}
 										<Typography
-											noWrap
 											variant="h6"
-											display="flex"
+											component="span"
 											lineHeight={1}
-											sx={{
-												mr: onlyBalance ? 0 : 1,
-											}}
+											color="textSecondary"
+											sx={{ ml: 0.5 }}
 											style={{ fontSize: '1.1rem' }}
 										>
-											{balance !== null ? numberWithCommas(balance) : 0}{' '}
-											<Typography
-												variant="h6"
-												component="span"
-												lineHeight={1}
-												color="textSecondary"
-												sx={{ ml: 0.5 }}
-												style={{ fontSize: '1.1rem' }}
-											>
-												SPC
-											</Typography>
+											SPC
 										</Typography>
-										{!onlyBalance && <IoSwapVertical size="18" color={theme.palette.primary.light} />}
-									</Button>
-								)}
+									</Typography>
+									<IoSwapVertical size="18" color={theme.palette.primary.light} />
+								</Button>
 							</Tooltip>
 						)}
 						{!isConnectedToSpaces && (
