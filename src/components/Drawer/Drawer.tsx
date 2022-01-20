@@ -3,6 +3,7 @@ import { IoCloseCircleOutline, IoMenu } from 'react-icons/io5'
 import { NavLink } from 'react-router-dom'
 import {
 	Box,
+	Divider,
 	Grid,
 	IconButton,
 	List,
@@ -20,24 +21,24 @@ import Javascript from '@/assets/javascript.png'
 import Logo from '@/assets/spaces-logo.png'
 import Terminal from '@/assets/terminal.png'
 import { ThemeToggle } from '@/components/ThemeToggle'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { getOwnedSpaces } from '@/utils/spacesVM'
 
 export const Drawer = memo(() => {
+	const [myOwnedSpaces, setOwnedSpaces] = useState<string[]>()
 	const [open, setOpen] = useState<boolean>(false)
 	const theme = useTheme()
+	const { currentAddress } = useMetaMask()
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
 	useEffect(() => {
-		console.log('HERE')
 		const fetchOwnedSpaces = async () => {
-			const ownedSpaces = await getOwnedSpaces()
-
-			console.log(ownedSpaces)
-			//setRecentActivity(activity.activity)
+			const ownedSpaces = await getOwnedSpaces(currentAddress)
+			setOwnedSpaces(ownedSpaces?.spaces)
 		}
 
 		fetchOwnedSpaces()
-	}, [])
+	}, [currentAddress])
 
 	return (
 		<>
@@ -135,7 +136,7 @@ export const Drawer = memo(() => {
 							key={label}
 							href={isExternal && url}
 							target={isExternal && '_blank'}
-							sx={{ mb: 2, borderRadius: 4 }}
+							sx={{ mb: 1, borderRadius: 4, height: 52 }}
 							onClick={() => setOpen(false)}
 						>
 							<ListItemIcon sx={{ fontSize: 32 }}>{emoji}</ListItemIcon>
@@ -143,6 +144,36 @@ export const Drawer = memo(() => {
 						</ListItem>
 					))}
 				</List>
+
+				{myOwnedSpaces && (
+					<>
+						<Divider sx={{ mt: 1 }} />
+
+						<Typography variant="h4" sx={{ fontFamily: 'DM Serif Display', mt: 3 }}>
+							Your spaces
+						</Typography>
+
+						<List sx={{ mt: 2, ml: -2 }}>
+							{myOwnedSpaces.map((space, i) => (
+								<ListItem
+									component={NavLink}
+									// @ts-ignore
+									button
+									to={`/${space}`}
+									key={`${space}-${i}`}
+									sx={{ mb: 1, borderRadius: 4, height: 52 }}
+									onClick={() => setOpen(false)}
+								>
+									<ListItemIcon sx={{ fontSize: 32 }}>
+										<Twemoji svg text="🔭" className="emoji" />
+									</ListItemIcon>
+
+									<ListItemText primary={<Typography variant="h5">{space}</Typography>} />
+								</ListItem>
+							))}
+						</List>
+					</>
+				)}
 			</SwipeableDrawer>
 		</>
 	)

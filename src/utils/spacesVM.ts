@@ -71,8 +71,9 @@ export const getLatestBlockID = async () => {
 	return blockData?.blockId
 }
 
-export const getOwnedSpaces = async () => {
-	const ownedSpaces = await fetchSpaces('owned')
+export const getOwnedSpaces = async (currentAddress: string) => {
+	if (!currentAddress) return
+	const ownedSpaces = await fetchSpaces('owned', { address: currentAddress })
 
 	return ownedSpaces
 }
