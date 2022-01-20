@@ -68,6 +68,7 @@ export const MetaMaskSelect = ({ onlyBalance }: any) => {
 		paddingTop: 1,
 		paddingBottom: 1,
 		borderRadius: 0,
+		display: metaMaskExists && isConnectedToSpaces ? 'flex' : 'none',
 		backgroundColor: (theme: Theme) => theme.customPalette.customBackground,
 		borderTop: (theme: Theme) => `1px solid ${theme.palette.divider}`,
 	}
