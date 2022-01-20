@@ -140,7 +140,13 @@ export const Drawer = memo(() => {
 							onClick={() => setOpen(false)}
 						>
 							<ListItemIcon sx={{ fontSize: 32 }}>{emoji}</ListItemIcon>
-							<ListItemText primary={<Typography variant="h5">{label}</Typography>} />
+							<ListItemText
+								primary={
+									<Typography noWrap variant="h5">
+										{label}
+									</Typography>
+								}
+							/>
 						</ListItem>
 					))}
 				</List>
@@ -168,7 +174,13 @@ export const Drawer = memo(() => {
 										<Twemoji svg text="🔭" className="emoji" />
 									</ListItemIcon>
 
-									<ListItemText primary={<Typography variant="h5">{space}</Typography>} />
+									<ListItemText
+										primary={
+											<Typography noWrap variant="h5">
+												{space}
+											</Typography>
+										}
+									/>
 								</ListItem>
 							))}
 						</List>
