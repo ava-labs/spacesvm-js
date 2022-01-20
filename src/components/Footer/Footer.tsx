@@ -43,98 +43,98 @@ export const Footer = memo(() => {
 		fetchNetworks()
 	}, [])
 
-	return (
-		<Box pb={isMobile ? 6 : 4}>
-			<Divider sx={{ my: 4 }} />
-			<Grid container spacing={2}>
-				<Grid item container direction="column" alignItems="flex-end" xs={6}>
-					<Grid item>
-						<ReactRouterLink
-							to="/"
-							style={{
-								textDecoration: 'none',
-								display: 'flex',
-								alignItems: 'center',
-							}}
-						>
-							<img src={Logo} width={isMobile ? 24 : 32} height={isMobile ? 24 : 32} alt={`${APP_NAME} Logo`} />
-							<Typography
-								variant="h4"
-								component="div"
-								color="textPrimary"
-								sx={{ fontFamily: 'DM Serif Display', ml: 2, letterSpacing: 6 }}
-							>
-								{APP_NAME}
-							</Typography>
-						</ReactRouterLink>
-					</Grid>
-					<Grid item>
-						<Typography component="footer" variant="body2" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="right">
-							{`© ${new Date().getFullYear()} ${APP_NAME}`}
-						</Typography>
-					</Grid>
-					<Grid item>
-						<Typography component="footer" variant="body2" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="right">
-							<Link color="inherit" href="https://spacesvm.xyz/" rel="noopener noreferrer" target="_blank">
-								Powered by the SpacesVM Avalanche Subnet
-							</Link>
-						</Typography>
-					</Grid>
-					<Grid item>
-						<Typography component="footer" variant="body2" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="right">
-							<Link color="inherit" href="https://dribbble.com/dmitrymoi/" rel="noopener noreferrer" target="_blank">
-								Illustrations by Dmitry Moiseenko
-							</Link>
-						</Typography>
-					</Grid>
-				</Grid>
-				<Grid item>
-					<Divider orientation="vertical" />
-				</Grid>
-				<Grid item>
-					<Grid container direction="column" spacing={1}>
-						{quarkNetworks && (
-							<Grid item>
-								<Typography component="span" variant="body2" color="textSecondary">
-									See us on Avascan! Our <Link href={`${CHAIN_ID_URL}${quarkNetworks.chainId}`}>chain</Link> and our{' '}
-									<Link href={`${SUBNET_ID_URL}${quarkNetworks.subnetId}`}>subnet</Link>
-								</Typography>
-							</Grid>
-						)}
-						<Grid item>
-							<ButtonGroup>
-								<Button
-									variant="outlined"
-									color="secondary"
-									disabled
-									sx={{
-										color: (theme) => `${theme.palette.text.primary}!important`,
-										background: (theme) => theme.customPalette.customBackground,
-										'&:hover': { background: (theme) => theme.customPalette.customBackground },
-									}}
-								>
-									Subnet ID
-								</Button>
+	// return (
+	// 	<Box pb={isMobile ? 6 : 4}>
+	// 		<Divider sx={{ my: 4 }} />
+	// 		<Grid container spacing={2}>
+	// 			<Grid item container direction="column" alignItems="flex-end" xs={6}>
+	// 				<Grid item>
+	// 					<ReactRouterLink
+	// 						to="/"
+	// 						style={{
+	// 							textDecoration: 'none',
+	// 							display: 'flex',
+	// 							alignItems: 'center',
+	// 						}}
+	// 					>
+	// 						<img src={Logo} width={isMobile ? 24 : 32} height={isMobile ? 24 : 32} alt={`${APP_NAME} Logo`} />
+	// 						<Typography
+	// 							variant="h4"
+	// 							component="div"
+	// 							color="textPrimary"
+	// 							sx={{ fontFamily: 'DM Serif Display', ml: 2, letterSpacing: 6 }}
+	// 						>
+	// 							{APP_NAME}
+	// 						</Typography>
+	// 					</ReactRouterLink>
+	// 				</Grid>
+	// 				<Grid item>
+	// 					<Typography component="footer" variant="body2" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="right">
+	// 						{`© ${new Date().getFullYear()} ${APP_NAME}`}
+	// 					</Typography>
+	// 				</Grid>
+	// 				<Grid item>
+	// 					<Typography component="footer" variant="body2" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="right">
+	// 						<Link color="inherit" href="https://spacesvm.xyz/" rel="noopener noreferrer" target="_blank">
+	// 							Powered by the SpacesVM Avalanche Subnet
+	// 						</Link>
+	// 					</Typography>
+	// 				</Grid>
+	// 				<Grid item>
+	// 					<Typography component="footer" variant="body2" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="right">
+	// 						<Link color="inherit" href="https://dribbble.com/dmitrymoi/" rel="noopener noreferrer" target="_blank">
+	// 							Illustrations by Dmitry Moiseenko
+	// 						</Link>
+	// 					</Typography>
+	// 				</Grid>
+	// 			</Grid>
+	// 			<Grid item>
+	// 				<Divider orientation="vertical" />
+	// 			</Grid>
+	// 			<Grid item>
+	// 				<Grid container direction="column" spacing={1}>
+	// 					{quarkNetworks && (
+	// 						<Grid item>
+	// 							<Typography component="span" variant="body2" color="textSecondary">
+	// 								See us on Avascan! Our <Link href={`${CHAIN_ID_URL}${quarkNetworks.chainId}`}>chain</Link> and our{' '}
+	// 								<Link href={`${SUBNET_ID_URL}${quarkNetworks.subnetId}`}>subnet</Link>
+	// 							</Typography>
+	// 						</Grid>
+	// 					)}
+	// 					<Grid item>
+	// 						<ButtonGroup>
+	// 							<Button
+	// 								variant="outlined"
+	// 								color="secondary"
+	// 								disabled
+	// 								sx={{
+	// 									color: (theme) => `${theme.palette.text.primary}!important`,
+	// 									background: (theme) => theme.customPalette.customBackground,
+	// 									'&:hover': { background: (theme) => theme.customPalette.customBackground },
+	// 								}}
+	// 							>
+	// 								Subnet ID
+	// 							</Button>
 
-								<Button
-									variant="outlined"
-									color="secondary"
-									endIcon={<IoOpenOutline size={14} />}
-									onClick={() => window.open(`${SUBNET_ID_URL}${quarkNetworks.subnetId}`)}
-									sx={{
-										background: (theme) => theme.customPalette.customBackground,
-										'&:hover': { background: (theme) => theme.customPalette.customBackground },
-									}}
-								>
-									{obfuscateAddress(quarkNetworks.subnetId)}
-								</Button>
-							</ButtonGroup>
-						</Grid>
-					</Grid>
-				</Grid>
-			</Grid>
-		</Box>
-	)
+	// 							<Button
+	// 								variant="outlined"
+	// 								color="secondary"
+	// 								endIcon={<IoOpenOutline size={14} />}
+	// 								onClick={() => window.open(`${SUBNET_ID_URL}${quarkNetworks.subnetId}`)}
+	// 								sx={{
+	// 									background: (theme) => theme.customPalette.customBackground,
+	// 									'&:hover': { background: (theme) => theme.customPalette.customBackground },
+	// 								}}
+	// 							>
+	// 								{obfuscateAddress(quarkNetworks.subnetId)}
+	// 							</Button>
+	// 						</ButtonGroup>
+	// 					</Grid>
+	// 				</Grid>
+	// 			</Grid>
+	// 		</Grid>
+	// 	</Box>
+	// )
 
 	return (
 		<Box pb={isMobile ? 6 : 4}>
