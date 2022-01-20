@@ -1,5 +1,6 @@
-import { IoAdd } from 'react-icons/io5'
-import { Button, CircularProgress, Grid, Grow, styled, TextField } from '@mui/material'
+import { AiOutlineRedo } from 'react-icons/ai'
+import { IoAdd, IoCloseCircleOutline } from 'react-icons/io5'
+import { Button, CircularProgress, Grid, Grow, IconButton, styled, TextField, Tooltip } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
 import { VALID_KEY_REGEX } from '@/constants'
@@ -24,7 +25,7 @@ type KeyValueInputProps = {
 export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyValueInputProps) => {
 	const { signWithMetaMask, issueTx } = useMetaMask()
 	const [formValues, setFormValues] = useState<{ keyText?: string; valueText?: string; loading?: boolean }[]>([])
-	const { enqueueSnackbar } = useSnackbar()
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 
 	const handleChange = (i: any, e: any) => {
 		const newFormValues = [...formValues]
@@ -59,28 +60,20 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 			key: keyText,
 			value: valueText,
 		})
-		const signature = await signWithMetaMask(typedData)
 
+		const signature = await signWithMetaMask(typedData)
 		if (!signature) {
-			handleChange(i, {
-				target: {
-					name: 'loading',
-					value: false,
-				},
-			})
+			onSubmitFailure(i)
 			return
 		}
 
 		const success = await issueTx(typedData, signature)
-
 		if (!success) {
-			enqueueSnackbar('Something went wrong...', { variant: 'error' })
+			onSubmitFailure(i)
 			return
 		}
-
 		enqueueSnackbar('Item added successfully!', { variant: 'success' })
-		// Give the blockchain a chance to update... yes I know this is bad code but its easy for now <3
-		setTimeout(refreshSpaceDetails, 1000)
+		refreshSpaceDetails()
 		handleChange(i, {
 			target: {
 				name: 'loading',
@@ -88,6 +81,39 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 			},
 		})
 		removeFormFields(i)
+	}
+
+	const onSubmitFailure = async (i: number) => {
+		handleChange(i, {
+			target: {
+				name: 'loading',
+				value: false,
+			},
+		})
+		enqueueSnackbar('Oops!  Something went wrong when saving your key.  Try again!', {
+			variant: 'warning',
+			persist: true,
+			action: (
+				<>
+					<Button
+						startIcon={<AiOutlineRedo />}
+						variant="outlined"
+						color="inherit"
+						onClick={() => {
+							closeSnackbar()
+							submitKeyValue(i)
+						}}
+					>
+						Retry Set
+					</Button>
+					<Tooltip title="Dismiss">
+						<IconButton onClick={() => closeSnackbar()}>
+							<IoCloseCircleOutline />
+						</IconButton>
+					</Tooltip>
+				</>
+			),
+		})
 	}
 
 	return (
