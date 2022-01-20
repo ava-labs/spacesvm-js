@@ -16,6 +16,7 @@ export const APP_NAME = 'Spaces'
 export const APP_SLOGAN = 'Claim your space on the Avalanche blockchain'
 
 // units
+export const ONE_SECOND_IN_MS = 1000
 export const ONE_MINUTES_IN_MS = 60000
 export const TEN_MINUTES_IN_MS = 600000
 export const PRICE_PER_SPC = 0.05 // $0.05 per SPC, bogus for now
