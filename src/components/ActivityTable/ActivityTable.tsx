@@ -103,8 +103,12 @@ export const ActivityTable = memo(() => {
 
 	return recentActivity ? (
 		<>
-			<Typography align="center" variant="body2" sx={{ mb: 2 }}>
-				Live TPS: {tps === 0 ? '-' : tps} <br />
+			<Typography align="center" variant="body2" sx={{ mb: 2 }} fontWeight={900}>
+				Live TPS:{' '}
+				<Typography component="span" variant="body2" fontWeight={900} sx={{ ml: '4px' }} fontSize={18} color="primary">
+					{tps === 0 ? '-' : tps}
+				</Typography>{' '}
+				<br />
 				<Typography sx={{ ml: 1 }} variant="caption" component="span" color="textSecondary">
 					(Updated every 10 seconds)
 				</Typography>
