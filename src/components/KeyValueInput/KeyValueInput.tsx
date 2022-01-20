@@ -1,6 +1,7 @@
 import { AiOutlineRedo } from 'react-icons/ai'
-import { IoAdd, IoCloseCircleOutline } from 'react-icons/io5'
-import { Button, CircularProgress, Grid, Grow, IconButton, styled, TextField, Tooltip } from '@mui/material'
+import { IoAdd, IoCloseCircleOutline, IoInformationCircleOutline } from 'react-icons/io5'
+import { Button, CircularProgress, Grid, Grow, IconButton, styled, TextField, Tooltip, Typography } from '@mui/material'
+import { Box } from '@mui/system'
 import { useSnackbar } from 'notistack'
 
 import { VALID_KEY_REGEX } from '@/constants'
@@ -150,6 +151,32 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 										}}
 										placeholder="Key"
 										fullWidth
+										helperText={
+											<Tooltip
+												title={
+													<Typography variant="caption" noWrap fontSize={10}>
+														Any lowercase string - e.g. twitter
+													</Typography>
+												}
+												placement="bottom"
+											>
+												<Typography
+													sx={{
+														'&:hover': {
+															cursor: 'help',
+														},
+													}}
+													variant="caption"
+													component="span"
+													color="textSecondary"
+												>
+													<Box display="inline-flex" component="span" position="relative" top={3} left={-4}>
+														<IoInformationCircleOutline size={14} />
+													</Box>
+													Hint
+												</Typography>
+											</Tooltip>
+										}
 										InputProps={{
 											sx: { fontSize: 32, fontWeight: 900 },
 										}}
@@ -168,6 +195,32 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 										onChange={(e) => handleChange(i, e)}
 										placeholder="Value"
 										fullWidth
+										helperText={
+											<Tooltip
+												title={
+													<Typography variant="caption" noWrap fontSize={10}>
+														Any lowercase string - e.g. https://example.com/
+													</Typography>
+												}
+												placement="bottom"
+											>
+												<Typography
+													sx={{
+														'&:hover': {
+															cursor: 'help',
+														},
+													}}
+													variant="caption"
+													component="span"
+													color="textSecondary"
+												>
+													<Box display="inline-flex" component="span" position="relative" top={3} left={-4}>
+														<IoInformationCircleOutline size={14} />
+													</Box>
+													Hint
+												</Typography>
+											</Tooltip>
+										}
 										InputProps={{
 											sx: { fontSize: 32, fontWeight: 900 },
 										}}
@@ -190,6 +243,7 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 											submitKeyValue(i)
 										}}
 										disabled={loading || keyText?.length === 0 || valueText?.length === 0}
+										sx={{ mb: 3 }}
 										variant="contained"
 										size="large"
 									>
