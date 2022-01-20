@@ -97,10 +97,10 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 							onSubmit()
 						}}
 					>
-						Retry Transfer
+						Retry transfer
 					</Button>
 					<Tooltip title="Dismiss">
-						<IconButton onClick={() => closeSnackbar()}>
+						<IconButton onClick={() => closeSnackbar()} color="inherit">
 							<IoCloseCircleOutline />
 						</IconButton>
 					</Tooltip>

@@ -108,7 +108,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 							Connect
 						</Button>
 						<Tooltip title="Dismiss">
-							<IconButton onClick={() => closeSnackbar()}>
+							<IconButton onClick={() => closeSnackbar()} color="inherit">
 								<IoCloseCircleOutline />
 							</IconButton>
 						</Tooltip>

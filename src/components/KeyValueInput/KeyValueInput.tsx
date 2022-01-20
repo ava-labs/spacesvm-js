@@ -104,10 +104,10 @@ export const KeyValueInput = memo(({ spaceId, refreshSpaceDetails, empty }: KeyV
 							submitKeyValue(i)
 						}}
 					>
-						Retry Set
+						Retry set
 					</Button>
 					<Tooltip title="Dismiss">
-						<IconButton onClick={() => closeSnackbar()}>
+						<IconButton onClick={() => closeSnackbar()} color="inherit">
 							<IoCloseCircleOutline />
 						</IconButton>
 					</Tooltip>

@@ -109,10 +109,10 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 							onSubmit()
 						}}
 					>
-						Retry Transfer
+						Retry transfer
 					</Button>
 					<Tooltip title="Dismiss">
-						<IconButton onClick={() => closeSnackbar()}>
+						<IconButton onClick={() => closeSnackbar()} color="inherit">
 							<IoCloseCircleOutline />
 						</IconButton>
 					</Tooltip>
