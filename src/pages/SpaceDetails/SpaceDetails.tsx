@@ -71,7 +71,7 @@ export const SpaceDetails = memo(() => {
 
 	return (
 		<Page title={spaceIdTrimmed} showFooter={false} noPadding>
-			<Box style={{ paddingTop: 64 }}>
+			<Box style={{ paddingTop: 65 }}>
 				{loading ? (
 					<LinearProgress color="secondary" sx={{ position: 'absolute', left: 0, right: 0 }} />
 				) : (
@@ -84,7 +84,7 @@ export const SpaceDetails = memo(() => {
 								sx={{
 									height: {
 										xs: 'unset',
-										md: 'calc(100vh - 64px)',
+										md: 'calc(100vh - 65px)',
 									},
 									p: 2,
 									pb: 4,
@@ -215,7 +215,7 @@ export const SpaceDetails = memo(() => {
 									overflow: 'auto',
 									height: {
 										xs: 'unset',
-										md: 'calc(100vh - 64px)',
+										md: 'calc(100vh - 65px)',
 									},
 									mb: {
 										xs: 2,

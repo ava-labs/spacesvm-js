@@ -22,6 +22,7 @@ export const AppBar = memo(() => {
 					// for scrollbar not to be blurry
 					mr: '10px',
 					width: 'calc(100% - 10px)',
+					mt: '1px',
 					backdropFilter: 'blur(5px)',
 				}}
 			>
