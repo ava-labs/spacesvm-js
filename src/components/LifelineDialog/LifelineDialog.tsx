@@ -1,5 +1,6 @@
 import { Twemoji } from 'react-emoji-render'
-import { IoAdd, IoRemove } from 'react-icons/io5'
+import { AiOutlineRedo } from 'react-icons/ai'
+import { IoAdd, IoCloseCircleOutline, IoRemove } from 'react-icons/io5'
 import { useParams } from 'react-router-dom'
 import {
 	Box,
@@ -15,6 +16,7 @@ import {
 	useMediaQuery,
 	useTheme,
 } from '@mui/material'
+import { useSnackbar } from 'notistack'
 
 import { LifelineDoneDialog } from './LifelineDoneDialog'
 
@@ -53,6 +55,7 @@ export const LifelineDialog = ({
 	const [fee, setFee] = useState<number>(0)
 	const [isSigning, setIsSigning] = useState<boolean>(false)
 	const [isDone, setIsDone] = useState<boolean>(false)
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
 	// spaceUnits is from the API.  More stuff stored = more spaceUnits
@@ -69,11 +72,38 @@ export const LifelineDialog = ({
 		if (!signature) return
 		const success = await issueTx(typedData, signature)
 		if (!success) {
-			// show some sort of failure dialog
+			onSubmitFailure()
 			return
 		}
 		setIsDone(true)
 		refreshSpaceDetails()
+	}
+
+	const onSubmitFailure = async () => {
+		enqueueSnackbar("Oops!  Something went wrong and we couldn't extend your space's life.  Try again!", {
+			variant: 'warning',
+			persist: true,
+			action: (
+				<>
+					<Button
+						startIcon={<AiOutlineRedo />}
+						variant="outlined"
+						color="inherit"
+						onClick={() => {
+							closeSnackbar()
+							onSubmit()
+						}}
+					>
+						Retry Transfer
+					</Button>
+					<Tooltip title="Dismiss">
+						<IconButton onClick={() => closeSnackbar()}>
+							<IoCloseCircleOutline />
+						</IconButton>
+					</Tooltip>
+				</>
+			),
+		})
 	}
 
 	useEffect(() => {
