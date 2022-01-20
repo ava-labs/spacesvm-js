@@ -1,5 +1,6 @@
+import { Twemoji } from 'react-emoji-render'
 import { IoCloseCircleOutline, IoInformationCircleOutline } from 'react-icons/io5'
-import { Box, Button, Drawer, IconButton, Tooltip, Typography } from '@mui/material'
+import { Box, Button, Drawer, IconButton, Link, Tooltip, Typography } from '@mui/material'
 
 import WhatsASpaceBg from '@/assets/whats-a-space.jpg'
 
@@ -69,38 +70,50 @@ export const WhatIsASpace = memo(() => {
 				</Box>
 				<Box pt={'180px'}>
 					<Typography variant="body1" gutterBottom>
-						Ostifie de ciarge de bâtard de torvisse de saintes fesses de charogne de calvinouche de saint-ciarge de
-						mosus de Jésus de plâtre de câline de bine de sapristi de viarge d'enfant d'chienne de torrieux de charrue
-						de boswell de viande à chien de marde de bout d'ciarge de crime de patente à gosse de maudit de verrat de
-						colon de Jésus Marie Joseph de crisse de cul de crucifix de batince de p'tit Jésus.
+						A space is your digital home. A place to store and share links, images, and files. Instead of living in a
+						private server somewhere, your space is stored on a blockchain running in an Avalanche Subnet on the Fuji
+						Network (this is only a demo for now 😉).
 					</Typography>
 					<br />
 					<Typography variant="body1">
-						Ostifie de ciarge de bâtard de torvisse de saintes fesses de charogne de calvinouche de saint-ciarge de
-						mosus de Jésus de plâtre de câline de bine de sapristi de viarge d'enfant d'chienne de torrieux de charrue
-						de boswell de viande à chien de marde de bout d'ciarge de crime de patente à gosse de maudit de verrat de
-						colon de Jésus Marie Joseph de crisse de cul de crucifix de batince de p'tit Jésus.
+						Just like a home, the only one who can make changes to a space is the owner (the person who claims the
+						space). Not just whoever we say the owner is, no no no. The owner is an EVM-formatted address that is backed
+						by a private key in any <Link href="https://eips.ethereum.org/EIPS/eip-712">EIP-712</Link> compatible
+						wallet. Only actions signed by this private key can modify a space.
 					</Typography>
 					<br />
 					<Typography variant="body1">
-						Ostifie de ciarge de bâtard de torvisse de saintes fesses de charogne de calvinouche de saint-ciarge de
-						mosus de Jésus de plâtre de câline de bine de sapristi de viarge d'enfant d'chienne de torrieux de charrue
-						de boswell de viande à chien de marde de bout d'ciarge de crime de patente à gosse de maudit de verrat de
-						colon de Jésus Marie Joseph de crisse de cul de crucifix de batince de p'tit Jésus.
+						EIP-712 compliance in this case, however, does not mean that{' '}
+						<Link href="https://github.com/ava-labs/spacesvm">SpacesVM</Link> is an EVM or even an EVM derivative.
+						SpacesVM is a new Avalanche-native VM written from scratch to optimize for storage-related operations.
 					</Typography>
 					<br />
 					<Typography variant="body1">
-						Ostifie de ciarge de bâtard de torvisse de saintes fesses de charogne de calvinouche de saint-ciarge de
-						mosus de Jésus de plâtre de câline de bine de sapristi de viarge d'enfant d'chienne de torrieux de charrue
-						de boswell de viande à chien de marde de bout d'ciarge de crime de patente à gosse de maudit de verrat de
-						colon de Jésus Marie Joseph de crisse de cul de crucifix de batince de p'tit Jésus.
+						In this demo, the ~970k addresses that have interacted with the{' '}
+						<Link href="https://docs.avax.network/learn/platform-overview/#contract-chain-c-chain">
+							Avalanche C-Chain
+						</Link>{' '}
+						more than twice have received an airdrop of <span style={{ fontWeight: 600 }}> 10,000 SPC </span> tokens
+						that can be used to claim spaces and store items in them.
 					</Typography>
 					<br />
 					<Typography variant="body1">
-						Ostifie de ciarge de bâtard de torvisse de saintes fesses de charogne de calvinouche de saint-ciarge de
-						mosus de Jésus de plâtre de câline de bine de sapristi de viarge d'enfant d'chienne de torrieux de charrue
-						de boswell de viande à chien de marde de bout d'ciarge de crime de patente à gosse de maudit de verrat de
-						colon de Jésus Marie Joseph de crisse de cul de crucifix de batince de p'tit Jésus.
+						Anyone can run their own SpacesVM instance to store spaces data and/or validate that any modifications that
+						occur to spaces are only done by the owner. If you'd like to get involved, check us out on{' '}
+						<Link href="https://github.com/ava-labs/spacesvm">Github</Link>!
+					</Typography>
+					<br />
+					<Typography variant="body1">
+						Lastly, a short disclaimer. SpacesVM is new, unaudited code and should be treated as such. For this reason,
+						the Spaces Chain may be restarted to rollout new features and/or repair any incorrect state. This site
+						exists <span style={{ fontWeight: 600 }}> solely </span> to demonstrate the coolness of Avalanche Subnets
+						and the VMs you could build on them. If you have any suggestions for what could be improved, open an
+						issue/PR on <Link href="https://github.com/ava-labs/spacesvm">SpacesVM</Link> or{' '}
+						<Link href="https://github.com/ava-labs/spacesvm-js">SpacesVM JS</Link>.
+					</Typography>
+					<br />
+					<Typography variant="h6" sx={{ fontFamily: 'DM Serif Display' }}>
+						- the spaces team <Twemoji svg text="❤️" />
 					</Typography>
 				</Box>
 			</Drawer>
