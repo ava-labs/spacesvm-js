@@ -93,42 +93,14 @@ export const Footer = memo(() => {
 				</Grid>
 				<Grid item>
 					<Grid container direction="column" spacing={1}>
-						<Grid item>
-							<Typography component="span" variant="body2" color="textSecondary">
-								See us on Avascan!&nbsp;
-							</Typography>
-							<Link>Our Chain</Link>{' '}
-							<Typography component="span" variant="body2" color="textSecondary">
-								and
-							</Typography>{' '}
-							<Link>our subnet</Link>
-							{/* <ButtonGroup>
-								<Button
-									variant="outlined"
-									color="secondary"
-									disabled
-									sx={{
-										color: (theme) => `${theme.palette.text.primary}!important`,
-										background: (theme) => theme.customPalette.customBackground,
-										'&:hover': { background: (theme) => theme.customPalette.customBackground },
-									}}
-								>
-									Chain ID
-								</Button>
-								<Button
-									variant="outlined"
-									color="secondary"
-									endIcon={<IoOpenOutline size={14} />}
-									onClick={() => quarkNetworks && window.open(`${CHAIN_ID_URL}${quarkNetworks.chainId}`)}
-									sx={{
-										background: (theme) => theme.customPalette.customBackground,
-										'&:hover': { background: (theme) => theme.customPalette.customBackground },
-									}}
-								>
-									{quarkNetworks && obfuscateAddress(quarkNetworks.chainId)}
-								</Button>
-							</ButtonGroup> */}
-						</Grid>
+						{quarkNetworks && (
+							<Grid item>
+								<Typography component="span" variant="body2" color="textSecondary">
+									See us on Avascan! Our <Link href={`${CHAIN_ID_URL}${quarkNetworks.chainId}`}>chain</Link> and our{' '}
+									<Link href={`${SUBNET_ID_URL}${quarkNetworks.subnetId}`}>subnet</Link>
+								</Typography>
+							</Grid>
+						)}
 						<Grid item>
 							<ButtonGroup>
 								<Button
