@@ -4,12 +4,12 @@ import { Box, Button, Drawer, IconButton, Link, Tooltip, Typography } from '@mui
 
 import WhatsASpaceBg from '@/assets/whats-a-space.jpg'
 
-export const WhatIsASpace = memo(() => {
+export const WhatIsASpace = memo(({ isFooter = false }: { isFooter: boolean }) => {
 	const [open, setOpen] = useState<boolean>(false)
 
 	return (
 		<>
-			<Box display="flex" justifyContent="center" sx={{ mt: 1 }}>
+			<Box display="flex" justifyContent={isFooter ? 'normal' : 'center'} sx={{ mt: 1 }}>
 				<Button
 					onClick={() => setOpen(true)}
 					color="secondary"
