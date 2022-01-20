@@ -4,7 +4,6 @@ import {
 	Button,
 	ButtonGroup,
 	Grid,
-	IconButton,
 	keyframes,
 	Theme,
 	Tooltip,
