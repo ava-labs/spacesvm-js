@@ -65,7 +65,11 @@ export const MetaMaskProvider = ({ children }: any) => {
 	 * Listen for ethereum initalization in browser
 	 */
 	useEffect(() => {
-		const handleEthereum = () => setMetaMaskExists(!!ethereum?.isMetaMask)
+		const handleEthereum = () => {
+			setMetaMaskExists(!!ethereum?.isMetaMask)
+			setCurrentAddress(ethereum.selectedAddress)
+		}
+		handleEthereum()
 		setTimeout(handleEthereum, 3000) // If ethereum isn't installed after 3 seconds then MM probably isn't installed.
 		return window.addEventListener('ethereum#initialized', handleEthereum, { once: true })
 	}, [])
