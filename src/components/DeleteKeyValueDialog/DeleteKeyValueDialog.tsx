@@ -26,11 +26,6 @@ export const DeleteKeyValueDialog = ({ open, close, spaceKey, refreshSpaceDetail
 	const { spaceId } = useParams()
 	const [isSigning, setIsSigning] = useState<boolean>(false)
 
-	const handleClose = () => {
-		setTimeout(refreshSpaceDetails, 1000)
-		close()
-	}
-
 	const deleteKeyValue = async () => {
 		if (!spaceKey || !spaceId) return
 		const { typedData } = await getSuggestedFee({ type: TxType.Delete, space: spaceId, key: spaceKey })
@@ -44,14 +39,14 @@ export const DeleteKeyValueDialog = ({ open, close, spaceKey, refreshSpaceDetail
 			return
 		}
 		refreshSpaceDetails()
-		handleClose()
+		close()
 	}
 
 	if (spaceKey === undefined) return null
 
 	return (
-		<Dialog open={open} onClose={handleClose} maxWidth="xs">
-			<DialogTitle onClose={handleClose}>
+		<Dialog open={open} onClose={close} maxWidth="xs">
+			<DialogTitle onClose={close}>
 				<Typography variant="h4" component="p" fontFamily="DM Serif Display" align="center">
 					Are you <strong>SURE</strong> you want to delete this item? <Twemoji svg text="🧨" />
 				</Typography>

@@ -84,8 +84,7 @@ export const KeyValueInputEdit = memo(
 			}
 
 			enqueueSnackbar('Item edited successfully!', { variant: 'success' })
-			// Give the blockchain a chance to update... yes I know this is bad code but its easy for now <3
-			setTimeout(refreshSpaceDetails, 1000)
+			refreshSpaceDetails()
 			handleChange(i, {
 				target: {
 					name: 'loading',
