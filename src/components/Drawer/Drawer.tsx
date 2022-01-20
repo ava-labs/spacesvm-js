@@ -1,7 +1,8 @@
 import { Twemoji } from 'react-emoji-render'
-import { IoMenu } from 'react-icons/io5'
+import { IoCloseCircleOutline, IoMenu } from 'react-icons/io5'
 import { NavLink } from 'react-router-dom'
 import {
+	Box,
 	Grid,
 	IconButton,
 	List,
@@ -52,8 +53,23 @@ export const Drawer = memo(() => {
 				open={open}
 				onClose={() => setOpen(false)}
 			>
-				<Grid container justifyContent="space-between" alignItems="end">
-					<Grid item>
+				<Tooltip title="Close" placement="top">
+					<Box
+						sx={{
+							color: (theme) => theme.palette.grey[400],
+							position: 'absolute',
+							bottom: isMobile ? 12 : 'unset',
+							top: isMobile ? 'unset' : 12,
+							right: 22,
+						}}
+					>
+						<IconButton onClick={() => setOpen(false)} color="inherit">
+							<IoCloseCircleOutline />
+						</IconButton>
+					</Box>
+				</Tooltip>
+				<Grid container justifyContent="space-between" alignItems="end" wrap="nowrap">
+					<Grid item container>
 						<Typography variant="h4" sx={{ fontFamily: 'DM Serif Display' }}>
 							Menu
 						</Typography>
@@ -71,7 +87,7 @@ export const Drawer = memo(() => {
 					</Grid>
 				</Grid>
 
-				<List sx={{ mt: 4, ml: -2 }}>
+				<List sx={{ mt: 2, ml: -2 }}>
 					{[
 						{ label: 'Home', emoji: <Twemoji svg text="🏠" className="emoji" />, url: '/' },
 						{
