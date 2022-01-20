@@ -67,7 +67,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 	useEffect(() => {
 		const handleEthereum = () => {
 			setMetaMaskExists(!!ethereum?.isMetaMask)
-			setCurrentAddress(ethereum.selectedAddress)
+			setCurrentAddress(ethereum?.selectedAddress)
 		}
 		handleEthereum()
 		setTimeout(handleEthereum, 3000) // If ethereum isn't installed after 3 seconds then MM probably isn't installed.
