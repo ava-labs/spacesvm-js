@@ -1,15 +1,20 @@
 import { Twemoji } from 'react-emoji-render'
+import { AiOutlineRedo } from 'react-icons/ai'
+import { IoCloseCircleOutline } from 'react-icons/io5'
 import { useParams } from 'react-router-dom'
 import {
 	Box,
+	Button,
 	Dialog,
 	DialogContent,
 	Fade,
+	IconButton,
 	Table,
 	TableBody,
 	TableCell,
 	TableRow,
 	TextField,
+	Tooltip,
 	Typography,
 	useMediaQuery,
 	useTheme,
@@ -39,7 +44,7 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 	const { currentAddress, signWithMetaMask, issueTx } = useMetaMask()
 	const [toAddress, setToAddress] = useState<string>('')
 	const [addressInputError, setAddressInputError] = useState<string | undefined>()
-	const { enqueueSnackbar } = useSnackbar()
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 	const [isSigning, setIsSigning] = useState<boolean>(false)
 	const [isDone, setIsDone] = useState<boolean>(false)
 	const theme = useTheme()
@@ -62,6 +67,7 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 			setIsSigning(false)
 			if (!success) {
 				// show some sort of failure dialog
+				onSubmitFailure()
 				return
 			}
 			setIsDone(true)
@@ -74,6 +80,33 @@ export const MoveSpaceDialog = ({ open, onClose, refreshSpaceDetails }: MoveSpac
 			setIsSigning(false)
 		}
 		refreshSpaceDetails()
+	}
+
+	const onSubmitFailure = async () => {
+		enqueueSnackbar("Oops!  Something went wrong and we couldn't move your space. Try again!", {
+			variant: 'warning',
+			persist: true,
+			action: (
+				<>
+					<Button
+						startIcon={<AiOutlineRedo />}
+						variant="outlined"
+						color="inherit"
+						onClick={() => {
+							closeSnackbar()
+							onSubmit()
+						}}
+					>
+						Retry Transfer
+					</Button>
+					<Tooltip title="Dismiss">
+						<IconButton onClick={() => closeSnackbar()}>
+							<IoCloseCircleOutline />
+						</IconButton>
+					</Tooltip>
+				</>
+			),
+		})
 	}
 
 	useEffect(() => {

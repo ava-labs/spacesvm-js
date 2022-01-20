@@ -95,7 +95,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 	}
 
 	const onSubmitFailure = async () => {
-		enqueueSnackbar('Oops!  Something went wrong - try again!', {
+		enqueueSnackbar("Oops!  Something went wrong and we couldn't transfer your SPC.  Try again!", {
 			variant: 'warning',
 			persist: true,
 			action: (

@@ -123,7 +123,7 @@ export const Home = memo(() => {
 
 	const onClaimFailure = async () => {
 		setClaiming(false)
-		enqueueSnackbar('Oops!  Something went wrong - try again!', {
+		enqueueSnackbar("Oops!  Something went wrong and we couldn't transfer your SPC. Try again!", {
 			variant: 'warning',
 			persist: true,
 			action: (
