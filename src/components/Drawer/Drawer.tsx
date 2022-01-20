@@ -105,7 +105,7 @@ export const Drawer = memo(() => {
 						{ label: 'Home', emoji: <Twemoji svg text="🏠" className="emoji" />, url: '/' },
 						{
 							label: 'SpacesVM',
-							emoji: <Twemoji svg text="👨‍💻" className="emoji" />,
+							emoji: <Twemoji svg text="⚙️" className="emoji" />,
 							url: 'https://subnetvm.xyz/',
 							isExternal: true,
 						},
