@@ -4,7 +4,11 @@ import { Box, Button, Drawer, IconButton, Link, Tooltip, Typography } from '@mui
 
 import WhatsASpaceBg from '@/assets/whats-a-space.jpg'
 
-export const WhatIsASpace = memo(({ isFooter = false }: { isFooter: boolean }) => {
+type WhatIsASpaceProps = {
+	isFooter?: boolean
+}
+
+export const WhatIsASpace = memo(({ isFooter = false }: WhatIsASpaceProps) => {
 	const [open, setOpen] = useState<boolean>(false)
 
 	return (
