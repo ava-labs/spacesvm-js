@@ -218,7 +218,7 @@ export const ActivityTable = memo(() => {
 										</Box>
 									)}
 									<CardContent sx={{ pt: 0, pb: '0!important' }}>
-										<Table>
+										<Table sx={{ tableLayout: 'fixed' }}>
 											<TableBody>
 												{timestamp && (
 													<TableRow>
@@ -241,10 +241,12 @@ export const ActivityTable = memo(() => {
 																Space
 															</Typography>
 														</TableCell>
-														<TableCell sx={{ maxWidth: 280 }}>
-															<MuiLink component={Link} to={`/${space}/`}>
-																{space}
-															</MuiLink>
+														<TableCell>
+															<Typography noWrap variant="body2">
+																<MuiLink component={Link} to={`/${space}/`}>
+																	{space}
+																</MuiLink>
+															</Typography>
 														</TableCell>
 													</TableRow>
 												)}
@@ -255,16 +257,16 @@ export const ActivityTable = memo(() => {
 																Key
 															</Typography>
 														</TableCell>
-														<TableCell sx={{ maxWidth: 280 }}>
-															{type === 'delete' ? (
-																<Typography noWrap variant="body2">
-																	{key}
-																</Typography>
-															) : (
-																<MuiLink component={Link} to={`/${space}/${key}/`}>
-																	{key}
-																</MuiLink>
-															)}
+														<TableCell>
+															<Typography noWrap variant="body2">
+																{type === 'delete' ? (
+																	key
+																) : (
+																	<MuiLink component={Link} to={`/${space}/${key}/`}>
+																		{key}
+																	</MuiLink>
+																)}
+															</Typography>
 														</TableCell>
 													</TableRow>
 												)}

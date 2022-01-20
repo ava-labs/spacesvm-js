@@ -49,6 +49,26 @@ export const commonOverrides: ThemeOptions['components'] = {
 			},
 		},
 	},
+	MuiTableCell: {
+		styleOverrides: {
+			root: {
+				padding: '8px 12px',
+				height: 50,
+			},
+		},
+	},
+	MuiTableRow: {
+		styleOverrides: {
+			root: {
+				'& td:first-child': {
+					paddingLeft: 4,
+				},
+				'& td:last-child': {
+					paddingRight: 4,
+				},
+			},
+		},
+	},
 	MuiTabs: {
 		styleOverrides: {
 			root: {

@@ -13,11 +13,13 @@ export const Layout: FC = memo(({ children }) => {
 			{!window.location.href.includes('/ping') && <AppBar />}
 			<Box
 				id="layout"
+				className="scroller"
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
 					overflow: 'auto',
 					height: '100vh',
+					scrollbarWidth: 'thin', // for firefox
 				}}
 			>
 				{children}

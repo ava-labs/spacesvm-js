@@ -73,7 +73,7 @@ export const Footer = memo(() => {
 					</Grid>
 					<Grid item>
 						<Typography component="footer" variant="body2" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="right">
-							{`© ${new Date().getFullYear()} ${APP_NAME}`}
+							&copy; {`${new Date().getFullYear()} ${APP_NAME}`}
 						</Typography>
 					</Grid>
 					<Grid item>
@@ -109,8 +109,8 @@ export const Footer = memo(() => {
 							container
 							alignItems="center"
 							justifyContent={isMobile ? 'center' : 'flex-start'}
-							sx={{ mt: 0.5 }}
-							columnSpacing={2}
+							sx={{ mb: 1 }}
+							spacing={2}
 						>
 							<Grid item>
 								<Link
@@ -119,6 +119,7 @@ export const Footer = memo(() => {
 									rel="noopener noreferrer"
 									target="_blank"
 									color="inherit"
+									sx={{ display: 'flex' }}
 								>
 									<StyledImg src={AvalancheLogo} alt="Avalanche logo" width={28} height={28} />
 								</Link>
@@ -130,6 +131,7 @@ export const Footer = memo(() => {
 									rel="noopener noreferrer"
 									target="_blank"
 									color="inherit"
+									sx={{ display: 'flex' }}
 								>
 									<IoLogoGithub size={32} />
 								</Link>
@@ -206,17 +208,3 @@ export const Footer = memo(() => {
 		</Box>
 	)
 })
-{
-	/* <Grid item>
-					<Typography component="footer" variant="body2" sx={{ width: '100%', opacity: 0.5, py: 1 }} align="center">
-						{`© ${new Date().getFullYear()} ${APP_NAME} — `}
-						<Link color="inherit" href="https://spacesvm.xyz/" rel="noopener noreferrer" target="_blank">
-							Powered by the SpacesVM Avalanche Subnet
-						</Link>
-						{` — `}
-						<Link color="inherit" href="https://dribbble.com/dmitrymoi/" rel="noopener noreferrer" target="_blank">
-							Illustrations by Dmitry Moiseenko
-						</Link>
-					</Typography>
-				</Grid> */
-}
