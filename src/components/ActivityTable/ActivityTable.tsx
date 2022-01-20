@@ -69,9 +69,11 @@ export const ActivityTable = memo(() => {
 
 		fetchRecentActivity()
 
-		setInterval(() => {
+		const fetchInterval = setInterval(() => {
 			fetchRecentActivity()
 		}, 10000) // refresh every 10s
+
+		return () => clearInterval(fetchInterval)
 	}, [])
 
 	useEffect(() => {
