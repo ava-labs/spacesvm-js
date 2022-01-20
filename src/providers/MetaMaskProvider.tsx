@@ -105,7 +105,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 								connectToMetaMask()
 							}}
 						>
-							Try again
+							Connect
 						</Button>
 						<Tooltip title="Dismiss">
 							<IconButton onClick={() => closeSnackbar()}>

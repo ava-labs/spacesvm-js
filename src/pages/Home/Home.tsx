@@ -1,4 +1,5 @@
 import { Twemoji } from 'react-emoji-render'
+import { AiOutlineRedo } from 'react-icons/ai'
 import { IoCheckmarkCircle, IoClose, IoCloseCircleOutline, IoSearch } from 'react-icons/io5'
 import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom'
 import {
@@ -87,33 +88,8 @@ export const Home = memo(() => {
 	}, [username])
 
 	const onClaim = async () => {
-		if (!metaMaskExists) {
+		if (!metaMaskExists || !currentAddress) {
 			connectToMetaMask()
-			return
-		}
-
-		if (!currentAddress) {
-			enqueueSnackbar('Please connect to MetaMask to claim a space.', {
-				variant: 'warning',
-				persist: true,
-				action: (
-					<>
-						<Button
-							startIcon={<img src={MetaMaskFoxLogo} alt="metamask-fox" style={{ height: 24 }} />}
-							variant="outlined"
-							color="inherit"
-							onClick={() => connectToMetaMask()}
-						>
-							Connect
-						</Button>
-						<Tooltip title="Dismiss">
-							<IconButton onClick={() => closeSnackbar()}>
-								<IoCloseCircleOutline />
-							</IconButton>
-						</Tooltip>
-					</>
-				),
-			})
 			return
 		}
 
@@ -139,10 +115,38 @@ export const Home = memo(() => {
 		setClaiming(true)
 		const claimSuccess = await issueTx(typedData, signature)
 		if (!claimSuccess) {
-			// Show something in the UI to display the claim failed
+			onClaimFailure()
 			return
 		}
 		onClaimSuccess()
+	}
+
+	const onClaimFailure = async () => {
+		setClaiming(false)
+		enqueueSnackbar('Oops!  Something went wrong - try again!', {
+			variant: 'warning',
+			persist: true,
+			action: (
+				<>
+					<Button
+						startIcon={<AiOutlineRedo />}
+						variant="outlined"
+						color="inherit"
+						onClick={() => {
+							closeSnackbar()
+							onClaim()
+						}}
+					>
+						Retry
+					</Button>
+					<Tooltip title="Dismiss">
+						<IconButton onClick={() => closeSnackbar()}>
+							<IoCloseCircleOutline />
+						</IconButton>
+					</Tooltip>
+				</>
+			),
+		})
 	}
 
 	const onClaimSuccess = async () => {
