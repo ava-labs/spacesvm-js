@@ -104,6 +104,18 @@ export const Drawer = memo(() => {
 					{[
 						{ label: 'Home', emoji: <Twemoji svg text="🏠" className="emoji" />, url: '/' },
 						{
+							label: 'SpacesVM',
+							emoji: <Twemoji svg text="👨‍💻" className="emoji" />,
+							url: 'https://subnetvm.xyz/',
+							isExternal: true,
+						},
+						{
+							label: 'SpacesVM JS',
+							emoji: <img src={Javascript} width={32} height={32} alt="Javascript logo" style={{ borderRadius: 4 }} />,
+							url: 'https://github.com/ava-labs/spacesvm-js',
+							isExternal: true,
+						},
+						{
 							label: 'Spaces CLI',
 							emoji: <img src={Logo} width={32} height={32} alt="Spaces logo" />,
 							url: 'https://spaces-cli.xyz/',
@@ -113,18 +125,6 @@ export const Drawer = memo(() => {
 							label: 'Subnet CLI',
 							emoji: <img src={Terminal} width={32} height={32} alt="Terminal icon" />,
 							url: 'https://subnet-cli.xyz/',
-							isExternal: true,
-						},
-						{
-							label: 'SubnetVM',
-							emoji: <Twemoji svg text="👨‍💻" className="emoji" />,
-							url: 'https://subnetvm.xyz/',
-							isExternal: true,
-						},
-						{
-							label: 'SubnetVM JS',
-							emoji: <img src={Javascript} width={32} height={32} alt="Javascript logo" style={{ borderRadius: 4 }} />,
-							url: 'https://github.com/ava-labs/spacesvm-js',
 							isExternal: true,
 						},
 					].map(({ label, emoji, url, isExternal }) => (
