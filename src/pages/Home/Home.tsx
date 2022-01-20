@@ -45,7 +45,7 @@ const VerifyButton = styled(Button)(({ theme }: any) => ({
 	...purpleButton(theme),
 }))
 
-export const ClaimButton = styled(Button)(({ theme }: any) => ({
+const ClaimButton = styled(Button)(({ theme }: any) => ({
 	...rainbowButton(theme),
 }))
 

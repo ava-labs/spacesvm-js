@@ -23,12 +23,12 @@ import {
 import capitalize from 'lodash/capitalize'
 import { useSnackbar } from 'notistack'
 
-import { AddressChip } from '../AddressChip/AddressChip'
-import { DialogTitle } from '../DialogTitle'
 import { NoFundsDialog } from './NoFundsDialog'
 import { TransferFundsSuccessDialog } from './TransferFundsSuccessDialog'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
+import { AddressChip } from '@/components/AddressChip'
+import { DialogTitle } from '@/components/DialogTitle'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { purpleButton } from '@/theming/purpleButton'
 import { rainbowText } from '@/theming/rainbowText'

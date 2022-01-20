@@ -17,11 +17,11 @@ import {
 import capitalize from 'lodash/capitalize'
 import { useSnackbar } from 'notistack'
 
-import { AddressChip } from '../AddressChip/AddressChip'
-import { DialogTitle } from '../DialogTitle'
 import { MoveSpaceSuccessDialog } from './MoveSpaceSuccessDialog'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
+import { AddressChip } from '@/components/AddressChip/AddressChip'
+import { DialogTitle } from '@/components/DialogTitle'
 import { SubmitButton } from '@/pages/CustomSignature/SubmitButton'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { TxType } from '@/types'

@@ -2,8 +2,7 @@ import { PropsWithChildren } from 'react'
 import { Box, Container, Fade } from '@mui/material'
 import { useDocumentTitle } from '@react-hookz/web'
 
-import { Footer } from '../Footer'
-
+import { Footer } from '@/components/Footer'
 import { APP_NAME, APP_SLOGAN } from '@/constants'
 
 type PageProps = {

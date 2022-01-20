@@ -71,6 +71,12 @@ export const getLatestBlockID = async () => {
 	return blockData?.blockId
 }
 
+export const getOwnedSpaces = async () => {
+	const ownedSpaces = await fetchSpaces('owned')
+
+	return ownedSpaces
+}
+
 export const getLatestActivity = async () => {
 	const activity = await fetchSpaces('recentActivity')
 

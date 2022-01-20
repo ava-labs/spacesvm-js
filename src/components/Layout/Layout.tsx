@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { Box, useMediaQuery, useTheme } from '@mui/material'
 
-import { AppBar } from '../AppBar'
-import { MetaMaskSelect } from '../MetaMaskSelect'
+import { AppBar } from '@/components/AppBar'
+import { MetaMaskSelect } from '@/components/MetaMaskSelect'
 
 export const Layout: FC = memo(({ children }) => {
 	const theme = useTheme()

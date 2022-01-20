@@ -16,10 +16,10 @@ import {
 	useTheme,
 } from '@mui/material'
 
-import { DialogTitle } from '../DialogTitle'
 import { LifelineDoneDialog } from './LifelineDoneDialog'
 
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
+import { DialogTitle } from '@/components/DialogTitle'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { purpleButton } from '@/theming/purpleButton'
 import { rainbowText } from '@/theming/rainbowText'

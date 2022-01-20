@@ -16,16 +16,28 @@ import {
 	useTheme,
 } from '@mui/material'
 
-import { ThemeToggle } from '../ThemeToggle'
-
 import Javascript from '@/assets/javascript.png'
 import Logo from '@/assets/spaces-logo.png'
 import Terminal from '@/assets/terminal.png'
+import { ThemeToggle } from '@/components/ThemeToggle'
+import { getOwnedSpaces } from '@/utils/spacesVM'
 
 export const Drawer = memo(() => {
 	const [open, setOpen] = useState<boolean>(false)
 	const theme = useTheme()
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+
+	useEffect(() => {
+		console.log('HERE')
+		const fetchOwnedSpaces = async () => {
+			const ownedSpaces = await getOwnedSpaces()
+
+			console.log(ownedSpaces)
+			//setRecentActivity(activity.activity)
+		}
+
+		fetchOwnedSpaces()
+	}, [])
 
 	return (
 		<>

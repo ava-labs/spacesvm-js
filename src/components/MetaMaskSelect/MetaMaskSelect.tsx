@@ -14,9 +14,8 @@ import {
 } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
-import { TransferFundsDialog } from '../TransferFundsDialog'
-
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
+import { TransferFundsDialog } from '@/components/TransferFundsDialog'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { numberWithCommas } from '@/utils/numberUtils'
 import { obfuscateAddress } from '@/utils/obfuscateAddress'

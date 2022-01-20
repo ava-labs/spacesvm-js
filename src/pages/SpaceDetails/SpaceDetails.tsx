@@ -9,6 +9,7 @@ import {
 	Grid,
 	Grow,
 	LinearProgress,
+	styled,
 	Table,
 	TableBody,
 	TableCell,
@@ -19,7 +20,6 @@ import {
 } from '@mui/material'
 import { formatDistanceToNow } from 'date-fns'
 
-import { ClaimButton } from '../Home/Home'
 import { SpaceKeyValueRow } from './SpaceKeyValueRow'
 
 import NothingHere from '@/assets/nothing-here.jpg'
@@ -31,7 +31,12 @@ import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { USERNAME_REGEX_QUERY } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
+import { rainbowButton } from '@/theming/rainbowButton'
 import { querySpace } from '@/utils/spacesVM'
+
+const ClaimButton = styled(Button)(({ theme }: any) => ({
+	...rainbowButton(theme),
+}))
 
 export const SpaceDetails = memo(() => {
 	const navigate = useNavigate()
