@@ -92,7 +92,6 @@ export const ActivityTable = memo(() => {
 				value={selectedTab}
 				onChange={handleChange}
 				variant="scrollable"
-				centered
 				scrollButtons
 				indicatorColor="secondary"
 				textColor="inherit"
