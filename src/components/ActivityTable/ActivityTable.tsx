@@ -15,6 +15,7 @@ import {
 	Tabs,
 	Typography,
 } from '@mui/material'
+import findIndex from 'lodash/findIndex'
 
 import { AddressChip } from '@/components/AddressChip/AddressChip'
 import { ACTIVITY_TABLE_TAB_STORAGE_KEY } from '@/constants'
@@ -22,6 +23,8 @@ import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { getLatestActivity } from '@/utils/spacesVM'
 
 export const ActivityTable = memo(() => {
+	const [tps, setTps] = useState<number>()
+	const [mostRecentTxId, setMostRecentTxId] = useState<string>()
 	const [selectedTabStorage, setSelectedTabStorage] = useLocalStorage(ACTIVITY_TABLE_TAB_STORAGE_KEY, 'all') // track theme in localStorage
 	const [selectedTab, setSelectedTab] = useState<string>(selectedTabStorage)
 	const [recentActivity, setRecentActivity] = useState<
@@ -62,6 +65,16 @@ export const ActivityTable = memo(() => {
 	}
 
 	useEffect(() => {
+		const latestTxId = recentActivity?.[0].txId
+		const index = findIndex(recentActivity, (o) => o.txId == mostRecentTxId)
+		const tpsValue = Number(index) / 10
+
+		setTps(tpsValue)
+		setMostRecentTxId(latestTxId)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [recentActivity])
+
+	useEffect(() => {
 		const fetchRecentActivity = async () => {
 			const activity = await getLatestActivity()
 			setRecentActivity(activity.activity)
@@ -84,12 +97,18 @@ export const ActivityTable = memo(() => {
 	const handleChange = (event: SyntheticEvent, newValue: string) => {
 		setSelectedTab(newValue)
 		onActivityFiltered(newValue)
-		// setting `?tab=TAB` in URL to persist refresh
+		// setting tab in localStorage to persist refresh
 		setSelectedTabStorage(newValue)
 	}
 
 	return recentActivity ? (
 		<>
+			<Typography align="center" variant="body2" sx={{ mb: 2 }}>
+				Live TPS: {tps === 0 ? '-' : tps} <br />
+				<Typography sx={{ ml: 1 }} variant="caption" component="span" color="textSecondary">
+					(Updated every 10 seconds)
+				</Typography>
+			</Typography>
 			<Tabs
 				value={selectedTab}
 				onChange={handleChange}
