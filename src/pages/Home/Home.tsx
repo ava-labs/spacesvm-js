@@ -137,7 +137,7 @@ export const Home = memo(() => {
 							onClaim()
 						}}
 					>
-						Retry
+						Retry Claim
 					</Button>
 					<Tooltip title="Dismiss">
 						<IconButton onClick={() => closeSnackbar()}>

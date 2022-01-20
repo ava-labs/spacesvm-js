@@ -1,4 +1,6 @@
 import { Twemoji } from 'react-emoji-render'
+import { AiOutlineRedo } from 'react-icons/ai'
+import { IoCloseCircleOutline } from 'react-icons/io5'
 import { IoAdd, IoRemove } from 'react-icons/io5'
 import {
 	Box,
@@ -54,7 +56,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 	const [transferAmount, setTransferAmount] = useState<number>(0)
 	const [isSigning, setIsSigning] = useState<boolean>(false)
 	const [isDone, setIsDone] = useState<boolean>(false)
-	const { enqueueSnackbar } = useSnackbar()
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 	const [finalTxAmount, setFinalTxAmount] = useState<number>(0)
 	const [finalToAddress, setFinalToAddress] = useState<string>('')
@@ -78,7 +80,7 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 			const success = await issueTx(typedData, signature)
 			setIsSigning(false)
 			if (!success) {
-				// show some sort of failure dialog
+				onSubmitFailure()
 				return
 			}
 			setIsDone(true)
@@ -90,6 +92,33 @@ export const TransferFundsDialog = ({ open, close }: TransferFundsDialogProps) =
 			})
 			setIsSigning(false)
 		}
+	}
+
+	const onSubmitFailure = async () => {
+		enqueueSnackbar('Oops!  Something went wrong - try again!', {
+			variant: 'warning',
+			persist: true,
+			action: (
+				<>
+					<Button
+						startIcon={<AiOutlineRedo />}
+						variant="outlined"
+						color="inherit"
+						onClick={() => {
+							closeSnackbar()
+							onSubmit()
+						}}
+					>
+						Retry Transfer
+					</Button>
+					<Tooltip title="Dismiss">
+						<IconButton onClick={() => closeSnackbar()}>
+							<IoCloseCircleOutline />
+						</IconButton>
+					</Tooltip>
+				</>
+			),
+		})
 	}
 
 	// When changing wallet addresses, make sure they can't transfer more than in the new account's balance
