@@ -11,6 +11,8 @@ import {
 	SwipeableDrawer,
 	Tooltip,
 	Typography,
+	useMediaQuery,
+	useTheme,
 } from '@mui/material'
 
 import { ThemeToggle } from '../ThemeToggle'
@@ -21,11 +23,13 @@ import Terminal from '@/assets/terminal.png'
 
 export const Drawer = memo(() => {
 	const [open, setOpen] = useState<boolean>(false)
+	const theme = useTheme()
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
 	return (
 		<>
 			<Tooltip title="Menu">
-				<IconButton onClick={() => setOpen(true)} edge="end">
+				<IconButton onClick={() => setOpen(true)} edge={isMobile ? undefined : 'end'}>
 					<IoMenu />
 				</IconButton>
 			</Tooltip>
