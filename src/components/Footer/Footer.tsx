@@ -96,7 +96,7 @@ export const Footer = memo(() => {
 						<Divider orientation="vertical" />
 					</Grid>
 				)}
-				<Grid item sm={5} xs={12}>
+				<Grid item container sm={5} xs={12}>
 					<Grid
 						container
 						direction="column"
