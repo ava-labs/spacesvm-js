@@ -14,6 +14,9 @@ export const NoFundsDialog = ({ open, onClose }: NoFundsDialogProps) => (
 			<Typography variant="h3" align="center" fontFamily="DM Serif Display">
 				Your pockets are empty!&nbsp;
 				<Twemoji svg text=":cry:" />
+				<span style={{ position: 'absolute', fontSize: 36, transform: 'translateX(8px) translateY(-3px)' }}>
+					<Twemoji svg text=":cry:" />
+				</span>
 			</Typography>
 		</DialogTitle>
 		<DialogContent>
