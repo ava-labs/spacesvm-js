@@ -132,8 +132,8 @@ export const WhatIsASpace = memo(() => {
 						.
 					</Typography>
 					<br />
-					<Typography variant="h6" sx={{ fontFamily: 'DM Serif Display' }}>
-						- the spaces team <Twemoji svg text="❤️" />
+					<Typography variant="h5">
+						<Twemoji svg text="❤️" />
 					</Typography>
 				</Box>
 			</Drawer>
