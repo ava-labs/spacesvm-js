@@ -1,8 +1,7 @@
 import { Twemoji } from 'react-emoji-render'
 import { Dialog, Grow, Typography } from '@mui/material'
 
-import { DialogTitle } from '../DialogTitle'
-
+import { DialogTitle } from '@/components/DialogTitle'
 import { rainbowText } from '@/theming/rainbowText'
 
 type LifelineDoneDialogProps = {

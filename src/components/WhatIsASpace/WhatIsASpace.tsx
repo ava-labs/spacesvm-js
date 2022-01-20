@@ -1,5 +1,5 @@
-import { IoInformationCircleOutline } from 'react-icons/io5'
-import { Box, Button, Drawer, Typography } from '@mui/material'
+import { IoCloseCircleOutline, IoInformationCircleOutline } from 'react-icons/io5'
+import { Box, Button, Drawer, IconButton, Tooltip, Typography } from '@mui/material'
 
 import WhatsASpaceBg from '@/assets/whats-a-space.jpg'
 
@@ -39,6 +39,13 @@ export const WhatIsASpace = memo(() => {
 				open={open}
 				onClose={() => setOpen(false)}
 			>
+				<Tooltip title="Close" placement="top">
+					<Box sx={{ color: (theme) => theme.palette.grey[400], position: 'absolute', top: 8, left: 8, zIndex: 1 }}>
+						<IconButton onClick={() => setOpen(false)} color="inherit">
+							<IoCloseCircleOutline />
+						</IconButton>
+					</Box>
+				</Tooltip>
 				<Box
 					sx={{
 						backgroundColor: (theme) => theme.customPalette.customBackground,

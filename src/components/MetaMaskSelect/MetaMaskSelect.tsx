@@ -6,6 +6,7 @@ import {
 	Grid,
 	IconButton,
 	keyframes,
+	Theme,
 	Tooltip,
 	Typography,
 	useMediaQuery,
@@ -13,9 +14,8 @@ import {
 } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
-import { TransferFundsDialog } from '../TransferFundsDialog'
-
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
+import { TransferFundsDialog } from '@/components/TransferFundsDialog'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { numberWithCommas } from '@/utils/numberUtils'
 import { obfuscateAddress } from '@/utils/obfuscateAddress'
@@ -30,7 +30,7 @@ const growWidth = keyframes`
 	}
 `
 
-export const MetaMaskSelect = () => {
+export const MetaMaskSelect = ({ onlyBalance }: any) => {
 	const { enqueueSnackbar } = useSnackbar()
 	const theme = useTheme()
 	const {
@@ -61,35 +61,48 @@ export const MetaMaskSelect = () => {
 		})
 	}
 
+	const onlyBalanceStyles = {
+		position: 'fixed',
+		bottom: 0,
+		paddingTop: 1,
+		paddingBottom: 1,
+		borderRadius: 0,
+		display: metaMaskExists && isConnectedToSpaces ? 'flex' : 'none',
+		backgroundColor: (theme: Theme) => theme.customPalette.customBackground,
+		borderTop: (theme: Theme) => `1px solid ${theme.palette.divider}`,
+	}
+
 	return (
 		<>
-			<Grid container sx={{ borderRadius: 99999 }}>
+			<Grid container sx={{ ...(onlyBalance && { ...onlyBalanceStyles }) }} justifyContent={'center'}>
 				<Grid item>
 					<ButtonGroup>
-						<Tooltip title={currentAddress ? 'Copy address' : 'Connect to MetaMask'}>
-							{isMobile ? (
-								<IconButton onClick={handleMetaMaskClick} disabled={isConnectingToMM}>
-									<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />
-								</IconButton>
-							) : (
-								<Button
-									startIcon={<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />}
-									variant="outlined"
-									color="secondary"
-									onClick={handleMetaMaskClick}
-									disabled={isConnectingToMM}
-									sx={{
-										background: theme.customPalette.customBackground,
-										'&:hover': { background: theme.customPalette.customBackground },
-									}}
-								>
-									{currentAddress ? obfuscateAddress(currentAddress) : 'Connect'}
-								</Button>
-							)}
-						</Tooltip>
+						{!onlyBalance && (
+							<Tooltip title={currentAddress ? 'Copy address' : 'Connect to MetaMask'}>
+								{isMobile ? (
+									<IconButton onClick={handleMetaMaskClick} disabled={isConnectingToMM}>
+										<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />
+									</IconButton>
+								) : (
+									<Button
+										startIcon={<img src={MetaMaskFoxLogo} height={24} width={24} alt="Metamask Logo" />}
+										variant="outlined"
+										color="secondary"
+										onClick={handleMetaMaskClick}
+										disabled={isConnectingToMM}
+										sx={{
+											background: theme.customPalette.customBackground,
+											'&:hover': { background: theme.customPalette.customBackground },
+										}}
+									>
+										{currentAddress ? obfuscateAddress(currentAddress) : 'Connect'}
+									</Button>
+								)}
+							</Tooltip>
+						)}
 						{metaMaskExists && isConnectedToSpaces && (
 							<Tooltip title={'Transfer SPC'}>
-								{isMobile ? (
+								{isMobile && !onlyBalance ? (
 									<IconButton onClick={() => setTransferOpen(true)}>
 										<IoSwapVertical color={theme.palette.primary.light} />
 									</IconButton>
@@ -111,7 +124,7 @@ export const MetaMaskSelect = () => {
 											display="flex"
 											lineHeight={1}
 											sx={{
-												mr: 1,
+												mr: onlyBalance ? 0 : 1,
 											}}
 											style={{ fontSize: '1.1rem' }}
 										>
@@ -127,7 +140,7 @@ export const MetaMaskSelect = () => {
 												SPC
 											</Typography>
 										</Typography>
-										<IoSwapVertical size="18" color={theme.palette.primary.light} />
+										{!onlyBalance && <IoSwapVertical size="18" color={theme.palette.primary.light} />}
 									</Button>
 								)}
 							</Tooltip>

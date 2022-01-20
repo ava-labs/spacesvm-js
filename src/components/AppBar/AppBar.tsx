@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
 import { AppBar as MuiAppBar, Box, Container, Grid, Toolbar, Typography, useMediaQuery, useTheme } from '@mui/material'
 
-import { Drawer } from '../Drawer'
-import { MetaMaskSelect } from '../MetaMaskSelect'
-import { ThemeToggle } from '../ThemeToggle'
-
 import Logo from '@/assets/spaces-logo.png'
+import { Drawer } from '@/components/Drawer'
+import { MetaMaskSelect } from '@/components/MetaMaskSelect'
+import { ThemeToggle } from '@/components/ThemeToggle'
 import { APP_NAME } from '@/constants'
 
 export const AppBar = memo(() => {
@@ -22,6 +21,7 @@ export const AppBar = memo(() => {
 					// for scrollbar not to be blurry
 					mr: '10px',
 					width: 'calc(100% - 10px)',
+					mt: '1px',
 					backdropFilter: 'blur(5px)',
 				}}
 			>

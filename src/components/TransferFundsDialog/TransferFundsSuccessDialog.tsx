@@ -1,8 +1,7 @@
 import { Box, Dialog, DialogContent, Grow, Typography } from '@mui/material'
 
-import { AddressChip } from '../AddressChip/AddressChip'
-import { DialogTitle } from '../DialogTitle'
-
+import { AddressChip } from '@/components/AddressChip/AddressChip'
+import { DialogTitle } from '@/components/DialogTitle'
 import { rainbowText } from '@/theming/rainbowText'
 import { numberWithCommas } from '@/utils/numberUtils'
 

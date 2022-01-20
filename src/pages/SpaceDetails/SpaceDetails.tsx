@@ -9,6 +9,7 @@ import {
 	Grid,
 	Grow,
 	LinearProgress,
+	styled,
 	Table,
 	TableBody,
 	TableCell,
@@ -19,7 +20,6 @@ import {
 } from '@mui/material'
 import { formatDistanceToNow } from 'date-fns'
 
-import { ClaimButton } from '../Home/Home'
 import { SpaceKeyValueRow } from './SpaceKeyValueRow'
 
 import NothingHere from '@/assets/nothing-here.jpg'
@@ -31,8 +31,12 @@ import { Page } from '@/components/Page'
 import { PageTitle } from '@/components/PageTitle'
 import { USERNAME_REGEX_QUERY } from '@/constants'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
-import { rainbowText } from '@/theming/rainbowText'
+import { rainbowButton } from '@/theming/rainbowButton'
 import { querySpace } from '@/utils/spacesVM'
+
+const ClaimButton = styled(Button)(({ theme }: any) => ({
+	...rainbowButton(theme),
+}))
 
 export const SpaceDetails = memo(() => {
 	const navigate = useNavigate()
@@ -72,7 +76,7 @@ export const SpaceDetails = memo(() => {
 
 	return (
 		<Page title={spaceIdTrimmed} showFooter={false} noPadding>
-			<Box style={{ paddingTop: 64 }}>
+			<Box style={{ paddingTop: 65 }}>
 				{loading ? (
 					<LinearProgress color="secondary" sx={{ position: 'absolute', left: 0, right: 0 }} />
 				) : (
@@ -85,7 +89,7 @@ export const SpaceDetails = memo(() => {
 								sx={{
 									height: {
 										xs: 'unset',
-										md: 'calc(100vh - 64px)',
+										md: 'calc(100vh - 65px)',
 									},
 									p: 2,
 									pb: 4,
@@ -101,8 +105,8 @@ export const SpaceDetails = memo(() => {
 								<PageTitle
 									align="center"
 									variant="h1"
+									isRainbow
 									sx={{
-										...rainbowText,
 										mb: 0,
 									}}
 								>
@@ -216,7 +220,7 @@ export const SpaceDetails = memo(() => {
 									overflow: 'auto',
 									height: {
 										xs: 'unset',
-										md: 'calc(100vh - 64px)',
+										md: 'calc(100vh - 65px)',
 									},
 									mb: {
 										xs: 2,

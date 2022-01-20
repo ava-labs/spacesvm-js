@@ -1,7 +1,7 @@
 import { Twemoji } from 'react-emoji-render'
 import { Box, Button, Dialog, DialogContent, Grow, Typography } from '@mui/material'
 
-import { DialogTitle } from './../DialogTitle'
+import { DialogTitle } from '@/components/DialogTitle'
 
 type NoFundsDialogProps = {
 	open: boolean

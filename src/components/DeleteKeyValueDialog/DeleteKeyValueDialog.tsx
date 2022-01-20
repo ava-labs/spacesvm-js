@@ -2,9 +2,8 @@ import { Twemoji } from 'react-emoji-render'
 import { useParams } from 'react-router-dom'
 import { Button, Dialog, DialogContent, Fade, styled, Typography, useTheme } from '@mui/material'
 
-import { DialogTitle } from '../DialogTitle'
-
 import MetaMaskFoxLogo from '@/assets/metamask-fox.svg'
+import { DialogTitle } from '@/components/DialogTitle'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
 import { rainbowButton } from '@/theming/rainbowButton'
 import { TxType } from '@/types'

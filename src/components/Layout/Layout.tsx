@@ -1,10 +1,12 @@
 import { FC } from 'react'
-import { Box, useTheme } from '@mui/material'
+import { Box, useMediaQuery, useTheme } from '@mui/material'
 
-import { AppBar } from '../AppBar'
+import { AppBar } from '@/components/AppBar'
+import { MetaMaskSelect } from '@/components/MetaMaskSelect'
 
 export const Layout: FC = memo(({ children }) => {
 	const theme = useTheme()
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
 	return (
 		<Box sx={{ background: theme.customPalette.customBackground }}>
@@ -20,6 +22,7 @@ export const Layout: FC = memo(({ children }) => {
 			>
 				{children}
 			</Box>
+			{isMobile && <MetaMaskSelect onlyBalance />}
 		</Box>
 	)
 })
