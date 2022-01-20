@@ -13,7 +13,7 @@ export const WhatIsASpace = memo(({ isFooter = false }: WhatIsASpaceProps) => {
 
 	return (
 		<>
-			<Box display="flex" justifyContent={isFooter ? 'normal' : 'center'} sx={{ mt: 1 }}>
+			<Box display="flex" justifyContent={isFooter ? 'normal' : 'center'} sx={{ mt: isFooter ? 0 : 1 }}>
 				<Button
 					onClick={() => setOpen(true)}
 					color="secondary"
