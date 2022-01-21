@@ -2,11 +2,11 @@ import { Twemoji } from 'react-emoji-render'
 import { NavLink } from 'react-router-dom'
 import { List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material'
 
-export const MySpacesList = memo(({ spaces }: any) => (
+export const MySpacesList = memo(({ noMarginOnTitle, spaces }: any) => (
 	<>
 		{spaces && spaces?.length > 0 && (
 			<>
-				<Typography variant="h4" sx={{ fontFamily: 'DM Serif Display', mt: 3 }}>
+				<Typography variant="h4" sx={{ fontFamily: 'DM Serif Display', mt: noMarginOnTitle ? 0 : 3 }}>
 					Your spaces
 				</Typography>
 

@@ -16,6 +16,7 @@ import {
 	useTheme,
 } from '@mui/material'
 
+import { DialogTitle } from '../DialogTitle'
 import { MySpacesList } from '../MySpacesList'
 
 import Logo from '@/assets/spaces-logo.png'
@@ -122,8 +123,9 @@ export const AppBar = memo(() => {
 											onClose={() => setDialogOpen(false)}
 											TransitionComponent={Grow}
 										>
+											<DialogTitle onClose={() => setDialogOpen(false)} />
 											<DialogContent>
-												<MySpacesList spaces={myOwnedSpaces} />
+												<MySpacesList noMarginOnTitle spaces={myOwnedSpaces} />
 											</DialogContent>
 										</Dialog>
 									</Grid>
