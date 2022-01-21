@@ -170,11 +170,19 @@ export const SpaceDetails = memo(() => {
 														</TableRow>
 														<TableRow>
 															<TableCell sx={{ whiteSpace: 'nowrap' }}>Created on</TableCell>
-															<TableCell>{new Date(details.created * 1000).toLocaleString()}</TableCell>
+															<TableCell>
+																<Typography noWrap variant="caption">
+																	{new Date(details.created * 1000).toLocaleString()}
+																</Typography>
+															</TableCell>
 														</TableRow>
 														<TableRow>
 															<TableCell sx={{ whiteSpace: 'nowrap' }}>Last updated on</TableCell>
-															<TableCell>{new Date(details.updated * 1000).toLocaleString()}</TableCell>
+															<TableCell>
+																<Typography noWrap variant="caption">
+																	{new Date(details.updated * 1000).toLocaleString()}
+																</Typography>
+															</TableCell>
 														</TableRow>
 													</TableBody>
 												</Table>

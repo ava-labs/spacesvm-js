@@ -60,10 +60,10 @@ export const commonOverrides: ThemeOptions['components'] = {
 	MuiTableRow: {
 		styleOverrides: {
 			root: {
-				'& td:first-child': {
+				'& td:first-of-type': {
 					paddingLeft: 4,
 				},
-				'& td:last-child': {
+				'& td:last-of-type': {
 					paddingRight: 4,
 				},
 			},
