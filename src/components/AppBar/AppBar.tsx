@@ -109,7 +109,7 @@ export const AppBar = memo(() => {
 								{myOwnedSpaces && myOwnedSpaces?.length > 0 && (
 									<Grid item>
 										<Tooltip title="My spaces">
-											<span>
+											<span style={{ display: 'inline-flex' }}>
 												<IconButton onClick={() => setDialogOpen(true)}>
 													<Twemoji svg text="✨" />
 												</IconButton>
