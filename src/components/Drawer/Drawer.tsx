@@ -22,23 +22,23 @@ import Logo from '@/assets/spaces-logo.png'
 import Terminal from '@/assets/terminal.png'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { useMetaMask } from '@/providers/MetaMaskProvider'
-import { getOwnedSpaces } from '@/utils/spacesVM'
 
 export const Drawer = memo(() => {
 	const [myOwnedSpaces, setOwnedSpaces] = useState<string[]>()
 	const [open, setOpen] = useState<boolean>(false)
 	const theme = useTheme()
-	const { currentAddress } = useMetaMask()
+	const { currentAddress, fetchOwnedSpaces } = useMetaMask()
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
 	useEffect(() => {
-		const fetchOwnedSpaces = async () => {
-			const ownedSpaces = await getOwnedSpaces(currentAddress)
-			setOwnedSpaces(ownedSpaces?.spaces)
+		if (!currentAddress) return
+
+		const fetchMySpaces = async () => {
+			setOwnedSpaces(await fetchOwnedSpaces(currentAddress))
 		}
 
-		fetchOwnedSpaces()
-	}, [currentAddress])
+		fetchMySpaces()
+	}, [currentAddress, fetchOwnedSpaces])
 
 	return (
 		<>
