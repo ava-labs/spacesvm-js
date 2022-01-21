@@ -116,6 +116,7 @@ export const AppBar = memo(() => {
 										</Tooltip>
 
 										<Dialog
+											fullScreen={isMobile}
 											open={dialogOpen}
 											maxWidth="xs"
 											onClose={() => setDialogOpen(false)}
