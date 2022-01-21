@@ -75,7 +75,7 @@ export default defineConfig({
 					vendor: ['react', 'react-router-dom', 'react-dom'],
 					...renderChunks(dependencies),
 				},
-				chunkFileNames: '[name].js',
+				chunkFileNames: '[name].[hash].js',
 			},
 		},
 	},

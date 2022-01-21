@@ -1,36 +1,27 @@
 /* istanbul ignore file */
 
-import { lazy, LazyExoticComponent, Suspense } from 'react'
 import { Navigate, Route, Routes as Switch } from 'react-router-dom'
 
-// Shortcut method for lazy page imports
-// Only to reduce boilerplate
-const pageLazyLoader = (key: string): LazyExoticComponent<any> =>
-	lazy(() => import(/* @vite-ignore */ `./${key}/${key}.tsx`).then((m) => ({ default: m[key] })))
-
-// Lazy loading all pages
-const Home = pageLazyLoader('Home')
-const SpaceDetails = pageLazyLoader('SpaceDetails')
-const KeyDetails = pageLazyLoader('KeyDetails')
-const Page404 = pageLazyLoader('Page404')
-const CustomSignature = pageLazyLoader('CustomSignature')
-const PingSpaces = pageLazyLoader('PingSpaces')
+import { CustomSignature } from './CustomSignature/CustomSignature'
+import { Home } from './Home/Home'
+import { KeyDetails } from './KeyDetails/KeyDetails'
+import { Page404 } from './Page404/Page404'
+import { PingSpaces } from './PingSpaces/PingSpaces'
+import { SpaceDetails } from './SpaceDetails/SpaceDetails'
 
 export const Routes = () => (
-	<Suspense fallback={<></>}>
-		<Switch>
-			<Route path="/" element={<Home />} />
+	<Switch>
+		<Route path="/" element={<Home />} />
 
-			<Route path="/:spaceId/:key" element={<KeyDetails />} />
-			<Route path="/:spaceId" element={<SpaceDetails />} />
+		<Route path="/:spaceId/:key" element={<KeyDetails />} />
+		<Route path="/:spaceId" element={<SpaceDetails />} />
 
-			<Route path={`/custom.transaction/`} element={<CustomSignature />} />
-			<Route path={`/ping.spaces/`} element={<PingSpaces />} />
-			<Route path={`/page.404/`} element={<Page404 />} />
+		<Route path={`/custom.transaction/`} element={<CustomSignature />} />
+		<Route path={`/ping.spaces/`} element={<PingSpaces />} />
+		<Route path={`/page.404/`} element={<Page404 />} />
 
-			<Route path="*" element={<Navigate replace to={`/page.404/`} />} />
-		</Switch>
-	</Suspense>
+		<Route path="*" element={<Navigate replace to={`/page.404/`} />} />
+	</Switch>
 )
 
 export default Routes
