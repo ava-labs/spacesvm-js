@@ -85,6 +85,7 @@ export const ActivityTable = memo(() => {
 		fetchRecentActivity()
 
 		const fetchInterval = setInterval(() => {
+			if (document.visibilityState === 'hidden') return
 			fetchRecentActivity()
 		}, 10000) // refresh every 10s
 

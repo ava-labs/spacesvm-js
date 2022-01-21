@@ -45,7 +45,10 @@ export const MetaMaskProvider = ({ children }: any) => {
 	}, [currentAddress, isConnectedToSpaces])
 	useEffect(() => {
 		updateBalance()
-		const balanceUpdateInterval = setInterval(updateBalance, 10000) // Poll for latest balance every 10s
+		const balanceUpdateInterval = setInterval(() => {
+			if (document.visibilityState === 'hidden') return
+			updateBalance()
+		}, 10000) // Poll for latest balance every 10s
 		return () => clearInterval(balanceUpdateInterval)
 	}, [updateBalance])
 
