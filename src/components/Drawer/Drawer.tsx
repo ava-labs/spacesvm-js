@@ -17,6 +17,8 @@ import {
 	useTheme,
 } from '@mui/material'
 
+import { MySpacesList } from '../MySpacesList'
+
 import Javascript from '@/assets/javascript.png'
 import Logo from '@/assets/spaces-logo.png'
 import Terminal from '@/assets/terminal.png'
@@ -155,35 +157,7 @@ export const Drawer = memo(() => {
 					<>
 						<Divider sx={{ mt: 1 }} />
 
-						<Typography variant="h4" sx={{ fontFamily: 'DM Serif Display', mt: 3 }}>
-							Your spaces
-						</Typography>
-
-						<List sx={{ mt: 2, ml: -2 }}>
-							{myOwnedSpaces.map((space, i) => (
-								<ListItem
-									component={NavLink}
-									// @ts-ignore
-									button
-									to={`/${space}`}
-									key={`${space}-${i}`}
-									sx={{ mb: 1, borderRadius: 4, height: 52 }}
-									onClick={() => setOpen(false)}
-								>
-									<ListItemIcon sx={{ fontSize: 32 }}>
-										<Twemoji svg text="🔭" className="emoji" />
-									</ListItemIcon>
-
-									<ListItemText
-										primary={
-											<Typography noWrap variant="h5">
-												{space}
-											</Typography>
-										}
-									/>
-								</ListItem>
-							))}
-						</List>
+						<MySpacesList spaces={myOwnedSpaces} />
 					</>
 				)}
 			</SwipeableDrawer>

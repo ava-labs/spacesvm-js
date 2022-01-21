@@ -1,15 +1,46 @@
+import { Twemoji } from 'react-emoji-render'
 import { Link } from 'react-router-dom'
-import { AppBar as MuiAppBar, Box, Container, Grid, Toolbar, Typography, useMediaQuery, useTheme } from '@mui/material'
+import {
+	AppBar as MuiAppBar,
+	Box,
+	Container,
+	Dialog,
+	DialogContent,
+	Grid,
+	Grow,
+	IconButton,
+	Toolbar,
+	Tooltip,
+	Typography,
+	useMediaQuery,
+	useTheme,
+} from '@mui/material'
+
+import { MySpacesList } from '../MySpacesList'
 
 import Logo from '@/assets/spaces-logo.png'
 import { Drawer } from '@/components/Drawer'
 import { MetaMaskSelect } from '@/components/MetaMaskSelect'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { APP_NAME } from '@/constants'
+import { useMetaMask } from '@/providers/MetaMaskProvider'
 
 export const AppBar = memo(() => {
 	const theme = useTheme()
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+	const [dialogOpen, setDialogOpen] = useState<boolean>(false)
+	const { currentAddress, fetchOwnedSpaces } = useMetaMask()
+	const [myOwnedSpaces, setOwnedSpaces] = useState<string[]>()
+
+	useEffect(() => {
+		if (!currentAddress) return
+
+		const fetchMySpaces = async () => {
+			setOwnedSpaces(await fetchOwnedSpaces(currentAddress))
+		}
+
+		fetchMySpaces()
+	}, [currentAddress, fetchOwnedSpaces])
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
@@ -62,7 +93,7 @@ export const AppBar = memo(() => {
 								alignItems="center"
 								justifyContent="flex-end"
 								wrap="nowrap"
-								spacing={isMobile ? 0 : 2}
+								spacing={isMobile ? 0 : 1}
 							>
 								<Grid item sx={{ display: { xs: 'none', md: 'inherit' } }}>
 									<ThemeToggle />
@@ -71,6 +102,29 @@ export const AppBar = memo(() => {
 								{!isMobile && (
 									<Grid item>
 										<MetaMaskSelect />
+									</Grid>
+								)}
+
+								{myOwnedSpaces && myOwnedSpaces?.length > 0 && (
+									<Grid item>
+										<Tooltip title="My spaces">
+											<span>
+												<IconButton onClick={() => setDialogOpen(true)}>
+													<Twemoji svg text="✨" />
+												</IconButton>
+											</span>
+										</Tooltip>
+
+										<Dialog
+											open={dialogOpen}
+											maxWidth="xs"
+											onClose={() => setDialogOpen(false)}
+											TransitionComponent={Grow}
+										>
+											<DialogContent>
+												<MySpacesList spaces={myOwnedSpaces} />
+											</DialogContent>
+										</Dialog>
 									</Grid>
 								)}
 

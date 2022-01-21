@@ -19,6 +19,7 @@
     "@react-hookz/web": "12.3.0",
     "date-fns": "2.28.0",
     "lodash": "4.17.21",
+    "material-ui-popup-state": "^2.0.0",
     "notistack": "2.0.3",
     "react": "17.0.2",
     "react-device-detect": "2.1.2",
