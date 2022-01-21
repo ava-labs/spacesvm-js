@@ -157,7 +157,7 @@ export const Drawer = memo(() => {
 					<>
 						<Divider sx={{ mt: 1 }} />
 
-						<MySpacesList spaces={myOwnedSpaces} />
+						<MySpacesList spaces={myOwnedSpaces} onClose={() => setOpen(false)} />
 					</>
 				)}
 			</SwipeableDrawer>

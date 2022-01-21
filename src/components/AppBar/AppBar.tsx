@@ -125,7 +125,7 @@ export const AppBar = memo(() => {
 										>
 											<DialogTitle onClose={() => setDialogOpen(false)} />
 											<DialogContent>
-												<MySpacesList noMarginOnTitle spaces={myOwnedSpaces} />
+												<MySpacesList noMarginOnTitle onClose={() => setDialogOpen(false)} spaces={myOwnedSpaces} />
 											</DialogContent>
 										</Dialog>
 									</Grid>

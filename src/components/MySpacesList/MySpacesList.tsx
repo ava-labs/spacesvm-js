@@ -2,7 +2,7 @@ import { Twemoji } from 'react-emoji-render'
 import { NavLink } from 'react-router-dom'
 import { List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material'
 
-export const MySpacesList = memo(({ noMarginOnTitle, spaces }: any) => (
+export const MySpacesList = memo(({ noMarginOnTitle, onClose, spaces }: any) => (
 	<>
 		{spaces && spaces?.length > 0 && (
 			<>
@@ -17,6 +17,7 @@ export const MySpacesList = memo(({ noMarginOnTitle, spaces }: any) => (
 							// @ts-ignore
 							button
 							to={`/${space}`}
+							onClick={onClose}
 							key={`${space}-${i}`}
 							sx={{ mb: 1, borderRadius: 4, height: 52 }}
 						>
