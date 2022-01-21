@@ -54,7 +54,8 @@ export const Home = memo(() => {
 	const [searchParams] = useSearchParams()
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 	const [claiming, setClaiming] = useState<boolean>(false)
-	const { issueTx, signWithMetaMask, currentAddress, connectToMetaMask, balance, metaMaskExists } = useMetaMask()
+	const { issueTx, signWithMetaMask, currentAddress, fetchOwnedSpaces, connectToMetaMask, balance, metaMaskExists } =
+		useMetaMask()
 	const navigate = useNavigate()
 	const [showClaimedDialog, setShowClaimedDialog] = useState<boolean>(false)
 	const [waitingForMetaMask, setWaitingForMetaMask] = useState<boolean>(false)
@@ -154,6 +155,7 @@ export const Home = memo(() => {
 		setAvailable(false)
 		setVerified(false)
 		setShowClaimedDialog(true)
+		fetchOwnedSpaces(currentAddress)
 	}
 
 	const handleSubmit = (e: any) => {

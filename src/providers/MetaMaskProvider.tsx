@@ -6,7 +6,7 @@ import throttle from 'lodash/throttle'
 import { useSnackbar } from 'notistack'
 
 import { APP_NAME } from '@/constants'
-import { getAddressBalance, isConnectedToSpacesVM, issueAndConfirmTransaction } from '@/utils/spacesVM'
+import { getAddressBalance, getOwnedSpaces, isConnectedToSpacesVM, issueAndConfirmTransaction } from '@/utils/spacesVM'
 
 declare global {
 	interface Window {
@@ -119,6 +119,11 @@ export const MetaMaskProvider = ({ children }: any) => {
 		}
 	}
 
+	const fetchOwnedSpaces = async (currentAddress: string) => {
+		const ownedSpaces = await getOwnedSpaces(currentAddress)
+		return ownedSpaces?.spaces
+	}
+
 	/**
 	 * If MM not installed, prompt user to do so.
 	 */
@@ -212,6 +217,7 @@ export const MetaMaskProvider = ({ children }: any) => {
 				metaMaskExists,
 				currentAddress,
 				balance,
+				fetchOwnedSpaces,
 				connectToMetaMask,
 				isConnectingToMM,
 				signWithMetaMask,
