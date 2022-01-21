@@ -24,7 +24,8 @@ import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { getLatestActivity } from '@/utils/spacesVM'
 
 export const ActivityTable = memo(() => {
-	const [tps, setTps] = useState<number>(0)
+	const [tps, setTps] = useState<number>()
+	const [showTps, setShowTps] = useState<boolean>()
 	const [selectedTabStorage, setSelectedTabStorage] = useLocalStorage(ACTIVITY_TABLE_TAB_STORAGE_KEY, 'all') // track theme in localStorage
 	const [selectedTab, setSelectedTab] = useState<string>(selectedTabStorage)
 	const [recentActivity, setRecentActivity] = useState<
@@ -67,9 +68,13 @@ export const ActivityTable = memo(() => {
 	useEffect(() => {
 		if (!recentActivity?.length) return
 		const timestampTenSecAgo = (Date.now() - 10 * ONE_SECOND_IN_MS) / 1000
-		const howManyIn10s = findIndex(recentActivity, (tx: any) => tx.timestamp < timestampTenSecAgo)
-		setTps(howManyIn10s / 10)
-	}, [recentActivity])
+		const tps = findIndex(recentActivity, (tx: any) => tx.timestamp < timestampTenSecAgo) / 10
+		setTps(tps)
+
+		// Only decide whether to show TPS on mount to avoid flipflopping when TPS is ~1
+		if (showTps !== undefined) return
+		setShowTps(tps >= 1)
+	}, [recentActivity, showTps])
 
 	useEffect(() => {
 		const fetchRecentActivity = async () => {
@@ -100,16 +105,25 @@ export const ActivityTable = memo(() => {
 
 	return recentActivity ? (
 		<>
-			<Typography align="center" variant="body2" sx={{ mb: 2 }} fontWeight={900}>
-				Live TPS:{' '}
-				<Typography component="span" variant="body2" fontWeight={900} sx={{ ml: '4px' }} fontSize={18} color="primary">
-					{tps && tps <= 0 ? <CircularProgress size={12} /> : tps}
-				</Typography>{' '}
-				<br />
-				<Typography sx={{ ml: 1 }} variant="caption" component="span" color="textSecondary">
-					(Updated every 10 seconds)
+			{showTps && (
+				<Typography align="center" variant="body2" fontWeight={900}>
+					Live TPS:{' '}
+					<Typography
+						component="span"
+						variant="body2"
+						fontWeight={900}
+						sx={{ ml: '4px' }}
+						fontSize={18}
+						color="primary"
+					>
+						{tps && tps <= 0 ? <CircularProgress size={12} /> : tps}
+					</Typography>{' '}
+					<br />
+					<Typography sx={{ ml: 1 }} variant="caption" component="span" color="textSecondary">
+						(Updated every 10 seconds)
+					</Typography>
 				</Typography>
-			</Typography>
+			)}
 			<Tabs
 				value={selectedTab}
 				onChange={handleChange}
@@ -118,7 +132,7 @@ export const ActivityTable = memo(() => {
 				indicatorColor="secondary"
 				textColor="inherit"
 				allowScrollButtonsMobile
-				sx={{ mx: -2, mb: 2 }}
+				sx={{ mx: -2, mb: 2, mt: showTps ? 2 : 4 }}
 			>
 				<Tab label="All" value="all" />
 				<Tab icon={<Twemoji svg text="📜" />} label="Claim" value="claim" />
