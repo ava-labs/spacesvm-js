@@ -12,6 +12,7 @@ import {
 	Link as MuiLink,
 	Tooltip,
 	Typography,
+	useTheme,
 } from '@mui/material'
 import { useSnackbar } from 'notistack'
 
@@ -50,6 +51,7 @@ export const SpaceKeyValueRow = ({
 	// const [valueExists, setValueExists] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 	const [loadingImageError, setLoadingImageError] = useState<boolean>(false)
+	const theme = useTheme()
 
 	const getSpaceValue = useCallback(async () => {
 		setIsLoading(true)
@@ -83,13 +85,18 @@ export const SpaceKeyValueRow = ({
 					mb: 1,
 					px: 2,
 					py: 3,
-					//backgroundColor: 'transparent',
-					border: '1px solid transparent',
+					border: `2px solid transparent`,
+					[theme.breakpoints.down('md')]: {
+						border: `2px solid ${theme.palette.divider}`,
+						'.actions': {
+							opacity: 1,
+						},
+					},
 					'&:hover': {
 						h4: {
 							textDecoration: valueIsUrl ? 'underline' : 'unset',
 						},
-						border: (theme) => `1px solid ${theme.palette.divider}`,
+						border: (theme) => `2px solid ${theme.palette.divider}`,
 						'.actions': {
 							opacity: 1,
 						},
@@ -97,7 +104,17 @@ export const SpaceKeyValueRow = ({
 				}}
 			>
 				<Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-					<CardContent sx={{ pt: 0, pb: '8px!important' }}>
+					<CardContent
+						sx={{
+							pt: 0,
+							pb: '8px!important',
+							px: {
+								xs: 0,
+								md: 1,
+								lg: 2,
+							},
+						}}
+					>
 						<Typography variant="h4" gutterBottom>
 							{spaceKey}
 						</Typography>
@@ -156,7 +173,7 @@ export const SpaceKeyValueRow = ({
 					</CardContent>
 				</Box>
 
-				<Box className="actions" sx={{ position: 'absolute', right: 32, top: 32 }}>
+				<Box className="actions" sx={{ position: 'absolute', right: 32, top: 24 }}>
 					<Grid container spacing={1} wrap="nowrap">
 						<Grid item>
 							<Tooltip placement="top" title="Copy direct link">
